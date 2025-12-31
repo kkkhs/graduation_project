@@ -1,1 +1,5 @@
-# graduation_project
+## 毕业设计仓库
+
+题目：《遥感场景下的微小船舶检测系统设计与实现》
+
+- **任务清单 / Spec**：见 `docs/spec.md`
