@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://graduation_project/schemas/prediction_result.schema.json",
+  "title": "PredictionResult",
+  "type": "object",
+  "required": [
+    "image_id",
+    "model_name",
+    "bbox",
+    "score",
+    "category_id",
+    "inference_time"
+  ],
+  "properties": {
+    "image_id": {
+      "type": "string",
+      "description": "Unique image identifier, usually filename or relative path."
+    },
+    "model_name": {
+      "type": "string",
+      "description": "Registered model name from config."
+    },
+    "bbox": {
+      "type": "array",
+      "description": "Bounding box in XYWH format.",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "category_id": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "inference_time": {
+      "type": "number",
+      "minimum": 0.0,
+      "description": "Inference latency in milliseconds."
+    }
+  },
+  "additionalProperties": false
+}

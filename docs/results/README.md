@@ -1,7 +1,11 @@
-## 结果文档说明（占位）
+## 结果文档说明
 
-建议后续将结果分为三类文档，便于写论文第四章与答辩材料：
-- `baselines.md`：三模型主对比表与结论
-- `ablation.md`：消融实验设计与结果
-- `qualitative.md`：可视化样例（成功/失败/难例）与原因分析
+本目录用于论文第四章与答辩结果材料，统一分为三类：
+- `baselines.md`：三模型主对比 + 融合结果（ensemble）。
+- `ablation.md`：最小 1-2 组消融（阈值/分辨率）。
+- `qualitative.md`：四类场景定性分析（成功/误检/漏检/复杂背景）。
 
+回填顺序固定：
+1. `baselines.md`
+2. `qualitative.md`
+3. `ablation.md`

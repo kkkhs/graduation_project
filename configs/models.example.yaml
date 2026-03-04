@@ -1,0 +1,42 @@
+# Unified model registry for inference system.
+# Copy to configs/models.yaml and adjust local paths on each machine.
+
+global:
+  device: "cuda:0"
+  default_conf_threshold: 0.25
+  default_iou_threshold: 0.50
+  output_dir: "outputs/predictions"
+  visualization_dir: "outputs/visualizations"
+
+models:
+  - model_name: "drenet"
+    framework_type: "drenet"
+    enabled: true
+    weight_path: "/absolute/path/to/weights/drenet_best.pth"
+    # Option A (mmdet-compatible): "/absolute/path/to/drenet_config.py"
+    # Option B (custom plugin): "/absolute/path/to/drenet_plugin.py:build_predictor"
+    config_path: "/absolute/path/to/drenet_config.py"
+    class_names: ["ship"]
+    input_size: [640, 640]
+    default_conf_threshold: 0.25
+    default_iou_threshold: 0.50
+
+  - model_name: "mmdet_fcos"
+    framework_type: "mmdetection"
+    enabled: true
+    weight_path: "/absolute/path/to/weights/fcos_best.pth"
+    config_path: "/absolute/path/to/mmdet_fcos_config.py"
+    class_names: ["ship"]
+    input_size: [640, 640]
+    default_conf_threshold: 0.25
+    default_iou_threshold: 0.50
+
+  - model_name: "yolo"
+    framework_type: "ultralytics"
+    enabled: true
+    weight_path: "/absolute/path/to/weights/yolo_best.pt"
+    config_path: ""
+    class_names: ["ship"]
+    input_size: [640, 640]
+    default_conf_threshold: 0.25
+    default_iou_threshold: 0.50

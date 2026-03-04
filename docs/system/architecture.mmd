@@ -1,0 +1,18 @@
+```mermaid
+flowchart LR
+    U["Input Image + Params"] --> P1["Presentation\nCLI / Visualization / Desktop UI"]
+
+    P1 --> A1["Application\nPredictService"]
+
+    A1 --> I1["Adapter\nDRENetAdapter"]
+    A1 --> I2["Adapter\nMMDetAdapter"]
+    A1 --> I3["Adapter\nYOLOAdapter"]
+
+    I1 --> A2["Application\nFusion (IoU + Weighted Box)"]
+    I2 --> A2
+    I3 --> A2
+
+    A2 --> O1["Unified Result (ensemble)"]
+    O1 --> O2["JSON Output"]
+    O1 --> O3["Visualization Image"]
+```
