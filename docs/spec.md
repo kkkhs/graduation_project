@@ -17,7 +17,7 @@
   - ultralytics（YOLO）：`https://docs.ultralytics.com/zh/`
 
 ### 阶段计划（对齐学院时间安排：2025.11–2026.06）
-> 注：你当前已在“准备与课题安排”阶段，最优先是**文献调研 + 开题报告**，随后才是成体系的训练对比与系统集成。
+> 注：当前日期为 **2026-03-06**，已进入“实施与完成课题”阶段，最优先是**跑通 DRENet + 启动三模型对比**。
 
 - **阶段 1：准备与课题安排（2025.11–2026.02）**
   - 交付：研究现状初稿、开题报告材料、初步方案与实验计划
@@ -189,3 +189,34 @@
 - **系统**：可切换 ≥3 模型，输入遥感图像输出检测结果与可视化
 - **论文**：按老师给的五大部分结构完成并能用实验/系统证据支撑结论
 
+---
+
+## 当前执行优先级（2026-03 版本）
+1. **P0（本周必须）**
+   - 训练机（3060 或云 GPU）跑通 DRENet 首轮训练/评测/可视化
+   - 产出第一份实验日志（`docs/experiments/logs/`）
+2. **P1（下周）**
+   - 跑通 mmdetection 主选模型（FCOS 或 Faster R-CNN）
+   - 跑通 YOLO 主选模型（ultralytics）
+3. **P2（后续）**
+   - 填写主对比表、消融表、定性分析表
+   - 输出答辩可用图集与系统演示素材
+
+## 本机与训练机分工（强制建议）
+- **本机（macOS）**
+  - 文档、模板、结果汇总、论文写作、PPT
+  - 维护 `docs/results/*.md` 与 `docs/experiments/logs/`
+- **训练机（3060 / 云 GPU）**
+  - 模型训练、评测、推理可视化
+  - 产出权重、日志、结果图后回传本机
+
+## 已落地执行文件（请优先使用）
+- 总执行手册：`docs/experiments/README.md`
+- 3060一步一步：`docs/experiments/3060_execution_playbook.md`
+- 云端 GPU 手册：`docs/experiments/cloud_execution_playbook.md`
+- 实验日志模板：`docs/experiments/exp_log_template.md`
+- 主对比模板：`docs/results/baselines.md`
+- 消融模板：`docs/results/ablation.md`
+- 定性分析模板：`docs/results/qualitative.md`
+- 回传脚本：`scripts/sync_results_from_laptop.sh`
+- 看板：`docs/spec_todo.md`
