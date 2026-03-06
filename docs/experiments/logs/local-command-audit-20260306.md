@@ -156,3 +156,15 @@
   - 结果：新增章节均已命中。
 - `git -C /Users/khs/codes/graduation_project diff -- README.md docs/experiments/3060_execution_playbook.md docs/experiments/drenet_reproduction_guide.md scripts/sync_results_from_laptop.sh`
   - 结果：确认 4 个目标文件均已更新。
+
+## F. 云端适配补充（2026-03-06）
+
+### F1. 读取命令
+- `sed -n '1,260p' /Users/khs/codes/graduation_project/docs/experiments/README.md`
+- `sed -n '1,220p' /Users/khs/codes/graduation_project/README.md`
+- `git -C /Users/khs/codes/graduation_project show --stat --oneline HEAD`
+
+### F2. 本轮修改目标
+- 新增 `docs/experiments/cloud_execution_playbook.md`
+- 更新 `README.md` 的训练入口说明
+- 更新 `docs/experiments/README.md` 的双环境说明

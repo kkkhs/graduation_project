@@ -13,9 +13,11 @@
 
 - 本机默认职责：文档整理、系统开发、结果回填、统一推理接入。
 - 训练机默认职责：DRENet / MMDet / YOLO 的正式训练、评测、导出权重与指标。
-- 正式实验的唯一执行入口：[`docs/experiments/3060_execution_playbook.md`](docs/experiments/3060_execution_playbook.md)
+- 正式实验入口：
+  - Windows 3060：[`docs/experiments/3060_execution_playbook.md`](docs/experiments/3060_execution_playbook.md)
+  - Linux 云 GPU：[`docs/experiments/cloud_execution_playbook.md`](docs/experiments/cloud_execution_playbook.md)
 
-如果你是从 0 开始跑实验，不要直接拼命令，先按 `3060_execution_playbook.md` 的顺序做环境预检、数据预检、冒烟训练，再进入正式训练。
+如果你是从 0 开始跑实验，不要直接拼命令，先选与你机器一致的执行手册，再按“环境预检 -> 数据预检 -> 冒烟训练 -> 正式训练”的顺序执行。
 
 ## 快速开始
 
@@ -147,6 +149,7 @@ scripts/    训练机结果回传脚本
 - 执行看板：`docs/spec_todo.md`
 - 实验总手册：`docs/experiments/README.md`
 - 3060 训练机手册：`docs/experiments/3060_execution_playbook.md`
+- 云端 GPU 手册：`docs/experiments/cloud_execution_playbook.md`
 - 结果模板说明：`docs/results/README.md`
 - 架构说明：`docs/system/architecture.md`
 - 推理接口契约：`docs/system/predict_api_contract.md`

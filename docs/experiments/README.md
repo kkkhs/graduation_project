@@ -1,12 +1,14 @@
-# 实验执行总规范（PowerShell 命令契约版）
+# 实验执行总规范
 
 > 目标：三模型实验做到“命令可复制、版本可追踪、结果可回填”。
 
 ## 1. 前置条件（硬件 / 环境 / 目录）
-- 训练系统：Windows PowerShell（3060 6GB）。
+- 支持两类训练环境：
+  - Windows PowerShell（3060 6GB）
+  - Linux Bash（云端 GPU）
 - 默认路径：
-  - 项目：`E:/work/graduation_project`
-  - 数据：`E:/datasets/LEVIR-Ship`
+  - Windows：项目 `E:/work/graduation_project`，数据 `E:/datasets/LEVIR-Ship`
+  - Linux：项目 `/workspace/graduation_project`，数据 `/data/LEVIR-Ship`
 - 本地机器：只做开发、结果汇总、论文回填。
 - 训练机：只跑训练/评测/导出。
 
@@ -59,8 +61,9 @@ artifacts/
 ## 命令索引表（按模型）
 | 模型 | 冒烟训练 | 正式训练 | 评测 | 详细命令文档 |
 |---|---|---|---|---|
-| DRENet | 第4.1节 | 第5.1节 | 第6.1节 | `docs/experiments/3060_execution_playbook.md` |
-| MMDet(FCOS) | 第4.2节 | 第5.2节 | 第6.2节 | `docs/experiments/3060_execution_playbook.md` |
-| YOLOv8n | 第4.3节 | 第5.3节 | 第6.3节 | `docs/experiments/3060_execution_playbook.md` |
+| DRENet | 第4.1节 | 第5.1节 | 第6.1节 | `docs/experiments/3060_execution_playbook.md` / `docs/experiments/cloud_execution_playbook.md` |
+| MMDet(FCOS) | 第4.2节 | 第5.2节 | 第6.2节 | `docs/experiments/3060_execution_playbook.md` / `docs/experiments/cloud_execution_playbook.md` |
+| YOLOv8n | 第4.3节 | 第5.3节 | 第6.3节 | `docs/experiments/3060_execution_playbook.md` / `docs/experiments/cloud_execution_playbook.md` |
 
-> 所有命令以 `docs/experiments/3060_execution_playbook.md` 为唯一准则。
+> Windows 训练机以 `docs/experiments/3060_execution_playbook.md` 为准。  
+> Linux 云 GPU 以 `docs/experiments/cloud_execution_playbook.md` 为准。
