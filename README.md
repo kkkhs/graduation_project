@@ -9,6 +9,14 @@
 - Python 桌面 UI（Qt）
 - 单元测试与兼容导入层
 
+## 训练与推理边界
+
+- 本机默认职责：文档整理、系统开发、结果回填、统一推理接入。
+- 训练机默认职责：DRENet / MMDet / YOLO 的正式训练、评测、导出权重与指标。
+- 正式实验的唯一执行入口：[`docs/experiments/3060_execution_playbook.md`](docs/experiments/3060_execution_playbook.md)
+
+如果你是从 0 开始跑实验，不要直接拼命令，先按 `3060_execution_playbook.md` 的顺序做环境预检、数据预检、冒烟训练，再进入正式训练。
+
 ## 快速开始
 
 ### 1) 环境准备

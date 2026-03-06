@@ -13,11 +13,24 @@ fi
 REMOTE="$1"
 REMOTE_PATH="$2"
 
-mkdir -p docs/experiments/logs assets/figures
+mkdir -p docs/experiments/logs assets/figures docs/results artifacts
 
-# 同步实验日志、结果图、结果文档（按需可扩展）
-rsync -avz --progress "$REMOTE:$REMOTE_PATH/docs/experiments/logs/" "docs/experiments/logs/" || true
-rsync -avz --progress "$REMOTE:$REMOTE_PATH/assets/figures/" "assets/figures/" || true
-rsync -avz --progress "$REMOTE:$REMOTE_PATH/docs/results/" "docs/results/" || true
+sync_dir() {
+  local remote_subpath="$1"
+  local local_subpath="$2"
+  if rsync -avz --progress "$REMOTE:$REMOTE_PATH/$remote_subpath/" "$local_subpath/"; then
+    echo "Synced: $remote_subpath -> $local_subpath"
+  else
+    echo "Warn: skip missing or unavailable path: $remote_subpath"
+  fi
+}
+
+# 同步实验日志、结果图、结果文档、训练产物与训练日志
+sync_dir "docs/experiments/logs" "docs/experiments/logs"
+sync_dir "assets/figures" "assets/figures"
+sync_dir "docs/results" "docs/results"
+sync_dir "artifacts" "artifacts"
+sync_dir "runs" "artifacts/training_runs"
+sync_dir "work_dirs" "artifacts/mmdet_work_dirs"
 
 echo "Sync finished."
