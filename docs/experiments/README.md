@@ -6,14 +6,19 @@ This folder stores experiment standards, templates, execution playbooks, and exp
 - `formal_experiment_spec_v1.md`
 - `formal_experiment_log_template_v1.md`
 - `docker_portability_runbook.md`
-- `drenet_local_patch_guide.md`
 - `3060_execution_playbook.md`
 - `cloud_execution_playbook.md`
 - `logs/` (single source of truth for run records)
+- `archive/` (deprecated docs, reference only)
 
 ## Redundancy Cleanup
 - Removed duplicated note: `drenet_smoke_record_20260307.md`
 - Keep all factual records under `logs/exp-*.md` only.
+- Moved deprecated docs to `archive/`:
+  - `exp_log_template.md`
+  - `next_run_plan.md`
+  - `drenet_reproduction_guide.md`
+  - `drenet_local_reproduction_guide.md`
 
 ## Existing Logs
 - `logs/exp-20260306-01-drenet.md`
