@@ -56,6 +56,12 @@ artifacts/
 - `ensemble` 推理能输出 JSON。
 - 三份结果文档已可用于论文章节回填。
 
+## 9. 正式实验记录规范（DRENet）
+- 规范文档：`docs/experiments/formal_experiment_spec_v1.md`
+- 记录模板：`docs/experiments/formal_experiment_log_template_v1.md`
+- 建议每次正式训练前先复制模板到：
+  - `docs/experiments/logs/exp-YYYYMMDD-xx-<model>.md`
+
 ---
 
 ## 命令索引表（按模型）
