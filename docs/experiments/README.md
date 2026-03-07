@@ -62,6 +62,11 @@ artifacts/
 - 建议每次正式训练前先复制模板到：
   - `docs/experiments/logs/exp-YYYYMMDD-xx-<model>.md`
 
+## 10. 跨主机 Docker 迁移（DRENet）
+- 迁移手册：`docs/experiments/docker_portability_runbook.md`
+- Docker 镜像：`deploy/docker/Dockerfile.drenet`
+- 启动脚本：`deploy/docker/run_formal.sh`
+
 ---
 
 ## 命令索引表（按模型）
