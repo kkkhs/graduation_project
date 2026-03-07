@@ -67,3 +67,13 @@
 - 使用统一脚本：
   - `powershell -ExecutionPolicy Bypass -File E:\workspace\scripts\run_drenet_train.ps1 ...`
 - 要求：通过同一入口同时保证命令留痕与 wandb 上报。
+
+## 6. 续训语义（epochs 规则）
+- `epochs` 表示“总目标轮次”，不是“额外追加轮次”。
+- 示例：
+  - 首次训练到 `epochs=300`。
+  - 后续想继续到 `1000`，应设置 `epochs=1000` 并从 `last.pt` 续训。
+  - 实际会从当前 epoch 接着跑到 1000（约再跑 700 epoch）。
+- 推荐实践：
+  - 中断后继续：优先用 `--resume <last.pt>`。
+  - 已完成一轮后拉长总轮次：可用 `--weights <last.pt> --epochs <new_total_epochs>`。
