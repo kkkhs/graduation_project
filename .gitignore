@@ -1,3 +1,19 @@
 .DS_Store
 **/.DS_Store
 outputs/
+
+# Training artifacts
+runs/
+checkpoints/
+wandb/
+**/events.out.tfevents.*
+**/*.pt
+
+# Local data / caches
+datasets/
+data/
+**/__pycache__/
+**/*.pyc
+
+# Third-party code vendor drop (prefer pinning upstream commit + patch files)
+experiments/drenet/DRENet/
