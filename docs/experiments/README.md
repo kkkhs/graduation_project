@@ -6,6 +6,7 @@ This folder stores experiment standards, templates, execution playbooks, and exp
 - `formal_experiment_spec_v1.md`
 - `formal_experiment_log_template_v1.md`
 - `docker_portability_runbook.md`
+- `drenet_local_patch_guide.md`
 - `3060_execution_playbook.md`
 - `cloud_execution_playbook.md`
 - `logs/` (single source of truth for run records)

@@ -1,0 +1,88 @@
+diff --git a/experiments/drenet/DRENet/utils/datasets.py b/experiments/drenet/DRENet/utils/datasets.py
+index bf76d56..57136aa 100644
+--- a/experiments/drenet/DRENet/utils/datasets.py
++++ b/experiments/drenet/DRENet/utils/datasets.py
+@@ -376,7 +376,8 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
+         self.label_files = img2label_paths(self.img_files)  # labels
+         cache_path = Path(self.label_files[0]).parent.with_suffix('.cache')  # cached labels
+         if cache_path.is_file():
+-            cache = torch.load(cache_path)  # load
++            # PyTorch 2.6 defaulted weights_only=True; cache loading needs full pickle.
++            cache = torch.load(cache_path, weights_only=False)  # load
+             if cache['hash'] != get_hash(self.label_files + self.img_files) or 'results' not in cache:  # changed
+                 cache = self.cache_labels(cache_path, prefix)  # re-cache
+         else:
+@@ -400,7 +401,7 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
+                 x[:, 0] = 0
+ 
+         n = len(shapes)  # number of images
+-        bi = np.floor(np.arange(n) / batch_size).astype(np.int)  # batch index
++        bi = np.floor(np.arange(n) / batch_size).astype(int)  # batch index
+         nb = bi[-1] + 1  # number of batches
+         self.batch = bi  # batch index of image
+         self.n = n
+@@ -429,7 +430,7 @@ class LoadImagesAndLabels(Dataset):  # for training/testing
+                 elif mini > 1:
+                     shapes[i] = [1, 1 / mini]
+ 
+-            self.batch_shapes = np.ceil(np.array(shapes) * img_size / stride + pad).astype(np.int) * stride
++            self.batch_shapes = np.ceil(np.array(shapes) * img_size / stride + pad).astype(int) * stride
+ 
+         # Cache images into memory for faster training (WARNING: large datasets may exceed system RAM)
+         self.imgs = [None] * n
+@@ -1048,7 +1049,7 @@ def extract_boxes(path='../coco128/'):  # from utils.datasets import *; extract_
+                     b = x[1:] * [w, h, w, h]  # box
+                     # b[2:] = b[2:].max()  # rectangle to square
+                     b[2:] = b[2:] * 1.2 + 3  # pad
+-                    b = xywh2xyxy(b.reshape(-1, 4)).ravel().astype(np.int)
++                    b = xywh2xyxy(b.reshape(-1, 4)).ravel().astype(int)
+ 
+                     b[[0, 2]] = np.clip(b[[0, 2]], 0, w)  # clip boxes outside of image
+                     b[[1, 3]] = np.clip(b[[1, 3]], 0, h)
+diff --git a/experiments/drenet/DRENet/utils/general.py b/experiments/drenet/DRENet/utils/general.py
+index df8cf7b..ebd9468 100644
+--- a/experiments/drenet/DRENet/utils/general.py
++++ b/experiments/drenet/DRENet/utils/general.py
+@@ -191,7 +191,7 @@ def labels_to_class_weights(labels, nc=80):
+         return torch.Tensor()
+ 
+     labels = np.concatenate(labels, 0)  # labels.shape = (866643, 5) for COCO
+-    classes = labels[:, 0].astype(np.int)  # labels = [class xywh]
++    classes = labels[:, 0].astype(int)  # labels = [class xywh]
+     weights = np.bincount(classes, minlength=nc)  # occurrences per class
+ 
+     # Prepend gridpoint count (for uCE training)
+@@ -206,7 +206,7 @@ def labels_to_class_weights(labels, nc=80):
+ 
+ def labels_to_image_weights(labels, nc=80, class_weights=np.ones(80)):
+     # Produces image weights based on class_weights and image contents
+-    class_counts = np.array([np.bincount(x[:, 0].astype(np.int), minlength=nc) for x in labels])
++    class_counts = np.array([np.bincount(x[:, 0].astype(int), minlength=nc) for x in labels])
+     image_weights = (class_weights.reshape(1, nc) * class_counts).sum(1)
+     # index = random.choices(range(n), weights=image_weights, k=1)  # weight image sample
+     return image_weights
+@@ -483,7 +483,7 @@ def non_max_suppression(prediction, conf_thres=0.25, iou_thres=0.45, classes=Non
+ 
+ def strip_optimizer(f='best.pt', s=''):  # from utils.general import *; strip_optimizer()
+     # Strip optimizer from 'f' to finalize training, optionally save as 's'
+-    x = torch.load(f, map_location=torch.device('cpu'))
++    x = torch.load(f, map_location=torch.device('cpu'), weights_only=False)
+     if x.get('ema'):
+         x['model'] = x['ema']  # replace model with ema
+     for k in 'optimizer', 'training_results', 'wandb_id', 'ema', 'updates':  # keys
+diff --git a/experiments/drenet/DRENet/utils/loss.py b/experiments/drenet/DRENet/utils/loss.py
+index 8b9aae0..cfd65d4 100644
+--- a/experiments/drenet/DRENet/utils/loss.py
++++ b/experiments/drenet/DRENet/utils/loss.py
+@@ -242,7 +242,10 @@ class ComputeLoss:
+ 
+             # Append
+             a = t[:, 6].long()  # anchor indices
+-            indices.append((b, a, gj.clamp_(0, gain[3] - 1), gi.clamp_(0, gain[2] - 1)))  # image, anchor, grid indices
++            # Torch 2.x enforces dtype consistency for clamp bounds on integer tensors.
++            gi_max = int(gain[2] - 1)
++            gj_max = int(gain[3] - 1)
++            indices.append((b, a, gj.clamp_(0, gj_max), gi.clamp_(0, gi_max)))  # image, anchor, grid indices
+             tbox.append(torch.cat((gxy - gij, gwh), 1))  # box
+             anch.append(anchors[a])  # anchors
+             tcls.append(c)  # class
