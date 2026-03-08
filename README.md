@@ -2,217 +2,84 @@
 
 题目：《遥感场景下的微小船舶检测系统设计与实现》
 
-这个仓库不是对外产品仓库，而是我自己做毕设时用的工作台。  
-它的目标很明确：把“论文 + 实验 + 系统 Demo”三件事放在一个仓库里推进，并且保证每一步都能回填到论文和答辩材料。
+这个仓库是毕设工作台，目标是把论文、实验和系统实现放在同一套可追溯流程里推进。
 
-## 1. 当前项目在做什么
+## 1. 当前状态（2026-03-08）
 
-当前主线已经从“开题准备”切到“实验落地”：
-- 第一优先级：完成 FCOS 与 YOLO26 首轮实验，补齐三模型对比
-- 第二优先级：把实测结果回填到论文第四章/第五章和答辩材料
-- 第三优先级：把实测结果回填到论文、图表和系统演示材料
+- DRENet 正式结果已完成并回传（`299/299`）
+- YOLO26 首轮正式结果已完成（EarlyStopping 于 `263/300`，best epoch `186`）
+- FCOS 仍待完成（当前第一优先级）
+- 结果表已回填 DRENet + YOLO26，待补 FCOS
+- 云端训练链路已打通：训练 -> 同步 -> 核验 -> 关机
 
-当前训练机计划支持两类环境：
-- Windows 3060 笔记本
-- Linux 云 GPU（例如 AutoDL）
+## 2. 近期重点（按顺序）
 
-## 2. Done / Todo
+1. 完成 FCOS 冒烟、正式训练、评测与回填
+2. 补齐三模型统一口径：`AP50 / AP50-95 / P / R / F1 / FPS / Params / FLOPs`
+3. 完成 `docs/results/` 的定性与消融
+4. 回填论文第四、第五章实验部分
 
-### 已完成
-- 开题相关主体材料已完成，基础文献整理框架已建立
-- 实验规范、训练手册、结果模板、日志模板已落地
-- 三模型统一推理骨架已完成
-- 融合推理、可视化输出、Qt 桌面 UI 已完成
-- 单元测试已补齐，当前系统骨架可运行
-- 云端与本地两套训练文档都已建立
-- DRENet 云端正式续训已完成（`299/299`），结果已回传并完成关机收尾
-- DRENet 主结果已回填到 `docs/results/baselines.md`（AP50=0.7949, AP50:95=0.2919）
-- 已打通“训练结束后自动同步 + 自动关机 + 本地 checkpoint 快照”链路
+## 3. 一眼看板
 
-### 还没完成
-- FCOS 首轮正式训练 / 评测 / 指标回填
-- YOLO26 首轮正式训练 / 评测 / 指标回填
-- 主对比表、消融表、定性分析表的真实数据回填
-- 论文第四章、第五章用实测结果补齐
-- 系统最终演示样例整理
+- 总看板： [spec_todo.md](/Users/khs/codes/graduation_project/docs/spec_todo.md)
+- 阶段总结： [progress_summary_20260308.md](/Users/khs/codes/graduation_project/docs/experiments/progress_summary_20260308.md)
 
-### 当前最该做
-1. 按执行手册先跑 YOLO26（冒烟 -> 正式 -> 评测）
-2. 再跑 FCOS（冒烟 -> 正式 -> 评测）
-3. 按统一协议补齐 FPS / Params / FLOPs
-4. 回填 `docs/results/` 和论文实验章节
+建议：日常只看 `spec_todo.md` 判断“下一步做什么”。
 
-## 3. Todo 看板入口
-
-总看板在：
-- [spec_todo.md](/Users/khs/codes/graduation_project/docs/spec_todo.md)
-
-这份文件是当前最重要的进度来源。  
-判断“现在该做什么”，优先看它，不优先看零散笔记。
-
-对应关系：
-- `B`：数据集与评价指标
-- `C`：DRENet 复现
-- `D`：三模型对比实验
-- `E`：系统实现
-- `F`：论文写作回填
-- `G`：训练机跑实验时，本机可以并行做的事
-
-## 4. 目录说明
-
-### 核心目录
-- `docs/`
-  - 项目文档中心。论文、实验、系统设计、答辩材料说明都在这里。
-- `src/`
-  - 系统代码主体，已经按分层方式组织。
-- `tools/`
-  - 直接可运行的入口脚本，比如推理、可视化、桌面 UI。
-- `configs/`
-  - 模型注册与统一推理配置。
-- `tests/`
-  - 单元测试与兼容性测试。
-- `scripts/`
-  - 辅助脚本，比如结果回传、checkpoint 监控、云端 run 同步。
-- `assets/`
-  - 适合长期保留的图片、图表、论文插图素材。
-
-### 文档目录
-- `docs/experiments/`
-  - 训练和评测相关手册、日志、执行计划。
-- `docs/results/`
-  - 论文第四章最直接的来源：主对比、消融、定性分析。
-- `docs/system/`
-  - 系统需求、架构、接口、集成规范。
-- `docs/literature/`
-  - 文献阅读、翻译、文献表格。
-- `docs/kaiti/`
-  - 开题报告、开题答辩相关材料。
-- `docs/thesis/`
-  - 论文大纲与章节材料映射。
-- `docs/ops/`
-  - 本地运行问题和运维说明。
-
-### 运行与产物目录
-- `outputs/`
-  - 运行产物目录。主要是推理 JSON、可视化图片、UI 导出结果。
-  - 现在已忽略，不作为版本库长期内容。
-- `pdfs/`
-  - 论文 PDF 与相关参考材料。
-
-## 5. 重要文档入口
-
-### 总控文档
-- [spec.md](/Users/khs/codes/graduation_project/docs/spec.md)
-  - 毕设总体任务说明，偏“全局规划”。
-- [spec_todo.md](/Users/khs/codes/graduation_project/docs/spec_todo.md)
-  - 当前进度看板，偏“现在做什么”。
+## 4. 核心文档入口
 
 ### 实验执行
-- [experiments/README.md](/Users/khs/codes/graduation_project/docs/experiments/README.md)
-  - 实验总规范，总入口。
-- [progress_summary_20260308.md](/Users/khs/codes/graduation_project/docs/experiments/progress_summary_20260308.md)
-  - 截至当前的实验阶段总结与下一步执行顺序。
-- [3060_execution_playbook.md](/Users/khs/codes/graduation_project/docs/experiments/3060_execution_playbook.md)
-  - Windows 3060 训练机手册。
-- [cloud_execution_playbook.md](/Users/khs/codes/graduation_project/docs/experiments/cloud_execution_playbook.md)
-  - Linux 云 GPU 手册，适合 AutoDL。
-- [run-20260308-yolo26-3060-3080ti.md](/Users/khs/codes/graduation_project/docs/experiments/logs/run-20260308-yolo26-3060-3080ti.md)
-  - YOLO26 首轮实跑记录（已执行，含问题台账与产物路径）。
-- [formal_experiment_log_template_v1.md](/Users/khs/codes/graduation_project/docs/experiments/formal_experiment_log_template_v1.md)
-  - 当前实验记录模板（新版本）。
+- 实验总入口： [experiments/README.md](/Users/khs/codes/graduation_project/docs/experiments/README.md)
+- 云端手册（AutoDL）： [cloud_execution_playbook.md](/Users/khs/codes/graduation_project/docs/experiments/cloud_execution_playbook.md)
+- 本地 3060 手册： [3060_execution_playbook.md](/Users/khs/codes/graduation_project/docs/experiments/3060_execution_playbook.md)
+- YOLO26 实跑日志： [run-20260308-yolo26-3060-3080ti.md](/Users/khs/codes/graduation_project/docs/experiments/logs/run-20260308-yolo26-3060-3080ti.md)
+- DRENet 实跑日志： [exp-20260308-02-drenet-formal-resume-300.md](/Users/khs/codes/graduation_project/docs/experiments/logs/exp-20260308-02-drenet-formal-resume-300.md)
 
 ### 结果回填
-- [baselines.md](/Users/khs/codes/graduation_project/docs/results/baselines.md)
-  - 三模型主对比结果表。
-- [ablation.md](/Users/khs/codes/graduation_project/docs/results/ablation.md)
-  - 消融实验记录。
-- [qualitative.md](/Users/khs/codes/graduation_project/docs/results/qualitative.md)
-  - 成功/误检/漏检/难例分析。
+- 主对比表： [baselines.md](/Users/khs/codes/graduation_project/docs/results/baselines.md)
+- 消融表： [ablation.md](/Users/khs/codes/graduation_project/docs/results/ablation.md)
+- 定性分析： [qualitative.md](/Users/khs/codes/graduation_project/docs/results/qualitative.md)
 
 ### 系统实现
-- [architecture.md](/Users/khs/codes/graduation_project/docs/system/architecture.md)
-  - 系统架构说明。
-- [predict_api_contract.md](/Users/khs/codes/graduation_project/docs/system/predict_api_contract.md)
-  - 统一推理接口契约。
-- [artifact_integration_spec.md](/Users/khs/codes/graduation_project/docs/system/artifact_integration_spec.md)
-  - 训练产物接入规范。
-- [result_sync_flow.md](/Users/khs/codes/graduation_project/docs/system/result_sync_flow.md)
-  - 训练结果回传流程。
-- [sync_autodl_experiment_assets.sh](/Users/khs/codes/graduation_project/scripts/sync_autodl_experiment_assets.sh)
-  - AutoDL 到本地 `experiment_assets/` 的精确同步脚本，支持按 run 名拉取和训练结束后的自动最终同步。
+- 架构： [architecture.md](/Users/khs/codes/graduation_project/docs/system/architecture.md)
+- 推理接口契约： [predict_api_contract.md](/Users/khs/codes/graduation_project/docs/system/predict_api_contract.md)
+- 产物接入规范： [artifact_integration_spec.md](/Users/khs/codes/graduation_project/docs/system/artifact_integration_spec.md)
 
-### 开题与论文
-- [kaiti.md](/Users/khs/codes/graduation_project/docs/kaiti/kaiti.md)
-  - 开题阶段任务说明。
-- [outline.md](/Users/khs/codes/graduation_project/docs/thesis/outline.md)
-  - 论文大纲。
+## 5. 目录作用（高频）
 
-## 6. 代码目录作用
+- `docs/`：实验、论文、系统文档主目录
+- `src/`：系统代码（分层架构）
+- `tools/`：可执行入口（推理、可视化、UI、转换脚本）
+- `configs/`：模型配置
+- `tests/`：测试
+- `scripts/`：同步、快照、运维脚本
+- `experiment_assets/`：训练产物与配置快照（本地归档）
+- `assets/`：长期保留图件
+- `outputs/`：临时运行输出（已忽略，不作正式交付）
 
-### `src/`
-- `src/application/`
-  - 业务流程层，负责预测服务、融合逻辑、DTO。
-- `src/domain/`
-  - 领域层，定义实体和接口。
-- `src/infrastructure/`
-  - 基础设施层，负责适配器工厂、配置读取、可视化等。
-- `src/adapters/`
-  - 兼容导入层/适配层。
-- `src/core/`
-  - 预测器、配置、注册表等底层核心逻辑。
-- `src/contracts/`
-  - 输出 JSON schema 等契约文件。
+## 6. 训练产物约定（当前执行标准）
 
-### `tools/`
-- `run_predict.py`
-  - 统一推理命令行入口。
-- `visualize_predict.py`
-  - 推理并输出可视化结果。
-- `desktop_ui_qt.py`
-  - 桌面 UI。
-- `convert_yolo_to_coco.py`
-  - 数据格式转换脚本。
-- `drenet_plugin_template.py`
-  - DRENet 接入模板。
+- run 目录：`experiment_assets/runs/<run_name>`
+- trace 日志按功能分层：`experiment_assets/runs/trace/{drenet,yolo,sync,data,docker,infra,misc}`
+- 数据 YAML 快照：`experiment_assets/configs/<run_name>/ship_autodl.yaml`
+- 若历史路径为 `runs/detect/runs/<run_name>`，允许保留兼容软链接
 
-## 7. 我现在该怎么用这个仓库
+本次 YOLO26 本地产物：
+- run： [yolo26_main_512_formal012](/Users/khs/codes/graduation_project/experiment_assets/runs/yolo26_main_512_formal012)
+- trace： [trace/yolo](/Users/khs/codes/graduation_project/experiment_assets/runs/trace/yolo)
+- data yaml 快照： [ship_autodl.yaml](/Users/khs/codes/graduation_project/experiment_assets/configs/yolo26_main_512_formal012/ship_autodl.yaml)
 
-如果当前目标是跑实验，建议只按这条链路走：
+## 7. 如何开始下一步（FCOS）
 
-1. 看 [spec_todo.md](/Users/khs/codes/graduation_project/docs/spec_todo.md)
-   - 确认当前阶段仍然是 `B/C/D/G3`
-2. 选训练环境
-   - AutoDL：看 [cloud_execution_playbook.md](/Users/khs/codes/graduation_project/docs/experiments/cloud_execution_playbook.md)
-   - 3060：看 [3060_execution_playbook.md](/Users/khs/codes/graduation_project/docs/experiments/3060_execution_playbook.md)
-3. 先跑 DRENet 首轮
-4. 结果回传后更新：
-   - [baselines.md](/Users/khs/codes/graduation_project/docs/results/baselines.md)
-   - [qualitative.md](/Users/khs/codes/graduation_project/docs/results/qualitative.md)
-5. 再开始 MMDet / YOLO
+1. 按云端手册完成 FCOS 冒烟与正式训练
+2. 将结果回填到 `docs/results/baselines.md`
+3. 写一份对应 run log 到 `docs/experiments/logs/`
+4. 更新 `spec_todo.md` 任务状态
 
-如果当前目标是改系统，不先碰训练：
-- 看 `src/` + `tools/`
-- 先跑测试：
+## 8. 默认实验口径
 
-```bash
-PYTHONPATH=. python3 -m unittest discover -s tests -p "test_*.py"
-```
-
-## 8. 当前默认约定
-
-- 主数据集：LEVIR-Ship
-- 主基线：DRENet
-- 目标：至少 3 个模型对比
+- 数据集：LEVIR-Ship
+- 三模型路线：DRENet / FCOS / YOLO26
 - 主指标：`AP50`
-- 辅助指标：`Precision / Recall / F1`
-- 训练产物应最终统一整理到 `artifacts/`
-- 可长期保留的图片放 `assets/figures/`
-- `outputs/` 只是临时运行结果，不作为正式交付目录
-
-## 9. 当前下一步
-
-- 先完成 YOLO26 正式结果（D11）
-- 再完成 FCOS 正式结果（D10）
-- 推荐执行顺序：YOLO26 先拿快结果，FCOS 后补 anchor-free 学术对比
-- 回填主对比表、定性分析、消融表（D12/D13/D14）
-- 形成下一轮计划：是否从 DRENet `300 -> 1000` 继续长程续训
+- 辅指标：`AP50-95 / Precision / Recall / F1`
+- 效率与复杂度：`FPS / Params / FLOPs`
