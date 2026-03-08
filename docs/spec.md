@@ -91,7 +91,7 @@
 
 8) **复现实验记录规范化（后续写论文必需）**
    - 任务：固定随机种子、记录超参、记录训练时长/显存、记录数据版本
-   - 交付：`docs/experiments/exp_log_template.md` + 每次实验一份记录
+   - 交付：`docs/experiments/formal_experiment_log_template_v1.md` + 每次实验一份记录
 
 ---
 
@@ -214,7 +214,7 @@
 - 总执行手册：`docs/experiments/README.md`
 - 3060一步一步：`docs/experiments/3060_execution_playbook.md`
 - 云端 GPU 手册：`docs/experiments/cloud_execution_playbook.md`
-- 实验日志模板：`docs/experiments/exp_log_template.md`
+- 实验日志模板：`docs/experiments/formal_experiment_log_template_v1.md`
 - 主对比模板：`docs/results/baselines.md`
 - 消融模板：`docs/results/ablation.md`
 - 定性分析模板：`docs/results/qualitative.md`

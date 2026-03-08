@@ -116,10 +116,10 @@
   - Windows 3060 训练机手册。
 - [cloud_execution_playbook.md](/Users/khs/codes/graduation_project/docs/experiments/cloud_execution_playbook.md)
   - Linux 云 GPU 手册，适合 AutoDL。
-- [drenet_reproduction_guide.md](/Users/khs/codes/graduation_project/docs/experiments/drenet_reproduction_guide.md)
-  - DRENet 专项复现手册。
-- [exp_log_template.md](/Users/khs/codes/graduation_project/docs/experiments/exp_log_template.md)
-  - 每次实验记录模板。
+- [plan-20260308-yolo26-first-run.md](/Users/khs/codes/graduation_project/docs/experiments/plans/plan-20260308-yolo26-first-run.md)
+  - 当前待执行的 YOLO26 首轮计划。
+- [formal_experiment_log_template_v1.md](/Users/khs/codes/graduation_project/docs/experiments/formal_experiment_log_template_v1.md)
+  - 当前实验记录模板（新版本）。
 
 ### 结果回填
 - [baselines.md](/Users/khs/codes/graduation_project/docs/results/baselines.md)

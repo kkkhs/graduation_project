@@ -69,7 +69,7 @@
    - `docs/results/ablation.md`
    - `docs/results/qualitative.md`
 5. 生成下一轮计划：
-   - `docs/experiments/next_run_plan.md`
+   - `docs/experiments/plans/plan-next-run.md`
    - 决策是否继续 DRENet `300 -> 1000`
 
 ## 6. 文档归档/合并检查结果
@@ -87,3 +87,4 @@
 - 本地/3060 执行手册：`docs/experiments/3060_execution_playbook.md`
 - 主对比表：`docs/results/baselines.md`
 - 本轮 DRENet 正式日志：`docs/experiments/logs/exp-20260308-02-drenet-formal-resume-300.md`
+- YOLO26 首轮计划：`docs/experiments/plans/plan-20260308-yolo26-first-run.md`

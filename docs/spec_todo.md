@@ -19,9 +19,9 @@
 - [x] B6 在训练机跑通评测脚本并产出首版结果（DRENet：AP50=0.7949，AP50:95=0.2919）
 
 ## C. DRENet 复现
-- [x] C7 复现文档已完成（`docs/experiments/drenet_reproduction_guide.md`）
+- [x] C7 复现文档已完成（`docs/experiments/archive/drenet_reproduction_guide.md`）
 - [x] C7 在训练机完成 DRENet 训练/测试/可视化首轮结果（cloud formal run 到 299/299）
-- [x] C8 实验日志模板已完成（`docs/experiments/exp_log_template.md`）
+- [x] C8 实验日志模板已完成（`docs/experiments/formal_experiment_log_template_v1.md`）
 - [x] C8 每次实验填报日志到 `docs/experiments/logs/`（已沉淀 2026-03-07~03-08 关键日志）
 
 ## D. 三模型对比实验
@@ -75,7 +75,7 @@
 ### G3 训练后立即衔接（结果一回传即可执行）
 - [x] G3-1 将 DRENet 首轮结果填入 `docs/results/baselines.md`
 - [ ] G3-2 生成第一版误检/漏检示例页并更新 `docs/results/qualitative.md`
-- [ ] G3-3 依据首轮结果调整下一轮实验参数计划（形成 `docs/experiments/next_run_plan.md`）
+- [ ] G3-3 依据首轮结果调整下一轮实验参数计划（形成 `docs/experiments/plans/plan-next-run.md`）
 - [ ] G3-4 回填论文实验章节草稿（先写“现象与原因”，后补最终数字）
 
 ---
@@ -83,7 +83,8 @@
 ## 已在本机落地的关键文件
 - 实验总手册：`docs/experiments/README.md`
 - 3060一步一步：`docs/experiments/3060_execution_playbook.md`
-- 实验记录模板：`docs/experiments/exp_log_template.md`
+- 实验记录模板：`docs/experiments/formal_experiment_log_template_v1.md`
+- 计划目录：`docs/experiments/plans/`
 - 主对比模板：`docs/results/baselines.md`
 - 消融模板：`docs/results/ablation.md`
 - 定性分析模板：`docs/results/qualitative.md`
@@ -107,4 +108,4 @@
 1. 先完成 YOLO26 冒烟与正式首轮，快速拿到第二条可回填基线。
 2. 再完成 FCOS 冒烟与正式首轮，补 anchor-free 学术对比。
 3. 回填 `docs/results/baselines.md`（补齐 FCOS、YOLO26 两行）与 `docs/results/qualitative.md`。
-4. 产出 `docs/experiments/next_run_plan.md`（是否继续 300->1000、阈值/分辨率消融计划）。
+4. 产出 `docs/experiments/plans/plan-next-run.md`（是否继续 300->1000、阈值/分辨率消融计划）。
