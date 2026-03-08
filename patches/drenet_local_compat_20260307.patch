@@ -86,3 +86,18 @@ index 8b9aae0..cfd65d4 100644
              tbox.append(torch.cat((gxy - gij, gwh), 1))  # box
              anch.append(anchors[a])  # anchors
              tcls.append(c)  # class
+diff --git a/experiments/drenet/DRENet/train.py b/experiments/drenet/DRENet/train.py
+index 5c757fa..f2726f7 100644
+--- a/experiments/drenet/DRENet/train.py
++++ b/experiments/drenet/DRENet/train.py
+@@ -73,7 +73,7 @@ def train(hyp, opt, device, tb_writer=None, wandb=None):
+     pretrained = weights.endswith('.pt')
+     if pretrained:
+         with torch_distributed_zero_first(rank):
+-            attempt_download(weights)  # download if not found locally
+-        ckpt = torch.load(weights, map_location=device)  # load checkpoint
++            attempt_download(weights)  # download if not found locally
++        ckpt = torch.load(weights, map_location=device, weights_only=False)  # load checkpoint
+         model = Model(opt.cfg or ckpt['model'].yaml, ch=3, nc=nc, anchors=hyp.get('anchors')).to(device)  # create
+         exclude = ['anchor'] if (opt.cfg or hyp.get('anchors')) and not opt.resume else []  # exclude keys
+         state_dict = ckpt['model'].float().state_dict()  # to FP32
