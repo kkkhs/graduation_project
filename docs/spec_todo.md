@@ -3,7 +3,7 @@
 > 说明：
 > - `[x]` 本机已完成（文档/模板/脚本已落地）
 > - `[ ]` 需在 3060 笔记本或云 GPU 执行
-> - 时间基准：2026-03-03
+> - 时间基准：2026-03-08
 
 ## A. 文献调研与开题
 - [x] A1 确定调研范围与关键词
@@ -12,24 +12,24 @@
 
 ## B. 数据集与评价指标
 - [x] B4 数据文档模板与执行说明已准备（见实验手册）
-- [ ] B4 在训练机完成 LEVIR-Ship 下载、结构核验和统计落盘
+- [x] B4 在训练机完成 LEVIR-Ship 下载、结构核验和统计落盘（云端链路已验证可用）
 - [x] B5 数据统一方案已明确（COCO 中间格式）
-- [ ] B5 在训练机完成实际转换脚本与产物
+- [ ] B5 在训练机完成实际转换脚本与产物（FCOS 正式实验前最终核验）
 - [x] B6 指标口径已统一（AP50/Precision/Recall/F1）
-- [ ] B6 在训练机跑通评测脚本并产出首版结果
+- [x] B6 在训练机跑通评测脚本并产出首版结果（DRENet：AP50=0.7949，AP50:95=0.2919）
 
 ## C. DRENet 复现
 - [x] C7 复现文档已完成（`docs/experiments/drenet_reproduction_guide.md`）
-- [ ] C7 在训练机完成 DRENet 训练/测试/可视化首轮结果
+- [x] C7 在训练机完成 DRENet 训练/测试/可视化首轮结果（cloud formal run 到 299/299）
 - [x] C8 实验日志模板已完成（`docs/experiments/exp_log_template.md`）
-- [ ] C8 每次实验填报日志到 `docs/experiments/logs/`
+- [x] C8 每次实验填报日志到 `docs/experiments/logs/`（已沉淀 2026-03-07~03-08 关键日志）
 
 ## D. 三模型对比实验
-- [ ] D9 模型1：DRENet 正式结果
-- [ ] D10 模型2：mmdetection（FCOS/Faster R-CNN）正式结果
-- [ ] D11 模型3：YOLO 正式结果
+- [x] D9 模型1：DRENet 正式结果
+- [ ] D10 模型2：mmdetection（FCOS）正式结果
+- [ ] D11 模型3：YOLO26 正式结果
 - [x] D12 主对比表模板已完成（`docs/results/baselines.md`）
-- [ ] D12 填入三模型实测结果并得出结论
+- [ ] D12 填入三模型实测结果并得出结论（已填 DRENet 行，待 FCOS/YOLO26）
 - [x] D13 消融表模板已完成（`docs/results/ablation.md`）
 - [ ] D13 完成至少 1-2 组消融并填写结果
 - [x] D14 定性结果模板已完成（`docs/results/qualitative.md`）
@@ -73,7 +73,7 @@
 - [x] G2-6 编写“结果回传后自动落盘流程”说明（对应 `scripts/sync_results_from_laptop.sh`）
 
 ### G3 训练后立即衔接（结果一回传即可执行）
-- [ ] G3-1 将 DRENet 首轮结果填入 `docs/results/baselines.md`
+- [x] G3-1 将 DRENet 首轮结果填入 `docs/results/baselines.md`
 - [ ] G3-2 生成第一版误检/漏检示例页并更新 `docs/results/qualitative.md`
 - [ ] G3-3 依据首轮结果调整下一轮实验参数计划（形成 `docs/experiments/next_run_plan.md`）
 - [ ] G3-4 回填论文实验章节草稿（先写“现象与原因”，后补最终数字）
@@ -104,7 +104,7 @@
 - 架构图：`docs/system/architecture.mmd`
 
 ## 下一步（你现在就做）
-1. 在 3060 笔记本按 `docs/experiments/3060_execution_playbook.md` 跑通 DRENet 首轮。
-2. 同步执行 `G1` 和 `G2` 里至少各 2 项，保证训练等待时间不空转。
-3. 生成第一份日志：`docs/experiments/logs/exp-YYYYMMDD-01-drenet.md`。
-4. 回传结果后执行 `G3-1` 和 `G3-2`。
+1. 先完成 YOLO26 冒烟与正式首轮，快速拿到第二条可回填基线。
+2. 再完成 FCOS 冒烟与正式首轮，补 anchor-free 学术对比。
+3. 回填 `docs/results/baselines.md`（补齐 FCOS、YOLO26 两行）与 `docs/results/qualitative.md`。
+4. 产出 `docs/experiments/next_run_plan.md`（是否继续 300->1000、阈值/分辨率消融计划）。

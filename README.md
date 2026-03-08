@@ -8,8 +8,8 @@
 ## 1. 当前项目在做什么
 
 当前主线已经从“开题准备”切到“实验落地”：
-- 第一优先级：训练机跑通 DRENet 首轮训练 / 评测 / 可视化
-- 第二优先级：扩展到 MMDetection 和 YOLO，形成三模型对比
+- 第一优先级：完成 FCOS 与 YOLO26 首轮实验，补齐三模型对比
+- 第二优先级：把实测结果回填到论文第四章/第五章和答辩材料
 - 第三优先级：把实测结果回填到论文、图表和系统演示材料
 
 当前训练机计划支持两类环境：
@@ -25,20 +25,22 @@
 - 融合推理、可视化输出、Qt 桌面 UI 已完成
 - 单元测试已补齐，当前系统骨架可运行
 - 云端与本地两套训练文档都已建立
+- DRENet 云端正式续训已完成（`299/299`），结果已回传并完成关机收尾
+- DRENet 主结果已回填到 `docs/results/baselines.md`（AP50=0.7949, AP50:95=0.2919）
+- 已打通“训练结束后自动同步 + 自动关机 + 本地 checkpoint 快照”链路
 
 ### 还没完成
-- LEVIR-Ship 在训练机上的实际下载、转换、统计落盘
-- DRENet 首轮正式训练 / 评测 / 可视化结果
-- MMDet 与 YOLO 的正式结果
+- FCOS 首轮正式训练 / 评测 / 指标回填
+- YOLO26 首轮正式训练 / 评测 / 指标回填
 - 主对比表、消融表、定性分析表的真实数据回填
 - 论文第四章、第五章用实测结果补齐
 - 系统最终演示样例整理
 
 ### 当前最该做
-1. 选定训练环境：3060 或 AutoDL
-2. 按对应执行手册完成环境预检、数据预检
-3. 先跑 DRENet 首轮
-4. 结果回传后更新 `docs/results/` 和论文材料
+1. 按执行手册先跑 YOLO26（冒烟 -> 正式 -> 评测）
+2. 再跑 FCOS（冒烟 -> 正式 -> 评测）
+3. 按统一协议补齐 FPS / Params / FLOPs
+4. 回填 `docs/results/` 和论文实验章节
 
 ## 3. Todo 看板入口
 
@@ -70,7 +72,7 @@
 - `tests/`
   - 单元测试与兼容性测试。
 - `scripts/`
-  - 辅助脚本，比如结果回传。
+  - 辅助脚本，比如结果回传、checkpoint 监控、云端 run 同步。
 - `assets/`
   - 适合长期保留的图片、图表、论文插图素材。
 
@@ -108,6 +110,8 @@
 ### 实验执行
 - [experiments/README.md](/Users/khs/codes/graduation_project/docs/experiments/README.md)
   - 实验总规范，总入口。
+- [progress_summary_20260308.md](/Users/khs/codes/graduation_project/docs/experiments/progress_summary_20260308.md)
+  - 截至当前的实验阶段总结与下一步执行顺序。
 - [3060_execution_playbook.md](/Users/khs/codes/graduation_project/docs/experiments/3060_execution_playbook.md)
   - Windows 3060 训练机手册。
 - [cloud_execution_playbook.md](/Users/khs/codes/graduation_project/docs/experiments/cloud_execution_playbook.md)
@@ -134,6 +138,8 @@
   - 训练产物接入规范。
 - [result_sync_flow.md](/Users/khs/codes/graduation_project/docs/system/result_sync_flow.md)
   - 训练结果回传流程。
+- [sync_autodl_experiment_assets.sh](/Users/khs/codes/graduation_project/scripts/sync_autodl_experiment_assets.sh)
+  - AutoDL 到本地 `experiment_assets/` 的精确同步脚本，支持按 run 名拉取和训练结束后的自动最终同步。
 
 ### 开题与论文
 - [kaiti.md](/Users/khs/codes/graduation_project/docs/kaiti/kaiti.md)
@@ -205,7 +211,8 @@ PYTHONPATH=. python3 -m unittest discover -s tests -p "test_*.py"
 
 ## 9. 当前下一步
 
-- 如果走 AutoDL：先补一份 AutoDL 专用手册，或直接按云端手册改路径执行
-- 先完成 DRENet 首轮训练、评测、可视化
-- 然后回填结果表和日志
-- 再进入三模型主对比阶段
+- 先完成 YOLO26 正式结果（D11）
+- 再完成 FCOS 正式结果（D10）
+- 推荐执行顺序：YOLO26 先拿快结果，FCOS 后补 anchor-free 学术对比
+- 回填主对比表、定性分析、消融表（D12/D13/D14）
+- 形成下一轮计划：是否从 DRENet `300 -> 1000` 继续长程续训

@@ -222,7 +222,7 @@ python tools/train.py configs\fcos\fcos_r50-caffe_fpn_gn-head_1x_coco.py `
   test_dataloader.dataset.data_prefix.img=test/images/
 ```
 
-### 4.3 YOLOv8 冒烟
+### 4.3 YOLO26 冒烟
 ```powershell
 cd E:\work
 git clone https://github.com/ultralytics/ultralytics.git
@@ -230,8 +230,9 @@ cd ultralytics
 git checkout cac4699df04f2c06a4ef3872217eae561981349d
 pip install -e .
 
-yolo detect train model=yolov8n.pt data=E:/datasets/LEVIR-Ship/ship.yaml imgsz=640 epochs=1 batch=2 device=0 project=E:/work/runs name=yolo_smoke
+yolo detect train model=yolo26n.pt data=E:/datasets/LEVIR-Ship/ship.yaml imgsz=640 epochs=1 batch=2 device=0 project=E:/work/runs name=yolo_smoke
 ```
+说明：若本地 Ultralytics 版本暂不支持 `yolo26n.pt`，先升级 Ultralytics；必要时可临时改用 `yolo11n.pt` 做冒烟。
 
 ### 4.4 冒烟通过判定
 分别检查：
@@ -275,10 +276,10 @@ python tools/train.py configs\fcos\fcos_r50-caffe_fpn_gn-head_1x_coco.py `
   test_dataloader.dataset.data_prefix.img=test/images/
 ```
 
-### 5.3 YOLOv8 正式训练
+### 5.3 YOLO26 正式训练
 ```powershell
 cd E:\work\ultralytics
-yolo detect train model=yolov8n.pt data=E:/datasets/LEVIR-Ship/ship.yaml imgsz=640 epochs=100 batch=4 device=0 project=E:/work/runs name=yolo_main
+yolo detect train model=yolo26n.pt data=E:/datasets/LEVIR-Ship/ship.yaml imgsz=640 epochs=100 batch=4 device=0 project=E:/work/runs name=yolo_main
 ```
 
 ### 5.4 正式训练中的失败分支
@@ -351,6 +352,26 @@ Checkpoint 5：
 - 评测成功
 - 指标可回填
 - 图像可用于定性分析
+
+### 6.5 FPS / FLOPs / Params 测量规范（统一口径）
+- 执行时机：
+  - 建议在训练结束后，使用最终权重（通常 `best`）测量并回填。
+- 固定条件（必须一致）：
+  - `imgsz=512`
+  - `batch=1`
+  - 同一 GPU
+  - 同一精度模式（FP32 或 FP16，需在日志中注明）
+  - 同一后处理阈值（conf/iou）
+- FPS 测量：
+  - 先 warmup（建议 50 次），再计时（建议 200 次），取平均单张耗时；
+  - `FPS = 1 / 平均单张耗时(秒)`。
+- Params 测量：
+  - 统计模型参数总量，单位 `M`。
+- FLOPs 测量：
+  - 统一在输入尺寸 `512x512` 下测一次前向的 `GFLOPs`。
+- 结果回填：
+  - 写入 `docs/results/baselines.md` 的 `FPS`、`Params(M)`；
+  - 若某模型 FLOPs 不便直接写入主表，可在实验日志备注中补充。
 
 ## 7. 导出融合可视化（项目统一入口）
 ```powershell

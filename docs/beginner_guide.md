@@ -316,14 +316,14 @@ x → [卷积层] → F(x) → F(x) + x → 输出
 | 框架            | 特点               | 支持模型                         |
 | --------------- | ------------------ | -------------------------------- |
 | **mmdetection** | 模块化、丰富模型库 | Faster R-CNN、RetinaNet、DETR 等 |
-| **ultralytics** | 易用、YOLO 生态    | YOLOv5、YOLOv8、YOLOv10          |
+| **ultralytics** | 易用、YOLO 生态    | YOLO11、YOLO26 等                |
 | **Detectron2**  | Facebook 开发      | Mask R-CNN 等                    |
 | **YOLOv5**      | 轻量、快速         | YOLOv5 系列                      |
 
 **本项目使用**：
 
-- **mmdetection**：通用检测器（Faster R-CNN、RetinaNet）
-- **ultralytics**：YOLO 系列（YOLOv8）
+- **mmdetection**：通用检测器（当前优先 FCOS）
+- **ultralytics**：YOLO 系列（当前优先 YOLO26）
 
 ### 6.3 数据处理工具
 
@@ -408,7 +408,8 @@ IoU = 预测框与真实框的交集 / 预测框与真实框的并集
 - **AP50**：IoU=0.5 时的 AP
 - **AP75**：IoU=0.75 时的 AP
 - **AP50:95**：IoU 从 0.5 到 0.95（步长 0.05）的平均 AP
-- **AP**：AP50:95 的简称
+- **AP**：在很多 COCO 风格报告中常指 AP50:95  
+  说明：不同论文可能用法不同；例如 DRENet 论文结果表中的 `AP` 实际指 `AP50(%)`。
 
 ### 7.8 按尺寸分桶的 AP
 
@@ -737,7 +738,7 @@ class_id x_center y_center width height
 | ---------------- | -------- | ----------- | ------------------ |
 | **DRENet**       | 参考方法 | 自定义      | 论文方法，作为基线 |
 | **Faster R-CNN** | 两阶段   | mmdetection | 通用检测器对比     |
-| **YOLOv8**       | 单阶段   | ultralytics | 实时检测对比       |
+| **YOLO26**       | 单阶段   | ultralytics | 实时检测对比       |
 
 ### 11.4 DRENet 方法详解
 
@@ -789,18 +790,18 @@ DRENet 由三个主要部分组成：
 
 ### 11.5 性能基准
 
-**DRENet 在 LEVIR-Ship 上的性能**：
+**DRENet 在 LEVIR-Ship 上的性能**（论文口径，主指标为 `AP50`，以百分数表示）：
 
-- **AP**：82.4
+- **AP50(%)**：82.4
 - **FPS**：85
 - **Params（推理）**：4.79M
 - **FLOPs（推理）**：8.3G
 
-**对比方法性能**：
+**对比方法性能**（同为 `AP50(%)`）：
 
-- EfficientDet-D2：AP 80.9，FPS 21
-- YOLOv5s：AP 75.6，FPS 95
-- CenterNet：AP 77.7，FPS 25
+- EfficientDet-D2：AP50 80.9，FPS 21
+- YOLOv5s：AP50 75.6，FPS 95
+- CenterNet：AP50 77.7，FPS 25
 
 ### 11.6 交付物
 
