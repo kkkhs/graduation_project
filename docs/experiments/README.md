@@ -40,13 +40,13 @@ This folder stores experiment standards, templates, execution playbooks, and exp
 - `logs/exp-20260308-02-drenet-formal-resume-300.md`
 
 ## Existing Plans
-- `plans/plan-20260308-yolo26-first-run.md`
+- `plans/plan-next-run.md`
 
 ## Next Steps
-1. Run YOLO26 smoke and formal run based on `plans/plan-20260308-yolo26-first-run.md`.
-2. Backfill YOLO26 metrics into `docs/results/baselines.md` and `docs/results/ablation.md`.
-3. Run FCOS smoke and formal run after YOLO26 baseline is stable.
-4. Keep one new log per run in `logs/` and avoid duplicate standalone notes.
+1. Run FCOS smoke and formal run based on `plans/plan-next-run.md`.
+2. Backfill FCOS metrics into `docs/results/baselines.md` and `docs/results/ablation.md`.
+3. Keep one new log per run in `logs/` and avoid duplicate standalone notes.
+4. Historical YOLO first-run plan is archived at `archive/plan-20260308-yolo26-first-run.md`.
 
 ## Maintenance Rules
 - Plans go to `plans/`; facts go to `logs/`; standards stay in spec/template files.

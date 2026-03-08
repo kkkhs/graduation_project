@@ -273,7 +273,7 @@ python3 tools/train.py configs/fcos/fcos_r50-caffe_fpn_gn-head_1x_coco.py \
 ### 5.3 YOLO26 正式训练
 ```bash
 cd /workspace/ultralytics
-yolo detect train model=yolo26n.pt data=/data/LEVIR-Ship/ship.yaml imgsz=640 epochs=100 batch=4 device=0 project=/workspace/runs name=yolo_main
+yolo detect train model=yolo26n.pt data=/data/LEVIR-Ship/ship.yaml imgsz=640 epochs=100 batch=12 device=0 project=/workspace/runs name=yolo_main
 ```
 
 ### 5.4 正式训练中的失败分支
@@ -362,6 +362,17 @@ python3 tools/train.py <config.py> --resume ./work_dirs/fcos_main/epoch_12.pth
 yolo detect train resume model=/workspace/runs/yolo_main/weights/last.pt
 ```
 
+### 7.1 W&B 续训防重复（强烈建议）
+若同一实验会多次重启，为避免出现“同名多个 run”，续训时固定：
+
+```bash
+export WANDB_RUN_ID=<existing_run_id>
+export WANDB_RESUME=must
+```
+
+然后再执行 `resume` 命令。  
+说明：W&B 唯一键是 `run_id`，不是 run `name`。只改名字不能防重复。
+
 ## 8. 回传与回填
 如果云端可以直接访问本机：
 
@@ -380,6 +391,17 @@ bash scripts/sync_results_from_laptop.sh <local_user@local_host> /workspace/grad
 
 Checkpoint 6：
 - 本机已收到日志、图、指标和结果文档
+
+### 8.1 本地目录建议（实跑经验）
+- 建议本地统一落到：
+  - `experiment_assets/runs/<run_name>`
+  - `experiment_assets/runs/trace/{drenet,yolo,sync,...}`
+- 输入配置（data yaml）建议单独快照：
+  - `experiment_assets/configs/<run_name>/ship_autodl.yaml`
+- 要求：
+  - 正式训练启动前先复制一份原始 `data yaml`
+  - 若训练后才补录，必须在日志中注明“根据运行日志恢复”
+- 若历史目录为 `runs/detect/runs/<run_name>`，可迁移到 `runs/` 根下，并保留兼容软链接。
 
 ## 9. 关机前检查清单
 - [ ] 本轮权重已落盘（best/last）

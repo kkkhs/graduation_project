@@ -22,7 +22,7 @@
 |---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | exp-20260308-02 | 94d4wdmk | cloud formal resume | DRENet | DRENet | 512 | 0.7949 | 0.2919 | 0.4927 | 0.8511 | 0.6241 | 待测 | 待补 | run: `drenet_levirship_512_bs4_sna_20260307_formal01`，最终 `299/299`，best AP50=0.8017@276/299 |
 |  |  | 4.2/5.2/6.2 | FCOS | MMDetection |  |  |  |  |  |  |  |  |  |
-|  |  | 4.3/5.3/6.3 | YOLO26n | Ultralytics |  |  |  |  |  |  |  |  |  |
+| exp-20260308-03 | yolo26_main_512_formal012_20260308_192322 | cloud formal + resume | YOLO26n | Ultralytics | 512 | 0.7950 | 0.3170 | 0.8430 | 0.7220 | 0.7778 | 待测 | 待补 | EarlyStopping at 263/300, best epoch=186；本地产物：`experiment_assets/runs/yolo26_main_512_formal012` |
 |  |  | system-ensemble | Ensemble | Fusion(IoU+WBF) |  |  |  |  |  |  | - | - | 三模型融合输出 |
 
 ## 4. 可追溯性要求（回填时必须满足）

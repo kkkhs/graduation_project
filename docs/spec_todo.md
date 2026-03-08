@@ -27,9 +27,9 @@
 ## D. 三模型对比实验
 - [x] D9 模型1：DRENet 正式结果
 - [ ] D10 模型2：mmdetection（FCOS）正式结果
-- [ ] D11 模型3：YOLO26 正式结果
+- [x] D11 模型3：YOLO26 首轮正式结果（EarlyStopping at 263/300，best epoch=186）
 - [x] D12 主对比表模板已完成（`docs/results/baselines.md`）
-- [ ] D12 填入三模型实测结果并得出结论（已填 DRENet 行，待 FCOS/YOLO26）
+- [ ] D12 填入三模型实测结果并得出结论（已填 DRENet、YOLO26，待 FCOS）
 - [x] D13 消融表模板已完成（`docs/results/ablation.md`）
 - [ ] D13 完成至少 1-2 组消融并填写结果
 - [x] D14 定性结果模板已完成（`docs/results/qualitative.md`）

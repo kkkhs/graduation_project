@@ -259,13 +259,23 @@ sync_file_tar() {
   run_ssh "rm -f '$remote_archive'" || true
 }
 
+archive_safe_name() {
+  local raw="$1"
+  # Keep archive names filesystem-safe for nested run paths like detect/runs/<name>.
+  raw="${raw//\//__}"
+  raw="${raw// /_}"
+  echo "$raw"
+}
+
 sync_run() {
   if [ -n "$RUN_NAME" ]; then
+    local run_slug
+    run_slug="$(archive_safe_name "$RUN_NAME")"
     log "Sync run: $RUN_NAME"
     if [ "$REMOTE_SYNC_MODE" = "rsync" ]; then
       sync_path "$REMOTE_ASSETS_ROOT/runs/$RUN_NAME" "$LOCAL_ASSETS_ROOT/runs/$RUN_NAME"
     else
-      sync_path_tar "$REMOTE_ASSETS_ROOT/runs/$RUN_NAME" "$LOCAL_ASSETS_ROOT/runs/$RUN_NAME" "run_${RUN_NAME}.tgz"
+      sync_path_tar "$REMOTE_ASSETS_ROOT/runs/$RUN_NAME" "$LOCAL_ASSETS_ROOT/runs/$RUN_NAME" "run_${run_slug}.tgz"
     fi
   else
     log "Sync all runs"
@@ -281,6 +291,8 @@ sync_checkpoints() {
   [ "$SYNC_CHECKPOINTS" = "1" ] || return 0
   mkdir -p "$LOCAL_ASSETS_ROOT/checkpoints"
   if [ -n "$RUN_NAME" ]; then
+    local run_slug
+    run_slug="$(archive_safe_name "$RUN_NAME")"
     log "Sync checkpoints matching run: $RUN_NAME"
     if [ "$REMOTE_SYNC_MODE" = "rsync" ]; then
       rsync -az --partial --progress -e "$RSYNC_RSH" \
@@ -289,8 +301,8 @@ sync_checkpoints() {
         --exclude='*' \
         "$REMOTE:$REMOTE_ASSETS_ROOT/checkpoints/" "$LOCAL_ASSETS_ROOT/checkpoints/"
     else
-      local remote_archive="/tmp/checkpoints_${RUN_NAME}.tgz"
-      local local_archive="${STAGING_DIR}/checkpoints_${RUN_NAME}.tgz"
+      local remote_archive="/tmp/checkpoints_${run_slug}.tgz"
+      local local_archive="${STAGING_DIR}/checkpoints_${run_slug}.tgz"
       rm -f "$local_archive"
       run_ssh "set -euo pipefail; rm -f '$remote_archive'; cd '$REMOTE_ASSETS_ROOT/checkpoints' && tar -czf '$remote_archive' \$(find . -type f -name '*${RUN_NAME}*' -print)"
       run_scp "$REMOTE:$remote_archive" "$local_archive"

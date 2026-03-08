@@ -2,6 +2,7 @@
 
 ## 1. 当前结论（可直接对外汇报）
 - DRENet 主链路已跑通并完成一轮正式结果沉淀（`299/299`）。
+- YOLO26 首轮云端正式训练已完成（EarlyStopping 于 `263/300`，best epoch `186`）。
 - 训练产物已从云端回传到本地 `experiment_assets/`，并完成一致性核验。
 - 自动化链路已具备：
   - watch 同步回传
@@ -51,25 +52,25 @@
 
 ## 3. 进行中与未完成
 - D10：FCOS 正式训练与评测结果（未完成）
-- D11：YOLO26 正式训练与评测结果（未完成）
-- D12：主对比表仅填 DRENet 行，FCOS/YOLO26 待补
+- D11：YOLO26 首轮已完成，若需继续需决策是否二阶段续训（如 `263 -> 400/600`）
+- D12：主对比表已填 DRENet、YOLO26，FCOS 待补
 - D13：消融实验待完成
 - D14：定性图（success/miss/false_positive）待补齐
 - F19：论文第4/5章待用完整三模型结果回填
 
 ## 4. 下一步执行顺序（建议严格按序）
-1. YOLO26：`1 epoch` 冒烟 -> 正式训练 -> 测试评估 -> 回填指标（先拿快结果）。
-2. FCOS：`1 epoch` 冒烟 -> 正式训练 -> 测试评估 -> 回填指标（补 anchor-free 对比）。
-3. 统一补齐效率与复杂度：
+1. FCOS：`1 epoch` 冒烟 -> 正式训练 -> 测试评估 -> 回填指标（补 anchor-free 对比）。
+2. 统一补齐效率与复杂度：
    - `FPS`（warmup 50 + timing 200）
    - `Params(M)`
    - `FLOPs(G)`
-4. 更新结果文档：
+3. 更新结果文档：
    - `docs/results/baselines.md`
    - `docs/results/ablation.md`
    - `docs/results/qualitative.md`
-5. 生成下一轮计划：
+4. 生成下一轮计划：
    - `docs/experiments/plans/plan-next-run.md`
+   - 决策是否继续 YOLO26 二阶段续训（如 `263 -> 400/600`）
    - 决策是否继续 DRENet `300 -> 1000`
 
 ## 6. 文档归档/合并检查结果
@@ -87,4 +88,22 @@
 - 本地/3060 执行手册：`docs/experiments/3060_execution_playbook.md`
 - 主对比表：`docs/results/baselines.md`
 - 本轮 DRENet 正式日志：`docs/experiments/logs/exp-20260308-02-drenet-formal-resume-300.md`
-- YOLO26 首轮计划：`docs/experiments/plans/plan-20260308-yolo26-first-run.md`
+- YOLO26 首轮实跑：`docs/experiments/logs/run-20260308-yolo26-3060-3080ti.md`
+
+## 7. YOLO26 当日执行补充（2026-03-08 晚）
+- 3060（Windows）侧结论：
+  - 已完成链路定位，但出现 `labels.cache` 锁冲突、`cv2` worker 导入失败、`WinError 1455`（页面文件），不适合本轮正式长训。
+  - W&B 在 Windows 侧还出现路径名与 key 注入兼容问题。
+- 3080Ti（云）侧执行：
+  - 完成 1 epoch 速度对比：
+    - `w0/noamp`: `81.1243s`
+    - `w2/amp`: `61.0547s`
+    - 提速：`1.3287x`
+  - 正式训练完成（EarlyStopping）：
+    - 最终停在 `263/300`，best epoch `186`
+    - 末次验证：`P=0.843`，`R=0.722`，`mAP50=0.795`，`mAP50-95=0.317`
+    - 远端运行目录：`/root/autodl-tmp/experiment_assets/runs/detect/runs/yolo26_main_512_formal012`
+    - 本地归档目录：`/Users/khs/codes/graduation_project/experiment_assets/runs/yolo26_main_512_formal012`
+    - trace 日志：`/Users/khs/codes/graduation_project/experiment_assets/runs/trace/yolo/`
+- 完整留痕：
+  - `docs/experiments/logs/run-20260308-yolo26-3060-3080ti.md`

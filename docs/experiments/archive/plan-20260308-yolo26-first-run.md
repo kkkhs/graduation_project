@@ -1,7 +1,8 @@
 # 计划：YOLO26 首轮执行准备（2026-03-08）
 
-status: planned
-execution: not started
+status: archived
+execution: completed_and_superseded
+note: 首轮已执行完成，结果与问题请看 `docs/experiments/logs/run-20260308-yolo26-3060-3080ti.md`。
 
 ## 1. 目标
 - 在不改变当前 DRENet 已完成结果的前提下，启动 YOLO26 首轮实验链路：
@@ -58,7 +59,7 @@ yolo detect train \
   data=/data/LEVIR-Ship/ship.yaml \
   imgsz=640 \
   epochs=100 \
-  batch=4 \
+  batch=12 \
   device=0 \
   project=/workspace/runs \
   name=yolo26_main

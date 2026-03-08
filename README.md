@@ -116,8 +116,8 @@
   - Windows 3060 训练机手册。
 - [cloud_execution_playbook.md](/Users/khs/codes/graduation_project/docs/experiments/cloud_execution_playbook.md)
   - Linux 云 GPU 手册，适合 AutoDL。
-- [plan-20260308-yolo26-first-run.md](/Users/khs/codes/graduation_project/docs/experiments/plans/plan-20260308-yolo26-first-run.md)
-  - 当前待执行的 YOLO26 首轮计划。
+- [run-20260308-yolo26-3060-3080ti.md](/Users/khs/codes/graduation_project/docs/experiments/logs/run-20260308-yolo26-3060-3080ti.md)
+  - YOLO26 首轮实跑记录（已执行，含问题台账与产物路径）。
 - [formal_experiment_log_template_v1.md](/Users/khs/codes/graduation_project/docs/experiments/formal_experiment_log_template_v1.md)
   - 当前实验记录模板（新版本）。
 
