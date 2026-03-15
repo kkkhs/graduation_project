@@ -1,0 +1,59 @@
+\chapter{国内外研究现状}
+\label{ch:related_work}
+
+\section{通用目标检测方法演进}
+
+目标检测方法的发展可概括为 four 条主线：two-stage、one-stage、anchor-free 与 transformer。two-stage 方法以 Faster R-CNN 为代表，通过候选区域生成与分类回归两阶段流程实现较高定位精度\cite{ren2015_fasterrcnn}。one-stage 方法以 YOLO 系列与 RetinaNet 为代表，直接进行密集预测，具有较好的实时性与工程部署友好性\cite{redmon2016_yolo,redmon2018_yolov3,lin2017_focalloss}。anchor-free 方法以 FCOS 为代表，降低了锚框先验与超参数设计成本，在复杂场景下具备稳定性优势\cite{tian2019_fcos}。transformer 检测器则通过全局关系建模提升上下文表达能力，代表方法包括 DETR、Deformable DETR 与 DINO\cite{carion2020_detr,zhu2021_deformabledetr,zhang2023_dino}。
+
+总体而言，two-stage 与 transformer 路线在精度上具备潜力，one-stage 在速度与资源开销方面优势明显，anchor-free 在调参与泛化上表现平衡。针对毕业设计场景，跨范式对比比单一路线更有利于形成可解释结论。
+
+\section{小目标检测研究进展}
+
+小目标检测的核心难点在于目标表征弱、背景干扰强与样本不均衡。已有研究通常从以下三个方向改进：
+
+\begin{enumerate}
+  \item \textbf{特征层改进}：通过 FPN 或其改进结构增强多尺度表征，缓解小目标在深层特征中消失的问题\cite{lin2017_fpn}。
+  \item \textbf{训练策略改进}：通过重加权损失、难例挖掘与数据增强提升小目标样本有效占比\cite{lin2017_focalloss}。
+  \item \textbf{推理策略改进}：通过阈值与后处理策略优化 Precision-Recall 平衡，减少复杂背景下误检与漏检。
+\end{enumerate}
+
+现有方法在通用数据集上已取得明显进展，但在遥感场景中仍存在迁移差距。其主要原因在于遥感图像中的纹理干扰更强、目标更稀疏、尺度分布更偏小，导致单一结构改进难以稳定泛化。
+
+\section{遥感船舶检测研究现状}
+
+遥感船舶检测研究在公开数据集与开源工具链支持下发展迅速。LEVIR-Ship 为中分辨率微小船舶检测提供了具有代表性的公开基准\cite{levirship2021_dataset}。在方法层面，DRENet 针对微小船舶特征弱的问题，通过退化重建增强机制在训练阶段强化目标表征，并在精度与速度之间取得较好平衡\cite{chen2022_tinyship_drenet}。
+
+在工程层面，OpenMMLab 与 Ultralytics 生态为跨模型复现提供了成熟工具\cite{mmdet2018_openmmlab,ultralytics2024_docs}。这使得研究重点从“能否训练”逐渐转向“如何公平对比、如何解释差异、如何系统落地”。
+
+\begin{table}[htbp]
+  \centering
+  \caption{本文相关研究方向与代表路线}
+  \label{tab:ch2_research_map}
+  \begin{tabular}{lll}
+    \hline
+    研究方向 & 代表路线 & 本文定位 \\
+    \hline
+    通用检测 & Faster R-CNN / FCOS / YOLO / DETR & 作为跨范式对比基础 \\
+    小目标检测 & 多尺度融合、损失重加权、增强策略 & 用于分析性能差异来源 \\
+    遥感船舶检测 & LEVIR-Ship + 专项方法（如 DRENet） & 聚焦微小船舶场景 \\
+    工程化实现 & mmdetection / ultralytics / 服务化封装 & 支撑系统落地与演示 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+\section{现有工作的不足与本文切入点}
+
+综合现有文献，当前研究仍存在以下问题：
+
+\begin{enumerate}
+  \item 对比协议不统一：不同工作在数据划分、阈值设置、评测脚本上存在差异，导致横向结论可信度下降。
+  \item 复现细节不足：部分方法缺少完整工程信息，难以在毕业设计周期内稳定复现。
+  \item 难例分析不充分：复杂海况、云层干扰与近岸背景下的误检漏检原因阐释不足。
+  \item 系统化闭环不足：从算法结果到可演示系统的链路常被弱化。
+\end{enumerate}
+
+针对上述问题，本文的切入点是：在统一协议下完成 DRENet、FCOS、YOLO26 三模型对比，结合消融与难例分析解释结果差异，并以 Web 系统实现算法服务化落地。该路径兼顾研究深度与工程交付，适配本科毕设“可验证、可展示、可复现”的目标。
+
+\section{本章小结}
+
+本章系统梳理了通用目标检测、小目标检测与遥感船舶检测研究进展，并总结了现有工作的主要不足。由此可见，仅追求单点指标提升不足以支撑完整毕业设计，必须同时强调统一评测、可复现流程与系统落地。下一章将据此给出本文的数据集、评价指标与方法方案。

@@ -1,0 +1,97 @@
+\chapter{数据集、评价指标与方法方案}
+\label{ch:method}
+
+\section{数据集介绍}
+
+本文采用 LEVIR-Ship 数据集作为统一实验基准\cite{levirship2021_dataset,chen2022_tinyship_drenet}。该数据集面向中分辨率遥感微小船舶检测任务，能够较好反映复杂海面背景下的小目标识别难点。数据规模与划分如表~\ref{tab:ch3_dataset_split} 所示。
+
+\begin{table}[htbp]
+  \centering
+  \caption{LEVIR-Ship 数据集划分}
+  \label{tab:ch3_dataset_split}
+  \begin{tabular}{lcc}
+    \hline
+    数据子集 & 图像数量 & 目标数量 \\
+    \hline
+    训练集 & 2320 & 2002 \\
+    验证集 & 788 & 665 \\
+    测试集 & 788 & 552 \\
+    \hline
+  \end{tabular}
+\end{table}
+
+从任务属性看，LEVIR-Ship 具有以下特点：目标尺度小、背景纹理复杂、场景差异明显。这决定了本文实验必须同时关注定位精度与召回表现，避免仅依赖单一指标判断模型优劣。
+
+\section{数据预处理与统一格式}
+
+为保障跨框架可比性，本文采用“统一标注协议 + 统一评测口径”策略。具体流程为：
+
+\begin{enumerate}
+  \item 数据结构核验：检查图像与标注对应关系、空标注与异常标注。
+  \item 标注规范化：统一为 COCO 中间格式，便于 mmdetection 与 YOLO 系列共享评测流程。
+  \item 划分一致化：固定 train/val/test 划分与样本清单，避免跨模型对比的样本偏差。
+  \item 结果标准化：统一输出字段 `image_id`、`model_name`、`bbox`、`score`、`category_id`。
+\end{enumerate}
+
+该流程确保模型差异主要来源于算法本身，而非数据处理与评测实现差异。
+
+\section{评价指标}
+
+本文采用 AP50 作为主指标，并辅以 AP50-95、Precision、Recall、F1 进行综合评价。相关定义如下：
+
+\begin{equation}
+\text{Precision} = \frac{TP}{TP + FP}
+\end{equation}
+
+\begin{equation}
+\text{Recall} = \frac{TP}{TP + FN}
+\end{equation}
+
+\begin{equation}
+F1 = \frac{2 \cdot \text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+\end{equation}
+
+\begin{equation}
+\text{IoU} = \frac{|B_{pred} \cap B_{gt}|}{|B_{pred} \cup B_{gt}|}
+\end{equation}
+
+其中 AP50 表示 IoU 阈值为 0.5 时的平均精度，AP50-95 表示在多 IoU 阈值区间上的平均性能。为兼顾工程可用性，后续章节还将补充 FPS、参数量与 FLOPs 指标。
+
+\section{模型方案}
+
+本文选择三类代表模型构建对比实验，覆盖不同检测范式：
+
+\subsection{DRENet（专项方法）}
+
+DRENet 针对微小船舶特征弱的问题，通过训练阶段的退化重建增强机制提升目标表征能力\cite{chen2022_tinyship_drenet}。该路线对复杂海面背景具有较强针对性，是本文的重要基线方法。
+
+\subsection{FCOS（Anchor-Free 路线）}
+
+FCOS 通过位置回归替代锚框设计，减少了 anchor 相关超参数依赖\cite{tian2019_fcos}。该方法在工程上易于复现，适合作为“通用 anchor-free 检测器”代表参与对比。
+
+\subsection{YOLO26（One-Stage 路线）}
+
+YOLO 系列具备端到端检测与较高推理效率，是工程部署常用方案\cite{redmon2016_yolo,redmon2018_yolov3,ultralytics2024_docs}。本文采用 YOLO26 作为 one-stage 代表，用于分析精度与效率的权衡关系。
+
+\section{统一实验协议与实现约束}
+
+为保证对比公平，本文遵循如下协议：
+
+\begin{enumerate}
+  \item 使用同一数据划分与同一评测口径；
+  \item 关键参数（输入尺寸、阈值范围、训练轮次）保持可对齐；
+  \item 固定实验记录模板，记录环境、配置、权重与日志路径；
+  \item 结果输出统一入库并支持可视化回看，保证可追溯性。
+\end{enumerate}
+
+在系统实现中，三模型通过统一推理入口进行封装：
+
+\begin{verbatim}
+predict(image_path, model_name, conf_threshold, iou_threshold)
+\end{verbatim}
+
+该接口使算法层与系统层解耦，便于后续扩展新模型并复用任务调度与结果展示能力。
+
+\section{本章小结}
+
+本章给出了本文实验的基础设置，包括数据集选择、预处理策略、评价指标和三模型方法方案，并明确了统一实验协议。上述设计为后续实验结果分析与系统实现章节提供了可复验、可对比的技术基础。

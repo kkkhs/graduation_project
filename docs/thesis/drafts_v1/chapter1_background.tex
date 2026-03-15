@@ -1,0 +1,69 @@
+\chapter{绪论}
+\label{ch:intro}
+
+\section{研究背景}
+
+遥感图像中的船舶检测是海上监管、港口调度、海事执法与应急救援中的关键基础能力。与自然场景目标检测相比，遥感场景存在覆盖范围大、背景复杂、目标稀疏等特点，传统人工判读在效率与一致性上难以满足实际业务需求。因此，将目标检测技术应用于遥感船舶场景，构建自动化、可复现、可回溯的检测流程，具有明确的工程价值与研究意义。
+
+近年来，通用目标检测方法从 two-stage 到 one-stage，再到 anchor-free 与 transformer 检测器持续演进，检测精度和推理效率不断提升\cite{ren2015_fasterrcnn,lin2017_fpn,lin2017_focalloss,tian2019_fcos,redmon2016_yolo,carion2020_detr,zhu2021_deformabledetr}。然而，将这些方法直接迁移到中分辨率遥感微小船舶场景时，仍面临显著性能退化与工程复现难题。
+
+\section{研究问题与挑战}
+
+本课题聚焦“遥感场景下的微小船舶检测”，核心问题是：在复杂背景与弱目标特征条件下，如何兼顾检测精度、召回能力与系统可部署性。结合 LEVIR-Ship 数据集与已有研究\cite{chen2022_tinyship_drenet,levirship2021_dataset}，可将主要挑战归纳为以下四点：
+
+\begin{enumerate}
+  \item 目标尺寸小、纹理弱：微小船舶在图像中仅占少量像素，特征在下采样过程中易丢失。
+  \item 背景干扰强：海浪、云层、岸线与港口设施会引入大量“类目标”纹理，导致误检增加。
+  \item 样本分布不均：正负样本比例失衡，且不同场景下目标分布差异明显。
+  \item 复现与评测口径不统一：不同方法在数据划分、阈值与评估脚本上不一致，横向对比可信度受限。
+\end{enumerate}
+
+\section{研究目标与研究内容}
+
+围绕上述问题，本文的总体目标是：在统一数据与评测协议下，完成多模型对比实验并实现可演示的检测系统，形成“实验结果 + 工程系统 + 论文论证”闭环。
+
+具体研究内容包括：
+
+\begin{enumerate}
+  \item \textbf{数据与协议统一}：基于 LEVIR-Ship 建立统一数据组织与评测口径，明确 AP50、AP50-95、Precision、Recall、F1 等指标定义。
+  \item \textbf{多模型对比实验}：选取 DRENet、FCOS 与 YOLO26 三类代表模型，在同一数据协议下进行训练与测试对比。
+  \item \textbf{消融与误差分析}：围绕阈值策略、场景难例与模型差异进行定量与定性分析。
+  \item \textbf{系统设计与实现}：构建 React + FastAPI + SQLite 的检测系统，实现任务提交、异步执行、结果可视化与历史回看。
+\end{enumerate}
+
+\section{技术路线与论文贡献}
+
+本文技术路线如图~\ref{fig:ch1_pipeline} 所示，可概括为“数据准备 $\rightarrow$ 模型训练与推理 $\rightarrow$ 结果分析 $\rightarrow$ 系统集成”四阶段。
+
+\begin{figure}[htbp]
+  \centering
+  \fbox{\parbox{0.88\textwidth}{
+  图占位：整体技术路线图（数据准备、三模型对比、结果分析、系统集成）。
+  }}
+  \caption{本文技术路线示意}
+  \label{fig:ch1_pipeline}
+\end{figure}
+
+相较于仅关注单模型指标的方案，本文工作强调统一协议下的可比性与系统落地性，形成如下贡献：
+
+\begin{enumerate}
+  \item 给出面向遥感微小船舶任务的统一实验流程与结果记录方式，提升对比结论可复验性。
+  \item 完成 DRENet、FCOS、YOLO26 的同口径对比，并提供面向场景问题的分析框架。
+  \item 将算法能力服务化封装为 Web 系统，打通任务管理、结果回看与可视化展示链路。
+\end{enumerate}
+
+\section{论文结构安排}
+
+本文后续章节安排如下：
+
+\begin{enumerate}
+  \item 第~\ref{ch:related_work} 章综述国内外相关研究，梳理通用检测、小目标检测与遥感船舶检测进展。
+  \item 第~\ref{ch:method} 章介绍数据集、评价指标、模型方案与实验协议。
+  \item 第四章给出三模型对比、消融实验与难例可视化分析。
+  \item 第五章介绍系统需求、架构设计、关键实现与演示结果。
+  \item 第六章总结全文并讨论后续改进方向。
+\end{enumerate}
+
+\section{本章小结}
+
+本章从应用需求与技术挑战出发，明确了遥感微小船舶检测课题的研究问题、研究目标与技术路线。本文将以“统一评测协议 + 多模型对比 + 系统落地”为主线，兼顾研究可信度与工程可交付性，为后续章节展开奠定基础。
