@@ -1,44 +1,78 @@
 % !TeX root = ../main.tex
 
-\chapter{引用文献的标注}
+\chapter{实验结果与分析}
+\label{ch:experiment}
 
-模板使用 \pkg{natbib} 宏包来设置参考文献引用的格式，默认采用角标数字标注法，
-更多引用方法可以参考该宏包的使用说明。
+\section{实验环境与设置}
 
-\section{顺序编码制}
+本文实验围绕 LEVIR-Ship 数据集展开，采用统一的数据划分和评测口径，对 DRENet、FCOS 与 YOLO26 三类代表模型进行对比分析。实验输入尺寸统一为 512，核心评价指标包括 AP50、AP50-95、Precision、Recall 与 F1。为了保证结果的可追溯性，本文在实验过程中统一记录训练配置、权重文件、日志目录和运行环境，并将结果回填到统一的结果文档中。
 
-\subsection{角标数字标注法}
+从工程实现角度看，实验既包含纯算法训练与测试，也包含系统侧的真实推理联调。算法结果主要用于支撑模型优劣分析，系统联调结果则用于验证模型能够以服务化方式稳定接入检测平台。
 
-\hfutsetup{
-  cite-style = super,
-}
-\noindent
-\begin{tabular}{l@{\quad$\Rightarrow$\quad}l}
-  \verb|\cite{knuth86a}|         & \cite{knuth86a}         \\
-  \verb|\citet{knuth86a}|        & \citet{knuth86a}        \\
-  \verb|\cite[42]{knuth86a}|     & \cite[42]{knuth86a}     \\
-  \verb|\cite{knuth86a,tlc2}|    & \cite{knuth86a,tlc2}    \\
-  \verb|\cite{knuth86a,knuth84}| & \cite{knuth86a,knuth84} \\
-\end{tabular}
+\section{三模型主对比结果}
 
+目前已完成并可追溯的三模型结果如表~\ref{tab:ch4_baselines} 所示。
 
-\subsection{数字标注法}
+\begin{table}[htbp]
+  \centering
+  \caption{三模型在 LEVIR-Ship 数据集上的主对比结果}
+  \label{tab:ch4_baselines}
+  \begin{tabular}{lcccccc}
+    \toprule
+    模型 & AP50 & AP50-95 & Precision & Recall & F1 & 备注 \\
+    \midrule
+    DRENet & 0.7949 & 0.2919 & 0.4927 & 0.8511 & 0.6241 & 正式结果已完成 \\
+    FCOS & 0.7700 & 0.2850 & -- & 0.4050 & -- & 正式结果已完成 \\
+    YOLO26 & 0.7950 & 0.3170 & 0.8430 & 0.7220 & 0.7778 & 首轮正式结果已完成 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
-\hfutsetup{
-  cite-style = inline,
-}
-\noindent
-\begin{tabular}{l@{\quad$\Rightarrow$\quad}l}
-  \verb|\cite{knuth86a}|         & \cite{knuth86a}         \\
-  \verb|\citet{knuth86a}|        & \citet{knuth86a}        \\
-  \verb|\cite[42]{knuth86a}|     & \cite[42]{knuth86a}     \\
-  \verb|\cite{knuth86a,tlc2}|    & \cite{knuth86a,tlc2}    \\
-  \verb|\cite{knuth86a,knuth84}| & \cite{knuth86a,knuth84} \\
-\end{tabular}
+从 AP50 指标看，YOLO26 与 DRENet 表现接近，二者均明显优于 FCOS。其中，YOLO26 的 AP50 为 0.7950，DRENet 的 AP50 为 0.7949，二者差异很小；FCOS 的 AP50 为 0.7700，说明在当前实验设置下，anchor-free 路线在中分辨率微小船舶场景中的整体精度略低于前两者。
 
-\hfutsetup{
-  cite-style = super,
-}
+从 AP50-95 指标看，YOLO26 取得了 0.3170 的最好结果，DRENet 为 0.2919，FCOS 为 0.2850。这说明在更严格的定位评价标准下，YOLO26 对目标框位置与尺度的拟合能力相对更强。DRENet 虽然在 AP50 上表现突出，但在更严格 IoU 阈值下仍有进一步优化空间。
 
-% 注意，参考文献列表中的每条文献在正文中都要被引用。这里只是为了示例。
-\nocite{*}
+\section{结果分析}
+
+\subsection{DRENet 结果分析}
+
+DRENet 是针对微小船舶检测任务设计的专项方法，其优势主要体现在对弱纹理目标的特征增强能力上。从当前实验结果看，DRENet 在 Recall 上达到 0.8511，显著高于 YOLO26 的 0.7220。这说明 DRENet 在“尽可能发现目标”方面具有明显优势，尤其适合对漏检更敏感的任务场景。
+
+但与此同时，DRENet 的 Precision 为 0.4927，明显低于 YOLO26。这说明其在提升召回的同时也引入了较多误检。对海上监管等业务场景而言，这意味着 DRENet 更适合作为“高召回优先”的候选模型，后续可以通过阈值调优、后处理优化或融合策略进一步平衡误检问题。
+
+\subsection{FCOS 结果分析}
+
+FCOS 作为本文选取的 anchor-free 代表模型，在当前实验中的 AP50 为 0.7700，低于 DRENet 和 YOLO26。该结果表明，在中分辨率微小船舶场景下，减少锚框依赖虽然能够简化模型设计，但未必能够直接带来更优精度。结合现有训练记录可以看出，FCOS 提供了较稳定的 baseline，适合作为与专项模型和 one-stage 模型比较的中间参照。
+
+尽管 FCOS 的总体指标暂不占优，但其研究价值仍然存在。一方面，FCOS 代表了通用 anchor-free 路线，可以帮助分析“是否必须依赖专项设计”这一问题；另一方面，其结构简洁、调参逻辑相对直接，有利于后续开展更规范的复现实验与稳定性分析。
+
+\subsection{YOLO26 结果分析}
+
+YOLO26 在当前实验中取得了最高的 AP50-95 和较高的 AP50，同时 Precision 和 F1 也明显优于 DRENet。该结果说明 YOLO26 在精度、定位质量和工程部署便利性之间表现出较好的平衡。尤其是其 Precision 达到 0.8430，说明在当前阈值设置下，YOLO26 的误检控制能力较强。
+
+对于本科毕业设计而言，YOLO26 具备一个重要优势，即训练与部署链路成熟、工程实现方便、系统接入成本较低。因此，如果从“系统默认模型”角度考虑，YOLO26 具有较强实用性；如果从“召回优先”角度考虑，则 DRENet 仍值得保留作为互补模型。
+
+\section{可视化与难例分析}
+
+除定量结果外，本文还通过系统推理结果和可视化图像对模型行为进行分析。当前系统已支持单图与批量任务提交，并可生成模型检测框叠加图与结构化结果表。通过对比不同模型在同一图像上的输出，可以发现以下现象：
+
+\begin{enumerate}
+  \item 在目标非常微小或背景较复杂时，DRENet 更容易给出候选框，因此召回表现较高。
+  \item 在背景纹理较强或近岸场景中，YOLO26 对误检的抑制更稳定。
+  \item FCOS 在部分样本上能够给出合理定位，但整体稳定性仍弱于前两者。
+\end{enumerate}
+
+\begin{figure}[htbp]
+  \centering
+  \fbox{\parbox{0.88\textwidth}{
+  图占位：同一张测试图像下 DRENet、FCOS、YOLO26 以及融合结果的对比可视化。
+  }}
+  \caption{典型样例的多模型检测结果对比}
+  \label{fig:ch4_visual_compare}
+\end{figure}
+
+目前，误检、漏检和复杂背景样例的系统化整理仍在补充中。后续可进一步结合成功检测、误检、漏检和复杂场景四类样本，形成更加完整的定性分析章节。
+
+\section{本章小结}
+
+本章对 DRENet、FCOS 和 YOLO26 三种模型进行了统一口径下的实验对比。结果表明，DRENet 在召回方面表现突出，YOLO26 在整体精度、定位质量与工程部署性方面更具优势，FCOS 则提供了 anchor-free 路线的稳定参照。总体来看，不同模型在精度、召回和可部署性之间各有侧重，这为后续系统默认模型选择和融合策略设计提供了依据。

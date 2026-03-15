@@ -32,7 +32,7 @@
   \item 数据结构核验：检查图像与标注对应关系、空标注与异常标注。
   \item 标注规范化：统一为 COCO 中间格式，便于 mmdetection 与 YOLO 系列共享评测流程。
   \item 划分一致化：固定 train/val/test 划分与样本清单，避免跨模型对比的样本偏差。
-  \item 结果标准化：统一输出字段 `image_id`、`model_name`、`bbox`、`score`、`category_id`。
+  \item 结果标准化：统一输出字段 \texttt{image\_id}、\texttt{model\_name}、\texttt{bbox}、\texttt{score}、\texttt{category\_id}。
 \end{enumerate}
 
 该流程确保模型差异主要来源于算法本身，而非数据处理与评测实现差异。

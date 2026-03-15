@@ -1,28 +1,91 @@
 % !TeX root = ../main.tex
 
-\begin{publications}
+\chapter{系统需求分析、设计与实现}
+\label{ch:system}
 
-\section{参加的学术交流与科研项目}
+\section{系统建设目标}
+
+本文系统建设的目标不是实现复杂的企业级平台，而是完成一套面向本科毕业设计场景、能够稳定演示和真实运行的轻量级检测系统。该系统需要满足以下要求：一是能够接入并调用多种检测模型；二是能够支持单张图像与批量图像推理；三是能够展示检测结果并保存历史任务；四是能够为后续论文撰写和答辩演示提供直观证据。
+
+基于这一目标，本文最终选择采用 React + FastAPI + SQLite 的本地单机方案，在保持系统完整性的同时控制实现复杂度，使系统既具备前后端和数据库三层结构，又不会因过重的部署依赖影响毕设推进。
+
+\section{系统需求分析}
+
+\subsection{功能需求}
+
+结合毕业设计任务和答辩演示需求，系统的核心功能可归纳如下：
 
 \begin{enumerate}
-\item A A A A A A A A A
-\item A A A A A A A A A
-\item A A A A A A A A A
+  \item 模型管理：支持读取模型配置、查看模型状态以及启用或停用模型；
+  \item 任务提交：支持单图和批量图像上传，并可设置推理模式与置信度阈值；
+  \item 任务执行：支持异步任务调度与状态流转，避免前端阻塞；
+  \item 结果展示：支持检测框可视化、结构化结果展示和历史结果回看；
+  \item 数据持久化：支持任务、结果和产物路径入库，保证系统重启后历史记录仍可查询。
 \end{enumerate}
 
-\section{发表的学术论文（含专利和软件著作权）}
+\subsection{非功能需求}
+
+除功能需求外，系统还需要满足以下非功能要求：
 
 \begin{enumerate}
-\item A A A A A A A A A
-\item A A A A A A A A A
-\item A A A A A A A A A
+  \item \textbf{可复现性}：依赖安装、数据库初始化和系统启动流程清晰可重现；
+  \item \textbf{可维护性}：算法层与服务层解耦，便于后续替换模型或扩展功能；
+  \item \textbf{可演示性}：界面简洁清晰，能够在答辩中快速展示任务流程与结果；
+  \item \textbf{轻量化}：不引入 Redis、Celery 或复杂分布式组件，优先满足本地单机运行。
 \end{enumerate}
 
-\section{获得的学术奖励}
+\section{系统总体架构}
+
+系统总体采用前后端分离架构，如图~\ref{fig:ch5_architecture} 所示。前端负责任务提交、列表展示和结果可视化；后端负责接口服务、任务调度、状态管理和静态文件路由；数据库负责持久化模型、任务、结果和文件路径信息；算法内核则通过统一接口被后端复用。
+
+\begin{figure}[htbp]
+  \centering
+  \fbox{\parbox{0.88\textwidth}{
+  图占位：系统总体架构图，包括前端、后端、数据库、算法内核和输出目录。
+  }}
+  \caption{系统总体架构示意}
+  \label{fig:ch5_architecture}
+\end{figure}
+
+从职责划分看，系统各层作用如下：
+
 \begin{enumerate}
-\item A A A A A A A A A
-\item A A A A A A A A A
-\item A A A A A A A A A
+  \item 前端层：基于 React、Vite、TypeScript 和 Ant Design 实现页面交互与图表展示；
+  \item 服务层：基于 FastAPI 提供任务提交、查询、模型查询和健康检查接口；
+  \item 调度层：基于 ThreadPoolExecutor 实现本地异步任务执行；
+  \item 数据层：基于 SQLite 与 SQLAlchemy 持久化系统状态；
+  \item 算法层：复用现有推理核心，实现单模型与融合模式推理。
 \end{enumerate}
 
-\end{publications}
+\section{数据库与接口设计}
+
+为了满足任务追踪与结果回放需求，系统设计了四张核心表：\texttt{models}、\texttt{tasks}、\texttt{results} 和 \texttt{task\_files}。其中，\texttt{models} 表用于管理模型配置，\texttt{tasks} 表用于记录任务状态和进度，\texttt{results} 表用于存储结构化检测框结果，\texttt{task\_files} 表用于保存输入图、输出 JSON 和可视化图像路径。
+
+后端接口统一挂载在 \texttt{/api/v1} 下，主要包括任务提交、任务查询、结果查询、模型查询与健康检查等接口。系统接口设计重点在于“最小可用”，即只保留答辩演示和实际运行所需的核心接口，避免无关复杂度。
+
+\section{关键实现流程}
+
+\subsection{任务提交与执行流程}
+
+当前端提交图像与配置后，后端首先完成参数校验与任务入库，然后将任务提交到本地线程池执行器中。执行器按照任务模式选择单模型或融合模式推理，并将结果写入数据库及输出目录。整个过程支持 \texttt{queued}、\texttt{running}、\texttt{done}、\texttt{failed} 四种任务状态，便于前端统一展示。
+
+\subsection{结果展示流程}
+
+推理完成后，系统会将结构化结果写入 JSON 文件，并生成对应的检测框可视化图像。前端通过任务详情页同时展示输入图、模型结果图、融合结果图以及结构化检测表格，从而支持“定量结果 + 可视化证据”联合展示。
+
+\section{系统实现效果}
+
+经过联调与验证，系统已经完成从任务创建到结果回放的完整链路。具体表现为：
+
+\begin{enumerate}
+  \item 已能够接入 DRENet 与 YOLO 真实权重并完成单图与批量推理；
+  \item 已支持任务列表轮询刷新、进度条展示和失败状态标记；
+  \item 已支持结果页展示模型来源、检测框、平均置信度和任务统计图表；
+  \item 已使用 SQLite 持久化任务历史，实现系统重启后的结果保留。
+\end{enumerate}
+
+从毕业设计交付角度看，该系统已满足“前端、后端、数据库、算法集成、可视化展示”五方面的完整性要求，能够作为论文第五章和答辩演示的核心支撑。
+
+\section{本章小结}
+
+本章围绕系统需求、总体架构、数据库设计、接口流程和实现效果，对本文检测系统进行了完整描述。系统采用轻量但完整的技术方案，在控制工程复杂度的前提下实现了多模型接入、异步任务执行、结果持久化与前端展示，满足了本科毕业设计对系统完整性和可演示性的要求。
