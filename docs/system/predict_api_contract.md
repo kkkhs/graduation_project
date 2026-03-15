@@ -1,6 +1,17 @@
 # 推理接口契约（实现标准）
 
+> 说明：本文同时覆盖 Python 内部推理接口与 Web API v1（FastAPI）。
+
 ## 1. 接口清单
+
+### 1.0 Web API v1
+- `POST /api/v1/tasks/infer`
+- `GET /api/v1/tasks`
+- `GET /api/v1/tasks/{task_id}`
+- `GET /api/v1/tasks/{task_id}/results`
+- `GET /api/v1/models`
+- `PATCH /api/v1/models/{model_key}`
+- `GET /api/v1/health`
 
 ### 1.1 单模型推理
 ```python

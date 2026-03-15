@@ -15,6 +15,14 @@ datasets/
 data/
 **/__pycache__/
 **/*.pyc
+frontend/node_modules/
+frontend/dist/
+frontend/test-results/
+*.tsbuildinfo
+.venv/
+app.db
+*.db
+*.sqlite3
 
 # Third-party code vendor drop (prefer pinning upstream commit + patch files)
 experiments/drenet/DRENet/

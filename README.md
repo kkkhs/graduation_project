@@ -4,13 +4,13 @@
 
 这个仓库是毕设工作台，目标是把论文、实验和系统实现放在同一套可追溯流程里推进。
 
-## 1. 当前状态（2026-03-08）
+## 1. 当前状态（2026-03-15）
 
-- DRENet 正式结果已完成并回传（`299/299`）
-- YOLO26 首轮正式结果已完成（EarlyStopping 于 `263/300`，best epoch `186`）
-- FCOS 仍待完成（当前第一优先级）
-- 结果表已回填 DRENet + YOLO26，待补 FCOS
-- 云端训练链路已打通：训练 -> 同步 -> 核验 -> 关机
+- Web 系统主链路已打通：`React + FastAPI + SQLite + 真实模型推理`
+- DRENet / YOLO 权重已接入 `models.yaml`，支持真实单图与批量推理
+- 任务页支持中文语义、进度条+数量比、失败/完成颜色区分
+- 任务详情已统一“融合结果在最后”（图表、标签、结构化表格）
+- FCOS 训练实验仍待补全（不影响当前 Web 系统演示）
 
 ## 2. 近期重点（按顺序）
 
@@ -48,7 +48,7 @@
 ## 5. 目录作用（高频）
 
 - `docs/`：实验、论文、系统文档主目录
-- `src/`：系统代码（分层架构）
+- `src/`：算法与推理内核（分层架构，给 Web 后端和脚本共用）
 - `tools/`：可执行入口（推理、可视化、UI、转换脚本）
 - `configs/`：模型配置
 - `tests/`：测试
@@ -56,6 +56,11 @@
 - `experiment_assets/`：训练产物与配置快照（本地归档）
 - `assets/`：长期保留图件
 - `outputs/`：临时运行输出（已忽略，不作正式交付）
+
+关于“为什么还有 `src/`”：
+- `backend/` 主要负责 Web API、任务队列、数据库与文件路由。
+- `src/` 承载模型调度、融合逻辑、适配器、可视化渲染等核心能力。
+- 目前 `backend` 是对 `src` 的服务化封装，不是替代关系；保留 `src` 可以避免算法代码在脚本端和 Web 端重复维护。
 
 ## 6. 训练产物约定（当前执行标准）
 
@@ -83,3 +88,26 @@
 - 主指标：`AP50`
 - 辅指标：`AP50-95 / Precision / Recall / F1`
 - 效率与复杂度：`FPS / Params / FLOPs`
+
+## 9. Web 系统入口（React + FastAPI + SQLite）
+
+系统升级为 Web 版本后，入口如下：
+
+- 后端：`backend/`（FastAPI + SQLAlchemy + Alembic + SQLite）
+- 前端：`frontend/`（React + Vite + TypeScript + AntD + ECharts）
+- 任务输出：`outputs/tasks/<task_id>/`
+
+快速启动：
+
+1. `pip install -r backend/requirements.txt`
+2. `./scripts/init_db.sh`
+3. `./scripts/start_backend.sh`
+4. `./scripts/start_frontend.sh`
+
+或一键：
+
+- `./scripts/dev_one_click.sh`
+
+详细说明见： [web_system_upgrade.md](/Users/khs/codes/graduation_project/docs/system/web_system_upgrade.md)
+
+联调与验证记录见： [test_report_20260315.md](/Users/khs/codes/graduation_project/docs/system/test_report_20260315.md)

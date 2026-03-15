@@ -14,7 +14,7 @@
 - [x] B4 数据文档模板与执行说明已准备（见实验手册）
 - [x] B4 在训练机完成 LEVIR-Ship 下载、结构核验和统计落盘（云端链路已验证可用）
 - [x] B5 数据统一方案已明确（COCO 中间格式）
-- [ ] B5 在训练机完成实际转换脚本与产物（FCOS 正式实验前最终核验）
+- [x] B5 在训练机完成实际转换脚本与产物（2026-03-09 已生成 `annotations/{train,val,test}.json` 并核验）
 - [x] B6 指标口径已统一（AP50/Precision/Recall/F1）
 - [x] B6 在训练机跑通评测脚本并产出首版结果（DRENet：AP50=0.7949，AP50:95=0.2919）
 
@@ -71,6 +71,7 @@
 - [x] G2-4 编写推理主流程伪代码与接口文档（`predict(...)` 输入输出契约）
 - [x] G2-5 编写“训练机产物接入规范”（权重命名、目录结构、版本号）
 - [x] G2-6 编写“结果回传后自动落盘流程”说明（对应 `scripts/sync_results_from_laptop.sh`）
+- [ ] G2-7 规范化插件配置入口（将 `config_path=/.../drenet_local_plugin.py:build_predictor` 改为模块化导入路径），并补齐部署依赖说明（避免新机器缺少 DRENet 代码导致推理失败）
 
 ### G3 训练后立即衔接（结果一回传即可执行）
 - [x] G3-1 将 DRENet 首轮结果填入 `docs/results/baselines.md`
@@ -105,7 +106,6 @@
 - 架构图：`docs/system/architecture.mmd`
 
 ## 下一步（你现在就做）
-1. 先完成 YOLO26 冒烟与正式首轮，快速拿到第二条可回填基线。
-2. 再完成 FCOS 冒烟与正式首轮，补 anchor-free 学术对比。
-3. 回填 `docs/results/baselines.md`（补齐 FCOS、YOLO26 两行）与 `docs/results/qualitative.md`。
-4. 产出 `docs/experiments/plans/plan-next-run.md`（是否继续 300->1000、阈值/分辨率消融计划）。
+1. 切到有卡实例，先完成 FCOS 冒烟与正式首轮，补 anchor-free 学术对比。
+2. 回填 `docs/results/baselines.md`（补齐 FCOS）与 `docs/results/qualitative.md`。
+3. 产出/更新 `docs/experiments/plans/plan-next-run.md`（FCOS 后续与 YOLO/DRENet 二阶段计划）。

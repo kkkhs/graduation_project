@@ -2,7 +2,7 @@
 # Copy to configs/models.yaml and adjust local paths on each machine.
 
 global:
-  device: "cuda:0"
+  device: "cpu"
   default_conf_threshold: 0.25
   default_iou_threshold: 0.50
   output_dir: "outputs/predictions"
@@ -12,16 +12,16 @@ models:
   - model_name: "drenet"
     framework_type: "drenet"
     enabled: true
-    weight_path: "/absolute/path/to/weights/drenet_best.pth"
-    config_path: "/absolute/path/to/drenet_config.py"
+    weight_path: "/Users/khs/codes/graduation_project/experiment_assets/runs/drenet_levirship_512_bs4_sna_20260307_formal01/weights/best.pt"
+    config_path: "/Users/khs/codes/graduation_project/tools/drenet_local_plugin.py:build_predictor"
     class_names: ["ship"]
-    input_size: [640, 640]
+    input_size: [512, 512]
     default_conf_threshold: 0.25
     default_iou_threshold: 0.50
 
   - model_name: "mmdet_fcos"
     framework_type: "mmdetection"
-    enabled: true
+    enabled: false
     weight_path: "/absolute/path/to/weights/fcos_best.pth"
     config_path: "/absolute/path/to/mmdet_fcos_config.py"
     class_names: ["ship"]
@@ -32,9 +32,9 @@ models:
   - model_name: "yolo"
     framework_type: "ultralytics"
     enabled: true
-    weight_path: "/absolute/path/to/weights/yolo_best.pt"
+    weight_path: "/Users/khs/codes/graduation_project/experiment_assets/runs/yolo26_main_512_formal012/weights/best.pt"
     config_path: ""
     class_names: ["ship"]
-    input_size: [640, 640]
+    input_size: [512, 512]
     default_conf_threshold: 0.25
     default_iou_threshold: 0.50
