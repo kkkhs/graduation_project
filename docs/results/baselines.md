@@ -21,7 +21,7 @@
 | 实验ID | W&B Run | 命令编号 | 模型 | 框架 | 输入尺寸 | AP50(主) | AP@0.5:0.95(辅) | Precision | Recall | F1 | FPS | Params(M) | 备注 |
 |---|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
 | exp-20260308-02 | 94d4wdmk | cloud formal resume | DRENet | DRENet | 512 | 0.7949 | 0.2919 | 0.4927 | 0.8511 | 0.6241 | 待测 | 待补 | run: `drenet_levirship_512_bs4_sna_20260307_formal01`，最终 `299/299`，best AP50=0.8017@276/299 |
-|  |  | 4.2/5.2/6.2 | FCOS | MMDetection |  |  |  |  |  |  |  |  |  |
+| exp-20260315-01 | lvxs9xhk | cloud formal resume | FCOS | MMDetection | 512 | 0.7700 | 0.2850 | - | 0.4050 | - | 待测 | 待补 | run: `fcos_main_fixedcfg_20260315_160824`，`120/120` 完成，best AP50=0.7980@14 |
 | exp-20260308-03 | yolo26_main_512_formal012_20260308_192322 | cloud formal + resume | YOLO26n | Ultralytics | 512 | 0.7950 | 0.3170 | 0.8430 | 0.7220 | 0.7778 | 待测 | 待补 | EarlyStopping at 263/300, best epoch=186；本地产物：`experiment_assets/runs/yolo26_main_512_formal012` |
 |  |  | system-ensemble | Ensemble | Fusion(IoU+WBF) |  |  |  |  |  |  | - | - | 三模型融合输出 |
 

@@ -78,3 +78,22 @@ artifacts/
 1. `docs/results/baselines.md`
 2. `docs/results/qualitative.md`
 3. `docs/results/ablation.md`
+
+## 8. 系统默认权重选择策略（防止早期波动 best 误用）
+当训练出现“`global best` 出现在早期波动期”的情况，系统接入按以下规则执行：
+
+1. 论文/对比口径（`global-best`）
+- 保留全程最优权重用于论文主表与对比实验复现。
+- 在实验日志中明确 `best_epoch`、`best_metric`、`monitor_metric`。
+
+2. 系统默认口径（`stable-best`）
+- 从后段稳定区间选择默认上线权重（建议“最后20个epoch”或“收敛后固定窗口”）。
+- 稳定区间内选择目标指标最优权重作为 `stable-best`。
+
+3. 配置约定（`configs/models.yaml`）
+- 默认 `weight_path` 指向 `stable-best`（系统演示/部署）。
+- 在同一模型配置中保留 `global-best` 备注路径（论文复现实验使用）。
+
+4. 必做校验（接入前）
+- 对 `global-best` 与 `stable-best` 做固定样本集 A/B 对比（至少记录 AP50、AP50:95、Recall）。
+- 若两者差异不显著，优先使用 `stable-best` 作为系统默认权重。

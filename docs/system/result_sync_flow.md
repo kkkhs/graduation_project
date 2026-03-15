@@ -109,6 +109,25 @@ SYNC_SSH_PASSWORD='<YOUR_PASSWORD>' bash scripts/sync_autodl_experiment_assets.s
   --local-assets-root /Users/khs/codes/graduation_project/experiment_assets
 ```
 
+### 4.4 MMDet 大 checkpoint 场景（推荐瘦身回传）
+当 `runs/mmdet/<run_name>/` 下 `epoch_*.pth` 过大时，建议使用 `--mmdet-thin`：
+
+```bash
+SYNC_SSH_PASSWORD='<YOUR_PASSWORD>' bash scripts/sync_autodl_experiment_assets.sh \
+  root@connect.westb.seetacloud.com \
+  --port 29137 \
+  --run-name mmdet/fcos_main_fixedcfg_20260315_160824 \
+  --local-assets-root /Users/khs/codes/graduation_project/experiment_assets \
+  --mmdet-thin \
+  --no-sync-checkpoints \
+  --no-sync-scripts \
+  --no-sync-trace
+```
+
+该模式会：
+- 回传：`best_*.pth`、`last_checkpoint` 指向的最终 `epoch_*.pth`、日志/配置/json/yaml/txt、`wandb/` 文件；
+- 不回传：其余中间 `epoch_*.pth`（继续保留在云端）。
+
 ### 4.4 训练结束自动归档 checkpoint（推荐）
 当使用 `watch_sync_then_shutdown_autodl.sh` 收尾时，脚本会在最终同步一致后，自动执行本地归档：
 

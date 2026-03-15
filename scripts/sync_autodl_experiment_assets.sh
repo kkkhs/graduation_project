@@ -22,6 +22,7 @@ SYNC_WANDB="0"
 REMOTE_WANDB_ROOT="/root/autodl-tmp/workspace/experiments/drenet/DRENet/wandb"
 SYNC_TRACE="1"
 STAGING_DIR=""
+MMDET_THIN="0"
 
 usage() {
   cat <<'EOF'
@@ -47,6 +48,11 @@ Options:
                                    /root/autodl-tmp/workspace/experiments/drenet/DRENet/wandb
   --staging-dir <path>             Local temp dir for tar/scp fallback.
                                    Default: .tmp/sync_autodl_experiment_assets
+  --mmdet-thin                     For MMDet run sync, only pull:
+                                   - best_*.pth
+                                   - last_checkpoint 指向的最终 epoch_*.pth
+                                   - logs/config/json/yaml/txt/wandb 等非大权重文件
+                                   Other epoch_*.pth remain on remote.
 Environment:
   SYNC_SSH_PASSWORD                Optional password for ssh/scp via expect.
   -h, --help                       Show this help.
@@ -114,6 +120,10 @@ while [ "$#" -gt 0 ]; do
     --staging-dir)
       STAGING_DIR="$2"
       shift 2
+      ;;
+    --mmdet-thin)
+      MMDET_THIN="1"
+      shift
       ;;
     -h|--help)
       usage
@@ -268,11 +278,77 @@ archive_safe_name() {
 }
 
 sync_run() {
+  sync_run_mmdet_thin_tar() {
+    local remote_src="$1"
+    local local_dest="$2"
+    local archive_name="$3"
+    local remote_archive="/tmp/${archive_name}"
+    local local_archive="${STAGING_DIR}/${archive_name}"
+
+    mkdir -p "$local_dest"
+    rm -f "$local_archive"
+    run_ssh "
+      set -euo pipefail
+      test -d '$remote_src'
+      rm -f '$remote_archive'
+      cd '$remote_src'
+      last_file=''
+      if [ -f last_checkpoint ]; then
+        last_file=\$(basename \"\$(cat last_checkpoint)\")
+      fi
+      {
+        find . -type f \\( \
+          -name '*.log' -o -name '*.json' -o -name '*.yaml' -o -name '*.yml' -o -name '*.txt' -o \
+          -name 'config.py' -o -name 'last_checkpoint' -o -name 'best_*.pth' \
+        \\) -print
+        find ./wandb -type f -print 2>/dev/null || true
+        if [ -n \"\$last_file\" ] && [ -f \"./\$last_file\" ]; then
+          printf './%s\n' \"\$last_file\"
+        fi
+      } | sort -u > /tmp/mmdet_thin_filelist.txt
+      tar --warning=no-file-changed --ignore-failed-read -czf '$remote_archive' -T /tmp/mmdet_thin_filelist.txt
+      rm -f /tmp/mmdet_thin_filelist.txt
+    "
+    run_scp "$REMOTE:$remote_archive" "$local_archive"
+    tar -xzf "$local_archive" -C "$local_dest"
+    run_ssh "rm -f '$remote_archive'" || true
+  }
+
+  sync_run_mmdet_thin_rsync() {
+    local remote_src="$1"
+    local local_dest="$2"
+    local last_file=""
+    last_file="$(run_ssh "set -euo pipefail; cd '$remote_src'; if [ -f last_checkpoint ]; then basename \"\$(cat last_checkpoint)\"; fi" || true)"
+    mkdir -p "$local_dest"
+    rsync -az --partial --progress -e "$RSYNC_RSH" \
+      --include='*/' \
+      --include='*.log' \
+      --include='*.json' \
+      --include='*.yaml' \
+      --include='*.yml' \
+      --include='*.txt' \
+      --include='config.py' \
+      --include='last_checkpoint' \
+      --include='best_*.pth' \
+      ${last_file:+--include="$last_file"} \
+      --include='wandb/***' \
+      --exclude='epoch_*.pth' \
+      --exclude='*' \
+      "$REMOTE:$remote_src/" "$local_dest/"
+  }
+
   if [ -n "$RUN_NAME" ]; then
     local run_slug
     run_slug="$(archive_safe_name "$RUN_NAME")"
     log "Sync run: $RUN_NAME"
-    if [ "$REMOTE_SYNC_MODE" = "rsync" ]; then
+    if [ "$MMDET_THIN" = "1" ]; then
+      log "MMDet thin sync enabled for run: $RUN_NAME"
+      if [ "$REMOTE_SYNC_MODE" = "rsync" ]; then
+        sync_run_mmdet_thin_rsync "$REMOTE_ASSETS_ROOT/runs/$RUN_NAME" "$LOCAL_ASSETS_ROOT/runs/$RUN_NAME"
+      else
+        sync_run_mmdet_thin_tar "$REMOTE_ASSETS_ROOT/runs/$RUN_NAME" "$LOCAL_ASSETS_ROOT/runs/$RUN_NAME" "run_${run_slug}_mmdet_thin.tgz"
+      fi
+    elif [ "$REMOTE_SYNC_MODE" = "rsync" ]; then
       sync_path "$REMOTE_ASSETS_ROOT/runs/$RUN_NAME" "$LOCAL_ASSETS_ROOT/runs/$RUN_NAME"
     else
       sync_path_tar "$REMOTE_ASSETS_ROOT/runs/$RUN_NAME" "$LOCAL_ASSETS_ROOT/runs/$RUN_NAME" "run_${run_slug}.tgz"

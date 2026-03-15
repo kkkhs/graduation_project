@@ -1,9 +1,15 @@
-# 毕设实验阶段进度总结（截至 2026-03-08）
+# 毕设实验阶段进度总结（更新至 2026-03-15 晚）
+
+> 归档说明：该文档已被 `/Users/khs/codes/graduation_project/docs/experiments/progress_summary_20260315.md` 取代，仅保留历史追溯。
 
 ## 1. 当前结论（可直接对外汇报）
 - DRENet 主链路已跑通并完成一轮正式结果沉淀（`299/299`）。
 - YOLO26 首轮云端正式训练已完成（EarlyStopping 于 `263/300`，best epoch `186`）。
-- 训练产物已从云端回传到本地 `experiment_assets/`，并完成一致性核验。
+- FCOS 正式训练已完成（`120/120`），并统一了日志/看板口径：
+  - W&B `coco/*` 按 `Step` 轴查看
+  - 终端按 epoch 末打印
+  - 固定单 run id 续写：`lvxs9xhk`（状态：`finished`）
+- 训练产物已从云端回传到本地 `experiment_assets/`（采用 mmdet thin 策略），并完成一致性核验。
 - 自动化链路已具备：
   - watch 同步回传
   - 训练结束 final sync
@@ -49,29 +55,48 @@
   - `scripts/sync_autodl_experiment_assets.sh`
   - `scripts/watch_sync_then_shutdown_autodl.sh`
   - `scripts/snapshot_drenet_checkpoint.sh`
+  - `sync_autodl_experiment_assets.sh --mmdet-thin`（仅回传 `best + last + logs/config/wandb`）
+
+### 2.4 FCOS 正式结果（新增）
+- run 名：`fcos_main_fixedcfg_20260315_160824`
+- W&B run id：`lvxs9xhk`
+- 最终轮次：`120/120`
+- 最终指标（last）：
+  - `AP50=0.770`
+  - `AP@0.5:0.95=0.285`
+  - `AR@100=0.405`
+  - `AR@1000=0.405`
+- 全局 best（按 AP50）：
+  - `0.798 @ 14`
+- 稳定窗口（101~120）：
+  - `stable-best 指标点`：`epoch103`, `AP50=0.776`, `AP50:95=0.286`
+  - 由于 `epoch103` 无保存权重，系统候选 checkpoint 选用 `epoch_102.pth`
 
 ## 3. 进行中与未完成
-- D10：FCOS 正式训练与评测结果（未完成）
+- D10：FCOS 正式训练与评测结果（已完成）
 - D11：YOLO26 首轮已完成，若需继续需决策是否二阶段续训（如 `263 -> 400/600`）
-- D12：主对比表已填 DRENet、YOLO26，FCOS 待补
+- D12：主对比表三模型核心精度已补齐；效率项（FPS/Params/FLOPs）待补
 - D13：消融实验待完成
 - D14：定性图（success/miss/false_positive）待补齐
 - F19：论文第4/5章待用完整三模型结果回填
 
 ## 4. 下一步执行顺序（建议严格按序）
-1. FCOS：`1 epoch` 冒烟 -> 正式训练 -> 测试评估 -> 回填指标（补 anchor-free 对比）。
-2. 统一补齐效率与复杂度：
+1. 统一补齐效率与复杂度：
    - `FPS`（warmup 50 + timing 200）
    - `Params(M)`
    - `FLOPs(G)`
-3. 更新结果文档：
+2. 更新结果文档：
    - `docs/results/baselines.md`
    - `docs/results/ablation.md`
    - `docs/results/qualitative.md`
+3. 完成系统侧模型默认权重落地：
+   - 论文：`global-best`
+   - 系统：`stable-best`
+   - 补固定样本集 A/B 校验记录
 4. 生成下一轮计划：
-   - `docs/experiments/plans/plan-next-run.md`
-   - 决策是否继续 YOLO26 二阶段续训（如 `263 -> 400/600`）
-   - 决策是否继续 DRENet `300 -> 1000`
+   - 是否继续 YOLO26 二阶段续训（如 `263 -> 400/600`）
+   - 是否继续 DRENet `300 -> 1000`
+   - 是否追加 FCOS 二阶段训练（围绕 `AP50:95` 优化）
 
 ## 6. 文档归档/合并检查结果
 - `docs/experiments/archive/` 下的旧执行计划与旧模型版本文档已处于归档区，暂不需要再移动。
@@ -79,7 +104,7 @@
   - `docs/spec_todo.md`
   - `docs/experiments/3060_execution_playbook.md`
   - `docs/experiments/cloud_execution_playbook.md`
-  - `docs/experiments/progress_summary_20260308.md`
+  - `docs/experiments/archive/progress_summary_20260308.md`
 - 本轮未做删除操作，避免影响历史追溯；后续在三模型结果补齐后可再做一次归档清理。
 
 ## 5. 关键入口文档
@@ -89,6 +114,7 @@
 - 主对比表：`docs/results/baselines.md`
 - 本轮 DRENet 正式日志：`docs/experiments/logs/exp-20260308-02-drenet-formal-resume-300.md`
 - YOLO26 首轮实跑：`docs/experiments/logs/run-20260308-yolo26-3060-3080ti.md`
+- FCOS 续训口径统一日志：`docs/experiments/logs/run-20260315-fcos-wandb-single-run-epoch-log.md`
 
 ## 7. YOLO26 当日执行补充（2026-03-08 晚）
 - 3060（Windows）侧结论：
@@ -107,3 +133,25 @@
     - trace 日志：`/Users/khs/codes/graduation_project/experiment_assets/runs/trace/yolo/`
 - 完整留痕：
   - `docs/experiments/logs/run-20260308-yolo26-3060-3080ti.md`
+
+## 8. FCOS 前置准备补充（2026-03-09，无卡实例）
+- 已完成：
+  - 在远端生成并校验 COCO 标注：
+    - `annotations/train.json`（2321/2002）
+    - `annotations/val.json`（788/665）
+    - `annotations/test.json`（788/552）
+  - 类别一致性校验通过：`ship`，`category_id=1`
+- 当前阻塞：
+  - 当前实例无 GPU（`nvidia-smi` 无设备，`torch.cuda.is_available()==False`）
+  - 无卡实例无法进行 FCOS 冒烟/正式训练
+- 已补齐（shipdet 环境）：
+  - `mmengine=0.10.7`
+  - `mmcv=2.1.0`（mmcv-lite）
+  - `mmdet=3.3.0`
+- 安装过程问题与处理：
+  - `openmim` 链路首次导致 `setuptools` 降级并引发 `mmcv` 构建失败
+  - 通过升级 `setuptools` + 固定 `mmcv-lite==2.1.0` 解决与 `mmdet 3.3.0` 的兼容问题
+- 下一步：
+  - 切回有卡实例后，直接跑 FCOS 1 epoch 冒烟
+- 留痕：
+  - `docs/experiments/archive/run-20260309-fcos-coco-prep-nogpu.md`

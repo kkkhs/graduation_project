@@ -22,7 +22,7 @@
 ## 3. 一眼看板
 
 - 总看板： [spec_todo.md](/Users/khs/codes/graduation_project/docs/spec_todo.md)
-- 阶段总结： [progress_summary_20260308.md](/Users/khs/codes/graduation_project/docs/experiments/progress_summary_20260308.md)
+- 阶段总结： [progress_summary_20260315.md](/Users/khs/codes/graduation_project/docs/experiments/progress_summary_20260315.md)
 
 建议：日常只看 `spec_todo.md` 判断“下一步做什么”。
 

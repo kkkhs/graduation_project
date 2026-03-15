@@ -26,7 +26,7 @@
 
 ## D. 三模型对比实验
 - [x] D9 模型1：DRENet 正式结果
-- [ ] D10 模型2：mmdetection（FCOS）正式结果
+- [x] D10 模型2：mmdetection（FCOS）正式结果（`lvxs9xhk`，120/120，last AP50=0.770，AP50:95=0.285，best AP50=0.798@14）
 - [x] D11 模型3：YOLO26 首轮正式结果（EarlyStopping at 263/300，best epoch=186）
 - [x] D12 主对比表模板已完成（`docs/results/baselines.md`）
 - [ ] D12 填入三模型实测结果并得出结论（已填 DRENet、YOLO26，待 FCOS）
@@ -72,12 +72,15 @@
 - [x] G2-5 编写“训练机产物接入规范”（权重命名、目录结构、版本号）
 - [x] G2-6 编写“结果回传后自动落盘流程”说明（对应 `scripts/sync_results_from_laptop.sh`）
 - [ ] G2-7 规范化插件配置入口（将 `config_path=/.../drenet_local_plugin.py:build_predictor` 改为模块化导入路径），并补齐部署依赖说明（避免新机器缺少 DRENet 代码导致推理失败）
+- [ ] G2-8 完成系统默认权重策略落地：区分 `global-best`（论文）与 `stable-best`（系统默认），并在 `configs/models.yaml` 与接入记录中固化
 
 ### G3 训练后立即衔接（结果一回传即可执行）
 - [x] G3-1 将 DRENet 首轮结果填入 `docs/results/baselines.md`
 - [ ] G3-2 生成第一版误检/漏检示例页并更新 `docs/results/qualitative.md`
 - [ ] G3-3 依据首轮结果调整下一轮实验参数计划（形成 `docs/experiments/plans/plan-next-run.md`）
 - [ ] G3-4 回填论文实验章节草稿（先写“现象与原因”，后补最终数字）
+- [ ] G3-5 若 `best` 出现在波动期：补做邻域复核（`best_epoch±5`）与后段稳定区间统计（如最后20个epoch均值/方差），并写入论文实验章节“结果稳健性说明”
+- [ ] G3-6 对 `global-best` 与 `stable-best` 做固定样本集 A/B 校验，并确定系统默认模型权重
 
 ---
 
