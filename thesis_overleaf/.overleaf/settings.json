@@ -1,6 +1,6 @@
 {
     "uri": "overleaf-workshop://www.overleaf.com/HFUT_Thesis?user%3D6954d8529acc67bae950f7e5%26project%3D6954d9a5b5498722bfe2f861",
     "serverName": "www.overleaf.com",
-    "enableCompileNPreview": false,
+    "enableCompileNPreview": true,
     "projectName": "HFUT_Thesis"
 }
