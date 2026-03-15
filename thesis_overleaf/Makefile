@@ -1,4 +1,6 @@
 MAIN = main
+OUTDIR = build
+MAINPDF = $(OUTDIR)/$(MAIN).pdf
 NAME = hfutthesis
 CLSFILES = $(NAME).cls
 BSTFILES = $(NAME)-numerical.bst $(NAME)-bachelor.bst
@@ -11,7 +13,7 @@ TEXMF = $(shell kpsewhich --var-value TEXMFHOME)
 
 .PHONY : main cls doc test save clean all install distclean zip FORCE_MAKE
 
-main : $(MAIN).pdf
+main : $(MAINPDF)
 
 all : main doc
 
@@ -19,7 +21,7 @@ cls : $(CLSFILES) $(BSTFILES)
 
 doc : $(NAME)-doc.pdf
 
-$(MAIN).pdf : $(MAIN).tex $(CLSFILES) $(BSTFILES) FORCE_MAKE
+$(MAINPDF) : $(MAIN).tex $(CLSFILES) $(BSTFILES) FORCE_MAKE
 	$(LATEXMK) $<
 
 $(NAME)-doc.pdf : $(NAME)-doc.tex FORCE_MAKE
@@ -41,13 +43,13 @@ install : cls doc
 	mkdir -p $(TEXMF)/{doc,source,tex}/latex/$(NAME)
 	mkdir -p $(TEXMF)/bibtex/bst/$(NAME)
 	cp $(BSTFILES) $(TEXMF)/bibtex/bst/$(NAME)
-	cp $(NAME).pdf $(TEXMF)/doc/latex/$(NAME)
+	cp $(MAINPDF) $(TEXMF)/doc/latex/$(NAME)
 	cp $(CLSFILES) $(TEXMF)/tex/latex/$(NAME)
 
 zip : main doc
 	ln -sf . $(NAME)
 	zip -r ../$(NAME)-$(VERSION).zip $(NAME)/{*.md,LICENSE,\
 	$(NAME)-doc.tex,$(NAME)-doc.pdf,$(NAME).cls,*.bst,*.bbx,*.cbx,figures,\
-	$(MAIN).tex,hfutsetup.tex,chapters,bib,$(MAIN).pdf,\
+	$(MAIN).tex,hfutsetup.tex,chapters,bib,$(MAINPDF),\
 	latexmkrc,Makefile}
 	rm $(NAME)
