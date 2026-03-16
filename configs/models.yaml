@@ -21,11 +21,11 @@ models:
 
   - model_name: "mmdet_fcos"
     framework_type: "mmdetection"
-    enabled: false
-    weight_path: "/absolute/path/to/weights/fcos_best.pth"
-    config_path: "/absolute/path/to/mmdet_fcos_config.py"
+    enabled: true
+    weight_path: "/Users/khs/codes/graduation_project/experiment_assets/checkpoints/mmdet/fcos_main_fixedcfg_20260315_160824_stable_ep102.pth"
+    config_path: "/Users/khs/codes/graduation_project/experiment_assets/runs/mmdet/fcos_main_fixedcfg_20260315_160824/fcos_main_fixedcfg_20260315_160824.py"
     class_names: ["ship"]
-    input_size: [640, 640]
+    input_size: [800, 800]
     default_conf_threshold: 0.25
     default_iou_threshold: 0.50
 

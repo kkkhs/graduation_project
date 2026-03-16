@@ -1,15 +1,15 @@
-# Plan Template
+# 计划模板
 
-status: planned
-execution: not started
+状态: 计划中
+执行: 未开始
 
-## Goal
-- <what this plan will accomplish>
+## 目标
+- <本计划要完成的事项>
 
-## Commands To Execute
+## 待执行命令
 ```bash
-# add pending commands here
+# 在这里写待执行命令
 ```
 
-## Acceptance
-- <clear success criteria>
+## 验收标准
+- <明确的成功条件>

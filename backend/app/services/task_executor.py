@@ -7,6 +7,8 @@ from collections import defaultdict
 from concurrent.futures import Future, ThreadPoolExecutor
 from datetime import datetime
 from pathlib import Path
+import traceback
+from typing import Optional
 
 from sqlalchemy.orm import Session
 
@@ -32,6 +34,7 @@ class TaskExecutor:
 
     def _run_task(self, task_id: int) -> None:
         session: Session = self.session_factory()
+        log_path: Optional[Path] = None
         try:
             task = session.get(TaskEntity, task_id)
             if task is None:
@@ -50,6 +53,7 @@ class TaskExecutor:
             input_dir.mkdir(parents=True, exist_ok=True)
             output_dir.mkdir(parents=True, exist_ok=True)
             vis_dir.mkdir(parents=True, exist_ok=True)
+            log_path = task_dir / "task.log"
 
             input_files = (
                 session.query(TaskFileEntity)
@@ -62,6 +66,14 @@ class TaskExecutor:
                 raise ValueError("single mode requires model_key")
 
             image_errors: list[str] = []
+            start_time = datetime.utcnow()
+            self._append_log(
+                log_path,
+                (
+                    f"[START] task_id={task_id} mode={task.mode} model_key={task.model_key} "
+                    f"score_thr={task.score_thr} inputs={len(input_files)} at={start_time.isoformat()}Z"
+                ),
+            )
 
             for idx, input_row in enumerate(input_files, start=1):
                 src_path = Path(input_row.path)
@@ -69,12 +81,17 @@ class TaskExecutor:
                     image_errors.append(f"missing input file: {src_path}")
                     task.done_count = idx
                     session.commit()
+                    self._append_log(
+                        log_path,
+                        f"[IMAGE] missing file: {src_path} (index={idx}/{len(input_files)})",
+                    )
                     continue
 
                 image_name = src_path.name
                 local_input = input_dir / image_name
                 if src_path.resolve() != local_input.resolve():
                     shutil.copy2(src_path, local_input)
+                image_start = datetime.utcnow()
 
                 if task.mode == "ensemble":
                     per_model, fused = self.runtime.predict_ensemble(
@@ -85,15 +102,18 @@ class TaskExecutor:
                     self._insert_rows(session, task_id, image_name, per_model, is_fused=False)
                     self._insert_rows(session, task_id, image_name, fused, is_fused=True)
                     payload = {"per_model": per_model, "fused": fused}
+                    vis_paths: list[str] = []
 
                     for model_name, rows in self._group_predictions_by_model(per_model).items():
                         vis_path = vis_dir / f"{local_input.stem}_vis_{self._safe_file_token(model_name)}.png"
                         render_detections(str(local_input), rows, str(vis_path))
                         session.add(TaskFileEntity(task_id=task_id, kind="vis", path=str(vis_path.resolve())))
+                        vis_paths.append(str(vis_path.resolve()))
 
                     fused_vis_path = vis_dir / f"{local_input.stem}_vis_fused.png"
                     render_detections(str(local_input), fused, str(fused_vis_path))
                     session.add(TaskFileEntity(task_id=task_id, kind="vis", path=str(fused_vis_path.resolve())))
+                    vis_paths.append(str(fused_vis_path.resolve()))
                 else:
                     model_key = selected_model_keys[0]
                     per_model = self.runtime.predict_single(
@@ -107,6 +127,7 @@ class TaskExecutor:
                     vis_path = vis_dir / f"{local_input.stem}_vis_{self._safe_file_token(model_key)}.png"
                     render_detections(str(local_input), per_model, str(vis_path))
                     session.add(TaskFileEntity(task_id=task_id, kind="vis", path=str(vis_path.resolve())))
+                    vis_paths = [str(vis_path.resolve())]
 
                 out_json = output_dir / f"{local_input.stem}.json"
                 out_json.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -115,6 +136,16 @@ class TaskExecutor:
 
                 task.done_count = idx
                 session.commit()
+                image_end = datetime.utcnow()
+                self._append_log(
+                    log_path,
+                    (
+                        f"[IMAGE] name={image_name} index={idx}/{len(input_files)} "
+                        f"per_model={len(payload['per_model'])} fused={len(payload['fused'])} "
+                        f"vis={','.join(vis_paths)} "
+                        f"duration_s={(image_end - image_start).total_seconds():.3f}"
+                    ),
+                )
 
             task.finished_at = datetime.utcnow()
             if image_errors:
@@ -124,6 +155,15 @@ class TaskExecutor:
             else:
                 task.status = "done"
             session.commit()
+            end_time = datetime.utcnow()
+            self._append_log(
+                log_path,
+                (
+                    f"[END] task_id={task_id} status={task.status} "
+                    f"errors={task.error_message or '-'} "
+                    f"duration_s={(end_time - start_time).total_seconds():.3f}"
+                ),
+            )
 
         except Exception as exc:  # noqa: BLE001
             rollback_task = session.get(TaskEntity, task_id)
@@ -133,6 +173,9 @@ class TaskExecutor:
                 rollback_task.error_message = str(exc)[:4000]
                 rollback_task.finished_at = datetime.utcnow()
                 session.commit()
+            if log_path is not None:
+                self._append_log(log_path, f"[ERROR] {exc}")
+                self._append_log(log_path, traceback.format_exc().strip())
         finally:
             session.close()
 
@@ -178,3 +221,10 @@ class TaskExecutor:
         cleaned = re.sub(r"[^0-9A-Za-z._-]+", "_", value.strip())
         cleaned = cleaned.strip("._-")
         return cleaned or "unknown"
+
+    @staticmethod
+    def _append_log(log_path: Path, message: str) -> None:
+        log_path.parent.mkdir(parents=True, exist_ok=True)
+        timestamp = datetime.utcnow().isoformat() + "Z"
+        with log_path.open("a", encoding="utf-8", errors="ignore") as handle:
+            handle.write(f"[{timestamp}] {message}\n")

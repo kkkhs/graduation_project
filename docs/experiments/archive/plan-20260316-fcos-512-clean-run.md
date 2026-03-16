@@ -1,5 +1,5 @@
-status: planned
-execution: ready to launch
+状态: 计划中
+执行: 可启动
 
 # 计划：FCOS 512 统一口径干净 Run（2026-03-16）
 

@@ -1,6 +1,6 @@
 # run-20260316-efficiency-metrics-3080ti
 
-status: executed  
+状态: 已执行  
 evidence: commands + outputs + artifacts
 
 ## 1) 执行目标

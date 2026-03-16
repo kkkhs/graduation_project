@@ -1,6 +1,6 @@
 # run-20260315-efficiency-prep-nogpu
 
-status: executed  
+状态: 已执行  
 evidence: commands + outputs + blockers
 
 ## 1) 目标

@@ -1,4 +1,4 @@
-status: executed
+状态: 已执行
 evidence: commands + outputs + blockers
 
 # 运行日志：FCOS 前置准备（无卡实例，2026-03-09）

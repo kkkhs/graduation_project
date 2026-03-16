@@ -48,7 +48,7 @@
 - wandb 指标曲线持续记录，run 元数据完整。
 - 能回溯到：代码 commit、数据路径、checkpoint、日志证据。
 
-## 7. Next Actions
+## 7. 下一步
 - [ ] 完成 `datasets/runs/checkpoints` 到 Mac 主机归档
 - [ ] 在 Mac 项目仓确认 `.workspace_assets/` 已忽略
 - [ ] 云主机拉取同一 commit 代码

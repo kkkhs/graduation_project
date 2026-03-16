@@ -1,6 +1,11 @@
 from __future__ import annotations
 
 import argparse
+import os
+
+# Torch 2.6 defaults weights_only=True which breaks MMDet checkpoints.
+# Set early before any torch import happens.
+os.environ.setdefault("TORCH_LOAD_WEIGHTS_ONLY", "0")
 import json
 
 from src.application.bootstrap import build_predict_service

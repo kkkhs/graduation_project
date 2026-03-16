@@ -1,7 +1,7 @@
 # 计划：下一轮实验执行（结果回填与论文收口优先）
 
-status: planned
-execution: next stage (after FCOS first formal run finished)
+状态: 计划中
+执行: 下一阶段（待 FCOS 首轮正式 run 完成后）
 
 ## 1. 背景
 - 已完成：DRENet、YOLO26、FCOS 首轮正式结果。

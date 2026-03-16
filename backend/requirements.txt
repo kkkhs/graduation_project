@@ -9,6 +9,11 @@ Pillow>=10.0
 httpx>=0.27,<1.0
 torch>=2.2,<2.7
 ultralytics>=8.4,<9.0
+mmengine>=0.10,<1.0
+mmdet>=3.2,<3.4
+# NOTE: MMDetection 依赖的 mmcv 需要与 CUDA/torch 匹配，
+# 可能需要按官方指引安装 mmcv-full（而非 pip 默认的 mmcv-lite）。
+mmcv>=2.1,<2.2
 pandas>=2.2,<3.0
 tqdm>=4.66,<5.0
 seaborn>=0.13,<0.14

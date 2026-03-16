@@ -85,7 +85,29 @@ class DRENetAdapter(BaseAdapter):
             raise FileNotFoundError(f"DRENet config file not found: {config_path}")
 
         try:
+            import os
+
+            # Torch 2.6 defaults weights_only=True which breaks MMDet checkpoints.
+            # We trust local checkpoints; allow full load for inference.
+            os.environ.setdefault("TORCH_LOAD_WEIGHTS_ONLY", "0")
+
             import torch
+            try:
+                import numpy as np
+                from mmengine.logging import HistoryBuffer  # type: ignore
+                from numpy.core.multiarray import _reconstruct
+                from torch.serialization import add_safe_globals
+
+                add_safe_globals([HistoryBuffer, _reconstruct, np.ndarray])
+            except Exception:
+                pass
+            _orig_torch_load = torch.load
+
+            def _safe_torch_load(*args, **kwargs):
+                kwargs.setdefault("weights_only", False)
+                return _orig_torch_load(*args, **kwargs)
+
+            torch.load = _safe_torch_load
             from mmdet.apis import inference_detector, init_detector  # type: ignore
         except Exception as exc:
             raise RuntimeError(

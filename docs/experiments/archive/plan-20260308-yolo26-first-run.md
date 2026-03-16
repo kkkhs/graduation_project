@@ -1,7 +1,7 @@
 # 计划：YOLO26 首轮执行准备（2026-03-08）
 
-status: archived
-execution: completed_and_superseded
+状态: 已归档
+执行: 已完成且被替代
 note: 首轮已执行完成，结果与问题请看 `docs/experiments/logs/run-20260308-yolo26-3060-3080ti.md`。
 
 ## 1. 目标

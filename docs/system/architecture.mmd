@@ -1,18 +1,15 @@
 ```mermaid
-flowchart LR
-    U["Input Image + Params"] --> P1["Presentation\nCLI / Visualization / Desktop UI"]
-
-    P1 --> A1["Application\nPredictService"]
-
-    A1 --> I1["Adapter\nDRENetAdapter"]
-    A1 --> I2["Adapter\nMMDetAdapter"]
-    A1 --> I3["Adapter\nYOLOAdapter"]
-
-    I1 --> A2["Application\nFusion (IoU + Weighted Box)"]
-    I2 --> A2
-    I3 --> A2
-
-    A2 --> O1["Unified Result (ensemble)"]
-    O1 --> O2["JSON Output"]
-    O1 --> O3["Visualization Image"]
+flowchart TD
+  A[用户进入 Web 控制台] --> B[选择任务类型/推理模式/阈值]
+  B --> C[上传影像]
+  C --> D[前端调用 /api/v1/tasks/infer]
+  D --> E[后端创建任务 + 入库]
+  E --> F[TaskExecutor 调度推理]
+  F --> G[InferenceRuntime 调用模型适配器]
+  G --> H[DRENet / YOLO / FCOS 推理]
+  H --> I[生成 per_model / fused 结果]
+  I --> J[可视化渲染输出图]
+  J --> K[写入 outputs/tasks/<id> + DB]
+  K --> L[前端轮询 /tasks/{id} 与 /tasks/{id}/results]
+  L --> M[展示状态 + 图像 + 表格]
 ```

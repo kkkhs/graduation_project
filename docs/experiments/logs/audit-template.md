@@ -1,20 +1,20 @@
-# Audit Log Template
+# 审计日志模板
 
-status: executed
-evidence: commands + exit codes + artifacts
+状态: 已执行
+证据: 命令 + 退出码 + 产物
 
-## Scope
-- <what period/host/process is audited>
+## 范围
+- <审计周期/主机/流程>
 
-## Verified Facts
-- <fact 1>
-- <fact 2>
+## 已核验证据
+- <事实 1>
+- <事实 2>
 
-## Raw Commands
+## 原始命令
 ```bash
-# command
+# 命令
 # exit_code=0
 ```
 
-## Conclusion
-- <final verdict and next action>
+## 结论
+- <最终结论与下一步>

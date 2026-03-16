@@ -74,3 +74,6 @@ pip install -r backend/requirements.txt
 ## 7. 验证与证据
 - 接口与联调：`docs/system/test_report_20260315.md`
 - UI 回归截图：`outputs/ui-*.png`
+
+## 8. 详细流程
+- 详细全链路说明：`docs/system/system_flow_detailed.md`

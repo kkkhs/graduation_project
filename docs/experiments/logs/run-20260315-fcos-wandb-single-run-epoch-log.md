@@ -1,4 +1,4 @@
-status: executed
+状态: 已执行
 evidence: commands + outputs + artifacts
 
 # 运行日志：FCOS 单 Run 续写与日志口径统一（2026-03-15）

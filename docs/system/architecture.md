@@ -25,6 +25,57 @@
 4. 融合层：`fuse_predictions` 进行聚类与加权框融合。
 5. 输出层：返回 JSON，必要时渲染可视化图片。
 
+## 6. 系统流程与 Web 架构示意
+
+### 6.1 全链路流程图（Mermaid）
+```mermaid
+flowchart TD
+  A[用户进入 Web 控制台] --> B[选择任务类型/推理模式/阈值]
+  B --> C[上传影像]
+  C --> D[前端调用 /api/v1/tasks/infer]
+  D --> E[后端创建任务 + 入库]
+  E --> F[TaskExecutor 调度推理]
+  F --> G[InferenceRuntime 调用模型适配器]
+  G --> H[DRENet / YOLO / FCOS 推理]
+  H --> I[生成 per_model / fused 结果]
+  I --> J[可视化渲染输出图]
+  J --> K[写入 outputs/tasks/<id> + DB]
+  K --> L[前端轮询 /tasks/{id} 与 /tasks/{id}/results]
+  L --> M[展示状态 + 图像 + 表格]
+```
+
+### 6.2 Web 架构图（Mermaid）
+```mermaid
+flowchart LR
+  subgraph Frontend[前端 Web]
+    UI[React + Vite + AntD]
+    UI --> API[/api/v1/.../]
+  end
+
+  subgraph Backend[后端服务]
+    API --> Router[FastAPI 路由]
+    Router --> DB[(SQLite / SQLAlchemy)]
+    Router --> Executor[TaskExecutor]
+    Executor --> Runtime[InferenceRuntime]
+    Runtime --> Adapter[模型适配器]
+  end
+
+  subgraph Models[模型层]
+    Adapter --> D[DRENet]
+    Adapter --> Y[YOLO26]
+    Adapter --> F[FCOS]
+  end
+
+  subgraph Storage[产物存储]
+    Runtime --> Files[outputs/tasks/<id>/...]
+    Executor --> Files
+    DB --> Files
+  end
+
+  UI -->|轮询| Router
+  Files --> UI
+```
+
 ## 4. 关键设计决策
 - 默认系统模式：`ensemble`（三模型综合）。
 - 单模型模式保留，用于调试与消融。

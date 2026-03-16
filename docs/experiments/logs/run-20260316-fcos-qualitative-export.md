@@ -1,4 +1,4 @@
-status: executed
+状态: 已执行
 evidence: commands + outputs + artifacts
 
 # 运行日志：FCOS 定性样例导出（2026-03-16）

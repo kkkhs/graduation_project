@@ -1,20 +1,20 @@
-# Run Log Template
+# 运行日志模板
 
-status: executed
-evidence: commands + exit codes + artifacts
+状态: 已执行
+证据: 命令 + 退出码 + 产物
 
-## Context
-- run_name: <name>
-- env: <host/gpu>
+## 背景
+- run_name: <名称>
+- env: <主机/GPU>
 
-## Executed Commands
+## 已执行命令
 ```bash
-# command
+# 命令
 # exit_code=0
 ```
 
-## Key Output
-- <terminal summary>
+## 关键输出
+- <终端摘要>
 
-## Artifacts
-- <paths to weights/logs/metrics>
+## 产物
+- <权重/日志/指标路径>

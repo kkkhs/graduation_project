@@ -61,7 +61,7 @@ predict_ensemble(
 | 依赖缺失 | `RuntimeError` | `not installed` |
 | 推理失败 | `RuntimeError` | `inference failed` |
 
-## 4. 输出结构（统一 schema）
+## 4. 输出结构（统一字段）
 每个元素必须包含：
 - `image_id: str`
 - `model_name: str`（融合结果固定为 `ensemble`）
@@ -85,7 +85,7 @@ predict_ensemble(
 ```
 
 ## 6. 兼容层说明（旧路径可调）
-保留旧导入路径，仅做 re-export：
+保留旧导入路径，仅做重导出（re-export）：
 - `from src.core.predictor import UnifiedPredictor`
 - `from src.adapters.yolo_adapter import YOLOAdapter`
 
