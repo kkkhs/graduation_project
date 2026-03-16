@@ -26,14 +26,15 @@
 
 ## D. 三模型对比实验
 - [x] D9 模型1：DRENet 正式结果
-- [x] D10 模型2：mmdetection（FCOS）正式结果（`lvxs9xhk`，120/120，last AP50=0.770，AP50:95=0.285，best AP50=0.798@14）
+- [x] D10 模型2：mmdetection（FCOS）历史正式结果（`lvxs9xhk`，120/120，last AP50=0.770，AP50:95=0.285，best AP50=0.798@14；实际口径 `1333x800`）
+- [x] D10 FCOS `512x512` 统一重训尝试已完成，但两次新 run 数值失稳，最终保留历史默认口径结果作为参考基线
 - [x] D11 模型3：YOLO26 首轮正式结果（EarlyStopping at 263/300，best epoch=186）
 - [x] D12 主对比表模板已完成（`docs/results/baselines.md`）
-- [ ] D12 填入三模型实测结果并得出结论（已填 DRENet、YOLO26，待 FCOS）
+- [x] D12 填入三模型实测结果并形成论文可用结论（其中 FCOS 以历史默认口径作为参考基线）
 - [x] D13 消融表模板已完成（`docs/results/ablation.md`）
 - [ ] D13 完成至少 1-2 组消融并填写结果
 - [x] D14 定性结果模板已完成（`docs/results/qualitative.md`）
-- [ ] D14 整理成功/漏检/误检难例图到 `assets/figures/`
+- [x] D14 整理成功/漏检/误检难例图到 `assets/figures/`（DRENet/YOLO/FCOS 已补齐，含 FCOS global-best 与 stable 口径）
 
 ## E. 系统需求、设计与实现
 - [x] E15 需求文稿已在开题稿中固定
@@ -76,7 +77,7 @@
 
 ### G3 训练后立即衔接（结果一回传即可执行）
 - [x] G3-1 将 DRENet 首轮结果填入 `docs/results/baselines.md`
-- [ ] G3-2 生成第一版误检/漏检示例页并更新 `docs/results/qualitative.md`
+- [x] G3-2 生成第一版误检/漏检示例页并更新 `docs/results/qualitative.md`
 - [ ] G3-3 依据首轮结果调整下一轮实验参数计划（形成 `docs/experiments/plans/plan-next-run.md`）
 - [ ] G3-4 回填论文实验章节草稿（先写“现象与原因”，后补最终数字）
 - [ ] G3-5 若 `best` 出现在波动期：补做邻域复核（`best_epoch±5`）与后段稳定区间统计（如最后20个epoch均值/方差），并写入论文实验章节“结果稳健性说明”
@@ -109,6 +110,6 @@
 - 架构图：`docs/system/architecture.mmd`
 
 ## 下一步（你现在就做）
-1. 切到有卡实例，先完成 FCOS 冒烟与正式首轮，补 anchor-free 学术对比。
-2. 回填 `docs/results/baselines.md`（补齐 FCOS）与 `docs/results/qualitative.md`。
-3. 产出/更新 `docs/experiments/plans/plan-next-run.md`（FCOS 后续与 YOLO/DRENet 二阶段计划）。
+1. 回填 `docs/results/qualitative.md`，补 success / miss / false_positive 例图。
+2. 完成论文第四章、第五章结果文字回填，明确 FCOS 为参考基线的限制说明。
+3. 再决策是否需要补做最小消融或系统演示样例整理。

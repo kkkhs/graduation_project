@@ -1,4 +1,4 @@
-# 计划：下一轮实验执行（FCOS 优先）
+# 计划：下一轮实验执行（结果回填与论文收口优先）
 
 status: planned
 execution: next stage (after FCOS first formal run finished)
@@ -11,7 +11,7 @@ execution: next stage (after FCOS first formal run finished)
 1. 完成三模型主对比表（含效率项）回填与结论收敛。
 2. 完成系统默认权重策略落地（`global-best` vs `stable-best`）。
 3. 完成定性图与最小消融，形成论文可直接引用材料。
-4. 明确是否进入二阶段训练（YOLO/DRENet/FCOS）。
+4. 将 FCOS 明确降级为“参考基线”，不再继续投入重训成本。
 
 ## 2.1 已有事实记录（上一阶段）
 - FCOS 正式 run（已完成）：
@@ -25,11 +25,10 @@ execution: next stage (after FCOS first formal run finished)
   - 回传策略仍使用 `--mmdet-thin`（避免大体积阻塞）
 
 ## 4. 执行顺序
-1. 回填 `docs/results/baselines.md` 的效率项（FPS/Params/FLOPs）。
-2. 补齐 `docs/results/qualitative.md`（success/miss/false_positive）。
-3. 补齐 `docs/results/ablation.md`（至少一组）。
-4. 完成系统默认模型选择 A/B 记录并更新配置。
-5. 最后再决策二阶段训练是否值得投入。
+1. 补齐 `docs/results/qualitative.md`（success/miss/false_positive）。（已完成）
+2. 补齐 `docs/results/ablation.md`（至少一组）。
+3. 完成系统默认模型选择 A/B 记录并更新配置。
+4. 回填论文第四章、第五章文字，并加入 FCOS 口径限制说明。
 
 ## 5. 留痕与产物要求
 - run 日志：`docs/experiments/logs/run-YYYYMMDD-fcos-*.md`

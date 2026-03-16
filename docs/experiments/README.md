@@ -40,22 +40,29 @@ This folder stores experiment standards, templates, execution playbooks, and exp
 - `logs/exp-20260308-02-drenet-formal-resume-300.md`
 - `logs/run-20260308-yolo26-3060-3080ti.md`
 - `logs/run-20260315-fcos-wandb-single-run-epoch-log.md`
+- `logs/run-20260315-efficiency-prep-nogpu.md`
+- `logs/run-20260316-efficiency-metrics-3080ti.md`
+- `logs/run-20260316-fcos-512-clean-start.md`
+- `logs/run-20260316-fcos-512-resume19-bs10.md`
+- `logs/run-20260316-fcos-qualitative-export.md`
 
 ## Existing Plans
 - `plans/plan-next-run.md`
+  - `plans/plan-20260316-fcos-512-clean-run.md` 已归档
 
 ## Progress Summary
 - Active: `progress_summary_20260315.md`
 - Archived: `archive/progress_summary_20260308.md`
 - Additional archived prep log: `archive/run-20260309-fcos-coco-prep-nogpu.md`
+ - Archived plan: `archive/plan-20260316-fcos-512-clean-run.md`
 
 ## Next Steps
-1. Complete cross-model result table finalization (add FPS/Params/FLOPs).
+1. Finalize the cross-model result table with the current accepted baselines.
 2. Finalize qualitative page and at least one ablation entry.
 3. Apply default deployment checkpoint policy:
    - paper: `global-best`
    - system: `stable-best`
-4. Keep one new log per run in `logs/` and avoid duplicate standalone notes.
+4. Treat FCOS as a reference baseline with documented input-policy differences.
 
 ## Maintenance Rules
 - Plans go to `plans/`; facts go to `logs/`; standards stay in spec/template files.

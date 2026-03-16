@@ -75,6 +75,10 @@ YOLO26 在当前实验中取得了最高的 AP50-95 和较高的 AP50，同时 P
 
 目前，成功检测、漏检与误检三类样例已完成整理，可作为论文中的定性对比图组。FCOS 同时保留了 global-best 与 stable 两套样例，用于区分论文口径与系统口径的展示。
 
+\subsection{定性样例清单与使用方式}
+
+为保证定性分析具备可追溯性，本文已按“模型 $\rightarrow$ 场景类型”归档样例图。论文中建议按照“DRENet $\rightarrow$ YOLO26 $\rightarrow$ FCOS”的顺序展示 success、miss 与 false\_positive 三类样例，从而与定量结果的讨论顺序保持一致。FCOS 的 stable 样例主要用于系统章节中的默认权重说明，不与 global-best 的论文口径混用。
+
 \section{本章小结}
 
 本章对 DRENet、FCOS 和 YOLO26 三种模型进行了统一口径下的实验对比。结果表明，DRENet 在召回方面表现突出，YOLO26 在整体精度、定位质量与工程部署性方面更具优势，FCOS 则提供了 anchor-free 路线的稳定参照。总体来看，不同模型在精度、召回和可部署性之间各有侧重，这为后续系统默认模型选择和融合策略设计提供了依据。

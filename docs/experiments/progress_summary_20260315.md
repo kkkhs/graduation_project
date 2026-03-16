@@ -18,6 +18,17 @@
   - 辅指标：`AP@0.5:0.95`
   - 同时记录：`Precision/Recall/F1/FPS/Params/FLOPs`
 
+## 1.1 2026-03-16 后续决策补充
+- 已尝试两条 FCOS `512x512` 新 run，用于与 DRENet/YOLO 做更严格的同输入口径对齐。
+- 两条新 run 均出现数值失稳：
+  - `grad_norm/loss = nan`
+  - `The testing results of the whole dataset is empty`
+- 最终项目决策：
+  - 不再继续投入 FCOS 重训成本
+  - 论文中保留 FCOS 历史正式 run（默认输入策略）作为 `anchor-free` 参考基线
+  - 主结论重点转回 DRENet 与 YOLO26
+  - FCOS 定性样例已补齐（global-best 与 stable 两套口径）
+
 ## 2. 已完成工作明细
 
 ### 2.1 DRENet 实验与结果
@@ -73,9 +84,9 @@
 ## 3. 进行中与未完成
 - D10：FCOS 正式训练与评测结果（已完成）
 - D11：YOLO26 首轮已完成，若需继续需决策是否二阶段续训（如 `263 -> 400/600`）
-- D12：主对比表三模型核心精度已补齐；效率项（FPS/Params/FLOPs）待补
+- D12：主对比表三模型核心精度已补齐；效率项（FPS/Params/FLOPs）已补
 - D13：消融实验待完成
-- D14：定性图（success/miss/false_positive）待补齐
+- D14：定性图（success/miss/false_positive）已补齐（含 FCOS global-best 与 stable）
 - F19：论文第4/5章待用完整三模型结果回填
 
 ## 4. 下一步执行顺序（建议严格按序）
