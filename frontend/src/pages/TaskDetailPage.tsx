@@ -155,6 +155,40 @@ function modeChipClass(mode: TaskSummary['mode']) {
   return mode === 'ensemble' ? 'mode-ensemble' : 'mode-single'
 }
 
+function isNoResultRow(record: ResultRecord): boolean {
+  return record.source_model === 'no_result'
+}
+
+function normalizeModelSource(sourceModel: string): string {
+  const normalized = sourceModel.trim().toLowerCase()
+  if (normalized === 'fused' || normalized === 'ensemble' || normalized === '融合结果') {
+    return 'ensemble'
+  }
+  return sourceModel
+}
+
+type ModelGroupRow = {
+  key: string
+  indexLabel: string
+  bboxText: string
+  scoreText: string
+  categoryText: string
+  isPlaceholder?: boolean
+}
+
+type ModelGroupCard = {
+  modelKey: string
+  title: string
+  count: number
+  isFused: boolean
+  rows: ModelGroupRow[]
+}
+
+type ImageGroupCard = {
+  imageName: string
+  groups: ModelGroupCard[]
+}
+
 export function TaskDetailPage() {
   const params = useParams()
   const taskId = Number(params.taskId)
@@ -191,6 +225,9 @@ export function TaskDetailPage() {
       .sort((a, b) => {
         const imageDiff = a.image_name.localeCompare(b.image_name)
         if (imageDiff !== 0) return imageDiff
+        const aNoResult = isNoResultRow(a)
+        const bNoResult = isNoResultRow(b)
+        if (aNoResult !== bNoResult) return aNoResult ? 1 : -1
         if (a.is_fused !== b.is_fused) return a.is_fused ? 1 : -1
         const modelDiff = compareModelSourceFusedLast(a.source_model, b.source_model)
         if (modelDiff !== 0) return modelDiff
@@ -203,26 +240,108 @@ export function TaskDetailPage() {
     return result.by_model.slice().sort((a, b) => compareModelSourceFusedLast(a.source_model, b.source_model))
   }, [result])
 
+  const groupedImageData = useMemo<ImageGroupCard[]>(() => {
+    if (!result || !task) return []
+
+    const selectedModelKeys = (task.model_key ?? '')
+      .split(',')
+      .map((item) => item.trim())
+      .filter(Boolean)
+      .sort(compareModelSourceFusedLast)
+
+    return result.images.map((image) => {
+      const validRecords = image.records.filter((record) => !isNoResultRow(record))
+      const grouped = new Map<string, ResultRecord[]>()
+
+      for (const record of validRecords) {
+        const groupKey = normalizeModelSource(record.source_model)
+        const existing = grouped.get(groupKey) ?? []
+        existing.push(record)
+        grouped.set(groupKey, existing)
+      }
+
+      const groupKeys = [...selectedModelKeys]
+      if (task.mode === 'ensemble') {
+        groupKeys.push('ensemble')
+      }
+
+      const uniqueGroupKeys = Array.from(new Set(groupKeys)).sort(compareModelSourceFusedLast)
+      const groups: ModelGroupCard[] = uniqueGroupKeys.map((groupKey) => {
+        const rows = (grouped.get(groupKey) ?? []).slice().sort((a, b) => b.score - a.score)
+        const rowItems: ModelGroupRow[] =
+          rows.length > 0
+            ? rows.map((record, index) => ({
+                key: `${groupKey}-${record.id}`,
+                indexLabel: String(index + 1),
+                bboxText: record.bbox.map((item) => item.toFixed(1)).join(', '),
+                scoreText: record.score.toFixed(3),
+                categoryText: String(record.category_id)
+              }))
+            : [
+                {
+                  key: `${groupKey}-empty`,
+                  indexLabel: '-',
+                  bboxText: '-',
+                  scoreText: '-',
+                  categoryText: '-',
+                  isPlaceholder: true
+                }
+              ]
+
+        return {
+          modelKey: groupKey,
+          title: formatModelSourceLabel(groupKey),
+          count: rows.length,
+          isFused: groupKey === 'ensemble',
+          rows: rowItems
+        }
+      })
+
+      return {
+        imageName: image.image_name,
+        groups
+      }
+    })
+  }, [result, task])
+
   const statusToneClass =
     task?.status === 'done' ? 'status-text done' : task?.status === 'failed' ? 'status-text failed' : ''
 
   const columns: ColumnsType<ResultRecord> = [
     { title: 'ID', dataIndex: 'id', width: 80 },
     { title: '图片', dataIndex: 'image_name', width: 240 },
-    { title: '来源模型', dataIndex: 'source_model', width: 140, render: (v: string) => formatModelSourceLabel(v) },
+    {
+      title: '来源模型',
+      dataIndex: 'source_model',
+      width: 140,
+      render: (v: string, record: ResultRecord) => (isNoResultRow(record) ? '无检测结果' : formatModelSourceLabel(v))
+    },
     {
       title: '融合',
       dataIndex: 'is_fused',
       width: 90,
-      render: (v: boolean) => <span className={`pill-status ${v ? 'done' : 'queued'}`}>{formatFusionLabel(v)}</span>
+      render: (v: boolean, record: ResultRecord) =>
+        isNoResultRow(record) ? <span className="pill-status queued">-</span> : <span className={`pill-status ${v ? 'done' : 'queued'}`}>{formatFusionLabel(v)}</span>
     },
     {
       title: '框(x1,y1,x2,y2)',
       dataIndex: 'bbox',
       width: 290,
-      render: (bbox: number[]) => bbox.map((n) => n.toFixed(1)).join(', ')
+      render: (bbox: number[], record: ResultRecord) => (isNoResultRow(record) ? '-' : bbox.map((n) => n.toFixed(1)).join(', '))
     },
-    { title: 'score', dataIndex: 'score', width: 90, render: (v: number) => v.toFixed(3) }
+    {
+      title: 'score',
+      dataIndex: 'score',
+      width: 90,
+      render: (v: number, record: ResultRecord) => (isNoResultRow(record) ? '-' : v.toFixed(3))
+    }
+  ]
+
+  const groupedColumns: ColumnsType<ModelGroupRow> = [
+    { title: '序号', dataIndex: 'indexLabel', width: 72 },
+    { title: '框(x1,y1,x2,y2)', dataIndex: 'bboxText' },
+    { title: 'score', dataIndex: 'scoreText', width: 96 },
+    { title: '类别', dataIndex: 'categoryText', width: 88 }
   ]
 
   return (
@@ -350,7 +469,50 @@ export function TaskDetailPage() {
             )}
           </Card>
 
-          <Card className="panel-card" title="结构化检测结果">
+          <Card className="panel-card" title="结构化结果概览">
+            {groupedImageData.length === 0 ? (
+              <Empty description="暂无结果" />
+            ) : (
+              <Space direction="vertical" style={{ width: '100%' }} size={12}>
+                {groupedImageData.map((image) => (
+                  <Card
+                    key={`grouped-${image.imageName}`}
+                    type="inner"
+                    className="result-image-card grouped-result-card"
+                    title={<div className="result-image-head"><span>{image.imageName}</span></div>}
+                  >
+                    <div className="grouped-model-grid">
+                      {image.groups.map((group) => (
+                        <div className="grouped-model-card" key={`${image.imageName}-${group.modelKey}`}>
+                          <div className="grouped-model-head">
+                            <div className="grouped-model-title-row">
+                              <span className="grouped-model-title">{group.title}</span>
+                              <span className={`pill-status ${group.isFused ? 'done' : 'queued'}`}>
+                                {group.isFused ? '融合结果' : '原始模型结果'}
+                              </span>
+                            </div>
+                            <div className="grouped-model-meta">
+                              {group.count > 0 ? `检测到 ${group.count} 个结果` : '无检测结果'}
+                            </div>
+                          </div>
+                          <Table
+                            className="table-quiet grouped-result-table"
+                            rowKey="key"
+                            columns={groupedColumns}
+                            dataSource={group.rows}
+                            pagination={false}
+                            size="small"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </Card>
+                ))}
+              </Space>
+            )}
+          </Card>
+
+          <Card className="panel-card" title="原始明细表">
             <Table
               className="table-quiet"
               rowKey="id"

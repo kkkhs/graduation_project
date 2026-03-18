@@ -71,6 +71,18 @@ def _resolve_image_name_by_stem(candidates: dict[str, TaskResultImage], stem: st
     return stem
 
 
+def _build_no_result_record(image_name: str, placeholder_id: int) -> ResultRecord:
+    return ResultRecord(
+        id=placeholder_id,
+        image_name=image_name,
+        source_model="no_result",
+        is_fused=False,
+        bbox=[],
+        score=0.0,
+        category_id=0,
+    )
+
+
 @router.post("/tasks/infer", response_model=TaskCreateResponse)
 def create_infer_task(
     request: Request,
@@ -217,6 +229,13 @@ def get_task_results(task_id: int, request: Request, session: Annotated[Session,
     model_stats: dict[str, list[float]] = {}
     for row in result_rows:
         model_stats.setdefault(row.source_model, []).append(row.score)
+
+    placeholder_id = -1
+    for image in by_image.values():
+        if image.records:
+            continue
+        image.records.append(_build_no_result_record(image.image_name, placeholder_id))
+        placeholder_id -= 1
 
     by_model = [
         ModelStats(source_model=key, count=len(values), average_score=(sum(values) / len(values) if values else 0.0))

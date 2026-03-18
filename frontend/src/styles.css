@@ -461,6 +461,10 @@ body {
   padding-top: 12px;
 }
 
+.grouped-result-card .ant-card-body {
+  padding-top: 14px;
+}
+
 .result-image-head {
   display: flex;
   align-items: flex-start;
@@ -473,6 +477,56 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+.grouped-model-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.grouped-model-card {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 250, 252, 0.98));
+  padding: 12px;
+}
+
+.grouped-model-head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.grouped-model-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.grouped-model-title {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.grouped-model-meta {
+  color: #475569;
+  font-size: 0.86rem;
+}
+
+.grouped-result-table .ant-table {
+  background: transparent;
+}
+
+.grouped-result-table .ant-table-thead > tr > th {
+  font-size: 0.8rem;
+}
+
+.grouped-result-table .ant-table-tbody > tr > td {
+  font-size: 0.82rem;
 }
 
 .media-grid {
@@ -519,6 +573,10 @@ body {
   .media-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .grouped-model-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 780px) {
@@ -552,5 +610,9 @@ body {
   .table-quiet .ant-table-cell {
     white-space: nowrap;
     padding: 10px 8px !important;
+  }
+
+  .grouped-model-title-row {
+    align-items: flex-start;
   }
 }
