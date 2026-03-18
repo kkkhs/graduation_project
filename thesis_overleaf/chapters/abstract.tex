@@ -1,27 +1,27 @@
 % !TeX root = ../main.tex
 
 \hfutsetup{
-  keywords  = {遥感图像, 微小船舶检测, 目标检测, LEVIR-Ship, Web系统},
-  keywords* = {remote sensing images, tiny ship detection, object detection, LEVIR-Ship, web system},
+  keywords  = {遥感图像, 微小船舶检测, LEVIR-Ship, 目标检测, 检测系统},
+  keywords* = {remote sensing images, tiny ship detection, LEVIR-Ship, object detection, detection system},
 }
 
 \begin{abstract}
-  遥感场景下的微小船舶检测在海上监管、港口监测、海事执法和应急救援等领域具有重要应用价值。然而，中分辨率遥感图像中船舶目标尺度小、纹理弱，且易受海浪、云层、岸线和港口设施等复杂背景干扰，导致检测任务存在漏检率高、误检率高和模型泛化能力不足等问题。针对上述问题，本文围绕公开数据集 LEVIR-Ship，开展了微小船舶检测算法对比实验与系统实现研究。
+  遥感场景下的微小船舶检测在海上监管、港口监测、海事执法和应急救援等应用中具有重要价值。然而，中分辨率遥感图像中的船舶目标往往尺度小、纹理弱，并且易受到海浪、云层、岸线和港区设施等复杂背景干扰，导致检测任务普遍存在漏检率高、误检率高以及模型跨场景稳定性不足等问题。围绕上述问题，本文以公开数据集 LEVIR-Ship 为统一实验基准，开展了多模型对比研究与检测系统实现工作。
 
-  本文首先对遥感船舶检测、小目标检测和通用目标检测相关研究进行了梳理，在统一数据划分和评测口径的基础上，选取 DRENet、FCOS 和 YOLO26 三类具有代表性的检测模型开展对比实验。实验采用 AP50、AP50-95、Precision、Recall 和 F1 作为主要评价指标，并结合可视化结果对模型差异进行分析。当前已完成的实验结果表明，DRENet 在 LEVIR-Ship 数据集上的 AP50 为 0.7949，YOLO26 的 AP50 为 0.7950，FCOS 的 AP50 为 0.7700。DRENet 在复杂背景与微小目标表征方面具有一定优势，YOLO26 在整体精度与工程部署便利性之间表现较为均衡，FCOS 则提供了 anchor-free 路线下的稳定对比基线。
+  在算法研究部分，本文首先梳理了通用目标检测、小目标检测和遥感船舶检测相关研究，在统一数据划分、评价指标和结果记录方式的基础上，选取 DRENet、FCOS 和 YOLO26 三类代表模型进行对比实验。实验采用 AP50 作为主指标，并结合 AP50-95、Precision、Recall 和 F1 对模型性能进行综合评价。当前实验结果表明，DRENet 在 LEVIR-Ship 数据集上的 AP50 为 0.7949、Recall 为 0.8511，表现出较强的目标检出能力；YOLO26 的 AP50 为 0.7950、AP50-95 为 0.3170、Precision 为 0.8430，在精度、定位质量和工程可部署性之间表现较为均衡；FCOS 的 AP50 为 0.7700，能够作为 anchor-free 路线的参考基线纳入比较。综合来看，DRENet 更适合强调漏检控制的应用场景，YOLO26 更适合作为轻量部署候选，FCOS 则为不同检测范式的比较提供了补充视角。
 
-  在系统实现方面，本文将算法能力封装为一套面向本科毕业设计场景的轻量级检测系统，采用 React 构建前端界面，采用 FastAPI 构建后端服务，并通过 SQLite 实现任务记录与结果持久化。系统支持单图与批量任务提交、模型切换、进度查询、检测结果可视化和历史结果回看，打通了从模型推理到结果展示的完整链路。实践表明，该系统能够满足毕业设计阶段“可运行、可演示、可追溯”的基本要求。
+  在系统实现部分，本文将现有推理能力封装为一套面向本科毕业设计场景的轻量级检测系统。系统采用 React 构建前端页面，采用 FastAPI 构建后端服务，并通过 SQLite 完成任务、结果和产物路径的持久化存储。系统支持单图与批量任务提交、模型启停、异步任务调度、检测框可视化、结构化结果回看和历史任务查询，形成了从模型推理到结果展示的完整链路。相关实现表明，该系统能够满足毕业设计阶段对“可运行、可演示、可追溯”的基本要求。
 
-  本文的工作说明，在统一评测协议下开展多模型对比，并结合系统化实现与结果分析，能够更全面地评估不同检测范式在遥感微小船舶任务中的适用性。相关研究结果和系统实现可为后续的模型优化、消融实验和工程部署提供基础。
+  本文工作表明，在统一评测协议下开展多模型对比，并进一步完成算法服务化和可视化系统实现，能够更全面地评估不同检测范式在遥感微小船舶场景中的适用性。本文形成的实验结果、分析框架和系统实现，可为后续阈值消融、模型优化和工程部署研究提供基础。
 \end{abstract}
 
 \begin{abstract*}
-  \noindent %西文首段不缩进
-  Tiny ship detection in remote sensing images is of great significance for maritime supervision, port monitoring, law enforcement and emergency response. However, ship targets in mid-resolution remote sensing images are usually very small and easily affected by complex backgrounds such as waves, clouds, coastlines and harbor facilities, which makes accurate detection difficult. To address this problem, this thesis conducts comparative experiments and system implementation for tiny ship detection based on the public LEVIR-Ship dataset.
+  \noindent
+  Tiny ship detection in remote sensing images is important for maritime surveillance, port monitoring, law enforcement and emergency response. However, ship targets in mid-resolution remote sensing images are usually very small, weak in texture, and easily affected by complex backgrounds such as waves, clouds, coastlines and harbor facilities. These characteristics make the task prone to missed detections, false alarms and unstable cross-scene performance. To address this problem, this thesis conducts comparative experiments and system implementation based on the public LEVIR-Ship dataset.
 
-  First, related studies on remote sensing ship detection, small object detection and general object detection are reviewed. Then, under a unified data split and evaluation protocol, three representative models, namely DRENet, FCOS and YOLO26, are selected for comparative experiments. AP50, AP50-95, Precision, Recall and F1 are adopted as the main evaluation metrics, together with qualitative analysis based on visualization results. The completed experimental results show that DRENet achieves an AP50 of 0.7949 on LEVIR-Ship, YOLO26 achieves 0.7950, and FCOS achieves 0.7700. DRENet shows advantages in representing tiny targets under complex backgrounds, while YOLO26 provides a balanced performance in terms of accuracy and engineering deployment.
+  In the algorithm study, related work on general object detection, small object detection and remote sensing ship detection is first reviewed. Then, under a unified data split, evaluation protocol and result recording scheme, three representative models, namely DRENet, FCOS and YOLO26, are selected for comparative experiments. AP50 is used as the primary metric, while AP50-95, Precision, Recall and F1 are used as complementary metrics. The current results show that DRENet achieves an AP50 of 0.7949 and a Recall of 0.8511 on LEVIR-Ship, indicating strong target discovery capability. YOLO26 achieves an AP50 of 0.7950, an AP50-95 of 0.3170 and a Precision of 0.8430, showing a balanced performance in terms of accuracy, localization quality and deployability. FCOS achieves an AP50 of 0.7700 and is retained as an anchor-free reference baseline. Overall, DRENet is more suitable for scenarios that prioritize recall, while YOLO26 is more suitable for lightweight deployment.
 
-  In addition, a lightweight detection system is implemented for the bachelor thesis scenario. The frontend is built with React, the backend is built with FastAPI, and SQLite is used for task persistence and result storage. The system supports single-image and batch inference, model switching, task progress query, visualization of detection results, and history review, thereby forming a complete workflow from model inference to result presentation.
+  In the system implementation part, the existing inference capability is encapsulated into a lightweight detection system tailored to the undergraduate thesis scenario. The frontend is built with React, the backend is built with FastAPI, and SQLite is used to persist tasks, results and generated artifacts. The system supports single-image and batch task submission, model management, asynchronous execution, visualization of detection boxes, structured result review and history query, thereby forming a complete workflow from inference to presentation. The implementation demonstrates that the system can satisfy the basic requirements of being executable, demonstrable and traceable.
 
-  The study indicates that, under a unified evaluation protocol, combining multi-model comparison with system implementation can provide a more comprehensive understanding of the applicability of different detection paradigms to tiny ship detection in remote sensing scenes. The results of this thesis can serve as a basis for subsequent optimization, ablation studies and practical deployment.
+  The study shows that combining unified multi-model comparison with service-oriented system implementation can provide a more comprehensive understanding of the applicability of different detection paradigms to tiny ship detection in remote sensing scenes. The experimental results, analysis framework and system implementation can provide a foundation for subsequent threshold ablation, model optimization and engineering deployment.
 \end{abstract*}
