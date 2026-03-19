@@ -10,6 +10,7 @@ class PredictRequest:
     model_name: str
     conf_threshold: Optional[float] = None
     iou_threshold: Optional[float] = None
+    override_imgsz: Optional[int] = None
 
 
 @dataclass(frozen=True)

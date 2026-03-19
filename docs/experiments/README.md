@@ -45,24 +45,28 @@
 - `logs/run-20260316-fcos-512-clean-start.md`
 - `logs/run-20260316-fcos-512-resume19-bs10.md`
 - `logs/run-20260316-fcos-qualitative-export.md`
+- `logs/run-20260318-本地消融验证与口径收敛.md`
+- `logs/run-20260318-阈值消融正式执行.md`
+- `logs/run-20260318-尺寸敏感性正式执行.md`
 
 ## 现有计划
 - `plans/plan-next-run.md`
   - `plans/plan-20260316-fcos-512-clean-run.md` 已归档
 
 ## 阶段总结
-- 当前：`progress_summary_20260315.md`
+- 当前：`progress_summary_20260318.md`
+- 历史快照：`progress_summary_20260315.md`
 - 归档：`archive/progress_summary_20260308.md`
 - 额外归档准备记录：`archive/run-20260309-fcos-coco-prep-nogpu.md`
 - 归档计划：`archive/plan-20260316-fcos-512-clean-run.md`
 
 ## 下一步
-1. 完成三模型主对比表（以当前接受的基线为准）。
-2. 完成定性页并补至少 1 条消融。
-3. 确定默认部署权重策略：
+1. 完成论文第四章、第五章与摘要/结论的最终回填。
+2. 确定默认部署权重策略：
    - 论文：`global-best`
    - 系统：`stable-best`
-4. 将 FCOS 作为参考基线，并明确输入口径差异说明。
+3. 整理答辩与系统演示样例，形成一套稳定的展示材料。
+4. 保持 FCOS 作为参考基线，并持续保留输入口径差异说明。
 
 ## 维护规则
 - 计划放 `plans/`，事实放 `logs/`，规范类留在 spec/template。

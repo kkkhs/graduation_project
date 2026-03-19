@@ -12,7 +12,7 @@
 
   在系统实现部分，本文将现有推理能力封装为一套面向本科毕业设计场景的轻量级检测系统。系统采用 React 构建前端页面，采用 FastAPI 构建后端服务，并通过 SQLite 完成任务、结果和产物路径的持久化存储。系统支持单图与批量任务提交、模型启停、异步任务调度、检测框可视化、结构化结果回看和历史任务查询，形成了从模型推理到结果展示的完整链路。相关实现表明，该系统能够满足毕业设计阶段对“可运行、可演示、可追溯”的基本要求。
 
-  本文工作表明，在统一评测协议下开展多模型对比，并进一步完成算法服务化和可视化系统实现，能够更全面地评估不同检测范式在遥感微小船舶场景中的适用性。本文形成的实验结果、分析框架和系统实现，可为后续阈值消融、模型优化和工程部署研究提供基础。
+  本文工作表明，在统一评测协议下开展多模型对比，并进一步完成阈值消融、输入尺寸敏感性分析以及算法服务化和可视化系统实现，能够更全面地评估不同检测范式在遥感微小船舶场景中的适用性。本文形成的实验结果、分析框架和系统实现，可为后续模型优化、融合评测和工程部署研究提供基础。
 \end{abstract}
 
 \begin{abstract*}
@@ -23,5 +23,5 @@
 
   In the system implementation part, the existing inference capability is encapsulated into a lightweight detection system tailored to the undergraduate thesis scenario. The frontend is built with React, the backend is built with FastAPI, and SQLite is used to persist tasks, results and generated artifacts. The system supports single-image and batch task submission, model management, asynchronous execution, visualization of detection boxes, structured result review and history query, thereby forming a complete workflow from inference to presentation. The implementation demonstrates that the system can satisfy the basic requirements of being executable, demonstrable and traceable.
 
-  The study shows that combining unified multi-model comparison with service-oriented system implementation can provide a more comprehensive understanding of the applicability of different detection paradigms to tiny ship detection in remote sensing scenes. The experimental results, analysis framework and system implementation can provide a foundation for subsequent threshold ablation, model optimization and engineering deployment.
+  The study shows that combining unified multi-model comparison with threshold ablation, input-size sensitivity analysis, and service-oriented system implementation can provide a more comprehensive understanding of the applicability of different detection paradigms to tiny ship detection in remote sensing scenes. The experimental results, analysis framework and system implementation can provide a foundation for subsequent model optimization, fusion evaluation and engineering deployment.
 \end{abstract*}

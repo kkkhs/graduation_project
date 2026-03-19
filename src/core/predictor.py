@@ -20,12 +20,14 @@ class UnifiedPredictor:
         model_name: str,
         conf_threshold: Optional[float] = None,
         iou_threshold: Optional[float] = None,
+        override_imgsz: Optional[int] = None,
     ) -> List[Dict[str, Any]]:
         return self._service.predict(
             image_path=image_path,
             model_name=model_name,
             conf_threshold=conf_threshold,
             iou_threshold=iou_threshold,
+            override_imgsz=override_imgsz,
         )
 
     def predict_ensemble(
@@ -34,6 +36,7 @@ class UnifiedPredictor:
         model_names: Optional[List[str]] = None,
         conf_threshold: Optional[float] = None,
         iou_threshold: Optional[float] = None,
+        override_imgsz: Optional[int] = None,
         fusion_iou_threshold: float = 0.55,
         min_votes: int = 1,
     ) -> List[Dict[str, Any]]:
@@ -42,6 +45,7 @@ class UnifiedPredictor:
             model_names=model_names,
             conf_threshold=conf_threshold,
             iou_threshold=iou_threshold,
+            override_imgsz=override_imgsz,
             fusion_iou_threshold=fusion_iou_threshold,
             min_votes=min_votes,
         )

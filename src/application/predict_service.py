@@ -26,6 +26,7 @@ class PredictService:
         model_names: Optional[Sequence[str]] = None,
         conf_threshold: Optional[float] = None,
         iou_threshold: Optional[float] = None,
+        override_imgsz: Optional[int] = None,
         fusion_iou_threshold: float = 0.55,
         min_votes: int = 1,
     ) -> List[Dict[str, Any]]:
@@ -42,6 +43,7 @@ class PredictService:
                 model_name=name,
                 conf_threshold=conf_threshold,
                 iou_threshold=iou_threshold,
+                override_imgsz=override_imgsz,
             )
             all_records.extend(records)
         return fuse_predictions(
@@ -56,12 +58,14 @@ class PredictService:
         model_name: str,
         conf_threshold: Optional[float] = None,
         iou_threshold: Optional[float] = None,
+        override_imgsz: Optional[int] = None,
     ) -> List[Dict[str, Any]]:
         request = PredictRequest(
             image_path=image_path,
             model_name=model_name,
             conf_threshold=conf_threshold,
             iou_threshold=iou_threshold,
+            override_imgsz=override_imgsz,
         )
         results = self.predict_by_request(request)
         return [
@@ -88,7 +92,14 @@ class PredictService:
         adapter.ensure_loaded()
 
         t0 = time.perf_counter()
-        preds = adapter.infer(image_path=request.image_path, conf_threshold=conf, iou_threshold=iou)
+        if request.override_imgsz is not None and request.override_imgsz <= 0:
+            raise ValueError("override_imgsz must be > 0")
+        preds = adapter.infer(
+            image_path=request.image_path,
+            conf_threshold=conf,
+            iou_threshold=iou,
+            override_imgsz=request.override_imgsz,
+        )
         dt_ms = (time.perf_counter() - t0) * 1000.0
 
         image_id = Path(request.image_path).name

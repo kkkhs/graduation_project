@@ -36,12 +36,15 @@ class YOLOAdapter(BaseAdapter):
         image_path: str,
         conf_threshold: float,
         iou_threshold: float,
+        override_imgsz: int | None = None,
     ) -> List[Dict[str, Any]]:
         self.validate_image_path(image_path)
         if self._model is None:
             raise RuntimeError("YOLO model is not loaded")
 
-        imgsz = int(self.model_config.input_size[0]) if self.model_config.input_size else 640
+        imgsz = override_imgsz or (
+            int(self.model_config.input_size[0]) if self.model_config.input_size else 640
+        )
 
         try:
             results = self._model.predict(

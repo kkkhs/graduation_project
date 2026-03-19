@@ -29,6 +29,7 @@ def main() -> None:
     )
     parser.add_argument("--conf", type=float, default=None, help="confidence threshold")
     parser.add_argument("--iou", type=float, default=None, help="iou threshold")
+    parser.add_argument("--imgsz", type=int, default=None, help="override inference image size")
     parser.add_argument("--fusion-iou", type=float, default=0.55, help="IoU threshold for fusion")
     parser.add_argument("--min-votes", type=int, default=1, help="min votes for fused result")
     args = parser.parse_args()
@@ -42,6 +43,7 @@ def main() -> None:
             model_names=model_names,
             conf_threshold=args.conf,
             iou_threshold=args.iou,
+            override_imgsz=args.imgsz,
             fusion_iou_threshold=args.fusion_iou,
             min_votes=args.min_votes,
         )
@@ -51,6 +53,7 @@ def main() -> None:
             model_name=args.model,
             conf_threshold=args.conf,
             iou_threshold=args.iou,
+            override_imgsz=args.imgsz,
         )
     print(json.dumps(results, ensure_ascii=False, indent=2))
 

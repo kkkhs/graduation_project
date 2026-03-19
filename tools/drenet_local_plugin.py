@@ -7,6 +7,8 @@ config_path: "/Users/khs/codes/graduation_project/tools/drenet_local_plugin.py:b
 from __future__ import annotations
 
 import sys
+import contextlib
+import io
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -53,13 +55,18 @@ def build_predictor(weight_path: str, config_path: str, device: str):
     model.eval()
 
     stride = int(model.stride.max()) if hasattr(model, "stride") else 32
-    imgsz = check_img_size(512, s=stride)
     use_half = runtime_device.type != "cpu"
     if use_half:
         model.half()
 
     @torch.no_grad()
-    def predictor(image_path: str, conf_threshold: float, iou_threshold: float) -> List[Dict[str, Any]]:
+    def predictor(
+        image_path: str,
+        conf_threshold: float,
+        iou_threshold: float,
+        override_imgsz: int | None = None,
+    ) -> List[Dict[str, Any]]:
+        imgsz = check_img_size(override_imgsz or 512, s=stride)
         dataset = LoadImages(image_path, img_size=imgsz)
         rows: List[Dict[str, Any]] = []
 
@@ -70,7 +77,10 @@ def build_predictor(weight_path: str, config_path: str, device: str):
             if tensor.ndimension() == 3:
                 tensor = tensor.unsqueeze(0)
 
-            pred = model(tensor, augment=False)[0][0]
+            # Original DRENet/YOLOv5 utilities print one line per image.
+            # Silence them here so batch evaluation logs stay readable.
+            with contextlib.redirect_stdout(io.StringIO()):
+                pred = model(tensor, augment=False)[0][0]
             pred = non_max_suppression(pred, conf_threshold, iou_threshold)
 
             det = pred[0] if pred else None

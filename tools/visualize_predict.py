@@ -26,6 +26,7 @@ def main() -> None:
     )
     parser.add_argument("--conf", type=float, default=None, help="confidence threshold")
     parser.add_argument("--iou", type=float, default=None, help="iou threshold")
+    parser.add_argument("--imgsz", type=int, default=None, help="override inference image size")
     parser.add_argument(
         "--fusion-iou",
         type=float,
@@ -67,6 +68,7 @@ def main() -> None:
             model_names=model_names,
             conf_threshold=args.conf,
             iou_threshold=args.iou,
+            override_imgsz=args.imgsz,
             fusion_iou_threshold=args.fusion_iou,
             min_votes=args.min_votes,
         )
@@ -77,6 +79,7 @@ def main() -> None:
             model_name=args.model,
             conf_threshold=args.conf,
             iou_threshold=args.iou,
+            override_imgsz=args.imgsz,
         )
         title_mode = args.model
 

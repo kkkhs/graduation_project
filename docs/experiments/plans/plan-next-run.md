@@ -1,43 +1,53 @@
-# 计划：下一轮实验执行（结果回填与论文收口优先）
+# 计划：论文收口与系统默认权重落地
 
-状态: 计划中
-执行: 下一阶段（待 FCOS 首轮正式 run 完成后）
+状态: planned
+执行: not started
 
 ## 1. 背景
-- 已完成：DRENet、YOLO26、FCOS 首轮正式结果。
-- 当前阶段：从“训练打通”切换到“论文回填 + 系统默认权重落地 + 二阶段决策”。
+- 已完成：
+  - DRENet、FCOS、YOLO26 三模型正式结果
+  - 三模型统一阈值消融
+  - `FCOS / YOLO26` 输入尺寸敏感性分析
+- 当前阶段：从“实验补齐”切换到“论文收口 + 系统默认权重落地 + 答辩演示整理”。
 
 ## 2. 本轮目标
-1. 完成三模型主对比表（含效率项）回填与结论收敛。
+1. 完成论文第四章、第五章、摘要与总结章节的统一回填。
 2. 完成系统默认权重策略落地（`global-best` vs `stable-best`）。
-3. 完成定性图与最小消融，形成论文可直接引用材料。
-4. 将 FCOS 明确降级为“参考基线”，不再继续投入重训成本。
+3. 完成答辩演示样例与图表清单整理。
+4. 将 FCOS 的“参考基线”定位与输入口径差异，在论文和系统文档中统一写清楚。
 
 ## 2.1 已有事实记录（上一阶段）
 - FCOS 正式 run（已完成）：
   - `docs/experiments/logs/run-20260315-fcos-wandb-single-run-epoch-log.md`
+- 本地消融日志（已完成）：
+  - `docs/experiments/logs/run-20260318-阈值消融正式执行.md`
+  - `docs/experiments/logs/run-20260318-尺寸敏感性正式执行.md`
 
 ## 3. 开跑前检查（必须通过）
-- 进入二阶段训练前，再次确认：
-  - GPU 可用与显存预算
-  - 数据与标注版本一致
-  - W&B 项目与 run 命名策略已固定
-  - 回传策略仍使用 `--mmdet-thin`（避免大体积阻塞）
+- 进入论文与系统收口阶段前，再次确认：
+  - `docs/results/` 三个结果文档已为最新
+  - 论文中不存在“消融待补”的旧表述
+  - `configs/models.yaml` 的默认权重策略与文档一致
+  - 实验日志与关键 checkpoint 路径仍可追溯
 
 ## 4. 执行顺序
-1. 补齐 `docs/results/qualitative.md`（success/miss/false_positive）。（已完成）
-2. 补齐 `docs/results/ablation.md`（至少一组）。
-3. 完成系统默认模型选择 A/B 记录并更新配置。
-4. 回填论文第四章、第五章文字，并加入 FCOS 口径限制说明。
+1. 回填论文第四章、第五章、摘要与结论文字。
+2. 完成系统默认模型选择 A/B 记录并更新配置。
+3. 整理答辩图表、定性样例与演示清单。
+4. 如仍有余量，再补融合模式统一离线评测说明。
 
 ## 5. 留痕与产物要求
-- run 日志：`docs/experiments/logs/run-YYYYMMDD-fcos-*.md`
-- 训练产物：
-  - `experiment_assets/runs/<fcos_run_name>/`
-  - `experiment_assets/runs/trace/fcos/`
-- 配置快照：
-  - `experiment_assets/configs/<fcos_run_name>/`（含 data yaml / 关键 cfg 片段）
+- 文本回填记录：
+  - `docs/results/*.md`
+  - `thesis_overleaf/chapters/*.tex`
+- 系统默认权重记录：
+  - `configs/models.yaml`
+  - 相关系统文档与实验说明
+- 图表与样例：
+  - `assets/figures/`
+  - `docs/results/qualitative.md`
 
 ## 6. 风险与应对
-- 二阶段训练收益不确定：先以“当前结果+稳定性分析”支撑论文，再决定是否追加训练。
-- 产物体积过大：持续使用 `--mmdet-thin` 与关键 checkpoint 归档策略。
+- 文本口径不一致：以 `docs/results/` 与 `docs/spec_todo.md` 为唯一事实源统一修正。
+- 系统默认权重与论文口径混淆：明确区分 `global-best` 与 `stable-best`，并分别写入文档。
+- 图表过多导致答辩重点分散：优先保留主对比表、两组消融表和三类定性样例。

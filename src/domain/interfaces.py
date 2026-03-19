@@ -15,5 +15,6 @@ class DetectorAdapter(ABC):
         image_path: str,
         conf_threshold: float,
         iou_threshold: float,
+        override_imgsz: int | None = None,
     ) -> List[Dict[str, Any]]:
         pass

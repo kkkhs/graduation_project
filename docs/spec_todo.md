@@ -3,7 +3,7 @@
 > 说明：
 > - `[x]` 本机已完成（文档/模板/脚本已落地）
 > - `[ ]` 需在 3060 笔记本或云 GPU 执行
-> - 时间基准：2026-03-08
+> - 时间基准：2026-03-18
 
 ## A. 文献调研与开题
 - [x] A1 确定调研范围与关键词
@@ -32,7 +32,10 @@
 - [x] D12 主对比表模板已完成（`docs/results/baselines.md`）
 - [x] D12 填入三模型实测结果并形成论文可用结论（其中 FCOS 以历史默认口径作为参考基线）
 - [x] D13 消融表模板已完成（`docs/results/ablation.md`）
-- [ ] D13 完成至少 1-2 组消融并填写结果
+- [x] D13 完成消融结果回填：
+  - 三模型统一阈值消融
+  - FCOS/YOLO26 输入尺寸敏感性分析
+  - DRENet 尺寸限制说明留痕
 - [x] D14 定性结果模板已完成（`docs/results/qualitative.md`）
 - [x] D14 整理成功/漏检/误检难例图到 `assets/figures/`（DRENet/YOLO/FCOS 已补齐，含 FCOS global-best 与 stable 口径）
 
@@ -110,6 +113,6 @@
 - 架构图：`docs/system/architecture.mmd`
 
 ## 下一步（你现在就做）
-1. 回填 `docs/results/qualitative.md`，补 success / miss / false_positive 例图。
-2. 完成论文第四章、第五章结果文字回填，明确 FCOS 为参考基线的限制说明。
-3. 再决策是否需要补做最小消融或系统演示样例整理。
+1. 完成论文第四章、第五章、摘要与总结章节的最终回填和统一润色。
+2. 固化系统默认权重策略：明确论文 `global-best` 与系统 `stable-best` 的使用边界，并更新 `configs/models.yaml` 与接入文档。
+3. 整理答辩演示样例与图表清单，完成易/中/难样例、定性图和主表的最终收口。

@@ -4,25 +4,29 @@
 
 这个仓库是毕设工作台，目标是把论文、实验和系统实现放在同一套可追溯流程里推进。
 
-## 1. 当前状态（2026-03-15）
+## 1. 当前状态（2026-03-18）
 
+- 三模型主对比已完成：`DRENet / FCOS / YOLO26`
+- 两组离线消融已完成：
+  - 三模型统一阈值消融
+  - `FCOS / YOLO26` 输入尺寸敏感性分析
+- 定性分析、效率指标、关键 checkpoint 与实验日志已回填到仓库
 - Web 系统主链路已打通：`React + FastAPI + SQLite + 真实模型推理`
-- DRENet / YOLO 权重已接入 `models.yaml`，支持真实单图与批量推理
-- 任务页支持中文语义、进度条+数量比、失败/完成颜色区分
-- 任务详情已统一“融合结果在最后”（图表、标签、结构化表格）
-- FCOS 训练实验仍待补全（不影响当前 Web 系统演示）
+- 三模型权重均已接入统一推理链路，支持真实单图与批量推理
+- 当前重点已从“补训练”切换到“论文收口 + 系统默认权重策略 + 答辩演示材料”
 
 ## 2. 近期重点（按顺序）
 
-1. 完成 FCOS 冒烟、正式训练、评测与回填
-2. 补齐三模型统一口径：`AP50 / AP50-95 / P / R / F1 / FPS / Params / FLOPs`
-3. 完成 `docs/results/` 的定性与消融
-4. 回填论文第四、第五章实验部分
+1. 回填论文第四、第五章、摘要与总结章节
+2. 固化系统默认权重策略：区分论文 `global-best` 与系统 `stable-best`
+3. 准备答辩与系统演示样例（易/中/难 + success/miss/false_positive）
+4. 若时间允许，再补融合模式统一离线评测或系统默认参数说明
 
 ## 3. 一眼看板
 
 - 总看板： [spec_todo.md](/Users/khs/codes/graduation_project/docs/spec_todo.md)
-- 阶段总结： [progress_summary_20260315.md](/Users/khs/codes/graduation_project/docs/experiments/progress_summary_20260315.md)
+- 当前阶段总结： [progress_summary_20260318.md](/Users/khs/codes/graduation_project/docs/experiments/progress_summary_20260318.md)
+- 历史阶段总结： [progress_summary_20260315.md](/Users/khs/codes/graduation_project/docs/experiments/progress_summary_20260315.md)
 
 建议：日常只看 `spec_todo.md` 判断“下一步做什么”。
 
@@ -34,6 +38,9 @@
 - 本地 3060 手册： [3060_execution_playbook.md](/Users/khs/codes/graduation_project/docs/experiments/3060_execution_playbook.md)
 - YOLO26 实跑日志： [run-20260308-yolo26-3060-3080ti.md](/Users/khs/codes/graduation_project/docs/experiments/logs/run-20260308-yolo26-3060-3080ti.md)
 - DRENet 实跑日志： [exp-20260308-02-drenet-formal-resume-300.md](/Users/khs/codes/graduation_project/docs/experiments/logs/exp-20260308-02-drenet-formal-resume-300.md)
+- FCOS 正式 run 日志： [run-20260315-fcos-wandb-single-run-epoch-log.md](/Users/khs/codes/graduation_project/docs/experiments/logs/run-20260315-fcos-wandb-single-run-epoch-log.md)
+- 本地消融日志： [run-20260318-阈值消融正式执行.md](/Users/khs/codes/graduation_project/docs/experiments/logs/run-20260318-阈值消融正式执行.md)
+- 本地尺寸敏感性日志： [run-20260318-尺寸敏感性正式执行.md](/Users/khs/codes/graduation_project/docs/experiments/logs/run-20260318-尺寸敏感性正式执行.md)
 
 ### 结果回填
 - 主对比表： [baselines.md](/Users/khs/codes/graduation_project/docs/results/baselines.md)
@@ -74,12 +81,12 @@
 - trace： [trace/yolo](/Users/khs/codes/graduation_project/experiment_assets/runs/trace/yolo)
 - data yaml 快照： [ship_autodl.yaml](/Users/khs/codes/graduation_project/experiment_assets/configs/yolo26_main_512_formal012/ship_autodl.yaml)
 
-## 7. 如何开始下一步（FCOS）
+## 7. 如何开始下一步（当前推荐）
 
-1. 按云端手册完成 FCOS 冒烟与正式训练
-2. 将结果回填到 `docs/results/baselines.md`
-3. 写一份对应 run log 到 `docs/experiments/logs/`
-4. 更新 `spec_todo.md` 任务状态
+1. 先看 `docs/spec_todo.md`，确认还未收口的论文与系统任务。
+2. 再看 `docs/experiments/progress_summary_20260318.md`，把当前阶段事实和边界条件过一遍。
+3. 回填论文第四章、第五章、摘要与总结，保证表格、文字和实验日志口径一致。
+4. 固化系统默认权重策略，并整理答辩演示样例。
 
 ## 8. 默认实验口径
 

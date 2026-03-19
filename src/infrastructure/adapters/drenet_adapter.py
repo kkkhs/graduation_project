@@ -51,6 +51,7 @@ class DRENetAdapter(BaseAdapter):
         image_path: str,
         conf_threshold: float,
         iou_threshold: float,
+        override_imgsz: int | None = None,
     ) -> List[Dict[str, Any]]:
         self.validate_image_path(image_path)
 
@@ -67,7 +68,10 @@ class DRENetAdapter(BaseAdapter):
             if self._plugin_predictor is None:
                 raise RuntimeError("DRENet plugin predictor is not loaded")
             try:
-                raw = self._plugin_predictor(image_path, conf_threshold, iou_threshold)
+                if override_imgsz is None:
+                    raw = self._plugin_predictor(image_path, conf_threshold, iou_threshold)
+                else:
+                    raw = self._plugin_predictor(image_path, conf_threshold, iou_threshold, override_imgsz)
             except Exception as exc:
                 raise RuntimeError(f"DRENet plugin inference failed for {image_path}") from exc
             return normalize_raw_predictions(raw, conf_threshold)
