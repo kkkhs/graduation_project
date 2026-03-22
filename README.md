@@ -4,7 +4,7 @@
 
 这个仓库是毕设工作台，目标是把论文、实验和系统实现放在同一套可追溯流程里推进。
 
-## 1. 当前状态（2026-03-18）
+## 1. 当前状态（2026-03-19）
 
 - 三模型主对比已完成：`DRENet / FCOS / YOLO26`
 - 两组离线消融已完成：
@@ -13,14 +13,16 @@
 - 定性分析、效率指标、关键 checkpoint 与实验日志已回填到仓库
 - Web 系统主链路已打通：`React + FastAPI + SQLite + 真实模型推理`
 - 三模型权重均已接入统一推理链路，支持真实单图与批量推理
-- 当前重点已从“补训练”切换到“论文收口 + 系统默认权重策略 + 答辩演示材料”
+- 论文第四、第五章已进入成稿收口阶段，正式图片与生成脚本已补齐
+- 当前重点已从“补训练”切换到“论文收口 + 口径统一 + 系统默认权重策略 + 答辩演示材料”
 
 ## 2. 近期重点（按顺序）
 
 1. 回填论文第四、第五章、摘要与总结章节
-2. 固化系统默认权重策略：区分论文 `global-best` 与系统 `stable-best`
+2. 固化口径说明与系统默认权重策略：区分 FCOS 论文主对比口径与系统/消融口径
 3. 准备答辩与系统演示样例（易/中/难 + success/miss/false_positive）
-4. 若时间允许，再补融合模式统一离线评测或系统默认参数说明
+4. 整理论文成稿资产说明，清理中间脚本与图片版本
+5. 若时间允许，再补融合模式统一离线评测或系统默认参数说明
 
 ## 3. 一眼看板
 
@@ -46,6 +48,13 @@
 - 主对比表： [baselines.md](/Users/khs/codes/graduation_project/docs/results/baselines.md)
 - 消融表： [ablation.md](/Users/khs/codes/graduation_project/docs/results/ablation.md)
 - 定性分析： [qualitative.md](/Users/khs/codes/graduation_project/docs/results/qualitative.md)
+- 结果目录说明： [README.md](/Users/khs/codes/graduation_project/docs/results/README.md)
+
+### 论文成稿资产
+- 论文主入口： [main.tex](/Users/khs/codes/graduation_project/thesis_overleaf/main.tex)
+- 第四章实验结果与分析： [citations.tex](/Users/khs/codes/graduation_project/thesis_overleaf/chapters/citations.tex)
+- 第五章系统设计与实现： [publications.tex](/Users/khs/codes/graduation_project/thesis_overleaf/chapters/publications.tex)
+- 成稿图片清单： [README.md](/Users/khs/codes/graduation_project/thesis_overleaf/figures/generated/README.md)
 
 ### 系统实现
 - 架构： [architecture.md](/Users/khs/codes/graduation_project/docs/system/architecture.md)
@@ -85,8 +94,9 @@
 
 1. 先看 `docs/spec_todo.md`，确认还未收口的论文与系统任务。
 2. 再看 `docs/experiments/progress_summary_20260318.md`，把当前阶段事实和边界条件过一遍。
-3. 回填论文第四章、第五章、摘要与总结，保证表格、文字和实验日志口径一致。
-4. 固化系统默认权重策略，并整理答辩演示样例。
+3. 统一论文第四章、结果文档和系统文档中的 FCOS 口径说明，避免主表、系统演示和消融分析互相混写。
+4. 回填论文第四章、第五章、摘要与总结，保证表格、文字和实验日志口径一致。
+5. 固化系统默认权重策略，并整理答辩演示样例。
 
 ## 8. 默认实验口径
 
