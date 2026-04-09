@@ -15,8 +15,14 @@ class _FakeAdapter:
     def ensure_loaded(self) -> None:
         return None
 
-    def infer(self, image_path: str, conf_threshold: float, iou_threshold: float) -> List[Dict[str, Any]]:
-        del image_path, conf_threshold, iou_threshold
+    def infer(
+        self,
+        image_path: str,
+        conf_threshold: float,
+        iou_threshold: float,
+        override_imgsz: int | None = None,
+    ) -> List[Dict[str, Any]]:
+        del image_path, conf_threshold, iou_threshold, override_imgsz
         return self.rows
 
 

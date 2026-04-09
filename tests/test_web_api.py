@@ -6,13 +6,22 @@ import time
 import unittest
 from pathlib import Path
 
-from fastapi.testclient import TestClient
-from PIL import Image
+try:
+    from fastapi.testclient import TestClient
+except ModuleNotFoundError:  # pragma: no cover - dependency gate for lightweight envs
+    TestClient = None  # type: ignore[assignment]
+
+try:
+    from PIL import Image
+except ModuleNotFoundError:  # pragma: no cover - dependency gate for lightweight envs
+    Image = None  # type: ignore[assignment]
 
 from backend.app.core.settings import Settings
 from backend.app.main import create_app
 
 
+@unittest.skipIf(TestClient is None, "fastapi is not installed")
+@unittest.skipIf(Image is None, "Pillow is not installed")
 class WebApiTests(unittest.TestCase):
     def setUp(self) -> None:
         self._tmp = tempfile.TemporaryDirectory(prefix="gp_webapi_")
