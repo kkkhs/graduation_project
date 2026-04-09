@@ -50,41 +50,19 @@
 - [x] E17-多层可维护架构已落地（presentation/application/domain/infrastructure）
 - [x] E17-三模型综合推理已接入（ensemble_all + 结果融合）
 - [x] E17-单元/回归测试已补齐（fusion、参数校验、兼容导入）
-- [ ] E18 演示用例准备（易/中/难三类样例）
+- [x] E18 演示用例准备（易/中/难三类样例已固定到 `assets/demo_cases/`）
 
 ## F. 论文写作与答辩材料
 - [x] F19 论文大纲与材料映射已具备基础
 - [x] F19 用实测结果回填第四章与第五章内容（已形成可交初稿，持续润色中）
 
-## G. 本机可异步执行清单（不依赖 GPU，可与训练并行）
+## G. 最终收口清单（当前仍需保留的真实缺口）
 
-### G1 并行于训练机（训练在跑时，本机立刻可做）
-- [ ] G1-1 完成论文第1-3章终稿文字打磨（统一术语、删除重复表述）
-- [ ] G1-2 完成“实验方法说明”终稿（只写方法，不写结果）
-- [ ] G1-3 完成“评测指标定义”终稿（AP50/Precision/Recall/F1/IoU）
-- [ ] G1-4 完成“风险与进度管理”终稿（周计划+里程碑）
-- [ ] G1-5 完成答辩PPT文字版（课题意义/综述/难点/方案/条件）
-- [ ] G1-6 按模块生成PPT配图（AI生成或论文截图）并存放到 `assets/figures/ppt/`
-- [ ] G1-7 完成图注清单（每张图来源、用途、放置页码）保存到 `docs/ppt_figure_list.md`
-- [ ] G1-8 统一参考文献格式（作者、年份、会议/期刊名一致）
-
-### G2 纯本机工程准备（不训练也可完成）
-- [x] G2-1 建立系统目录骨架（`src/`、`configs/`、`outputs/`、`tools/`）
-- [x] G2-2 编写统一配置文件样例（3模型：DRENet/MMDet/YOLO）
-- [x] G2-3 编写结果标准化 schema（`image_id/model_name/bbox/score/category_id/inference_time`）
-- [x] G2-4 编写推理主流程伪代码与接口文档（`predict(...)` 输入输出契约）
-- [x] G2-5 编写“训练机产物接入规范”（权重命名、目录结构、版本号）
-- [x] G2-6 编写“结果回传后自动落盘流程”说明（对应 `scripts/sync_results_from_laptop.sh`）
-- [ ] G2-7 规范化插件配置入口，并补齐部署依赖说明
-- [ ] G2-8 完成系统默认权重策略落地：区分 `global-best`（论文）与 `stable-best`（系统默认），并在 `configs/models.yaml` 与接入记录中固化
-
-### G3 训练后立即衔接（结果一回传即可执行）
-- [x] G3-1 将 DRENet 首轮结果填入 `docs/results/baselines.md`
-- [x] G3-2 生成第一版误检/漏检示例页并更新 `docs/results/qualitative.md`
-- [ ] G3-3 依据首轮结果调整下一轮实验参数计划（形成 `docs/experiments/plans/plan-next-run.md`）
-- [ ] G3-4 回填论文实验章节草稿（先写“现象与原因”，后补最终数字）
-- [ ] G3-5 若 `best` 出现在波动期：补做邻域复核（`best_epoch±5`）与后段稳定区间统计（如最后20个epoch均值/方差），并写入论文实验章节“结果稳健性说明”
-- [ ] G3-6 对 `global-best` 与 `stable-best` 做固定样本集 A/B 校验，并确定系统默认模型权重
+- [x] G1 固定演示样例池已落地（`assets/demo_cases/{easy,medium,hard}` + `docs/system/demo_case_catalog.md`）
+- [ ] G2 统一参考文献格式与最终 citation key 检查
+- [x] G3 FCOS 特殊权重口径说明已收口：仅通过文档明确论文口径与系统/消融口径边界，不改 DRENet/YOLO 配置
+- [ ] G4 论文最终提交检查：封面、目录、图表分页、参考文献与模板页最终肉眼核验
+- [x] G5 系统最终交付检查已留档：启动命令、主链路、测试状态、前端回归与兜底截图已整理
 
 ---
 
@@ -113,6 +91,6 @@
 - 架构图：`docs/system/architecture.mmd`
 
 ## 下一步（你现在就做）
-1. 完成论文第四章、第五章、摘要与总结章节的最终回填和统一润色。
-2. 固化系统默认权重策略：明确论文 `global-best` 与系统 `stable-best` 的使用边界，并更新 `configs/models.yaml` 与接入文档。
-3. 整理答辩演示样例与图表清单，完成易/中/难样例、定性图和主表的最终收口。
+1. 完成参考文献格式与 citation key 的最后一次统一检查。
+2. 完成 FCOS 特殊权重口径的文档收口，确保论文、结果文档与系统文档一致。
+3. 按最终提交清单逐项检查论文 PDF 与系统交付材料。

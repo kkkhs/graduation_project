@@ -94,6 +94,11 @@ artifacts/
 - 默认 `weight_path` 指向 `stable-best`（系统演示/部署）。
 - 在同一模型配置中保留 `global-best` 备注路径（论文复现实验使用）。
 
+当前仓库口径补充说明：
+- FCOS 为当前唯一执行“双口径”策略的模型：论文主对比沿用历史 `global-best` 参考结果，系统与消融使用稳定候选权重。
+- DRENet 与 YOLO 在当前仓库中继续直接使用 `best` 权重，不额外拆分 `stable-best`。
+- 因此最终收口时，只需要把 FCOS 的边界写清楚，不需要改动 DRENet / YOLO 的配置策略。
+
 4. 必做校验（接入前）
 - 对 `global-best` 与 `stable-best` 做固定样本集 A/B 对比（至少记录 AP50、AP50:95、Recall）。
 - 若两者差异不显著，优先使用 `stable-best` 作为系统默认权重。

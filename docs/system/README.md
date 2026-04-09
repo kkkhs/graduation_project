@@ -15,3 +15,5 @@
 - `desktop_ui_guide.md`：桌面 UI 使用说明。
 - `python_visualization_guide.md`：可视化脚本入口。
 - `test_report_20260315.md`：联调验证证据。
+- `demo_case_catalog.md`：固定演示样例清单（easy / medium / hard）。
+- `final_delivery_checklist.md`：最终交付前的系统检查清单。

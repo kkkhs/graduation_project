@@ -9,4 +9,6 @@
 ## 建议阅读顺序
 1. `outline.md`（总提纲）
 2. `template_constraints_checklist.md`（格式/规范）
-3. `drafts_v1/`（章节草稿）
+3. `citation_keys_v1.md`（引用 key 与本地审计结果）
+4. `final_submission_checklist.md`（最终提交检查）
+5. `drafts_v1/`（章节草稿）

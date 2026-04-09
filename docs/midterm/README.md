@@ -2,7 +2,6 @@
 
 ## 文件清单
 - `midterm_defense_20260315.pptx`：中期答辩PPT（基于学校模板填充）
-- `midterm_speech_20260315.md`：6-8分钟逐页讲稿
 - `midterm_demo_script_20260315.md`：3-5分钟系统现场演示脚本
 - `NoteGPT_Translator_2022_jianqi_chen_a.pdf`：DRENet论文翻译版PDF（中期使用）
 - `pdf2zh_out_compare/2022_jianqi_chen_a-dual.pdf`：中英对照PDF（Compare PDF）

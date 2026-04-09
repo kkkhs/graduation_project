@@ -31,6 +31,9 @@
 - 历史阶段总结： [progress_summary_20260315.md](/Users/khs/codes/graduation_project/docs/experiments/progress_summary_20260315.md)
 - 目录导航： [project_structure.md](/Users/khs/codes/graduation_project/docs/project_structure.md)
 - 测试说明： [tests/README.md](/Users/khs/codes/graduation_project/tests/README.md)
+- 演示样例： [demo_case_catalog.md](/Users/khs/codes/graduation_project/docs/system/demo_case_catalog.md)
+- 论文终检： [final_submission_checklist.md](/Users/khs/codes/graduation_project/docs/thesis/final_submission_checklist.md)
+- 系统终检： [final_delivery_checklist.md](/Users/khs/codes/graduation_project/docs/system/final_delivery_checklist.md)
 
 建议：日常只看 `spec_todo.md` 判断“下一步做什么”。
 
