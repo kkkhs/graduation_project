@@ -11,9 +11,15 @@
 
 - `ch1_pipeline.png`
 - `ch3_dataset_examples.png`
+- `ch3_drenet_overview.png`
+- `ch3_fcos_pipeline.png`
+- `ch3_yolo_pipeline.png`
 - `ch4_success_cases.png`
 - `ch4_miss_cases.png`
 - `ch4_false_positive_cases.png`
+- `ch4_main_comparison_chart.png`
+- `ch4_threshold_trend.png`
+- `ch4_size_trend.png`
 - `ch5_architecture.png`
 - `ch5_er.png`
 - `ch5_flow.png`
@@ -36,6 +42,22 @@
   - `cd /Users/khs/codes/graduation_project`
   - `.venv/bin/python tools/build_ch4_panels_aligned.py`
 - 备注：脚本会从三模型 `predictions.json` 自动选样并渲染。
+
+### `ch3_drenet_overview.png` / `ch3_fcos_pipeline.png` / `ch3_yolo_pipeline.png`
+- 用途：第3章三模型方法示意图
+- 生成脚本：`/Users/khs/codes/graduation_project/tools/build_thesis_method_and_metric_figures.py`
+- 生成命令：
+  - `cd /Users/khs/codes/graduation_project`
+  - `.venv/bin/python tools/build_thesis_method_and_metric_figures.py`
+- 备注：脚本采用统一配色与圆角框风格，输出自绘方法流程图，不直接复用原论文插图。
+
+### `ch4_main_comparison_chart.png` / `ch4_threshold_trend.png` / `ch4_size_trend.png`
+- 用途：第4章主对比与消融趋势图
+- 生成脚本：`/Users/khs/codes/graduation_project/tools/build_thesis_method_and_metric_figures.py`
+- 生成命令：
+  - `cd /Users/khs/codes/graduation_project`
+  - `.venv/bin/python tools/build_thesis_method_and_metric_figures.py`
+- 备注：主对比图使用正文主表口径；阈值与尺寸趋势图使用 `experiment_assets/ablation/` 对应结果回填。
 
 ### `ch1_pipeline.png`
 - 用途：第1章技术路线图

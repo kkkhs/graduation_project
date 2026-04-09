@@ -5,7 +5,7 @@
 
 \section{数据集介绍}
 
-本文采用 LEVIR-Ship 数据集作为统一实验基准\cite{levirship2021_dataset,chen2022_tinyship_drenet}。该数据集面向中分辨率遥感微小船舶检测任务，能够较好反映复杂海面背景下小目标检出的实际难点。结合当前实验使用的数据组织方式，数据集划分如表~\ref{tab:ch3_dataset_split} 所示。
+本文采用 LEVIR-Ship 数据集作为统一实验基准\cite{chen2022_tinyship_drenet}。该数据集面向中分辨率遥感微小船舶检测任务，能够较好反映复杂海面背景下小目标检出的实际难点。结合当前实验使用的数据组织方式，数据集划分如表~\ref{tab:ch3_dataset_split} 所示。
 
 \begin{table}[htbp]
   \centering
@@ -81,13 +81,40 @@ F1 = \frac{2 \cdot \text{Precision} \cdot \text{Recall}}{\text{Precision} + \tex
 
 DRENet 是针对遥感微小船舶任务提出的专项方法，通过退化重建增强机制在训练阶段强化对弱纹理目标的表示能力\cite{chen2022_tinyship_drenet}。该方法对复杂海面背景具有较强针对性，是本文的重要主线模型之一。本文重点关注其在 Recall 和复杂背景场景中的表现。
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{generated/ch3_drenet_overview.png}
+  \caption{DRENet 方法示意}
+  \label{fig:ch3_drenet_overview}
+\end{figure}
+
+如图~\ref{fig:ch3_drenet_overview} 所示，DRENet 在常规检测路径之外额外引入了退化重建增强分支。该分支只在训练阶段参与，通过重建带有目标感知特性的退化图像来约束骨干特征学习，使网络更倾向于关注微小船舶而不是大片背景纹理。与此同时，CRMA 模块进一步增强了跨阶段特征的判别能力，因此该方法在本文实验中更容易表现出“召回优先”的检测特征。
+
 \subsection{FCOS（Anchor-Free 参考基线）}
 
 FCOS 通过位置回归替代锚框设计，降低了 anchor 尺寸和比例等超参数依赖\cite{tian2019_fcos}。在本文中，FCOS 的角色更接近 anchor-free 参考基线：它用于帮助分析“在不依赖专项结构的情况下，通用 anchor-free 方法在遥感微小船舶任务中能达到怎样的效果”。需要说明的是，当前可用的 FCOS 正式结果采用 MMDetection 默认输入策略，因此其主要承担参考和补充比较作用，而不作为严格同输入尺度公平主结论的核心对象。
 
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{generated/ch3_fcos_pipeline.png}
+  \caption{FCOS 检测流程示意}
+  \label{fig:ch3_fcos_pipeline}
+\end{figure}
+
+图~\ref{fig:ch3_fcos_pipeline} 展示了 FCOS 的核心思路：输入图像经过 Backbone 与 FPN 提取多层特征后，不再依赖预设 anchor，而是由检测头直接预测类别、边框偏移和 centerness。这样的设计降低了锚框超参数带来的额外调节成本，也使 FCOS 成为本文中最具代表性的 anchor-free 参考路线。正因为它的结构更加通用，FCOS 在论文中更适合承担范式对照而不是专项最优模型的角色。
+
 \subsection{YOLO26（One-Stage 轻量部署代表）}
 
 YOLO 系列以端到端检测和较高推理效率著称，是工程部署中应用广泛的一类模型\cite{redmon2016_yolo,redmon2018_yolov3,ultralytics2024_docs}。本文采用 YOLO26 作为 one-stage 路线代表，重点考察其在精度、定位质量、训练链路成熟度和系统接入便利性之间的平衡关系。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{generated/ch3_yolo_pipeline.png}
+  \caption{YOLO26 单阶段检测流程示意}
+  \label{fig:ch3_yolo_pipeline}
+\end{figure}
+
+从图~\ref{fig:ch3_yolo_pipeline} 可以看到，YOLO26 延续了典型 one-stage 路线的结构，即通过 Backbone 提取特征、Neck 完成多尺度融合，再由检测头一次性输出候选框结果。相比需要更强专项设计的模型，这种结构在训练、部署和接口封装上都更直接，因此特别适合作为本文系统默认模型候选。它在实验中的优势也主要体现在整体精度、定位质量与接入便利性的综合平衡上。
 
 \section{统一实验协议与实现约束}
 
