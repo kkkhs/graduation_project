@@ -49,7 +49,7 @@
 - 生成命令：
   - `cd /Users/khs/codes/graduation_project`
   - `.venv/bin/python tools/build_thesis_method_and_metric_figures.py`
-- 备注：脚本采用统一配色与圆角框风格，输出自绘方法流程图，不直接复用原论文插图。
+- 备注：脚本采用黑白灰论文框图风格，统一使用衬线字体、细线箭头与自绘流程结构，不直接复用原论文插图。
 
 ### `ch4_main_comparison_chart.png` / `ch4_threshold_trend.png` / `ch4_size_trend.png`
 - 用途：第4章主对比与消融趋势图
@@ -61,24 +61,35 @@
 
 ### `ch1_pipeline.png`
 - 用途：第1章技术路线图
-- 当前来源：固定成稿资产（手工整理后保留）
-- 脚本状态：`N/A`（仓库内暂无对应自动生成脚本）
-- 建议：若后续需要脚本化，建议补一个基于 Mermaid 的统一导出脚本。
+- 生成脚本：`/Users/khs/codes/graduation_project/tools/build_thesis_method_and_metric_figures.py`
+- 生成命令：
+  - `cd /Users/khs/codes/graduation_project`
+  - `.venv/bin/python tools/build_thesis_method_and_metric_figures.py`
+- 备注：当前已统一改为黑白灰论文框图风格，技术路线图与第3章方法图保持一致。
 
 ### `ch5_architecture.png`
 - 用途：第5章系统总体架构图
-- 当前来源：固定成稿资产（与 `docs/system/architecture.md` 中 Web 架构语义一致）
-- 脚本状态：`N/A`（仓库内暂无对应自动生成脚本）
+- 生成脚本：`/Users/khs/codes/graduation_project/tools/build_thesis_method_and_metric_figures.py`
+- 生成命令：
+  - `cd /Users/khs/codes/graduation_project`
+  - `.venv/bin/python tools/build_thesis_method_and_metric_figures.py`
+- 备注：脚本采用与第1章、第3章一致的分层框图风格，和 `docs/system/architecture.md` 的系统语义保持一致。
 
 ### `ch5_er.png`
 - 用途：第5章数据库 ER 图
-- 当前来源：固定成稿资产（与 `docs/system/database_er.md` 语义一致）
-- 脚本状态：`N/A`（仓库内暂无对应自动生成脚本）
+- 生成脚本：`/Users/khs/codes/graduation_project/tools/build_thesis_method_and_metric_figures.py`
+- 生成命令：
+  - `cd /Users/khs/codes/graduation_project`
+  - `.venv/bin/python tools/build_thesis_method_and_metric_figures.py`
+- 备注：脚本将数据库表结构转为论文中的静态实体关系图，和 `docs/system/database_er.md` 保持一致。
 
 ### `ch5_flow.png`
 - 用途：第5章系统关键流程图
-- 当前来源：固定成稿资产（与 `docs/system/architecture.mmd` 流程语义一致）
-- 脚本状态：`N/A`（仓库内暂无对应自动生成脚本）
+- 生成脚本：`/Users/khs/codes/graduation_project/tools/build_thesis_method_and_metric_figures.py`
+- 生成命令：
+  - `cd /Users/khs/codes/graduation_project`
+  - `.venv/bin/python tools/build_thesis_method_and_metric_figures.py`
+- 备注：脚本输出论文化的单列流程框图，与 `docs/system/architecture.mmd` 中的关键流程语义一致。
 
 ### `ch5_pages.png`
 - 用途：第5章系统页面三联图
