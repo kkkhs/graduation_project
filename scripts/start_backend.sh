@@ -17,8 +17,10 @@ else
 fi
 
 RELOAD_FLAG="${APP_RELOAD:-0}"
+APP_HOST="${APP_HOST:-127.0.0.1}"
+APP_PORT="${APP_PORT:-8000}"
 if [ "$RELOAD_FLAG" = "1" ]; then
-  "$UVICORN_BIN" backend.app.main:app --host 0.0.0.0 --port 8000 --reload
+  "$UVICORN_BIN" backend.app.main:app --host "$APP_HOST" --port "$APP_PORT" --reload
 else
-  "$UVICORN_BIN" backend.app.main:app --host 0.0.0.0 --port 8000
+  "$UVICORN_BIN" backend.app.main:app --host "$APP_HOST" --port "$APP_PORT"
 fi

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import shutil
 from datetime import datetime
 from pathlib import Path
@@ -17,14 +18,17 @@ from backend.app.schemas import (
     ModelStats,
     ModelToggleRequest,
     ResultRecord,
+    ReferenceBox,
     TaskCreateResponse,
     TaskListResponse,
     TaskResultImage,
     TaskResultsResponse,
     TaskSummary,
 )
+from src.infrastructure.visualization import render_detections
 
 router = APIRouter(prefix="/api/v1", tags=["api"])
+MAX_IMAGE_BYTES = 1 * 1024 * 1024
 
 
 
@@ -51,6 +55,14 @@ def _validate_task_params(task_type: str, mode: str, model_key: Optional[str], i
         raise HTTPException(status_code=400, detail="model_key is required when mode=single")
     if score_thr < 0 or score_thr > 1:
         raise HTTPException(status_code=400, detail="score_thr must be in [0,1]")
+
+
+def _file_size_bytes(upload: UploadFile) -> int:
+    current = upload.file.tell()
+    upload.file.seek(0, 2)
+    size = upload.file.tell()
+    upload.file.seek(current)
+    return int(size)
 
 
 
@@ -83,6 +95,133 @@ def _build_no_result_record(image_name: str, placeholder_id: int) -> ResultRecor
     )
 
 
+def _dataset_root() -> Path:
+    return Path(__file__).resolve().parents[3] / "experiment_assets" / "datasets" / "LEVIR-Ship"
+
+
+def _find_dataset_image_and_label(image_name: str) -> tuple[Optional[Path], Optional[Path]]:
+    root = _dataset_root()
+    if not root.exists():
+        return None, None
+    for split in ("train", "val", "test"):
+        image_path = root / split / "images" / image_name
+        if image_path.exists():
+            label_path = root / split / "labels" / f"{Path(image_name).stem}.txt"
+            return image_path, (label_path if label_path.exists() else None)
+    return None, None
+
+
+def _load_image_size(image_path: Path) -> tuple[float, float]:
+    try:
+        from PIL import Image  # type: ignore
+    except Exception:
+        return 1.0, 1.0
+    with Image.open(image_path) as image:
+        width, height = image.size
+    return float(width or 1), float(height or 1)
+
+
+def _load_reference_boxes(image_name: str) -> list[ReferenceBox]:
+    image_path, label_path = _find_dataset_image_and_label(image_name)
+    if image_path is None or label_path is None:
+        return []
+
+    width, height = _load_image_size(image_path)
+    boxes: list[ReferenceBox] = []
+    for raw_line in label_path.read_text(encoding="utf-8", errors="ignore").splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+        parts = line.split()
+        if len(parts) < 5:
+            continue
+        try:
+            cls = int(float(parts[0]))
+            cx = float(parts[1]) * width
+            cy = float(parts[2]) * height
+            bw = float(parts[3]) * width
+            bh = float(parts[4]) * height
+        except ValueError:
+            continue
+        x1 = cx - bw / 2.0
+        y1 = cy - bh / 2.0
+        x2 = cx + bw / 2.0
+        y2 = cy + bh / 2.0
+        boxes.append(
+            ReferenceBox(
+                bbox=[round(x1, 2), round(y1, 2), round(x2, 2), round(y2, 2)],
+                category_id=cls,
+            )
+        )
+    return boxes
+
+
+def _is_dataset_image(image_name: str) -> bool:
+    image_path, _ = _find_dataset_image_and_label(image_name)
+    return image_path is not None
+
+
+def _load_model_inference_ms(output_json_path: str) -> dict[str, float]:
+    path = Path(output_json_path)
+    if not path.exists():
+        return {}
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8", errors="ignore"))
+    except Exception:
+        return {}
+
+    result: dict[str, float] = {}
+    for row in payload.get("per_model", []):
+        model_name = str(row.get("model_name") or "").strip()
+        if not model_name:
+            continue
+        value = row.get("inference_time")
+        try:
+            ms = float(value)
+        except (TypeError, ValueError):
+            continue
+        result[model_name] = ms
+
+    if "ensemble" not in result:
+        fused_rows = payload.get("fused", [])
+        if fused_rows:
+            try:
+                result["ensemble"] = float(fused_rows[0].get("inference_time", 0.0))
+            except (TypeError, ValueError):
+                pass
+    return result
+
+
+def _ensure_gt_vis(task_root: Path, image_name: str, reference_boxes: list[ReferenceBox]) -> Optional[str]:
+    if not reference_boxes:
+        return None
+    input_path = task_root / "raw" / image_name
+    if not input_path.exists():
+        input_path = task_root / "input" / image_name
+    if not input_path.exists():
+        dataset_image_path, _ = _find_dataset_image_and_label(image_name)
+        if dataset_image_path is None or not dataset_image_path.exists():
+            return None
+        input_path = dataset_image_path
+    out_path = task_root / "vis" / f"{Path(image_name).stem}_vis_gt.png"
+    predictions = []
+    for item in reference_boxes:
+        x1, y1, x2, y2 = item.bbox
+        predictions.append(
+            {
+                "model_name": "gt",
+                "score": 1.0,
+                "bbox": [x1, y1, max(0.0, x2 - x1), max(0.0, y2 - y1)],
+                "category_id": item.category_id,
+            }
+        )
+    try:
+        render_detections(str(input_path), predictions, str(out_path))
+    except Exception:
+        return None
+    return str(out_path.resolve()) if out_path.exists() else None
+
+
 @router.post("/tasks/infer", response_model=TaskCreateResponse)
 def create_infer_task(
     request: Request,
@@ -95,6 +234,13 @@ def create_infer_task(
 ):
     upload_files = images or []
     _validate_task_params(task_type, mode, model_key, len(upload_files), score_thr)
+    for item in upload_files:
+        size_bytes = _file_size_bytes(item)
+        if size_bytes > MAX_IMAGE_BYTES:
+            raise HTTPException(
+                status_code=400,
+                detail=f"image too large: {item.filename} exceeds 1MB limit",
+            )
 
     if mode == "single":
         row = session.query(ModelEntity).filter(ModelEntity.key == model_key).first()
@@ -175,6 +321,7 @@ def get_task_results(task_id: int, request: Request, session: Annotated[Session,
     task = session.get(TaskEntity, task_id)
     if task is None:
         raise HTTPException(status_code=404, detail="task not found")
+    task_root = request.app.state.settings.task_output_root / str(task_id)
 
     result_rows = session.query(ResultEntity).filter(ResultEntity.task_id == task_id).order_by(ResultEntity.id.asc()).all()
     file_rows = (
@@ -225,6 +372,8 @@ def get_task_results(task_id: int, request: Request, session: Annotated[Session,
             bucket.vis_urls.append(_to_static_url(request, row.path))
         elif row.kind == "output":
             bucket.output_urls.append(_to_static_url(request, row.path))
+            for model_name, ms in _load_model_inference_ms(row.path).items():
+                bucket.model_inference_ms[model_name] = ms
 
     model_stats: dict[str, list[float]] = {}
     for row in result_rows:
@@ -232,8 +381,14 @@ def get_task_results(task_id: int, request: Request, session: Annotated[Session,
 
     placeholder_id = -1
     for image in by_image.values():
+        image.reference_boxes = _load_reference_boxes(image.image_name)
+        image.is_dataset_image = _is_dataset_image(image.image_name)
+        gt_vis = _ensure_gt_vis(task_root, image.image_name, image.reference_boxes)
+        if gt_vis:
+            image.gt_vis_url = _to_static_url(request, gt_vis)
         if image.records:
             continue
+        image.vis_urls = [u for u in image.vis_urls if "_vis_fused" not in u and "_vis_ensemble" not in u]
         image.records.append(_build_no_result_record(image.image_name, placeholder_id))
         placeholder_id -= 1
 

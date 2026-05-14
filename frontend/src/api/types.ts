@@ -44,12 +44,21 @@ export interface ResultRecord {
   category_id: number
 }
 
+export interface ReferenceBox {
+  bbox: number[]
+  category_id: number
+}
+
 export interface TaskResultImage {
   image_name: string
   input_url: string | null
+  gt_vis_url: string | null
   vis_urls: string[]
   output_urls: string[]
   records: ResultRecord[]
+  is_dataset_image: boolean
+  reference_boxes: ReferenceBox[]
+  model_inference_ms: Record<string, number>
 }
 
 export interface ModelStats {

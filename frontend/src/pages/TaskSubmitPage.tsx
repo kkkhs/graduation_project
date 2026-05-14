@@ -23,6 +23,7 @@ import type { ModelItem } from '../api/types'
 import { formatTaskModeLabel, formatTaskTypeLabel } from '../utils/labels'
 
 const { Dragger } = Upload
+const MAX_IMAGE_BYTES = 1 * 1024 * 1024
 
 export function TaskSubmitPage() {
   const [models, setModels] = useState<ModelItem[]>([])
@@ -206,6 +207,10 @@ export function TaskSubmitPage() {
               <Dragger
                 multiple={taskType === 'batch'}
                 beforeUpload={(file: RcFile) => {
+                  if (file.size > MAX_IMAGE_BYTES) {
+                    message.error(`图片过大：${file.name}，单图不能超过 1MB`)
+                    return Upload.LIST_IGNORE
+                  }
                   setFiles((prev) => {
                     const duplicated = prev.some(
                       (item) =>
@@ -240,7 +245,7 @@ export function TaskSubmitPage() {
                 <p style={{ margin: 0, fontWeight: 600 }}>
                   {taskType === 'single' ? '选择 1 张图片进行快速推理' : '拖拽多张图片到此处，或点击选择'}
                 </p>
-                <p className="dropzone-note">支持 JPG / PNG / BMP / TIFF，系统会自动创建异步任务并写入结果数据库</p>
+                <p className="dropzone-note">支持 JPG / PNG / BMP / TIFF；单图不超过 1MB，系统会自动创建异步任务并写入结果数据库</p>
               </Dragger>
             </Form.Item>
 

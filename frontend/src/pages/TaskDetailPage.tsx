@@ -141,6 +141,9 @@ function parseVisLabel(url: string): string {
     clean = token
   }
   clean = clean.replace(/[_-]+/g, ' ')
+  if (clean === 'gt') {
+    return '参考框（GT）'
+  }
   if (clean === 'fused' || clean === 'ensemble') {
     return '融合结果'
   }
@@ -173,6 +176,7 @@ type ModelGroupRow = {
   bboxText: string
   scoreText: string
   categoryText: string
+  inferenceMsText: string
   isPlaceholder?: boolean
 }
 
@@ -181,11 +185,14 @@ type ModelGroupCard = {
   title: string
   count: number
   isFused: boolean
+  inferenceMs: number | null
   rows: ModelGroupRow[]
 }
 
 type ImageGroupCard = {
   imageName: string
+  isDatasetImage: boolean
+  referenceText: string
   groups: ModelGroupCard[]
 }
 
@@ -196,6 +203,7 @@ export function TaskDetailPage() {
   const [task, setTask] = useState<TaskSummary | null>(null)
   const [result, setResult] = useState<TaskResultsResponse | null>(null)
   const [loading, setLoading] = useState(false)
+  const [gtImgFailed, setGtImgFailed] = useState<Record<string, boolean>>({})
 
   const load = async () => {
     if (!taskId) return
@@ -268,6 +276,7 @@ export function TaskDetailPage() {
       const uniqueGroupKeys = Array.from(new Set(groupKeys)).sort(compareModelSourceFusedLast)
       const groups: ModelGroupCard[] = uniqueGroupKeys.map((groupKey) => {
         const rows = (grouped.get(groupKey) ?? []).slice().sort((a, b) => b.score - a.score)
+        const inferMs = image.model_inference_ms?.[groupKey]
         const rowItems: ModelGroupRow[] =
           rows.length > 0
             ? rows.map((record, index) => ({
@@ -275,7 +284,8 @@ export function TaskDetailPage() {
                 indexLabel: String(index + 1),
                 bboxText: record.bbox.map((item) => item.toFixed(1)).join(', '),
                 scoreText: record.score.toFixed(3),
-                categoryText: String(record.category_id)
+                categoryText: String(record.category_id),
+                inferenceMsText: typeof inferMs === 'number' ? `${inferMs.toFixed(2)} ms` : '-'
               }))
             : [
                 {
@@ -284,6 +294,7 @@ export function TaskDetailPage() {
                   bboxText: '-',
                   scoreText: '-',
                   categoryText: '-',
+                  inferenceMsText: typeof inferMs === 'number' ? `${inferMs.toFixed(2)} ms` : '-',
                   isPlaceholder: true
                 }
               ]
@@ -293,12 +304,20 @@ export function TaskDetailPage() {
           title: formatModelSourceLabel(groupKey),
           count: rows.length,
           isFused: groupKey === 'ensemble',
+          inferenceMs: typeof inferMs === 'number' ? inferMs : null,
           rows: rowItems
         }
       })
 
       return {
         imageName: image.image_name,
+        isDatasetImage: image.is_dataset_image,
+        referenceText:
+          image.reference_boxes && image.reference_boxes.length > 0
+            ? `Llabel 框(x1,y1,x2,y2)：${image.reference_boxes
+                .map((item, idx) => `${idx + 1}.[${item.bbox.map((v) => v.toFixed(1)).join(', ')}]`)
+                .join('、')}`
+            : 'Llabel 框(x1,y1,x2,y2)：该图无标注目标',
         groups
       }
     })
@@ -334,6 +353,17 @@ export function TaskDetailPage() {
       dataIndex: 'score',
       width: 90,
       render: (v: number, record: ResultRecord) => (isNoResultRow(record) ? '-' : v.toFixed(3))
+    },
+    {
+      title: '推理耗时(ms)',
+      dataIndex: 'source_model',
+      width: 120,
+      render: (sourceModel: string, record: ResultRecord) => {
+        if (isNoResultRow(record) || !result) return '-'
+        const image = result.images.find((item) => item.image_name === record.image_name)
+        const ms = image?.model_inference_ms?.[sourceModel]
+        return typeof ms === 'number' ? ms.toFixed(2) : '-'
+      }
     }
   ]
 
@@ -341,7 +371,8 @@ export function TaskDetailPage() {
     { title: '序号', dataIndex: 'indexLabel', width: 72 },
     { title: '框(x1,y1,x2,y2)', dataIndex: 'bboxText' },
     { title: 'score', dataIndex: 'scoreText', width: 96 },
-    { title: '类别', dataIndex: 'categoryText', width: 88 }
+    { title: '类别', dataIndex: 'categoryText', width: 88 },
+    { title: '推理耗时', dataIndex: 'inferenceMsText', width: 112 }
   ]
 
   return (
@@ -425,6 +456,10 @@ export function TaskDetailPage() {
             ) : (
               <Space direction="vertical" style={{ width: '100%' }}>
                 {result.images.map((image) => {
+                  const hasOnlyNoResult = image.records.every((record) => isNoResultRow(record))
+                  const visUrls = hasOnlyNoResult
+                    ? image.vis_urls.filter((url) => !url.includes('_vis_fused') && !url.includes('_vis_ensemble'))
+                    : image.vis_urls
                   const modelNames = Array.from(new Set(image.records.map((record) => record.source_model)))
                     .sort(compareModelSourceFusedLast)
                     .map((name) => formatModelSourceLabel(name))
@@ -455,7 +490,24 @@ export function TaskDetailPage() {
                             <Image src={image.input_url} />
                           </div>
                         ) : null}
-                        {image.vis_urls.map((url) => (
+                        {image.gt_vis_url ? (
+                          <div className="vis-image-frame">
+                            <div className="vis-label">参考框（GT）</div>
+                            {!gtImgFailed[image.image_name] ? (
+                              <img
+                                src={image.gt_vis_url}
+                                alt={`gt-${image.image_name}`}
+                                className="gt-plain-img"
+                                onError={() => {
+                                  setGtImgFailed((prev) => ({ ...prev, [image.image_name]: true }))
+                                }}
+                              />
+                            ) : (
+                              <Image src={image.input_url ?? undefined} />
+                            )}
+                          </div>
+                        ) : null}
+                        {visUrls.map((url) => (
                           <div className="vis-image-frame" key={url}>
                             <div className="vis-label">{parseVisLabel(url)}</div>
                             <Image src={url} />
@@ -479,8 +531,15 @@ export function TaskDetailPage() {
                     key={`grouped-${image.imageName}`}
                     type="inner"
                     className="result-image-card grouped-result-card"
-                    title={<div className="result-image-head"><span>{image.imageName}</span></div>}
+                    title={
+                      <div className="result-image-head">
+                        <span>{image.imageName}</span>
+                      </div>
+                    }
                   >
+                    <div style={{ marginBottom: 10, color: '#475569', fontSize: 13 }}>
+                      {image.isDatasetImage ? image.referenceText : '非数据集样例'}
+                    </div>
                     <div className="grouped-model-grid">
                       {image.groups.map((group) => (
                         <div className="grouped-model-card" key={`${image.imageName}-${group.modelKey}`}>
@@ -493,6 +552,9 @@ export function TaskDetailPage() {
                             </div>
                             <div className="grouped-model-meta">
                               {group.count > 0 ? `检测到 ${group.count} 个结果` : '无检测结果'}
+                            </div>
+                            <div className="grouped-model-meta">
+                              推理耗时：{group.inferenceMs === null ? '-' : `${group.inferenceMs.toFixed(2)} ms`}
                             </div>
                           </div>
                           <Table

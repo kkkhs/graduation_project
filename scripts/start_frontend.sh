@@ -8,4 +8,7 @@ if [ ! -d node_modules ]; then
   npm install
 fi
 
-npm run dev -- --host 0.0.0.0 --port 5173
+FRONTEND_HOST="${FRONTEND_HOST:-127.0.0.1}"
+FRONTEND_PORT="${FRONTEND_PORT:-5173}"
+
+npm run dev -- --host "$FRONTEND_HOST" --port "$FRONTEND_PORT"

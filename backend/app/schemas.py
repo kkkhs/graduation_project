@@ -51,12 +51,21 @@ class ResultRecord(BaseModel):
     category_id: int
 
 
+class ReferenceBox(BaseModel):
+    bbox: list[float]
+    category_id: int
+
+
 class TaskResultImage(BaseModel):
     image_name: str
     input_url: Optional[str] = None
+    gt_vis_url: Optional[str] = None
     vis_urls: list[str] = Field(default_factory=list)
     output_urls: list[str] = Field(default_factory=list)
     records: list[ResultRecord] = Field(default_factory=list)
+    is_dataset_image: bool = False
+    reference_boxes: list[ReferenceBox] = Field(default_factory=list)
+    model_inference_ms: dict[str, float] = Field(default_factory=dict)
 
 
 class ModelStats(BaseModel):

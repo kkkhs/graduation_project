@@ -9,11 +9,43 @@ if [ ! -d ".venv" ]; then
 fi
 source .venv/bin/activate
 
-pip install -r backend/requirements.txt
+if ! python - <<'PY'
+import importlib.util
+import sys
+
+required = [
+    "fastapi",
+    "uvicorn",
+    "sqlalchemy",
+    "alembic",
+    "pydantic",
+    "yaml",
+    "PIL",
+]
+missing = [name for name in required if importlib.util.find_spec(name) is None]
+if missing:
+    print("MISSING_DEPS:" + ",".join(missing))
+    sys.exit(1)
+sys.exit(0)
+PY
+then
+  echo "检测到关键依赖缺失，尝试安装 backend/requirements.txt ..."
+  if ! pip install -r backend/requirements.txt; then
+    echo "依赖安装失败（可能是当前网络不可用）。"
+    echo "请先联网后执行：source .venv/bin/activate && pip install -r backend/requirements.txt"
+    exit 1
+  fi
+fi
+
 ./scripts/init_db.sh
 
-echo "启动后端: http://localhost:8000"
-echo "启动前端: http://localhost:5173"
+BACK_HOST="${APP_HOST:-127.0.0.1}"
+BACK_PORT="${APP_PORT:-8000}"
+WEB_HOST="${FRONTEND_HOST:-127.0.0.1}"
+WEB_PORT="${FRONTEND_PORT:-5173}"
+
+echo "启动后端: http://${BACK_HOST}:${BACK_PORT}"
+echo "启动前端: http://${WEB_HOST}:${WEB_PORT}"
 
 ./scripts/start_backend.sh &
 BACK_PID=$!
