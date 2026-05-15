@@ -203,7 +203,6 @@ export function TaskDetailPage() {
   const [task, setTask] = useState<TaskSummary | null>(null)
   const [result, setResult] = useState<TaskResultsResponse | null>(null)
   const [loading, setLoading] = useState(false)
-  const [gtImgFailed, setGtImgFailed] = useState<Record<string, boolean>>({})
 
   const load = async () => {
     if (!taskId) return
@@ -497,18 +496,10 @@ export function TaskDetailPage() {
                         {image.gt_vis_url ? (
                           <div className="vis-image-frame">
                             <div className="vis-label">参考框（GT）</div>
-                            {!gtImgFailed[image.image_name] ? (
-                              <img
-                                src={image.gt_vis_url}
-                                alt={`gt-${image.image_name}`}
-                                className="gt-plain-img"
-                                onError={() => {
-                                  setGtImgFailed((prev) => ({ ...prev, [image.image_name]: true }))
-                                }}
-                              />
-                            ) : (
-                              <Image src={image.input_url ?? undefined} />
-                            )}
+                            <Image
+                              src={image.gt_vis_url}
+                              fallback={image.input_url ?? undefined}
+                            />
                           </div>
                         ) : null}
                         {visUrls.map((url) => (

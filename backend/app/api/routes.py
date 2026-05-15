@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import shutil
+from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 from typing import Annotated, Optional
@@ -99,16 +100,28 @@ def _dataset_root() -> Path:
     return Path(__file__).resolve().parents[3] / "experiment_assets" / "datasets" / "LEVIR-Ship"
 
 
-def _find_dataset_image_and_label(image_name: str) -> tuple[Optional[Path], Optional[Path]]:
+@dataclass
+class DatasetImageInfo:
+    image_path: Optional[Path] = None
+    label_path: Optional[Path] = None
+    is_dataset_image: bool = False
+
+
+def _resolve_dataset_info(image_name: str) -> DatasetImageInfo:
+    """一次遍历 train/val/test，返回图片路径、label 路径、是否数据集图片。"""
     root = _dataset_root()
     if not root.exists():
-        return None, None
+        return DatasetImageInfo()
     for split in ("train", "val", "test"):
         image_path = root / split / "images" / image_name
         if image_path.exists():
             label_path = root / split / "labels" / f"{Path(image_name).stem}.txt"
-            return image_path, (label_path if label_path.exists() else None)
-    return None, None
+            return DatasetImageInfo(
+                image_path=image_path,
+                label_path=label_path if label_path.exists() else None,
+                is_dataset_image=True,
+            )
+    return DatasetImageInfo()
 
 
 def _load_image_size(image_path: Path) -> tuple[float, float]:
@@ -121,14 +134,13 @@ def _load_image_size(image_path: Path) -> tuple[float, float]:
     return float(width or 1), float(height or 1)
 
 
-def _load_reference_boxes(image_name: str) -> list[ReferenceBox]:
-    image_path, label_path = _find_dataset_image_and_label(image_name)
-    if image_path is None or label_path is None:
+def _load_reference_boxes_from_info(info: DatasetImageInfo) -> list[ReferenceBox]:
+    if info.image_path is None or info.label_path is None:
         return []
 
-    width, height = _load_image_size(image_path)
+    width, height = _load_image_size(info.image_path)
     boxes: list[ReferenceBox] = []
-    for raw_line in label_path.read_text(encoding="utf-8", errors="ignore").splitlines():
+    for raw_line in info.label_path.read_text(encoding="utf-8", errors="ignore").splitlines():
         line = raw_line.strip()
         if not line:
             continue
@@ -154,11 +166,6 @@ def _load_reference_boxes(image_name: str) -> list[ReferenceBox]:
             )
         )
     return boxes
-
-
-def _is_dataset_image(image_name: str) -> bool:
-    image_path, _ = _find_dataset_image_and_label(image_name)
-    return image_path is not None
 
 
 def _load_model_inference_ms(output_json_path: str) -> dict[str, float]:
@@ -192,18 +199,22 @@ def _load_model_inference_ms(output_json_path: str) -> dict[str, float]:
     return result
 
 
-def _ensure_gt_vis(task_root: Path, image_name: str, reference_boxes: list[ReferenceBox]) -> Optional[str]:
+def _ensure_gt_vis(task_root: Path, image_name: str, reference_boxes: list[ReferenceBox], info: DatasetImageInfo) -> Optional[str]:
     if not reference_boxes:
         return None
+    out_path = task_root / "vis" / f"{Path(image_name).stem}_vis_gt.png"
+    # 缓存命中：文件已存在则直接返回
+    if out_path.exists():
+        return str(out_path.resolve())
+
     input_path = task_root / "raw" / image_name
     if not input_path.exists():
         input_path = task_root / "input" / image_name
     if not input_path.exists():
-        dataset_image_path, _ = _find_dataset_image_and_label(image_name)
-        if dataset_image_path is None or not dataset_image_path.exists():
+        if info.image_path is None or not info.image_path.exists():
             return None
-        input_path = dataset_image_path
-    out_path = task_root / "vis" / f"{Path(image_name).stem}_vis_gt.png"
+        input_path = info.image_path
+
     predictions = []
     for item in reference_boxes:
         x1, y1, x2, y2 = item.bbox
@@ -381,9 +392,10 @@ def get_task_results(task_id: int, request: Request, session: Annotated[Session,
 
     placeholder_id = -1
     for image in by_image.values():
-        image.reference_boxes = _load_reference_boxes(image.image_name)
-        image.is_dataset_image = _is_dataset_image(image.image_name)
-        gt_vis = _ensure_gt_vis(task_root, image.image_name, image.reference_boxes)
+        info = _resolve_dataset_info(image.image_name)
+        image.is_dataset_image = info.is_dataset_image
+        image.reference_boxes = _load_reference_boxes_from_info(info)
+        gt_vis = _ensure_gt_vis(task_root, image.image_name, image.reference_boxes, info)
         if gt_vis:
             image.gt_vis_url = _to_static_url(request, gt_vis)
         if image.records:
