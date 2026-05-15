@@ -5,6 +5,7 @@
 ## 1. 接口清单
 
 ### 1.0 Web API v1
+
 - `POST /api/v1/tasks/infer`
 - `GET /api/v1/tasks`
 - `GET /api/v1/tasks/{task_id}`
@@ -14,11 +15,13 @@
 - `GET /api/v1/health`
 
 ### 1.1 单模型推理
+
 ```python
 predict(image_path, model_name, conf_threshold=None, iou_threshold=None) -> list[dict]
 ```
 
 ### 1.2 多模型融合推理
+
 ```python
 predict_ensemble(
     image_path,
@@ -31,6 +34,7 @@ predict_ensemble(
 ```
 
 ## 2. 输入参数与约束
+
 - `image_path: str`
   - 必填，图像路径（绝对/相对均可）。
   - 不存在时报错。
@@ -50,19 +54,22 @@ predict_ensemble(
   - `>= 1`。
 
 ## 3. 错误码/异常文本约定
-| 场景 | 异常类型 | 异常文本（关键字） |
-|---|---|---|
-| 模型名不存在 | `ValueError` | `unknown model_name` / `unknown model_names` |
-| 图像路径无效 | `ValueError` | `invalid image_path` |
-| 阈值越界 | `ValueError` | `threshold out of range` |
-| 融合阈值越界 | `ValueError` | `fusion_iou_threshold out of range` |
-| 最小投票非法 | `ValueError` | `min_votes must be >= 1` |
-| 权重不存在 | `FileNotFoundError` | `weight file not found` |
-| 依赖缺失 | `RuntimeError` | `not installed` |
-| 推理失败 | `RuntimeError` | `inference failed` |
+
+| 场景         | 异常类型            | 异常文本（关键字）                           |
+| ------------ | ------------------- | -------------------------------------------- |
+| 模型名不存在 | `ValueError`        | `unknown model_name` / `unknown model_names` |
+| 图像路径无效 | `ValueError`        | `invalid image_path`                         |
+| 阈值越界     | `ValueError`        | `threshold out of range`                     |
+| 融合阈值越界 | `ValueError`        | `fusion_iou_threshold out of range`          |
+| 最小投票非法 | `ValueError`        | `min_votes must be >= 1`                     |
+| 权重不存在   | `FileNotFoundError` | `weight file not found`                      |
+| 依赖缺失     | `RuntimeError`      | `not installed`                              |
+| 推理失败     | `RuntimeError`      | `inference failed`                           |
 
 ## 4. 输出结构（统一字段）
+
 每个元素必须包含：
+
 - `image_id: str`
 - `model_name: str`（融合结果固定为 `ensemble`）
 - `bbox: [x, y, w, h]`
@@ -71,6 +78,7 @@ predict_ensemble(
 - `inference_time: float`（ms）
 
 ## 5. 输出示例
+
 ```json
 [
   {
@@ -84,15 +92,19 @@ predict_ensemble(
 ]
 ```
 
-## 6. 兼容层说明（旧路径可调）
-保留旧导入路径，仅做重导出（re-export）：
-- `from src.core.predictor import UnifiedPredictor`
-- `from src.adapters.yolo_adapter import YOLOAdapter`
+## 6. 导入路径说明
 
-说明：兼容层不承载新业务逻辑，真实实现在 `src/application` 与 `src/infrastructure`。
+所有推理能力统一从以下路径导入：
+
+- `from src.application.predict_service import PredictService`
+- `from src.infrastructure.adapters.yolo_adapter import YOLOAdapter`
+- `from src.infrastructure.adapters.drenet_adapter import DRENetAdapter`
+- `from src.infrastructure.adapters.mmdet_adapter import MMDetAdapter`
 
 ## 7. DRENet 自定义插件模式
+
 当 DRENet 不是 mmdet 兼容格式时，可使用插件模式：
+
 - `configs/models.yaml` 中设置：
   - `framework_type: drenet`
   - `config_path: "/abs/path/to/plugin.py:build_predictor"`
