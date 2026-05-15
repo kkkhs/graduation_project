@@ -221,9 +221,13 @@ export function TaskDetailPage() {
 
   useEffect(() => {
     load()
+  }, [taskId])
+
+  useEffect(() => {
+    if (!task || (task.status !== 'queued' && task.status !== 'running')) return
     const timer = setInterval(load, 4000)
     return () => clearInterval(timer)
-  }, [taskId])
+  }, [taskId, task?.status])
 
   const tableData = useMemo(() => {
     if (!result) return []
