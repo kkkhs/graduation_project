@@ -11,9 +11,10 @@ import {
   Tag,
   message
 } from 'antd'
+import { DownloadOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
 import ReactECharts from 'echarts-for-react'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { fetchTask, fetchTaskResults } from '../api/client'
 import type { ModelStats, ResultRecord, TaskResultsResponse, TaskSummary } from '../api/types'
@@ -370,6 +371,40 @@ export function TaskDetailPage() {
     }
   ]
 
+  const handleExportCsv = useCallback(() => {
+    if (!result || tableData.length === 0) {
+      message.warning('暂无数据可导出')
+      return
+    }
+    const header = ['ID', '图片', '来源模型', '融合', '框(x1,y1,x2,y2)', 'score', '推理耗时(ms)']
+    const rows = tableData.map((row) => {
+      const isNoResult = isNoResultRow(row)
+      const image = result.images.find((item) => item.image_name === row.image_name)
+      const ms = image?.model_inference_ms?.[row.source_model]
+      return [
+        String(row.id),
+        row.image_name,
+        isNoResult ? '无检测结果' : formatModelSourceLabel(row.source_model),
+        isNoResult ? '-' : formatFusionLabel(row.is_fused),
+        isNoResult ? '-' : row.bbox.map((n) => n.toFixed(1)).join(', '),
+        isNoResult ? '-' : row.score.toFixed(3),
+        typeof ms === 'number' ? ms.toFixed(2) : '-',
+      ]
+    })
+    const csvContent = [header, ...rows]
+      .map((line) => line.map((cell) => `"${cell}"`).join(','))
+      .join('\n')
+    const bom = '\uFEFF'
+    const blob = new Blob([bom + csvContent], { type: 'text/csv;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `task_${taskId}_results.csv`
+    link.click()
+    URL.revokeObjectURL(url)
+    message.success('CSV 已导出')
+  }, [result, tableData, taskId])
+
   const groupedColumns: ColumnsType<ModelGroupRow> = [
     { title: '序号', dataIndex: 'indexLabel', width: 72 },
     { title: '框(x1,y1,x2,y2)', dataIndex: 'bboxText' },
@@ -569,7 +604,15 @@ export function TaskDetailPage() {
             )}
           </Card>
 
-          <Card className="panel-card" title="原始明细表">
+          <Card
+            className="panel-card"
+            title="原始明细表"
+            extra={
+              <Button icon={<DownloadOutlined />} size="small" onClick={handleExportCsv}>
+                导出 CSV
+              </Button>
+            }
+          >
             <Table
               className="table-quiet"
               rowKey="id"
