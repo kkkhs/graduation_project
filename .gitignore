@@ -24,5 +24,8 @@ app.db
 *.db
 *.sqlite3
 
+# Thesis compiled PDF (regenerate from LaTeX source)
+thesis_overleaf2/Thesis.pdf
+
 # Third-party code vendor drop (prefer pinning upstream commit + patch files)
 experiments/drenet/DRENet/
