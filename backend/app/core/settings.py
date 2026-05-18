@@ -15,6 +15,7 @@ class Settings:
     task_output_root: Path
     mock_inference: bool
     max_workers: int
+    max_parallel_models: int
 
 
 
@@ -33,6 +34,7 @@ def load_settings() -> Settings:
     outputs_root = Path(os.getenv("APP_OUTPUTS_ROOT", str(project_root / "outputs"))).resolve()
     task_output_root = Path(os.getenv("APP_TASK_OUTPUT_ROOT", str(outputs_root / "tasks"))).resolve()
     max_workers = int(os.getenv("APP_MAX_WORKERS", "1"))
+    max_parallel_models = int(os.getenv("APP_MAX_PARALLEL_MODELS", "1"))
 
     return Settings(
         project_root=project_root,
@@ -42,4 +44,5 @@ def load_settings() -> Settings:
         task_output_root=task_output_root,
         mock_inference=_as_bool(os.getenv("APP_MOCK_INFERENCE"), default=False),
         max_workers=max(1, max_workers),
+        max_parallel_models=max(1, max_parallel_models),
     )

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import hashlib
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Union
 
 from PIL import Image, ImageDraw, ImageFont
 
@@ -22,12 +22,30 @@ def _color_by_model(model_name: str) -> tuple[int, int, int]:
     return r, g, b
 
 
-def render_detections(image_path: str, predictions: List[Dict], output_path: str) -> str:
-    src = Path(image_path)
+def render_detections(
+    image_or_path: Union[str, Image.Image],
+    predictions: List[Dict],
+    output_path: str,
+) -> str:
+    """Render detection bounding boxes on an image and save to output_path.
+
+    Args:
+        image_or_path: Either a file path (str) or an already-opened PIL.Image.
+                       Passing an Image object avoids repeated file I/O and decoding
+                       when rendering multiple prediction sets on the same source image.
+        predictions: List of prediction dicts with 'bbox', 'score', 'model_name' keys.
+        output_path: Destination file path for the rendered image.
+    """
     out = Path(output_path)
     out.parent.mkdir(parents=True, exist_ok=True)
 
-    image = Image.open(src).convert('RGB')
+    # Accept either a path string or a pre-loaded PIL.Image
+    if isinstance(image_or_path, Image.Image):
+        image = image_or_path.copy().convert('RGB')
+    else:
+        src = Path(image_or_path)
+        image = Image.open(src).convert('RGB')
+
     width, height = image.size
     draw = ImageDraw.Draw(image)
 

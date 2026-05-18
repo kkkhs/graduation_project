@@ -16,8 +16,8 @@ import type { ColumnsType } from 'antd/es/table'
 import ReactECharts from 'echarts-for-react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { fetchTask, fetchTaskResults } from '../api/client'
-import type { ModelStats, ResultRecord, TaskResultsResponse, TaskSummary } from '../api/types'
+import { fetchTask, fetchTaskProgress, fetchTaskResults } from '../api/client'
+import type { ModelStats, ResultRecord, TaskProgress, TaskResultsResponse, TaskSummary } from '../api/types'
 import { TaskProgressBar } from '../components/TaskProgressBar'
 import {
   formatFusionLabel,
@@ -204,14 +204,17 @@ export function TaskDetailPage() {
   const [task, setTask] = useState<TaskSummary | null>(null)
   const [result, setResult] = useState<TaskResultsResponse | null>(null)
   const [loading, setLoading] = useState(false)
+  const [progress, setProgress] = useState<TaskProgress | null>(null)
 
-  const load = async () => {
+  /** Load full task summary + results (heavy, called once on mount and on completion). */
+  const loadFull = async () => {
     if (!taskId) return
     setLoading(true)
     try {
       const [taskData, resultData] = await Promise.all([fetchTask(taskId), fetchTaskResults(taskId)])
       setTask(taskData)
       setResult(resultData)
+      setProgress(null)
     } catch (err) {
       message.error(`加载任务详情失败: ${(err as Error).message}`)
     } finally {
@@ -219,13 +222,34 @@ export function TaskDetailPage() {
     }
   }
 
+  /** Poll lightweight progress endpoint (called frequently while task is active). */
+  const pollProgress = async () => {
+    if (!taskId) return
+    try {
+      const data = await fetchTaskProgress(taskId)
+      setProgress(data)
+      // Sync done_count into task for progress bar updates
+      if (task) {
+        setTask({ ...task, status: data.status, done_count: data.done_count, input_count: data.input_count })
+      }
+      // When task completes, fetch full results once
+      if (data.status === 'done' || data.status === 'failed') {
+        loadFull()
+      }
+    } catch {
+      // Silently ignore progress poll errors
+    }
+  }
+
+  // Initial load on mount
   useEffect(() => {
-    load()
+    loadFull()
   }, [taskId])
 
+  // Lightweight progress polling while task is active (1.5s interval)
   useEffect(() => {
     if (!task || (task.status !== 'queued' && task.status !== 'running')) return
-    const timer = setInterval(load, 4000)
+    const timer = setInterval(pollProgress, 1500)
     return () => clearInterval(timer)
   }, [taskId, task?.status])
 
@@ -448,7 +472,7 @@ export function TaskDetailPage() {
         </div>
       </div>
 
-      <Button onClick={load} loading={loading}>
+      <Button onClick={loadFull} loading={loading}>
         刷新
       </Button>
 

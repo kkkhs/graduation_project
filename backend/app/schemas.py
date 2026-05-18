@@ -101,6 +101,14 @@ class ModelToggleRequest(BaseModel):
     is_enabled: bool
 
 
+class TaskProgressResponse(BaseModel):
+    """Lightweight progress info for polling — avoids heavy results query."""
+    task_id: int
+    status: str
+    done_count: int
+    input_count: int
+
+
 class HealthResponse(BaseModel):
     status: str
     config_path: str

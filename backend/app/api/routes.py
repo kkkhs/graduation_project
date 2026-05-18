@@ -22,6 +22,7 @@ from backend.app.schemas import (
     ReferenceBox,
     TaskCreateResponse,
     TaskListResponse,
+    TaskProgressResponse,
     TaskResultImage,
     TaskResultsResponse,
     TaskSummary,
@@ -96,6 +97,12 @@ def _build_no_result_record(image_name: str, placeholder_id: int) -> ResultRecor
     )
 
 
+# Optimization 5: In-memory cache for dataset info and reference boxes.
+# The dataset is static, so repeated lookups for the same image_name are wasteful.
+_dataset_info_cache: dict[str, DatasetImageInfo] = {}
+_reference_boxes_cache: dict[str, list[ReferenceBox]] = {}
+
+
 def _dataset_root() -> Path:
     return Path(__file__).resolve().parents[3] / "experiment_assets" / "datasets" / "LEVIR-Ship"
 
@@ -109,19 +116,28 @@ class DatasetImageInfo:
 
 def _resolve_dataset_info(image_name: str) -> DatasetImageInfo:
     """一次遍历 train/val/test，返回图片路径、label 路径、是否数据集图片。"""
+    cached = _dataset_info_cache.get(image_name)
+    if cached is not None:
+        return cached
+
     root = _dataset_root()
     if not root.exists():
-        return DatasetImageInfo()
-    for split in ("train", "val", "test"):
-        image_path = root / split / "images" / image_name
-        if image_path.exists():
-            label_path = root / split / "labels" / f"{Path(image_name).stem}.txt"
-            return DatasetImageInfo(
-                image_path=image_path,
-                label_path=label_path if label_path.exists() else None,
-                is_dataset_image=True,
-            )
-    return DatasetImageInfo()
+        result = DatasetImageInfo()
+    else:
+        result = DatasetImageInfo()
+        for split in ("train", "val", "test"):
+            image_path = root / split / "images" / image_name
+            if image_path.exists():
+                label_path = root / split / "labels" / f"{Path(image_name).stem}.txt"
+                result = DatasetImageInfo(
+                    image_path=image_path,
+                    label_path=label_path if label_path.exists() else None,
+                    is_dataset_image=True,
+                )
+                break
+
+    _dataset_info_cache[image_name] = result
+    return result
 
 
 def _load_image_size(image_path: Path) -> tuple[float, float]:
@@ -137,6 +153,12 @@ def _load_image_size(image_path: Path) -> tuple[float, float]:
 def _load_reference_boxes_from_info(info: DatasetImageInfo) -> list[ReferenceBox]:
     if info.image_path is None or info.label_path is None:
         return []
+
+    # Cache by image_name since the same image always has the same reference boxes
+    cache_key = info.image_path.name
+    cached = _reference_boxes_cache.get(cache_key)
+    if cached is not None:
+        return cached
 
     width, height = _load_image_size(info.image_path)
     boxes: list[ReferenceBox] = []
@@ -165,6 +187,7 @@ def _load_reference_boxes_from_info(info: DatasetImageInfo) -> list[ReferenceBox
                 category_id=cls,
             )
         )
+    _reference_boxes_cache[cache_key] = boxes
     return boxes
 
 
@@ -325,6 +348,20 @@ def get_task(task_id: int, session: Annotated[Session, Depends(get_session)]):
     if row is None:
         raise HTTPException(status_code=404, detail="task not found")
     return TaskSummary.model_validate(row)
+
+
+@router.get("/tasks/{task_id}/progress", response_model=TaskProgressResponse)
+def get_task_progress(task_id: int, session: Annotated[Session, Depends(get_session)]):
+    """Lightweight progress endpoint for polling — only returns status & counts."""
+    row = session.get(TaskEntity, task_id)
+    if row is None:
+        raise HTTPException(status_code=404, detail="task not found")
+    return TaskProgressResponse(
+        task_id=row.id,
+        status=row.status,
+        done_count=row.done_count,
+        input_count=row.input_count,
+    )
 
 
 @router.get("/tasks/{task_id}/results", response_model=TaskResultsResponse)

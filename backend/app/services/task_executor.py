@@ -1,15 +1,16 @@
 from __future__ import annotations
 
+import os
 import re
 import json
-import shutil
+import traceback
 from collections import defaultdict
 from concurrent.futures import Future, ThreadPoolExecutor
 from datetime import datetime
 from pathlib import Path
-import traceback
 from typing import Optional
 
+from PIL import Image
 from sqlalchemy.orm import Session
 
 from backend.app.core.settings import Settings
@@ -17,6 +18,9 @@ from backend.app.db.models import ResultEntity, TaskEntity, TaskFileEntity
 from backend.app.db.session import SessionFactory
 from backend.app.services.inference_runtime import InferenceRuntime
 from src.infrastructure.visualization import render_detections
+
+# Commit progress to DB every N images so the progress endpoint stays responsive.
+_COMMIT_PROGRESS_INTERVAL = 2
 
 
 class TaskExecutor:
@@ -89,9 +93,15 @@ class TaskExecutor:
 
                 image_name = src_path.name
                 local_input = input_dir / image_name
+
+                # Optimization 6: Use symlink instead of copy when on same filesystem
                 if src_path.resolve() != local_input.resolve():
-                    shutil.copy2(src_path, local_input)
+                    self._link_or_copy(src_path, local_input)
+
                 image_start = datetime.utcnow()
+
+                # Optimization 3: Open source image once, reuse for all vis renders
+                src_image = Image.open(str(local_input)).convert("RGB")
 
                 if task.mode == "ensemble":
                     per_model, fused = self.runtime.predict_ensemble(
@@ -106,12 +116,12 @@ class TaskExecutor:
 
                     for model_name, rows in self._group_predictions_by_model(per_model).items():
                         vis_path = vis_dir / f"{local_input.stem}_vis_{self._safe_file_token(model_name)}.png"
-                        render_detections(str(local_input), rows, str(vis_path))
+                        render_detections(src_image, rows, str(vis_path))
                         session.add(TaskFileEntity(task_id=task_id, kind="vis", path=str(vis_path.resolve())))
                         vis_paths.append(str(vis_path.resolve()))
 
                     fused_vis_path = vis_dir / f"{local_input.stem}_vis_fused.png"
-                    render_detections(str(local_input), fused, str(fused_vis_path))
+                    render_detections(src_image, fused, str(fused_vis_path))
                     session.add(TaskFileEntity(task_id=task_id, kind="vis", path=str(fused_vis_path.resolve())))
                     vis_paths.append(str(fused_vis_path.resolve()))
                 else:
@@ -125,9 +135,12 @@ class TaskExecutor:
                     payload = {"per_model": per_model, "fused": []}
 
                     vis_path = vis_dir / f"{local_input.stem}_vis_{self._safe_file_token(model_key)}.png"
-                    render_detections(str(local_input), per_model, str(vis_path))
+                    render_detections(src_image, per_model, str(vis_path))
                     session.add(TaskFileEntity(task_id=task_id, kind="vis", path=str(vis_path.resolve())))
                     vis_paths = [str(vis_path.resolve())]
+
+                # Close the source image to free memory
+                src_image.close()
 
                 out_json = output_dir / f"{local_input.stem}.json"
                 out_json.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -135,7 +148,11 @@ class TaskExecutor:
                 session.add(TaskFileEntity(task_id=task_id, kind="output", path=str(out_json.resolve())))
 
                 task.done_count = idx
-                session.commit()
+
+                # Optimization 4: Batch commit — only commit every N images or on last image
+                if idx % _COMMIT_PROGRESS_INTERVAL == 0 or idx == len(input_files):
+                    session.commit()
+
                 image_end = datetime.utcnow()
                 self._append_log(
                     log_path,
@@ -147,6 +164,7 @@ class TaskExecutor:
                     ),
                 )
 
+            # Final commit for any remaining uncommitted rows
             task.finished_at = datetime.utcnow()
             if image_errors:
                 task.status = "failed"
@@ -178,6 +196,22 @@ class TaskExecutor:
                 self._append_log(log_path, traceback.format_exc().strip())
         finally:
             session.close()
+
+    @staticmethod
+    def _link_or_copy(src: Path, dst: Path) -> None:
+        """Create a symlink if possible, otherwise fall back to file copy."""
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            # Remove existing dst if present
+            if dst.exists() or dst.is_symlink():
+                dst.unlink()
+            os.symlink(str(src.resolve()), str(dst))
+        except OSError:
+            # Symlink not supported (e.g. cross-filesystem on Windows) — fall back to copy
+            if dst.exists():
+                dst.unlink()
+            import shutil
+            shutil.copy2(str(src), str(dst))
 
     @staticmethod
     def _insert_rows(session: Session, task_id: int, image_name: str, rows: list[dict], is_fused: bool) -> None:

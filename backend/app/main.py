@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 from typing import Optional
 
@@ -15,6 +16,7 @@ from backend.app.services.inference_runtime import InferenceRuntime
 from backend.app.services.model_registry import sync_models
 from backend.app.services.task_executor import TaskExecutor
 
+logger = logging.getLogger(__name__)
 
 
 def create_app(settings: Optional[Settings] = None) -> FastAPI:
@@ -52,9 +54,18 @@ def create_app(settings: Optional[Settings] = None) -> FastAPI:
     app.include_router(router)
     app.mount("/static", StaticFiles(directory=str(cfg.outputs_root)), name="static")
 
+    # Optimization 7: Pre-load all model weights on startup to avoid first-request delay
+    @app.on_event("startup")
+    def _preload_models() -> None:
+        if not cfg.mock_inference:
+            logger.info("preloading all model weights...")
+            runtime.preload_all()
+            logger.info("model preloading complete")
+
     @app.on_event("shutdown")
     def _shutdown() -> None:
         app.state.task_executor.shutdown()
+        runtime.shutdown()
 
     return app
 

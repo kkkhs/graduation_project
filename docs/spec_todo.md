@@ -79,6 +79,24 @@
 - [ ] H4 第5章补充 CSV 导出功能说明：在接口或实现效果中提一句"支持结果导出为 CSV 文件"
 - [ ] H5 可选：答辩前跑出融合模式的离线 AP50 指标，补充到第4章
 
+## I. 系统响应速度优化（2026-05-18）
+
+- [x] I1 优化方案设计与文档（`plans/performance_optimization_plan.md`）
+- [x] I2 并行推理能力实现（`inference_runtime.py` + `settings.py` + `adapter_factory.py`，默认串行 `max_parallel_models=1`）
+- [x] I3 前端轮询策略优化（新增 `GET /tasks/{id}/progress` 端点 + `TaskDetailPage.tsx` 轻量轮询）
+- [x] I4 可视化渲染复用 Image 对象（`visualization.py` 支持 `str | PIL.Image`，`task_executor.py` 只开一次图）
+- [x] I5 DB 批量 commit（`task_executor.py` 每 2 张图 commit 一次）
+- [x] I6 results 端点数据集信息缓存（`routes.py` 内存缓存 `_dataset_info_cache` + `_reference_boxes_cache`）
+- [x] I7 symlink 替代 copy2（`task_executor.py` `_link_or_copy()` 方法）
+- [x] I8 模型预加载（`main.py` startup 事件 + `inference_runtime.py` `preload_all()`）
+- [x] I9 基准测试脚本（`scripts/benchmark_performance.py` + `scripts/benchmark_e2e_latency.py`）
+- [x] I10 改动总结文档（`docs/system/performance_optimization_summary.md`）
+- [ ] I11 论文第5章同步：写入系统响应速度优化策略（7 个瓶颈 → 7 个优化方案 + 实测数据）
+- [ ] I12 论文第5章同步：写入轻量进度端点设计（progress API 设计动机、接口定义、前端轮询重构）
+- [ ] I13 论文第5章同步：写入可视化渲染优化（PIL.Image 复用策略）
+- [ ] I14 论文第5章同步：写入并行推理机制（ThreadPoolExecutor + max_parallel_models 配置 + CPU/GPU 策略）
+- [ ] I15 论文第5章同步：写入基准测试数据表格（作为论据）
+
 ---
 
 ## 已在本机落地的关键文件

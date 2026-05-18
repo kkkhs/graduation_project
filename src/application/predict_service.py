@@ -20,6 +20,10 @@ class PredictService:
     def available_models(self) -> List[str]:
         return sorted(list(self.runtime_config.models.keys()))
 
+    def preload_all(self) -> None:
+        """Pre-load all configured model weights into memory."""
+        self.adapter_factory.preload_all(self.runtime_config.models)
+
     def predict_ensemble(
         self,
         image_path: str,

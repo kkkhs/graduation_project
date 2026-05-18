@@ -1,4 +1,11 @@
 export type TaskStatus = 'queued' | 'running' | 'done' | 'failed'
+
+export interface TaskProgress {
+  task_id: number
+  status: TaskStatus
+  done_count: number
+  input_count: number
+}
 export type TaskMode = 'single' | 'ensemble'
 export type TaskType = 'single' | 'batch'
 

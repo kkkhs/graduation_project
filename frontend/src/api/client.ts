@@ -1,4 +1,10 @@
-import type { ModelItem, TaskListResponse, TaskResultsResponse, TaskSummary } from './types'
+import type {
+  ModelItem,
+  TaskListResponse,
+  TaskProgress,
+  TaskResultsResponse,
+  TaskSummary,
+} from './types'
 
 async function parseJson<T>(resp: Response): Promise<T> {
   if (!resp.ok) {
@@ -19,17 +25,22 @@ export async function fetchHealth() {
 }
 
 export async function fetchModels(): Promise<ModelItem[]> {
-  const data = await parseJson<{ items: ModelItem[] }>(await fetch('/api/v1/models'))
+  const data = await parseJson<{ items: ModelItem[] }>(
+    await fetch('/api/v1/models'),
+  )
   return data.items
 }
 
-export async function toggleModel(modelKey: string, isEnabled: boolean): Promise<ModelItem> {
+export async function toggleModel(
+  modelKey: string,
+  isEnabled: boolean,
+): Promise<ModelItem> {
   return parseJson(
     await fetch(`/api/v1/models/${modelKey}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ is_enabled: isEnabled })
-    })
+      body: JSON.stringify({ is_enabled: isEnabled }),
+    }),
   )
 }
 
@@ -54,19 +65,30 @@ export async function submitTask(payload: {
   return parseJson(
     await fetch('/api/v1/tasks/infer', {
       method: 'POST',
-      body: formData
-    })
+      body: formData,
+    }),
   )
 }
 
-export async function fetchTasks(page = 1, pageSize = 20): Promise<TaskListResponse> {
-  return parseJson(await fetch(`/api/v1/tasks?page=${page}&page_size=${pageSize}`))
+export async function fetchTasks(
+  page = 1,
+  pageSize = 20,
+): Promise<TaskListResponse> {
+  return parseJson(
+    await fetch(`/api/v1/tasks?page=${page}&page_size=${pageSize}`),
+  )
 }
 
 export async function fetchTask(taskId: number): Promise<TaskSummary> {
   return parseJson(await fetch(`/api/v1/tasks/${taskId}`))
 }
 
-export async function fetchTaskResults(taskId: number): Promise<TaskResultsResponse> {
+export async function fetchTaskProgress(taskId: number): Promise<TaskProgress> {
+  return parseJson(await fetch(`/api/v1/tasks/${taskId}/progress`))
+}
+
+export async function fetchTaskResults(
+  taskId: number,
+): Promise<TaskResultsResponse> {
   return parseJson(await fetch(`/api/v1/tasks/${taskId}/results`))
 }
