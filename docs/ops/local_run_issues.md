@@ -1,7 +1,7 @@
 # 本机/训练机运行问题记录
 
 > 结构：问题 -> 原因 -> 解决 -> 复现命令
-> 更新时间：2026-03-03
+> 更新时间：2026-05-16
 
 ## 问题 1：`ModuleNotFoundError: No module named 'src'`
 
@@ -62,6 +62,25 @@ python train.py --resume /path/to/last_checkpoint.pth
 
 ```bash
 python train.py --batch-size 2 --img-size 512 --amp
+```
+
+## 问题 7：DRENet 对非正方形/非 512×512 图片推理崩溃
+
+- 现象：`RuntimeError: The size of tensor a (144) must match the size of tensor b (256) at non-singleton dimension 1`
+- 原因：DRENet 的 `BottleneckResAtnMHSA` 模块（[`experiments/drenet/DRENet/models/common.py:119`](../../experiments/drenet/DRENet/models/common.py:119)）在初始化时将位置编码 `rel_h`/`rel_w` 固定为训练时的特征图空间尺寸（512×512 输入 → 某层 16×16=256 个位置）。当输入图片宽高比不同时，letterbox 后有效区域变化，导致该层特征图变为 12×12=144 个位置，`content_content`（dim1=144）与 `content_position`（dim1=256）维度不匹配。
+- 影响范围：所有非 512×512 正方形输入（包括任意非数据集图片）。
+- 修复方案（待实施）：
+  - **方案 A（推荐）**：取消注释 [`common.py:136-141`](../../experiments/drenet/DRENet/models/common.py:136) 中的 resolution-agnostic 位置编码，用 `F.interpolate` 动态适配特征图尺寸。参考 [DRENet Issue #10](https://github.com/WindVChen/DRENet/issues/10)。
+  - **方案 B（简单）**：在 [`tools/drenet_local_plugin.py`](../../tools/drenet_local_plugin.py) 中强制将输入 resize 为正方形 512×512（不使用 letterbox），但有损宽高比。
+- 复现命令：
+
+```bash
+# 用任意非 512×512 正方形图片触发
+PYTHONPATH=. python3 -c "
+from tools.drenet_local_plugin import build_predictor
+p = build_predictor('experiment_assets/runs/drenet_levirship_512_bs4_sna_20260307_formal01/weights/best.pt', '', 'cpu')
+p('outputs/tasks/37/input/4559992950.png', 0.25, 0.5)
+"
 ```
 
 ## 预防措施
