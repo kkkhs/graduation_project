@@ -66,17 +66,17 @@
 ## G. 最终收口清单（当前仍需保留的真实缺口）
 
 - [x] G1 固定演示样例池已落地（`assets/demo_cases/{easy,medium,hard}` + `docs/system/demo_case_catalog.md`）
-- [ ] G2 统一参考文献格式与最终 citation key 检查
+- [x] G2 统一参考文献格式与最终 citation key 检查（已核对正文 20 个 key 与 `ref.bib` 条目一一对应，重复历史 key 已清理）
 - [x] G3 FCOS 特殊权重口径说明已收口：仅通过文档明确论文口径与系统/消融口径边界，不改 DRENet/YOLO 配置
 - [ ] G4 论文最终提交检查：封面、目录、图表分页、参考文献与模板页最终肉眼核验
 - [x] G5 系统最终交付检查已留档：启动命令、主链路、测试状态、前端回归与兜底截图已整理
 
 ## H. 论文审阅发现的问题（2026-05-15）
 
-- [ ] H1 参考文献去重：`hfut.bib` 中 `chen2022_tinyship_drenet` 与 `levirship2021_dataset` 是同一篇论文，删除未引用的 `levirship2021_dataset`
-- [ ] H2 致谢日期更新：`acknowledgements.tex` 中 "2026年3月" → "2026年5月"
-- [ ] H3 第4章 FCOS Recall 口径说明：表注中补充 `AR@100` 与 Recall 的差异解释，避免答辩被追问
-- [ ] H4 第5章补充 CSV 导出功能说明：在接口或实现效果中提一句"支持结果导出为 CSV 文件"
+- [x] H1 参考文献去重：当前 `ref.bib` 已不含历史重复 key `levirship2021_dataset`
+- [x] H2 致谢日期更新：当前致谢页不再包含旧日期文本，无需额外修改
+- [x] H3 第4章 FCOS Recall 口径说明：已在表注和正文中补充 `AR@100` 与 Recall 的差异解释
+- [x] H4 第5章补充 CSV 导出功能说明：已在系统实现效果中写明支持结果导出为 CSV 文件
 - [ ] H5 可选：答辩前跑出融合模式的离线 AP50 指标，补充到第4章
 
 ## I. 系统响应速度优化（2026-05-18）
@@ -91,11 +91,11 @@
 - [x] I8 模型预加载（`main.py` startup 事件 + `inference_runtime.py` `preload_all()`）
 - [x] I9 基准测试脚本（`scripts/benchmark_performance.py` + `scripts/benchmark_e2e_latency.py`）
 - [x] I10 改动总结文档（`docs/system/performance_optimization_summary.md`）
-- [ ] I11 论文第5章同步：写入系统响应速度优化策略（7 个瓶颈 → 7 个优化方案 + 实测数据）
-- [ ] I12 论文第5章同步：写入轻量进度端点设计（progress API 设计动机、接口定义、前端轮询重构）
-- [ ] I13 论文第5章同步：写入可视化渲染优化（PIL.Image 复用策略）
-- [ ] I14 论文第5章同步：写入并行推理机制（ThreadPoolExecutor + max_parallel_models 配置 + CPU/GPU 策略）
-- [ ] I15 论文第5章同步：写入基准测试数据表格（作为论据）
+- [x] I11 论文第5章同步：已新增“系统响应速度优化”小节，写入 7 类瓶颈与对应优化思路
+- [x] I12 论文第5章同步：已写入轻量 progress 端点设计与前端轮询重构
+- [x] I13 论文第5章同步：已写入可视化渲染优化与 `PIL.Image` 复用策略
+- [x] I14 论文第5章同步：已写入并行推理机制、默认串行策略与 CPU/GPU 配置取舍
+- [x] I15 论文第5章同步：已补入系统响应速度优化基准测试表格
 
 ---
 
