@@ -8,7 +8,7 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTDIR = ROOT / "thesis_overleaf" / "figures" / "generated"
+OUTDIR = ROOT / "thesis_overleaf2" / "img"
 
 MODEL_COLORS = {
     "DRENet": "#8C8C8C",
@@ -717,6 +717,167 @@ def build_size_trend(out_path: Path) -> None:
     plt.close(fig)
 
 
+EFFICIENCY_RESULTS = {
+    "DRENet": {"FPS": 121.90, "Params(M)": 4.79, "FLOPs(G)": 4.21},
+    "FCOS": {"FPS": 45.96, "Params(M)": 32.17, "FLOPs(G)": 123.0},
+    "YOLO26": {"FPS": 69.06, "Params(M)": 2.50, "FLOPs(G)": 3.69},
+}
+
+
+def build_ch2_research_map(out_path: Path) -> None:
+    """第二章方法脉络图：三条研究路线汇聚到本文切入点。"""
+    fig, ax = plt.subplots(figsize=(12, 5.5))
+    polish_axes(ax)
+
+    top_y = 0.72
+    top_h = 0.12
+    add_box(ax, 0.04, top_y, 0.28, top_h, "General object detection", "two-stage / one-stage / anchor-free / transformer")
+    add_box(ax, 0.36, top_y, 0.28, top_h, "Small object detection", "multi-scale fusion / loss re-weighting / post-processing")
+    add_box(ax, 0.68, top_y, 0.28, top_h, "Remote sensing ship detection", "LEVIR-Ship / specialized methods (DRENet)")
+
+    mid_y = 0.48
+    mid_h = 0.10
+    gen_xs = [0.06, 0.16, 0.26]
+    gen_labels = [("Faster R-CNN", ""), ("YOLO / RetinaNet", ""), ("FCOS / DETR", "")]
+    for x, (t, s) in zip(gen_xs, gen_labels):
+        add_box(ax, x, mid_y, 0.08, mid_h, t, s, fontsize=9)
+
+    small_xs = [0.38, 0.48, 0.58]
+    small_labels = [("FPN / SCRDet", ""), ("Focal Loss", ""), ("SNIP / NMS", "")]
+    for x, (t, s) in zip(small_xs, small_labels):
+        add_box(ax, x, mid_y, 0.08, mid_h, t, s, fontsize=9)
+
+    ship_xs = [0.70, 0.80]
+    ship_labels = [("LEVIR-Ship", "dataset"), ("DRENet", "specialized method")]
+    for x, (t, s) in zip(ship_xs, ship_labels):
+        add_box(ax, x, mid_y, 0.08, mid_h, t, s, fontsize=9)
+
+    for x in gen_xs:
+        add_arrow(ax, (x + 0.04, top_y), (x + 0.04, mid_y + mid_h), shrink_a=2, shrink_b=4)
+    for x in small_xs:
+        add_arrow(ax, (x + 0.04, top_y), (x + 0.04, mid_y + mid_h), shrink_a=2, shrink_b=4)
+    for x in ship_xs:
+        add_arrow(ax, (x + 0.04, top_y), (x + 0.04, mid_y + mid_h), shrink_a=2, shrink_b=4)
+
+    bot_y = 0.18
+    bot_h = 0.14
+    add_box(ax, 0.20, bot_y, 0.60, bot_h, "Our entry point", "multi-model comparison under unified protocol + system implementation", fc=ACCENT_FILL, ec=LINE)
+
+    add_arrow(ax, (0.16, mid_y), (0.35, bot_y + bot_h), text="cross-paradigm comparison basis", text_offset=(-0.04, 0.03))
+    add_arrow(ax, (0.48, mid_y), (0.50, bot_y + bot_h), text="performance gap analysis", text_offset=(0.0, 0.03))
+    add_arrow(ax, (0.78, mid_y), (0.65, bot_y + bot_h), text="tiny ship scenario focus", text_offset=(0.04, 0.03))
+
+    fig.tight_layout(pad=1)
+    fig.savefig(out_path, dpi=220, bbox_inches="tight")
+    plt.close(fig)
+
+
+def build_ch3_preprocess_flow(out_path: Path) -> None:
+    """第三章数据预处理与统一格式流程图。"""
+    fig, ax = plt.subplots(figsize=(12, 4.0))
+    polish_axes(ax)
+
+    top_y = 0.55
+    top_h = 0.16
+    xs = [0.04, 0.22, 0.40, 0.58, 0.76]
+    ws = [0.14, 0.14, 0.14, 0.14, 0.14]
+    labels = [
+        ("Verify images & labels", "one-to-one check\nempty labels / abnormal coords"),
+        ("COCO intermediate format", "unified annotation format\ncross-framework sharing"),
+        ("Fixed data split", "train / val / test\nfixed sample lists"),
+        ("Unified output structure", "image_id / bbox\nscore / category_id"),
+        ("System-callable", "inference API / database\nvisualization / replay"),
+    ]
+    for x, w, (title, subtitle) in zip(xs, ws, labels):
+        add_box(ax, x, top_y, w, top_h, title, subtitle, fontsize=10)
+
+    for i in range(4):
+        add_arrow(ax, (xs[i] + ws[i], top_y + top_h / 2), (xs[i + 1], top_y + top_h / 2))
+
+    add_box(ax, 0.15, 0.12, 0.70, 0.10, "Unified protocol constraint: differences come from detection paradigms and implementation strategies, not from data organization or script details", fc=ACCENT_FILL, ec=LINE, fontsize=10)
+    add_arrow(ax, (0.50, top_y), (0.50, 0.22))
+
+    fig.tight_layout(pad=1)
+    fig.savefig(out_path, dpi=220, bbox_inches="tight")
+    plt.close(fig)
+
+
+def build_ch4_efficiency_chart(out_path: Path) -> None:
+    """第四章效率与复杂度对比柱状图。"""
+    metrics = ["FPS", "Params(M)", "FLOPs(G)"]
+    models = list(EFFICIENCY_RESULTS.keys())
+    x = np.arange(len(metrics))
+    width = 0.22
+
+    fig, ax = plt.subplots(figsize=(10, 4.8))
+    fig.patch.set_facecolor(BG)
+    ax.set_facecolor("white")
+
+    for idx, model in enumerate(models):
+        offsets = x + (idx - 1) * width
+        vals = [EFFICIENCY_RESULTS[model][m] for m in metrics]
+        bars = ax.bar(offsets, vals, width=width, label=model, color=MODEL_COLORS[model], edgecolor="white", linewidth=1.0)
+        for bar, raw in zip(bars, vals):
+            cx = bar.get_x() + bar.get_width() / 2
+            label = f"{raw:.1f}" if raw >= 10 else f"{raw:.2f}"
+            ax.text(cx, raw + 1.5, label, ha="center", va="bottom", fontsize=8.5, color=TEXT)
+
+    ax.set_ylabel("Score")
+    ax.set_xticks(x)
+    ax.set_xticklabels(metrics)
+    ax.grid(axis="y", linestyle="--", alpha=0.25)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.legend(frameon=False, ncol=3, loc="upper center", bbox_to_anchor=(0.5, 1.10))
+    fig.tight_layout(rect=(0, 0, 1, 0.97))
+    fig.savefig(out_path, dpi=220, bbox_inches="tight")
+    plt.close(fig)
+
+
+def build_ch4_radar_chart(out_path: Path) -> None:
+    """第四章多维度雷达图：综合展示三模型在精度、效率、部署上的表现。"""
+    radar_metrics = ["AP50", "AP50-95", "Precision", "Recall", "F1", "FPS", "Params eff", "FLOPs eff"]
+    models = list(MAIN_RESULTS.keys())
+
+    radar_data = {}
+    for m in models:
+        main = MAIN_RESULTS[m]
+        eff = EFFICIENCY_RESULTS[m]
+        precision_val = main["Precision"] if main["Precision"] is not None else 0.0
+        f1_val = main["F1"] if main["F1"] is not None else 0.0
+        fps_norm = eff["FPS"] / 121.90
+        params_eff = 1.0 - eff["Params(M)"] / 32.17
+        flops_eff = 1.0 - eff["FLOPs(G)"] / 123.0
+        radar_data[m] = [
+            main["AP50"], main["AP50-95"], precision_val, main["Recall"], f1_val,
+            fps_norm, params_eff, flops_eff,
+        ]
+
+    N = len(radar_metrics)
+    angles = np.linspace(0, 2 * np.pi, N, endpoint=False).tolist()
+    angles += angles[:1]
+
+    fig, ax = plt.subplots(figsize=(8, 8), subplot_kw={"polar": True})
+    fig.patch.set_facecolor(BG)
+
+    for model in models:
+        values = radar_data[model]
+        values += values[:1]
+        ax.plot(angles, values, linewidth=2.0, color=MODEL_COLORS[model], label=model)
+        ax.fill(angles, values, alpha=0.15, color=MODEL_COLORS[model])
+
+    ax.set_xticks(angles[:-1])
+    ax.set_xticklabels(radar_metrics, fontsize=10)
+    ax.set_ylim(0, 1.0)
+    ax.set_yticks([0.2, 0.4, 0.6, 0.8, 1.0])
+    ax.set_yticklabels(["0.2", "0.4", "0.6", "0.8", "1.0"], fontsize=8, color=MUTED)
+    ax.legend(frameon=False, loc="upper right", bbox_to_anchor=(1.25, 1.10))
+
+    fig.tight_layout(pad=2)
+    fig.savefig(out_path, dpi=220, bbox_inches="tight")
+    plt.close(fig)
+
+
 def main() -> None:
     setup_matplotlib()
     OUTDIR.mkdir(parents=True, exist_ok=True)
@@ -730,6 +891,11 @@ def main() -> None:
     build_ch5_architecture(OUTDIR / "ch5_architecture.png")
     build_ch5_flow(OUTDIR / "ch5_flow.png")
     build_ch5_er(OUTDIR / "ch5_er.png")
+    # New figures for enriching thesis
+    build_ch2_research_map(OUTDIR / "ch2_research_map.png")
+    build_ch3_preprocess_flow(OUTDIR / "ch3_preprocess_flow.png")
+    build_ch4_efficiency_chart(OUTDIR / "ch4_efficiency_chart.png")
+    build_ch4_radar_chart(OUTDIR / "ch4_radar_chart.png")
     print("Generated thesis method and metric figures in", OUTDIR)
 
 

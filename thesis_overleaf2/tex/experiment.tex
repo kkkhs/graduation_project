@@ -58,9 +58,23 @@ FCOS 的 AP50 和 AP50-95 均低于前两者。在当前实验条件下，通用
   \end{tabular}
 \end{table}
 
-效率表中的趋势和精度表并不完全相同。DRENet 在当前记录中 FPS 最高，说明其推理速度较突出。YOLO26 的参数量为 2.5042M、FLOPs 为 3.6939G，模型规模更小。FCOS 的参数量和计算量较高，整体效率低于前两者。
+效率表中的趋势和精度表并不完全相同。DRENet 在当前记录中 FPS 最高，说明其推理速度较突出。YOLO26 的参数量为 2.5042M、FLOPs 为 3.6939G，模型规模更小。FCOS 的参数量和计算量较高，整体效率低于前两者。三模型效率与复杂度对比的可视化见图~\ref{fig:ch4_efficiency_chart}。
 
-把精度和效率放在一起读，DRENet 在召回和速度方面优势明显，YOLO26 在定位质量、误检控制和模型规模之间更均衡，FCOS 则提供 anchor-free 路线的对照。
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{img/ch4_efficiency_chart.png}
+  \caption{三模型效率与复杂度对比柱状图}
+  \label{fig:ch4_efficiency_chart}
+\end{figure}
+
+把精度和效率放在一起读，DRENet 在召回和速度方面优势明显，YOLO26 在定位质量、误检控制和模型规模之间更均衡，FCOS 则提供 anchor-free 路线的对照。为综合展示三模型在精度与效率各维度上的表现，本文绘制了多维度雷达图（见图~\ref{fig:ch4_radar_chart}），其中参数效率和计算效率取逆指标（越小越优）进行归一化。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.65\textwidth]{img/ch4_radar_chart.png}
+  \caption{三模型多维度综合雷达图}
+  \label{fig:ch4_radar_chart}
+\end{figure}
 
 \subsection{模型逐项分析}
 

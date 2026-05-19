@@ -23,11 +23,11 @@
   \end{tabular}
 \end{table}
 
-LEVIR-Ship 中的船舶目标普遍较小，背景纹理也较为复杂。部分图像中，船体与海浪、岸线或港区设施的局部纹理差异并不明显；当后处理阈值调整时，模型输出也会随之改变。基于这些观察，本文在实验设计中同时记录检出能力、误检控制和工程部署相关指标，而不是只依赖一个主指标判断模型优劣。
+LEVIR-Ship 里船舶目标普遍偏小，背景纹理又比较杂。有些图像中，船体跟海浪、岸线或港区设施的纹理差异本身就不大，后处理阈值一调，模型输出跟着变。正因为这样，本文在实验设计里没有只拿一个主指标去判模型好坏，而是把检出能力、误检控制和工程部署相关指标都记下来。
 
 \subsection{数据集样例与任务特征}
 
-LEVIR-Ship 覆盖开阔海域、近岸区域、港口区域和多目标密集分布等场景，不同图像块在背景纹理、目标密度、目标朝向和局部对比度上差异较大。这意味着模型既要对微弱目标保持敏感，也要抑制复杂背景中的伪目标响应。对遥感微小船舶检测而言，“目标小而背景强”正是任务难点的集中体现。
+LEVIR-Ship 涵盖了开阔海域、近岸区域、港口区域和多目标密集分布等场景，不同图像块之间背景纹理、目标密度、朝向和局部对比度的差异都比较大。模型一方面要对微弱目标保持敏感，另一方面又得压住复杂背景里的伪目标响应。"目标小而背景强"这个矛盾，基本就是遥感微小船舶检测的核心难点。
 
 \begin{figure}[htbp]
   \centering
@@ -36,17 +36,24 @@ LEVIR-Ship 覆盖开阔海域、近岸区域、港口区域和多目标密集分
   \label{fig:ch3_dataset_examples}
 \end{figure}
 
-图~\ref{fig:ch3_dataset_examples} 展示了不同场景下的样例图像。后续实验除 AP50 外，还会记录 Precision、Recall 和 F1，并保留成功检测、漏检和误检样例，用于观察模型在不同背景条件下的表现。
+不同场景的样例图像见图~\ref{fig:ch3_dataset_examples}。后续实验不只看 AP50，也会记录 Precision、Recall 和 F1，同时保留成功检测、漏检和误检样例，方便观察模型在不同背景条件下的具体表现。
 
 \subsection{数据预处理与统一格式}
 
 跨框架实验里，最容易出偏差的地方往往不是网络结构，而是数据和评测脚本。为把这部分误差压下去，实验前先统一数据预处理和结果组织方式。
 
-处理流程分为几步。第一步核对图像和标注文件是否一一对应，并检查空标注、异常坐标和类别不一致等情况。第二步将数据整理为 COCO 中间格式，使 MMDetection 路线和 YOLO 路线尽量共享同一评测基础。第三步固定 train、val、test 划分及样本清单，避免模型之间因为样本范围不同而产生额外差异。最后，各模型输出统一整理为包含 \texttt{image\_id}、\texttt{model\_name}、\texttt{bbox}、\texttt{score} 和 \texttt{category\_id} 的结构化记录，供可视化和数据库存储使用。
+处理流程大致为：先核对图像和标注文件是否一一对应，并检查空标注、异常坐标和类别不一致等情况；然后把数据同步整理成 COCO 中间格式，让 MMDetection 路线和 YOLO 路线尽量共用同一套评测基础；再固定 train、val、test 划分及样本清单，防止模型之间因为样本范围不同而产生额外差异；最后，各模型输出统一整理成包含 \texttt{image\_id}、\texttt{model\_name}、\texttt{bbox}、\texttt{score} 和 \texttt{category\_id} 的结构化记录，供可视化和数据库存储使用。
 
 这些处理的用意很直接：尽量让差异来自检测范式和实现策略，而不是来自数据组织或脚本细节。若每个模型都使用不同划分、不同评测脚本和不同输出字段，后续得到的数值就很难解释。统一格式和统一口径在本文中属于实验方法的一部分，不只是训练前的文件整理。
 
-统一格式也直接服务于系统实现。不同框架与实现方式的推理结果可以进入同一套后处理与可视化逻辑；结构化结果也能写入 Web 系统数据库，使离线实验结果和在线任务回放使用同一类数据表达。
+统一格式也直接服务于系统实现。不同框架与实现方式的推理结果可以进入同一套后处理与可视化逻辑；结构化结果也能写入 Web 系统数据库，使离线实验结果和在线任务回放使用同一类数据表达。数据预处理与统一格式流程见图~\ref{fig:ch3_preprocess_flow}。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\textwidth]{img/ch3_preprocess_flow.png}
+  \caption{数据预处理与统一格式流程图}
+  \label{fig:ch3_preprocess_flow}
+\end{figure}
 
 \subsection{评价指标}
 
@@ -104,7 +111,7 @@ FCOS 用位置回归替代锚框设计，减少了 anchor 尺寸、比例和匹�
   \label{fig:ch3_fcos_pipeline}
 \end{figure}
 
-图~\ref{fig:ch3_fcos_pipeline} 展示了 FCOS 的基本流程。输入图像经过 Backbone 和 FPN 后生成多尺度特征，检测头直接预测类别、边框偏移和 centerness 分数。由于没有显式 anchor 设计，FCOS 适合作为本文的 anchor-free 对照。
+FCOS 的基本流程见图~\ref{fig:ch3_fcos_pipeline}。输入图像过 Backbone 和 FPN 之后生成多尺度特征，检测头直接预测类别、边框偏移和 centerness 分数。因为没有显式 anchor 设计，FCOS 在本文中作为 anchor-free 对照比较合适。
 
 \subsubsection{YOLO26（One-Stage 代表）}
 
