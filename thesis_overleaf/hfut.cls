@@ -239,7 +239,7 @@
 \newcommand{\ebibname}{参考文献}
 \renewcommand\abstractname{摘\hspace{2em}要}
 \renewcommand{\ALG@name}{算法}
-\renewcommand{\abstracttextfont}{\sffamily\small\noindent\ignorespaces}
+\renewcommand{\abstracttextfont}{\sffamily\small\ignorespaces}
 % 新定义的引用名称
 \newcommand{\keywords}[1]{\vskip2ex\par\noindent\normalfont{\bfseries 关键词: } #1}
 \renewcommand{\algorithmicrequire}{\textbf{输入：}}
@@ -304,6 +304,7 @@
     \setlength{\parskip}{0em}
     \setlength{\baselineskip}{22pt} % （宋体，小四；固定行距22磅，段前、段后均为0行间距。段落首行缩进2字符。）
     \songti
+    \noindent\hspace*{2em}\ignorespaces
 }{
     \setlength{\parindent}{0em}
     \setlength{\parskip}{1em}
@@ -322,6 +323,8 @@
     \setlength{\parindent}{1em}
     \setlength{\parskip}{0em}
     \setlength{\baselineskip}{22pt} % 22磅行距，首行缩进1字符，段前、段后均为0行间距
+    \songti
+    \noindent\hspace*{1em}\ignorespaces
 }{
     \setlength{\parindent}{0em}
     \setlength{\parskip}{1em}
@@ -443,7 +446,7 @@
 % 设置页眉页脚
 \fancypagestyle{contentstyle}{
     \fancyhf{}
-    \fancyhead[C]{\footnotesize{合肥工业大学本科毕业设计（论文）}\vspace{0.1cm}}% structure elements
+    \fancyhead[C]{\footnotesize{合肥工业大学毕业设计（论文）}\vspace{0.1cm}}% structure elements
     \fancyfoot[C]{\footnotesize \thepage}% page number
     \renewcommand{\headrulewidth}{0.8pt}% header rule
     \renewcommand{\footrulewidth}{0pt}% footer rule

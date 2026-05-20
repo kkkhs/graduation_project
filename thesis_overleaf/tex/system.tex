@@ -28,7 +28,7 @@
 
 系统采用前后端分离架构，如图~\ref{fig:ch5_architecture} 所示。前端页面用于处理任务创建、列表查询和结果可视化；后端为其提供接口服务、任务调度、状态管理和静态文件访问；数据库则用于保存模型、任务、检测结果和输出文件路径；而算法能力层封装整体模型预测服务、模型适配器与融合逻辑，并由后端通过统一接口调用。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.92\textwidth]{img/ch5_architecture.png}
   \caption{系统总体架构图}
@@ -51,7 +51,7 @@
 
 数据库围绕任务追踪和结果回看设计，核心表包括 \texttt{models}、\texttt{tasks}、\texttt{results} 和 \texttt{task\_files}。\texttt{models} 表保存模型名称、键值、权重路径和启停状态；\texttt{tasks} 表记录任务类型、执行模式、状态和时间；\texttt{results} 表保存检测框结构化结果；\texttt{task\_files} 表记录输入图、输出 JSON 和可视化结果路径。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.92\textwidth]{img/ch5_er.png}
   \caption{系统数据库 ER 图}
@@ -99,7 +99,7 @@
 
 推理完成后，结构化检测结果写入数据库，输入图、输出 JSON 和可视化图像保存到 \texttt{outputs/tasks/<task\_id>/}。任务运行期间，前端优先轮询 \path{/api/v1/tasks/<task_id>/progress} 接口，只获取 \texttt{status}、\texttt{done\_count} 和 \texttt{input\_count} 等字段；任务结束后，再请求结果接口加载完整检测框和可视化产物。任务执行与结果展示流程如图~\ref{fig:ch5_flow} 所示。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.92\textwidth]{img/ch5_flow.png}
   \caption{系统关键流程图}
@@ -114,11 +114,11 @@
 
 任务提交页支持单图和批量输入，推理模式、模型选择和阈值参数放在同一表单区域。任务列表页突出状态、进度、模式、创建时间和耗时，方便观察任务执行情况。任务详情页展示可视化结果、检测框表格、模型来源和统计图表，用于回看单次任务的输入、执行和输出。
 
-相比只展示一张检测结果图，Web 前端可以同时放置任务参数、执行状态、结果图像和结构化检测框。这样，实验结论不只停留在表格和文字中，也能通过系统任务记录进行复查。
+相比只展示一张检测结果图，Web 前端可以同时放置任务参数、执行状态、结果图像和结构化检测框。这样，实验结论不只停留在表格和文字中，也能通过系统任务记录进行复查。如图~\ref{fig:ch5_pages} 所示，任务提交页、任务列表页和任务详情页共同构成了完整的使用链路。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=0.92\textwidth]{img/ch5_pages.png}
+  \includegraphics[width=\textwidth,height=0.78\textheight,keepaspectratio]{img/ch5_pages.png}
   \caption{系统主要页面实现效果}
   \label{fig:ch5_pages}
 \end{figure}
@@ -159,9 +159,10 @@
 
 为检查这些改动是否有效，本文对几个关键环节做了微基准测试，结果见表~\ref{tab:ch5_perf}。
 
-\begin{table}[htbp]
+\begin{table}[H]
   \centering
   \small
+  \setlength{\tabcolsep}{4pt}
   \caption{系统响应速度优化的关键基准结果}
   \label{tab:ch5_perf}
   \begin{tabular}{p{3.0cm}p{2.2cm}p{2.2cm}p{2.0cm}p{4.0cm}}

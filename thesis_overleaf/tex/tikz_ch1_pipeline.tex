@@ -1,0 +1,92 @@
+% 技术路线图 TikZ 版本
+% 用于替代 ch1_pipeline.png
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+    % 样式定义
+    box/.style={
+      rectangle,
+      rounded corners=2pt,
+      draw=black,
+      fill=#1,
+      minimum width=2.2cm,
+      minimum height=0.9cm,
+      text centered,
+      font=\small
+    },
+    box/.default={white},
+    smallbox/.style={
+      rectangle,
+      rounded corners=2pt,
+      draw=black,
+      fill=#1,
+      minimum width=2.0cm,
+      minimum height=0.75cm,
+      text centered,
+      font=\footnotesize
+    },
+    smallbox/.default={white},
+    arrow/.style={
+      -{Stealth[length=6pt, width=4pt]},
+      thick,
+      black
+    },
+    dashedarrow/.style={
+      -{Stealth[length=6pt, width=4pt]},
+      thick,
+      black,
+      dashed
+    },
+    label/.style={
+      font=\scriptsize,
+      fill=white,
+      inner sep=1pt
+    },
+    group/.style={
+      rectangle,
+      draw=black,
+      dashed,
+      rounded corners=3pt,
+      inner sep=8pt
+    }
+  ]
+  
+  % 顶层：四个主要阶段
+  \node[box={gray!15}] (data) at (0, 0) {\textbf{Data prep}\\Data verification};
+  \node[box={gray!15}] (model) at (3.5, 0) {\textbf{Model training}\\Train + inference};
+  \node[box={gray!15}] (result) at (7, 0) {\textbf{Result analysis}\\quantitative and\\qualitative study};
+  \node[box={gray!15}] (system) at (10.5, 0) {\textbf{System integration}\\web deployment\\and demo};
+  
+  % 顶层箭头
+  \draw[arrow] (data.east) -- (model.west);
+  \draw[arrow] (model.east) -- (result.west);
+  \draw[arrow] (result.east) -- (system.west);
+  
+  % 中间层：三个协议框
+  \node[smallbox={gray!8}] (protocol) at (1.75, -2.2) {\textbf{Unified protocol}\\data split / metrics\\/ thresholds};
+  \node[smallbox={gray!8}] (api) at (5.25, -2.2) {\textbf{Unified inference API}\\single-model /\\ensemble};
+  \node[smallbox={gray!8}] (evidence) at (8.75, -2.2) {\textbf{System evidence chain}\\task replay / result\\review / history};
+  
+  % 垂直箭头（带标签）
+  \draw[dashedarrow] (data.south) -- (protocol.north) 
+    node[midway, left, label] {\parbox{1.5cm}{\raggedright\scriptsize constrains training and evaluation}};
+  \draw[dashedarrow] (model.south) -- (api.north)
+    node[midway, left, label] {\parbox{1.2cm}{\raggedright\scriptsize feeds into unified interface}};
+  \draw[dashedarrow] (system.south) -- (evidence.north)
+    node[midway, right, label] {\parbox{1.2cm}{\raggedleft\scriptsize service-based presentation}};
+  
+  % 水平箭头
+  \draw[arrow] (protocol.east) -- (api.west);
+  \draw[arrow] (api.east) -- (evidence.west);
+  
+  % 底层：统一的结论框
+  \node[smallbox={gray!20}] (unified) at (5.25, -3.8) {\textbf{Paper results, system demos and task history share the same protocol}};
+  
+  % 垂直箭头到底层
+  \draw[arrow] (api.south) -- (unified.north);
+  
+  \end{tikzpicture}
+  \caption{技术路线图}
+  \label{fig:ch1_pipeline}
+\end{figure}

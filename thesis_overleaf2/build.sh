@@ -1,1 +1,0 @@
-latexmk -synctex=1 -pdfxe -shell-escape -interaction=nonstopmode -file-line-error -outdir=output2 Thesis.tex

@@ -144,9 +144,17 @@ def add_arrow(
     color: str = LINE,
     dashed: bool = False,
     text_offset: tuple[float, float] = (0, 0),
-    shrink_a: float = 2.0,
-    shrink_b: float = 6.0,
+    shrink_a: float = 0.5,
+    shrink_b: float = 3.0,
+    connection_style: str = "arc3,rad=0",
 ) -> None:
+    """
+    添加带箭头的连接线
+
+    参数改进：
+    - shrink_a/shrink_b 减小，使箭头更贴近框边界
+    - 添加 connection_style 控制路径形状，默认直线
+    """
     arrow = FancyArrowPatch(
         start,
         end,
@@ -158,12 +166,13 @@ def add_arrow(
         alpha=1.0,
         shrinkA=shrink_a,
         shrinkB=shrink_b,
+        connectionstyle=connection_style,
     )
     ax.add_patch(arrow)
     if text:
         mx = (start[0] + end[0]) / 2 + text_offset[0]
         my = (start[1] + end[1]) / 2 + text_offset[1]
-        ax.text(mx, my, text, fontsize=9.0, color=TEXT, ha="center", va="center")
+        ax.text(mx, my, text, fontsize=9.0, color=TEXT, ha="center", va="center", wrap=True)
 
 
 def add_polyline_with_final_arrow(

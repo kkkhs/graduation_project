@@ -1,0 +1,72 @@
+% 系统关键流程图 TikZ 版本
+% 用于替代 ch5_flow.png
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+    box/.style={
+      rectangle,
+      rounded corners=2pt,
+      draw=black,
+      fill=white,
+      minimum width=2.4cm,
+      minimum height=0.7cm,
+      text centered,
+      font=\small
+    },
+    statebox/.style={
+      rectangle,
+      rounded corners=2pt,
+      draw=black,
+      fill=gray!10,
+      minimum width=2.2cm,
+      minimum height=1.0cm,
+      text centered,
+      font=\small
+    },
+    artifactbox/.style={
+      rectangle,
+      rounded corners=2pt,
+      draw=black,
+      fill=gray!10,
+      minimum width=2.2cm,
+      minimum height=1.2cm,
+      text centered,
+      font=\small
+    },
+    arrow/.style={
+      -{Stealth[length=5pt, width=3.5pt]},
+      thick,
+      black
+    }
+  ]
+  
+  % 中间列：任务流程步骤
+  \node[box] (submit) at (0, 0) {Task submission};
+  \node[box] (validate) at (0, -1.2) {Parameter validation};
+  \node[box] (execute) at (0, -2.4) {Task execution};
+  \node[box] (write) at (0, -3.6) {Result writing};
+  \node[box] (query) at (0, -4.8) {Frontend polling};
+  \node[box] (review) at (0, -6.0) {User review};
+  
+  % 垂直箭头
+  \draw[arrow] (submit.south) -- (validate.north);
+  \draw[arrow] (validate.south) -- (execute.north);
+  \draw[arrow] (execute.south) -- (write.north);
+  \draw[arrow] (write.south) -- (query.north);
+  \draw[arrow] (query.south) -- (review.north);
+  
+  % 左侧：状态机
+  \node[statebox] (state) at (-3.5, -2.4) {\textbf{State machine}\\queued $\to$ running\\running $\to$ done\\running $\to$ failed};
+  
+  % 右侧：产物
+  \node[artifactbox] (artifacts) at (3.5, -2.4) {\textbf{Artifacts}\\raw image\\visualized image\\json + result rows};
+  
+  % 连接箭头
+  \draw[arrow] (state.east) -- (validate.west);
+  \draw[arrow] (write.east) -- (artifacts.west);
+  
+  \end{tikzpicture}
+  \caption{系统关键流程图}
+  \label{fig:ch5_flow}
+\end{figure}

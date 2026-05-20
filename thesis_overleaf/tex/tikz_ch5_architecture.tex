@@ -1,0 +1,81 @@
+% 系统架构图 TikZ 版本
+% 用于替代 ch5_architecture.png
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+    box/.style={
+      rectangle,
+      rounded corners=2pt,
+      draw=black,
+      fill=#1,
+      minimum width=2.0cm,
+      minimum height=0.7cm,
+      text centered,
+      font=\small
+    },
+    box/.default={white},
+    layerbox/.style={
+      rectangle,
+      rounded corners=2pt,
+      draw=black,
+      fill=#1,
+      minimum width=1.6cm,
+      minimum height=0.6cm,
+      text centered,
+      font=\footnotesize
+    },
+    layerbox/.default={white},
+    group/.style={
+      rectangle,
+      draw=black!60,
+      dashed,
+      rounded corners=3pt,
+      inner sep=6pt
+    },
+    arrow/.style={
+      -{Stealth[length=5pt, width=3.5pt]},
+      thick,
+      black
+    },
+    bidirarrow/.style={
+      {Stealth[length=4pt, width=3pt]}-{Stealth[length=4pt, width=3pt]},
+      thick,
+      black
+    }
+  ]
+  
+  % 顶层：Presentation layer
+  \node[box={blue!10}] (frontend) at (0, 0) {\textbf{Presentation layer}\\(React frontend)};
+  
+  % 第二层：Service layer
+  \node[box={green!10}] (backend) at (0, -1.5) {\textbf{Service layer}\\(FastAPI)};
+  
+  % 第三层：Data layer
+  \node[box={orange!10}] (data) at (-2.5, -3) {\textbf{Data layer}\\(SQLite)};
+  \node[box={orange!10}] (storage) at (2.5, -3) {\textbf{Storage layer}\\(File system)};
+  
+  % 底层：Model layer
+  \node[layerbox={purple!10}] (drenet) at (-2.5, -4.5) {DRENet};
+  \node[layerbox={purple!10}] (yolo) at (-0.8, -4.5) {YOLO};
+  \node[layerbox={purple!10}] (fcos) at (0.8, -4.5) {FCOS};
+  \node[layerbox={purple!10}] (ensemble) at (2.5, -4.5) {Ensemble};
+  
+  % 垂直箭头
+  \draw[bidirarrow] (frontend.south) -- (backend.north);
+  \draw[arrow] (backend.south west) -- (data.north east);
+  \draw[arrow] (backend.south east) -- (storage.north west);
+  
+  % 到模型层的箭头（分叉）
+  \draw[arrow] (backend.south) -- ++(0, -0.3) -| (drenet.north);
+  \draw[arrow] (backend.south) -- ++(0, -0.3) -| (yolo.north);
+  \draw[arrow] (backend.south) -- ++(0, -0.3) -| (fcos.north);
+  \draw[arrow] (backend.south) -- ++(0, -0.3) -| (ensemble.north);
+  
+  % 分组标签
+  \node[font=\footnotesize, left] at (-3.5, -4.5) {Model layer};
+  
+  \end{tikzpicture}
+  \caption{系统总体架构图}
+  \label{fig:ch5_architecture}
+\end{figure}

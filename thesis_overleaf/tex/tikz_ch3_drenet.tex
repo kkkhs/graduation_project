@@ -1,0 +1,85 @@
+% DRENet 方法示意图 TikZ 版本
+% 用于替代 ch3_drenet_overview.png
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[
+    box/.style={
+      rectangle,
+      rounded corners=2pt,
+      draw=black,
+      fill=white,
+      minimum width=1.8cm,
+      minimum height=0.7cm,
+      text centered,
+      font=\small
+    },
+    subbox/.style={
+      rectangle,
+      rounded corners=2pt,
+      draw=black,
+      fill=gray!10,
+      minimum width=1.6cm,
+      minimum height=0.6cm,
+      text centered,
+      font=\footnotesize
+    },
+    group/.style={
+      rectangle,
+      draw=black,
+      dashed,
+      rounded corners=3pt,
+      inner sep=6pt
+    },
+    arrow/.style={
+      -{Stealth[length=5pt, width=3.5pt]},
+      thick,
+      black
+    },
+    dashedarrow/.style={
+      -{Stealth[length=5pt, width=3.5pt]},
+      thick,
+      black,
+      dashed
+    }
+  ]
+  
+  % 顶部：主干网络流程
+  \node[box] (input) at (0, 0) {Input image};
+  \node[box] (backbone) at (2.5, 0) {Backbone};
+  \node[box] (neck) at (5, 0) {Neck\\(CRMA)};
+  \node[box] (head) at (7.5, 0) {Head\\(Detection)};
+  \node[box] (output) at (10, 0) {Output};
+  
+  % 顶部箭头
+  \draw[arrow] (input.east) -- (backbone.west);
+  \draw[arrow] (backbone.east) -- (neck.west);
+  \draw[arrow] (neck.east) -- (head.west);
+  \draw[arrow] (head.east) -- (output.west);
+  
+  % 标注：shared features
+  \node[font=\scriptsize] at (2.5, -0.9) {shared features};
+  
+  % 分支：退化重建增强
+  \node[subbox] (degradation) at (5, -1.8) {Degradation};
+  \node[subbox] (reconstruction) at (7, -1.8) {Reconstruction};
+  
+  % 从 backbone 到 degradation 的箭头
+  \draw[arrow] (backbone.south) -- (degradation.west) node[midway, above, font=\tiny, sloped] {};
+  
+  % degradation 到 reconstruction
+  \draw[arrow] (degradation.east) -- (reconstruction.west) node[midway, above, font=\scriptsize] {reconstruction loss};
+  
+  % reconstruction 回到 neck（特征引导，虚线）
+  \draw[dashedarrow] (reconstruction.north) -- (neck.south) node[midway, right, font=\scriptsize, xshift=2pt] {feature guidance};
+  
+  % 分组框：Training Only
+  \begin{scope}[on background layer]
+    \node[group, fill=gray!5, fit=(degradation) (reconstruction), inner sep=10pt] (training) {};
+    \node[font=\footnotesize, below] at (training.south) {Training only (not used in inference)};
+  \end{scope}
+  
+  \end{tikzpicture}
+  \caption{DRENet 方法示意图}
+  \label{fig:ch3_drenet_overview}
+\end{figure}
