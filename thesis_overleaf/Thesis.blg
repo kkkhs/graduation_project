@@ -1,15 +1,15 @@
 [0] Config.pm:308> INFO - This is Biber 2.20
 [0] Config.pm:311> INFO - Logfile is 'Thesis.blg'
-[51] biber:340> INFO - === Wed May 20, 2026, 17:30:39
-[65] Biber.pm:420> INFO - Reading 'Thesis.bcf'
-[168] Biber.pm:994> INFO - Found 20 citekeys in bib section 0
-[180] Biber.pm:4463> INFO - Processing section 0
-[187] Biber.pm:4654> INFO - Looking for bibtex file 'ref.bib' for section 0
-[188] bibtex.pm:1713> INFO - LaTeX decoding ...
-[198] bibtex.pm:1519> INFO - Found BibTeX data source 'ref.bib'
-[451] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[451] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[451] Biber.pm:4283> INFO - Sorting list 'none/global//global/global/global' of type 'entry' with template 'none' and locale 'en-US'
-[451] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
-[464] bbl.pm:676> INFO - Writing 'Thesis.bbl' with encoding 'UTF-8'
-[479] bbl.pm:779> INFO - Output to Thesis.bbl
+[49] biber:340> INFO - === Thu May 21, 2026, 14:39:10
+[62] Biber.pm:420> INFO - Reading 'Thesis.bcf'
+[140] Biber.pm:994> INFO - Found 20 citekeys in bib section 0
+[150] Biber.pm:4463> INFO - Processing section 0
+[156] Biber.pm:4654> INFO - Looking for bibtex file 'ref.bib' for section 0
+[157] bibtex.pm:1713> INFO - LaTeX decoding ...
+[167] bibtex.pm:1519> INFO - Found BibTeX data source 'ref.bib'
+[473] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[473] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[473] Biber.pm:4283> INFO - Sorting list 'none/global//global/global/global' of type 'entry' with template 'none' and locale 'en-US'
+[473] Biber.pm:4289> INFO - No sort tailoring available for locale 'en-US'
+[487] bbl.pm:676> INFO - Writing 'Thesis.bbl' with encoding 'UTF-8'
+[504] bbl.pm:779> INFO - Output to Thesis.bbl

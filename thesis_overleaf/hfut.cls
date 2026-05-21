@@ -120,9 +120,10 @@
     \section*{#1}
     \addcontentsline{toc}{section}{#1}
 }
-\renewcommand{\supercite}[1]{%
-    \textsuperscript{\cite{#1}}%
-}
+% 将引用格式改为右上角小号带中括号（superscript with brackets），如 ^[3]
+\let\origcite\cite
+\renewcommand{\supercite}[1]{\textsuperscript{\origcite{#1}}}
+\let\cite\supercite
 \def\bibfont{\zihao{5}\songti}
 % 设置引用文件
 \addbibresource{ref.bib}

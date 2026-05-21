@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  20 MAY 2026 17:07
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  21 MAY 2026 14:37
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1690,31 +1690,80 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@lastruleclass=\count542
 \@thisrulewidth=\dimen346
 )
-\@quotelevel=\count543
-\@quotereset=\count544
+(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/generic/pgf/front
+endlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
+
+(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/generic/pgf/libra
+ries/shapes/pgflibraryshapes.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2023-01-15 v3.1.10 (3.1.10)
+))
+(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/generic/pgf/libra
+ries/pgflibraryarrows.meta.code.tex
+File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgfarrowinset=\dimen347
+\pgfarrowlength=\dimen348
+\pgfarrowwidth=\dimen349
+\pgfarrowlinewidth=\dimen350
+)
+(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/generic/pgf/front
+endlayer/tikz/libraries/tikzlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/generic/pgf/front
+endlayer/tikz/libraries/tikzlibraryfit.code.tex
+File: tikzlibraryfit.code.tex 2023-01-15 v3.1.10 (3.1.10)
+)
+(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/generic/pgf/front
+endlayer/tikz/libraries/tikzlibrarybackgrounds.code.tex
+File: tikzlibrarybackgrounds.code.tex 2023-01-15 v3.1.10 (3.1.10)
+\pgf@layerbox@background=\box81
+\pgf@layerboxsaved@background=\box82
+)
+(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/generic/pgf/front
+endlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex
+(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/generic/pgf/front
+endlayer/tikz/libraries/tikzlibrarydecorations.code.tex
+(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/generic/pgf/modul
+es/pgfmoduledecorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen351
+\pgfdecoratedremainingdistance=\dimen352
+\pgfdecoratedinputsegmentcompleteddistance=\dimen353
+\pgfdecoratedinputsegmentremainingdistance=\dimen354
+\pgf@decorate@distancetomove=\dimen355
+\pgf@decorate@repeatstate=\count543
+\pgfdecorationsegmentamplitude=\dimen356
+\pgfdecorationsegmentlength=\dimen357
+)
+\tikz@lib@dec@box=\box83
+)
+(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/generic/pgf/libra
+ries/decorations/pgflibrarydecorations.pathreplacing.code.tex))
+\@quotelevel=\count544
+\@quotereset=\count545
  (tmp/Thesis.aux)
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 15.
-LaTeX Font Info:    ... okay on input line 15.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
@@ -1755,9 +1804,9 @@ ge=dflt;mapping=tex-text;"
 ge=dflt;embolden=4;mapping=tex-text;"
 
 )
-Package biblatex Info: Reference section=0 on input line 15.
-Package biblatex Info: Reference segment=0 on input line 15.
-Package hyperref Info: Link coloring OFF on input line 15.
+Package biblatex Info: Reference section=0 on input line 19.
+Package biblatex Info: Reference segment=0 on input line 19.
+Package hyperref Info: Link coloring OFF on input line 19.
  (./Thesis.out) (./Thesis.out)
 \@outlinefile=\write5
 \openout5 = `Thesis.out'.
@@ -1800,7 +1849,7 @@ Package hyperref Warning: Rerun to get /PageLabels entry.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count545
+\c@lstlisting=\count546
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: xetex
 * paper: <default>
@@ -1833,27 +1882,609 @@ Package hyperref Warning: Rerun to get /PageLabels entry.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-./Thesis.tex:18: I can't write on file `tex/pages/cover.aux'.
-\@include ...mmediate \openout \@partaux "#1.aux" 
-                                                  \immediate \write \@partau...
-l.18 \include{tex/pages/cover}
-                              
-(Press Enter to retry, or Control-D to exit; default file extension is `.tex')
-Please type another output file name
-./Thesis.tex:18: Emergency stop.
-\@include ...mmediate \openout \@partaux "#1.aux" 
-                                                  \immediate \write \@partau...
-l.18 \include{tex/pages/cover}
-                              
-*** (job aborted, file error in nonstop mode)
+\openout2 = `tex/pages/cover.aux'.
 
- 
+(./tex/pages/cover.tex
+
+Package fontspec Info: 
+(fontspec)             Font family 'AdobeHeitiStd-Regular.otf(0)' created for
+(fontspec)             font 'AdobeHeitiStd-Regular.otf' with options [Path =
+(fontspec)             fonts/,Mapping=tex-text,Script={CJK},AutoFakeBold={4}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->"[fonts/AdobeHeitiStd-Regular.otf]/OT:script=hani;lan
+guage=dflt;mapping=tex-text;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->"[fonts/AdobeHeitiStd-Regular.otf]/OT:script=hani;lan
+guage=dflt;embolden=4;mapping=tex-text;"
+
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/b/n' will be
+(Font)              scaled to size 12.045pt on input line 3.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 4.
+
+(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/amsfonts/um
+sa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 4.
+
+(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/amsfonts/um
+sb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+File: img/hfut_name.png Graphic file (type bmp)
+<img/hfut_name.png>
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
+(Font)              scaled to size 22.08249pt on input line 11.
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/b/n' will be
+(Font)              scaled to size 22.08249pt on input line 11.
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
+(Font)              scaled to size 42.0pt on input line 13.
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/b/n' will be
+(Font)              scaled to size 42.0pt on input line 13.
+File: img/hfut_logo.png Graphic file (type bmp)
+<img/hfut_logo.png>
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
+(Font)              scaled to size 15.75pt on input line 21.
+LaTeX Font Info:    Calculating math sizes for size <15.75> on input line 23.
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/b/n' will be
+(Font)              scaled to size 15.75pt on input line 24.
+
+
+[1
+
+
+
+])
+\openout2 = `tex/pages/chinese_title.aux'.
+
+ (./tex/pages/chinese_title.tex
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
+(Font)              scaled to size 15.05624pt on input line 28.
+
+
+[1
+
+
+
+])
+\openout2 = `tex/pages/english_title.aux'.
+
+ (./tex/pages/english_title.tex
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
+(Font)              scaled to size 18.0pt on input line 13.
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/b/n' will be
+(Font)              scaled to size 18.0pt on input line 13.
+
+
+[1
+
+
+
+])
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: xetex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(79.6678pt, 438.17227pt, 79.6678pt)
+* v-part:(T,H,B)=(89.34163pt, 666.36359pt, 89.34163pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=438.17227pt
+* \textheight=666.36359pt
+* \oddsidemargin=7.39781pt
+* \evensidemargin=7.39781pt
+* \topmargin=-21.92836pt
+* \headheight=14.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=56.9055pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+\openout2 = `tex/pages/statement.aux'.
+
+ (./tex/pages/statement.tex
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
+(Font)              scaled to size 18.06749pt on input line 5.
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/b/n' will be
+(Font)              scaled to size 18.06749pt on input line 6.
+
+Overfull \hbox (4.37639pt too wide) in paragraph at lines 9--10
+\TU/AdobeSongStd-Light.otf(0)/m/n/12.045 文）|  中 不 包 含 其 他 人 已 经 发 表 或 撰 写 过 的 研
+ 究 成 果，|  也 不 包 含 为 获 得 $[]$
+ []
+
+
+
+[1
+
+
+
+
+])
+\openout2 = `tex/abstract.aux'.
+
+ (./tex/abstract.tex
+
+[1
+
+
+
+]
+Overfull \hbox (7.11598pt too wide) in paragraph at lines 22--23
+\TU/TimesNewRoman(0)/m/n/12.045 ports single-image and batch-image submission, 
+model activation management, asynchronous
+ []
+
+
+
+[2
+
+]
+
+[3])
+\openout2 = `tex/pages/toc.aux'.
+
+ (./tex/pages/toc.tex
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
+(Font)              scaled to size 12.0pt on input line 1.
+ (./Thesis.toc
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/b/n' will be
+(Font)              scaled to size 12.0pt on input line 1.
+
+
+[4
+
+
+
+
+]
+
+[5])
+\tf@toc=\write6
+\openout6 = `Thesis.toc'.
+
+
+
+[6] (./Thesis.lof)
+\tf@lof=\write7
+\openout7 = `Thesis.lof'.
+
+
+
+[7
+
+] (./Thesis.lot)
+\tf@lot=\write8
+\openout8 = `Thesis.lot'.
+
+
+
+[8
+
+])
+\openout2 = `tex/introduction.aux'.
+
+ (./tex/introduction.tex
+
+[1
+
+
+
+
+
+]
+
+LaTeX Warning: Reference `fig:ch1_pipeline' on page 2 undefined on input line 4
+4.
+
+
+
+[2]
+File: img2_pdf/ch1_pipeline.pdf Graphic file (type pdf)
+<use img2_pdf/ch1_pipeline.pdf>
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
+(Font)              scaled to size 10.5pt on input line 49.
+
+
+[3])
+
+[4]
+\openout2 = `tex/related_work.aux'.
+
+ (./tex/related_work.tex
+
+[5
+
+
+
+
+]
+
+LaTeX Warning: Reference `fig:ch2_research_map' on page 6 undefined on input li
+ne 32.
+
+File: img2_pdf/ch2_research_map.pdf Graphic file (type pdf)
+<use img2_pdf/ch2_research_map.pdf>
+
+
+[6]
+
+LaTeX Warning: Reference `fig:ch2_research_map' on page 7 undefined on input li
+ne 45.
+
+)
+
+[7]
+\openout2 = `tex/method.aux'.
+
+ (./tex/method.tex
+
+LaTeX Warning: Reference `tab:ch3_dataset_split' on page 8 undefined on input l
+ine 9.
+
+File: img/ch3_dataset_examples.png Graphic file (type bmp)
+<img/ch3_dataset_examples.png>
+
+LaTeX Warning: Reference `fig:ch3_dataset_examples' on page 8 undefined on inpu
+t line 39.
+
+
+
+[8
+
+
+
+
+]
+
+Package fontspec Info: 
+(fontspec)             Font family 'AdobeFangsongStd-Regular.otf(0)' created
+(fontspec)             for font 'AdobeFangsongStd-Regular.otf' with options
+(fontspec)             [Path =
+(fontspec)             fonts/,Mapping=tex-text,Script={CJK},AutoFakeBold={4}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->"[fonts/AdobeFangsongStd-Regular.otf]/OT:script=hani;
+language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->"[fonts/AdobeFangsongStd-Regular.otf]/OT:script=hani;
+language=dflt;embolden=4;mapping=tex-text;"
+
+
+
+LaTeX Warning: Reference `fig:ch3_preprocess_flow' on page 9 undefined on input
+ line 49.
+
+File: img2_pdf/ch3_preprocess_flow.pdf Graphic file (type pdf)
+<use img2_pdf/ch3_preprocess_flow.pdf>
+
+
+[9]
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
+(Font)              scaled to size 8.0pt on input line 63.
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
+(Font)              scaled to size 6.0pt on input line 63.
+
+
+[10]
+File: img2_pdf/ch3_drenet_overview.pdf Graphic file (type pdf)
+<use img2_pdf/ch3_drenet_overview.pdf>
+
+
+LaTeX Warning: Reference `fig:ch3_drenet_overview' on page 11 undefined on inpu
+t line 101.
+
+File: img2_pdf/ch3_fcos_pipeline.pdf Graphic file (type pdf)
+<use img2_pdf/ch3_fcos_pipeline.pdf>
+
+LaTeX Warning: Reference `fig:ch3_fcos_pipeline' on page 11 undefined on input 
+line 114.
+
+
+
+[11]
+File: img2_pdf/ch3_yolo_pipeline.pdf Graphic file (type pdf)
+<use img2_pdf/ch3_yolo_pipeline.pdf>
+
+
+LaTeX Warning: Reference `fig:ch3_yolo_pipeline' on page 12 undefined on input 
+line 127.
+
+
+
+[12])
+
+[13]
+\openout2 = `tex/experiment.aux'.
+
+ (./tex/experiment.tex
+
+LaTeX Warning: Reference `tab:ch4_baselines' on page 14 undefined on input line
+ 11.
+
+File: img/ch4_main_comparison_chart.png Graphic file (type bmp)
+<img/ch4_main_comparison_chart.png>
+
+LaTeX Warning: Reference `tab:ch4_baselines' on page 14 undefined on input line
+ 35.
+
+
+LaTeX Warning: Reference `fig:ch4_main_comparison_chart' on page 14 undefined o
+n input line 35.
+
+
+
+[14
+
+
+
+
+]
+
+LaTeX Warning: Reference `tab:ch4_efficiency' on page 15 undefined on input lin
+e 43.
+
+
+LaTeX Warning: Reference `fig:ch4_efficiency_chart' on page 15 undefined on inp
+ut line 61.
+
+File: img/ch4_efficiency_chart.png Graphic file (type bmp)
+<img/ch4_efficiency_chart.png>
+
+
+[15]
+
+LaTeX Warning: Reference `fig:ch4_radar_chart' on page 16 undefined on input li
+ne 70.
+
+File: img/ch4_radar_chart.png Graphic file (type bmp)
+<img/ch4_radar_chart.png>
+
+
+[16]
+
+LaTeX Warning: Reference `tab:ch4_baselines' on page 17 undefined on input line
+ 99.
+
+
+LaTeX Warning: Reference `fig:ch4_success_cases' on page 17 undefined on input 
+line 103.
+
+
+
+[17]
+File: img/ch4_success_cases.png Graphic file (type bmp)
+<img/ch4_success_cases.png>
+
+
+LaTeX Warning: Reference `fig:ch4_miss_cases' on page 18 undefined on input lin
+e 114.
+
+File: img/ch4_miss_cases.png Graphic file (type bmp)
+<img/ch4_miss_cases.png>
+
+
+[18]
+
+LaTeX Warning: Reference `fig:ch4_false_positive_cases' on page 19 undefined on
+ input line 125.
+
+File: img/ch4_false_positive_cases.png Graphic file (type bmp)
+<img/ch4_false_positive_cases.png>
+
+
+[19]
+
+LaTeX Warning: Reference `tab:ch4_baselines' on page 20 undefined on input line
+ 134.
+
+
+LaTeX Warning: Reference `tab:ch4_threshold_ablation' on page 20 undefined on i
+nput line 142.
+
+File: img/ch4_threshold_trend.png Graphic file (type bmp)
+<img/ch4_threshold_trend.png>
+
+
+[20]
+
+LaTeX Warning: Reference `tab:ch4_threshold_ablation' on page 21 undefined on i
+nput line 173.
+
+
+LaTeX Warning: Reference `fig:ch4_threshold_trend' on page 21 undefined on inpu
+t line 173.
+
+
+
+[21]
+
+LaTeX Warning: Reference `tab:ch4_size_ablation' on page 22 undefined on input 
+line 181.
+
+File: img/ch4_size_trend.png Graphic file (type bmp)
+<img/ch4_size_trend.png>
+
+LaTeX Warning: Reference `tab:ch4_size_ablation' on page 22 undefined on input 
+line 206.
+
+
+LaTeX Warning: Reference `fig:ch4_size_trend' on page 22 undefined on input lin
+e 206.
+
+)
+
+[22]
+\openout2 = `tex/system.aux'.
+
+ (./tex/system.tex
+
+[23
+
+
+
+
+]
+
+LaTeX Warning: Reference `fig:ch5_architecture' on page 24 undefined on input l
+ine 29.
+
+File: img2_pdf/ch5_architecture.pdf Graphic file (type pdf)
+<use img2_pdf/ch5_architecture.pdf>
+
+
+[24]
+
+LaTeX Warning: Reference `fig:ch5_architecture' on page 25 undefined on input l
+ine 48.
+
+File: img2_pdf/ch5_er.pdf Graphic file (type pdf)
+<use img2_pdf/ch5_er.pdf>
+
+LaTeX Warning: Reference `fig:ch5_er' on page 25 undefined on input line 61.
+
+
+
+[25]
+
+LaTeX Warning: Reference `tab:ch5_api' on page 26 undefined on input line 65.
+
+
+
+[26]
+
+LaTeX Warning: Reference `fig:ch5_flow' on page 27 undefined on input line 100.
+
+
+File: img2_pdf/ch5_flow.pdf Graphic file (type pdf)
+<use img2_pdf/ch5_flow.pdf>
+
+
+[27]
+
+[28]
+
+LaTeX Warning: Reference `fig:ch5_pages' on page 29 undefined on input line 117
+.
+
+File: img/ch5_pages.png Graphic file (type bmp)
+<img/ch5_pages.png>
+
+
+[29]
+
+[30]
+Overfull \hbox (6.42047pt too wide) in paragraph at lines 148--149
+[]\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 针 对 该 问 题，|  后 端 新 增 进 度 查 询 接 口，|  
+只 返 回 \TU/lmtt/m/n/12.045 status\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 、| \TU
+/lmtt/m/n/12.045 done_count \TU/AdobeSongStd-Light.otf(1)/m/n/12.045 和 \TU/lmtt
+/m/n/12.045 input_count
+ []
+
+
+
+[31]
+
+LaTeX Warning: Reference `tab:ch5_perf' on page 32 undefined on input line 160.
+
+
+
+LaTeX Warning: Reference `tab:ch5_perf' on page 32 undefined on input line 181.
+
+
+)
+
+[32]
+
+[33]
+\openout2 = `tex/conclusion.aux'.
+
+ (./tex/conclusion.tex
+
+[34
+
+
+
+
+])
+
+[35]
+
+[36
+
+
+
+]
+
+[37]
+\openout2 = `tex/acknowledge.aux'.
+
+ (./tex/acknowledge.tex)
+
+[38
+
+
+]
+\Changes@OutFile=\write9
+\openout9 = `Thesis.soc'.
+
+\tf@loc=\write10
+\openout10 = `Thesis.loc'.
+
+ (tmp/Thesis.aux (tmp/tex/pages/cover.aux) (tmp/tex/pages/chinese_title.aux) (t
+mp/tex/pages/english_title.aux) (tmp/tex/pages/statement.aux)
+(tmp/tex/abstract.aux) (tmp/tex/pages/toc.aux) (tmp/tex/introduction.aux)
+(tmp/tex/related_work.aux) (tmp/tex/method.aux) (tmp/tex/experiment.aux)
+(tmp/tex/system.aux) (tmp/tex/conclusion.aux) (tmp/tex/acknowledge.aux))
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2022/08/05>
+ ***********
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package rerunfilecheck Info: File `Thesis.out' has not changed.
+(rerunfilecheck)             Checksum: E618AD5C755C8653A7C64F0F2539D53F;7702.
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                Thesis
+(biblatex)                and rerun LaTeX afterwards.
+
+Package logreq Info: Writing requests to 'Thesis.run.xml'.
+\openout1 = `Thesis.run.xml'.
+
+ ) 
 Here is how much of TeX's memory you used:
- 40986 strings out of 473832
- 857025 string characters out of 5719382
- 1803404 words of memory out of 5000000
- 63443 multiletter control sequences out of 15000+600000
- 560595 words of font info for 64 fonts, out of 8000000 for 9000
+ 43952 strings out of 473832
+ 966266 string characters out of 5719382
+ 1871026 words of memory out of 5000000
+ 66202 multiletter control sequences out of 15000+600000
+ 573074 words of font info for 155 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 129i,1n,136p,695b,900s stack positions out of 10000i,1000n,20000p,200000b,200000s
-No pages of output.
+ 129i,12n,136p,908b,5154s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on tmp/Thesis.xdv (50 pages, 633820 bytes).

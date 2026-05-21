@@ -1,6 +1,7 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  21 MAY 2026 14:10
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  21 MAY 2026 17:02
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **Thesis.tex
 (./Thesis.tex
@@ -1738,87 +1739,36 @@ es/pgfmoduledecorations.code.tex
 )
 (/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/generic/pgf/libra
 ries/decorations/pgflibrarydecorations.pathreplacing.code.tex))
-(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/svg/svg.sty
-Package: svg 2020/11/26 v2.02k (include SVG pictures)
-
-(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/koma-script
-/scrbase.sty
-Package: scrbase 2024/10/24 v3.43 KOMA-Script package (KOMA-Script-independent 
-basics and keyval usage)
-
-(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/koma-script
-/scrlfile.sty
-Package: scrlfile 2024/10/24 v3.43 KOMA-Script package (file load hooks)
-
-(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/koma-script
-/scrlfile-hook.sty
-Package: scrlfile-hook 2024/10/24 v3.43 KOMA-Script package (using LaTeX hooks)
-
-
-(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/koma-script
-/scrlogo.sty
-Package: scrlogo 2024/10/24 v3.43 KOMA-Script package (logo)
-)))
-Applying: [2021/05/01] Usage of raw or classic option list on input line 254.
-Already applied: [0000/00/00] Usage of raw or classic option list on input line
- 370.
-)
-(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/trimspaces/
-trimspaces.sty
-Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
-)
-(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/tools/shell
-esc.sty
-Package: shellesc 2023/07/08 v1.0d unified shell escape interface for LaTeX
-Package shellesc Info: Restricted shell escape enabled on input line 77.
-)
-\c@svg@param@lastpage=\count544
-\svg@box=\box84
-\c@svg@param@currpage=\count545
-)
-(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/transparent
-/transparent.sty
-Package: transparent 2022-10-27 v1.5 Transparency with color stacks
-
-(/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/transparent
-/transparent-nometadata.sty
-Package: transparent-nometadata 2022-10-27 v1.5 Transparency via pdfTeX's color
- stack (HO)
-
-
-Package transparent Warning: Loading aborted, because pdfTeX is not running in 
-PDF mode.
-
-))
-\@quotelevel=\count546
-\@quotereset=\count547
- (./Thesis.aux (./tex/pages/cover.aux) (./tex/pages/chinese_title.aux)
+\@quotelevel=\count544
+\@quotereset=\count545
+ (./Thesis.aux
+(./tex/pages/cover.aux) (./tex/pages/chinese_title.aux)
 (./tex/pages/english_title.aux) (./tex/pages/statement.aux) (./tex/abstract.aux
 ) (./tex/pages/toc.aux) (./tex/introduction.aux) (./tex/related_work.aux)
 (./tex/method.aux) (./tex/experiment.aux) (./tex/system.aux)
 (./tex/conclusion.aux) (./tex/acknowledge.aux))
 \openout1 = `Thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 21.
-LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 19.
+LaTeX Font Info:    ... okay on input line 19.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
@@ -1859,9 +1809,9 @@ ge=dflt;mapping=tex-text;"
 ge=dflt;embolden=4;mapping=tex-text;"
 
 )
-Package biblatex Info: Reference section=0 on input line 21.
-Package biblatex Info: Reference segment=0 on input line 21.
-Package hyperref Info: Link coloring OFF on input line 21.
+Package biblatex Info: Reference section=0 on input line 19.
+Package biblatex Info: Reference segment=0 on input line 19.
+Package hyperref Info: Link coloring OFF on input line 19.
  (./Thesis.out) (./Thesis.out)
 \@outlinefile=\write5
 \openout5 = `Thesis.out'.
@@ -1901,7 +1851,7 @@ Package hyperref Info: Link coloring OFF on input line 21.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count548
+\c@lstlisting=\count546
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: xetex
 * paper: <default>
@@ -2144,88 +2094,32 @@ LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/b/n' will be
 ]
 
 [2]
-
-Package svg Warning: You didn't enable `shell escape' (or `write18')
-(svg)                so it wasn't possible to launch the Inkscape export
-(svg)                for `img2/ch1_pipeline.svg' on input line 48.
-
-
-! Package svg Error: File `ch1_pipeline_svg-tex.pdf' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 ...udesvg[width=0.92\textwidth]{ch1_pipeline}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch1_pipeline_svg-tex.pdf'
-although `img2/ch1_pipeline.svg' was found.
-
-
-! Package svg Error: File `ch1_pipeline_svg-tex.pdf_tex' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.48 ...udesvg[width=0.92\textwidth]{ch1_pipeline}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch1_pipeline_svg-tex.pdf_tex'
-although `img2/ch1_pipeline.svg' was found.
-
+File: img2_pdf/ch1_pipeline.pdf Graphic file (type pdf)
+<use img2_pdf/ch1_pipeline.pdf>
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
 (Font)              scaled to size 10.5pt on input line 49.
-)
 
-[3]
+
+[3])
+
+[4]
 \openout2 = `tex/related_work.aux'.
 
  (./tex/related_work.tex
 
-[4
+[5
 
 
 
 
 ]
-
-Package svg Warning: You didn't enable `shell escape' (or `write18')
-(svg)                so it wasn't possible to launch the Inkscape export
-(svg)                for `img2/ch2_research_map.svg' on input line 36.
+File: img2_pdf/ch2_research_map.pdf Graphic file (type pdf)
+<use img2_pdf/ch2_research_map.pdf>
 
 
-! Package svg Error: File `ch2_research_map_svg-tex.pdf' is missing.
+[6])
 
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.36 ...vg[width=0.92\textwidth]{ch2_research_map}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch2_research_map_svg-tex.pdf'
-although `img2/ch2_research_map.svg' was found.
-
-
-! Package svg Error: File `ch2_research_map_svg-tex.pdf_tex' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.36 ...vg[width=0.92\textwidth]{ch2_research_map}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch2_research_map_svg-tex.pdf_tex'
-although `img2/ch2_research_map.svg' was found.
-
-
-
-[5])
-
-[6]
+[7]
 \openout2 = `tex/method.aux'.
 
  (./tex/method.tex
@@ -2233,7 +2127,7 @@ File: img/ch3_dataset_examples.png Graphic file (type bmp)
 <img/ch3_dataset_examples.png>
 
 
-[7
+[8
 
 
 
@@ -2256,146 +2150,32 @@ language=dflt;mapping=tex-text;"
 (fontspec)             <->"[fonts/AdobeFangsongStd-Regular.otf]/OT:script=hani;
 language=dflt;embolden=4;mapping=tex-text;"
 
+File: img2_pdf/ch3_preprocess_flow.pdf Graphic file (type pdf)
+<use img2_pdf/ch3_preprocess_flow.pdf>
 
 
-Package svg Warning: You didn't enable `shell escape' (or `write18')
-(svg)                so it wasn't possible to launch the Inkscape export
-(svg)                for `img2/ch3_preprocess_flow.svg' on input line 53.
-
-
-! Package svg Error: File `ch3_preprocess_flow_svg-tex.pdf' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.53 ...width=0.92\textwidth]{ch3_preprocess_flow}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch3_preprocess_flow_svg-tex.pdf'
-although `img2/ch3_preprocess_flow.svg' was found.
-
-
-! Package svg Error: File `ch3_preprocess_flow_svg-tex.pdf_tex' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.53 ...width=0.92\textwidth]{ch3_preprocess_flow}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch3_preprocess_flow_svg-tex.pdf_tex'
-although `img2/ch3_preprocess_flow.svg' was found.
-
-
-
-[8]
+[9]
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
 (Font)              scaled to size 8.0pt on input line 63.
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
 (Font)              scaled to size 6.0pt on input line 63.
 
 
-[9]
+[10]
+File: img2_pdf/ch3_drenet_overview.pdf Graphic file (type pdf)
+<use img2_pdf/ch3_drenet_overview.pdf>
+File: img2_pdf/ch3_fcos_pipeline.pdf Graphic file (type pdf)
+<use img2_pdf/ch3_fcos_pipeline.pdf>
 
-Package svg Warning: You didn't enable `shell escape' (or `write18')
-(svg)                so it wasn't possible to launch the Inkscape export
-(svg)                for `img2/ch3_drenet_overview.svg' on input line 96.
-
-
-! Package svg Error: File `ch3_drenet_overview_svg-tex.pdf' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.96 ...width=0.95\textwidth]{ch3_drenet_overview}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch3_drenet_overview_svg-tex.pdf'
-although `img2/ch3_drenet_overview.svg' was found.
-
-
-! Package svg Error: File `ch3_drenet_overview_svg-tex.pdf_tex' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.96 ...width=0.95\textwidth]{ch3_drenet_overview}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch3_drenet_overview_svg-tex.pdf_tex'
-although `img2/ch3_drenet_overview.svg' was found.
-
-
-Package svg Warning: You didn't enable `shell escape' (or `write18')
-(svg)                so it wasn't possible to launch the Inkscape export
-(svg)                for `img2/ch3_fcos_pipeline.svg' on input line 109.
-
-
-! Package svg Error: File `ch3_fcos_pipeline_svg-tex.pdf' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.109 ...[width=0.95\textwidth]{ch3_fcos_pipeline}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch3_fcos_pipeline_svg-tex.pdf'
-although `img2/ch3_fcos_pipeline.svg' was found.
-
-
-! Package svg Error: File `ch3_fcos_pipeline_svg-tex.pdf_tex' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.109 ...[width=0.95\textwidth]{ch3_fcos_pipeline}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch3_fcos_pipeline_svg-tex.pdf_tex'
-although `img2/ch3_fcos_pipeline.svg' was found.
-
-
-Package svg Warning: You didn't enable `shell escape' (or `write18')
-(svg)                so it wasn't possible to launch the Inkscape export
-(svg)                for `img2/ch3_yolo_pipeline.svg' on input line 122.
-
-
-! Package svg Error: File `ch3_yolo_pipeline_svg-tex.pdf' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.122 ...[width=0.95\textwidth]{ch3_yolo_pipeline}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch3_yolo_pipeline_svg-tex.pdf'
-although `img2/ch3_yolo_pipeline.svg' was found.
-
-
-! Package svg Error: File `ch3_yolo_pipeline_svg-tex.pdf_tex' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.122 ...[width=0.95\textwidth]{ch3_yolo_pipeline}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch3_yolo_pipeline_svg-tex.pdf_tex'
-although `img2/ch3_yolo_pipeline.svg' was found.
-
-
-
-[10])
 
 [11]
+File: img2_pdf/ch3_yolo_pipeline.pdf Graphic file (type pdf)
+<use img2_pdf/ch3_yolo_pipeline.pdf>
+
+
+[12])
+
+[13]
 \openout2 = `tex/experiment.aux'.
 
  (./tex/experiment.tex
@@ -2403,7 +2183,7 @@ File: img/ch4_main_comparison_chart.png Graphic file (type bmp)
 <img/ch4_main_comparison_chart.png>
 
 
-[12
+[14
 
 
 
@@ -2413,156 +2193,74 @@ File: img/ch4_efficiency_chart.png Graphic file (type bmp)
 <img/ch4_efficiency_chart.png>
 
 
-[13]
+[15]
 File: img/ch4_radar_chart.png Graphic file (type bmp)
 <img/ch4_radar_chart.png>
 
 
-[14]
+[16]
 
-[15]
+[17]
 File: img/ch4_success_cases.png Graphic file (type bmp)
 <img/ch4_success_cases.png>
 File: img/ch4_miss_cases.png Graphic file (type bmp)
 <img/ch4_miss_cases.png>
 
 
-[16]
+[18]
 File: img/ch4_false_positive_cases.png Graphic file (type bmp)
 <img/ch4_false_positive_cases.png>
 
 
-[17]
+[19]
 File: img/ch4_threshold_trend.png Graphic file (type bmp)
 <img/ch4_threshold_trend.png>
 
 
-[18]
+[20]
 
-[19]
+[21]
 File: img/ch4_size_trend.png Graphic file (type bmp)
 <img/ch4_size_trend.png>
 )
 
-[20]
+[22]
 \openout2 = `tex/system.aux'.
 
  (./tex/system.tex
 
-[21
+[23
 
 
 
 
 ]
-
-Package svg Warning: You didn't enable `shell escape' (or `write18')
-(svg)                so it wasn't possible to launch the Inkscape export
-(svg)                for `img2/ch5_architecture.svg' on input line 33.
-
-
-! Package svg Error: File `ch5_architecture_svg-tex.pdf' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.33 ...vg[width=0.92\textwidth]{ch5_architecture}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch5_architecture_svg-tex.pdf'
-although `img2/ch5_architecture.svg' was found.
-
-
-! Package svg Error: File `ch5_architecture_svg-tex.pdf_tex' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.33 ...vg[width=0.92\textwidth]{ch5_architecture}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch5_architecture_svg-tex.pdf_tex'
-although `img2/ch5_architecture.svg' was found.
-
-
-Package svg Warning: You didn't enable `shell escape' (or `write18')
-(svg)                so it wasn't possible to launch the Inkscape export
-(svg)                for `img2/ch5_er.svg' on input line 56.
-
-
-! Package svg Error: File `ch5_er_svg-tex.pdf' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.56   \includesvg[width=0.92\textwidth]{ch5_er}
-                                                
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch5_er_svg-tex.pdf'
-although `img2/ch5_er.svg' was found.
-
-
-! Package svg Error: File `ch5_er_svg-tex.pdf_tex' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.56   \includesvg[width=0.92\textwidth]{ch5_er}
-                                                
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch5_er_svg-tex.pdf_tex'
-although `img2/ch5_er.svg' was found.
-
-
-
-[22]
-
-[23]
-
-Package svg Warning: You didn't enable `shell escape' (or `write18')
-(svg)                so it wasn't possible to launch the Inkscape export
-(svg)                for `img2/ch5_flow.svg' on input line 104.
-
-
-! Package svg Error: File `ch5_flow_svg-tex.pdf' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.104 ...ncludesvg[width=0.92\textwidth]{ch5_flow}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch5_flow_svg-tex.pdf'
-although `img2/ch5_flow.svg' was found.
-
-
-! Package svg Error: File `ch5_flow_svg-tex.pdf_tex' is missing.
-
-See the svg package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.104 ...ncludesvg[width=0.92\textwidth]{ch5_flow}
-                                                  
-Did you run the export with Inkscape? There's no file
-`./svg-inkscape/ch5_flow_svg-tex.pdf_tex'
-although `img2/ch5_flow.svg' was found.
-
+File: img2_pdf/ch5_architecture.pdf Graphic file (type pdf)
+<use img2_pdf/ch5_architecture.pdf>
 
 
 [24]
-File: img/ch5_pages.png Graphic file (type bmp)
-<img/ch5_pages.png>
+File: img2_pdf/ch5_er.pdf Graphic file (type pdf)
+<use img2_pdf/ch5_er.pdf>
 
 
 [25]
 
 [26]
+File: img2_pdf/ch5_flow.pdf Graphic file (type pdf)
+<use img2_pdf/ch5_flow.pdf>
+
+
+[27]
+
+[28]
+File: img/ch5_pages.png Graphic file (type bmp)
+<img/ch5_pages.png>
+
+
+[29]
+
+[30]
 Overfull \hbox (6.42047pt too wide) in paragraph at lines 148--149
 []\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 针 对 该 问 题，|  后 端 新 增 进 度 查 询 接 口，|  
 只 返 回 \TU/lmtt/m/n/12.045 status\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 、| \TU
@@ -2572,36 +2270,36 @@ Overfull \hbox (6.42047pt too wide) in paragraph at lines 148--149
 
 
 
-[27])
+[31])
 
-[28]
+[32]
 
-[29]
+[33]
 \openout2 = `tex/conclusion.aux'.
 
  (./tex/conclusion.tex
 
-[30
+[34
 
 
 
 
 ])
 
-[31]
+[35]
 
-[32
+[36
 
 
 
 ]
 
-[33]
+[37]
 \openout2 = `tex/acknowledge.aux'.
 
  (./tex/acknowledge.tex)
 
-[34
+[38
 
 
 ]
@@ -2627,12 +2325,12 @@ Package logreq Info: Writing requests to 'Thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 44857 strings out of 473832
- 987640 string characters out of 5719382
- 1959550 words of memory out of 5000000
- 67063 multiletter control sequences out of 15000+600000
+ 43985 strings out of 473832
+ 966848 string characters out of 5719382
+ 1916713 words of memory out of 5000000
+ 66212 multiletter control sequences out of 15000+600000
  573074 words of font info for 155 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  129i,12n,136p,908b,5154s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Thesis.pdf (46 pages).
+Output written on Thesis.xdv (50 pages, 637692 bytes).
