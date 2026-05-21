@@ -14,14 +14,14 @@
 ```mermaid
 flowchart TB
     subgraph 顶层流程[" "]
-        A[数据准备<br/>dataset check and unified format] --> B[模型训练与推理<br/>DRENet / YOLO26 / FCOS]
-        B --> C[结果分析<br/>quantitative and qualitative study]
-        C --> D[系统集成<br/>web deployment and demo]
+        A[数据准备<br/>核对图像与标注] --> B[模型训练与推理<br/>DRENet / YOLO26 / FCOS]
+        B --> C[结果分析<br/>定量与定性分析]
+        C --> D[系统集成<br/>Web部署与演示]
     end
 
     subgraph 底层支撑[" "]
-        E[统一协议<br/>data split / metrics / thresholds] --> F[统一推理API<br/>single-model / ensemble]
-        F --> G[系统证据链<br/>task replay / result review / history]
+        E[统一协议<br/>数据划分、指标与阈值] --> F[统一推理API<br/>单模型/融合推理]
+        F --> G[系统证据链<br/>任务回放、结果复查与历史记录]
     end
 
     B -.->|约束训练与评估| E
@@ -46,18 +46,18 @@ flowchart TB
 ```mermaid
 flowchart TB
     subgraph 研究路线["三条研究路线"]
-        A[通用目标检测<br/>two-stage / one-stage / anchor-free / transformer]
-        B[小目标检测<br/>multi-scale fusion / loss re-weighting / post-processing]
-        C[遥感舰船检测<br/>LEVIR-Ship / specialized methods]
+        A[通用目标检测<br/>两阶段/单阶段/无锚点/Transformer]
+        B[小目标检测<br/>多尺度融合/损失重加权/后处理]
+        C[遥感舰船检测<br/>LEVIR-Ship/专项方法]
     end
 
     subgraph 具体方法["代表方法"]
         A1[Faster R-CNN] & A2[YOLO / RetinaNet] & A3[FCOS / DETR] <-->|细化| A
         B1[FPN / SCRDet] & B2[Focal Loss] & B3[SNIP / NMS] <-->|技术支撑| B
-        C1[LEVIR-Ship dataset] & C2[DRENet specialized] <-->|数据集/方法| C
+        C1[LEVIR-Ship数据集] & C2[DRENet专项] <-->|数据集/方法| C
     end
 
-    D[本文切入点<br/>multi-model comparison under unified protocol + system implementation]
+    D[本文切入点<br/>统一协议下的多模型对比+系统实现]
 
     A -.->|跨范式比较基础| D
     B -.->|性能差距分析| D
@@ -70,20 +70,20 @@ flowchart TB
 
 ```mermaid
 flowchart LR
-    A[Input image<br/>medium-resolution RS image] --> B[Backbone<br/>multi-scale feature extraction]
-    B --> C[CRMA block<br/>cross-stage attention]
-    C --> D[Detection head<br/>classification and box regression]
-    D --> E[Output<br/>ship detections]
+    A[输入图像<br/>中分辨率遥感影像] --> B[骨干网络<br/>多尺度特征提取]
+    B --> C[CRMA模块<br/>跨阶段注意力]
+    C --> D[检测头<br/>分类与边界框回归]
+    D --> E[输出<br/>船舶检测结果]
 
-    subgraph 训练专用分支["Train-only degraded reconstruction branch"]
-        F[DRE branch<br/>degraded reconstruction] --> G[Reconstructed map<br/>object-aware degraded image]
-        G --> H[Supervision target<br/>degraded-image constraint]
+    subgraph 训练专用分支["训练专用退化重建分支"]
+        F[DRE分支<br/>退化重建] --> G[重建特征图<br/>目标感知退化图像]
+        G --> H[监督目标<br/>退化图像约束]
     end
 
-    B -.->|shared features| F
-    G -.->|feature guidance<br/>虚线箭头| C
+    B -.->|共享特征| F
+    G -.->|特征引导| C
     F --> G
-    G -.->|reconstruction loss| H
+    G -.->|重建损失| H
 ```
 
 ---
@@ -92,14 +92,14 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A[Input image] --> B[Backbone<br/>feature extraction]
-    B --> C[FPN<br/>multi-level features]
-    C --> D[FCOS head<br/>shared conv tower]
-    D --> E[Decoded boxes<br/>anchor-free outputs]
+    A[输入图像] --> B[骨干网络<br/>特征提取]
+    B --> C[FPN<br/>多层级特征]
+    C --> D[FCOS检测头<br/>共享卷积塔]
+    D --> E[解码边界框<br/>无锚点输出]
 
-    D --> F[Classification<br/>class scores]
-    D --> G[Regression<br/>l, t, r, b]
-    D --> H[Centerness<br/>quality prior]
+    D --> F[分类<br/>类别得分]
+    D --> G[回归<br/>左/上/右/下]
+    D --> H[中心度<br/>质量先验]
 ```
 
 ---
@@ -108,14 +108,14 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A[Input image<br/>512 main setting] --> B[Backbone<br/>feature extraction]
-    B --> C[Neck<br/>multi-scale fusion]
-    C --> D[Detection head<br/>one-stage prediction]
-    D --> E[Output<br/>NMS result]
+    A[输入图像<br/>512主设置] --> B[骨干网络<br/>特征提取]
+    B --> C[特征融合层<br/>多尺度融合]
+    C --> D[检测头<br/>单阶段预测]
+    D --> E[输出<br/>NMS结果]
 
-    D --> F[Small scale<br/>fine targets]
-    D --> G[Medium scale<br/>balanced scale]
-    D --> H[Large scale<br/>context support]
+    D --> F[小尺度<br/>精细目标]
+    D --> G[中尺度<br/>平衡尺度]
+    D --> H[大尺度<br/>上下文支持]
 ```
 
 ---
@@ -124,12 +124,12 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A[Verify images & labels<br/>one-to-one check<br/>empty labels / abnormal coords] --> B[COCO intermediate format<br/>unified annotation format<br/>cross-framework sharing]
-    B --> C[Fixed data split<br/>train / val / test<br/>fixed sample lists]
-    C --> D[Unified output structure<br/>image_id / bbox<br/>score / category_id]
-    D --> E[System-callable<br/>inference API / database<br/>visualization / replay]
+    A[核对图像与标注<br/>一一对应检查<br/>空标签/异常坐标] --> B[COCO中间格式<br/>统一标注格式<br/>跨框架通用]
+    B --> C[固定数据划分<br/>训练集/验证集/测试集<br/>固定样本列表]
+    C --> D[统一输出结构<br/>图像ID/边界框<br/>得分/类别ID]
+    D --> E[系统可调用<br/>推理API/数据库<br/>可视化/回放]
 
-    C --> F[统一协议约束: differences come from detection paradigms<br/>and implementation strategies, not from data organization<br/>or script details]
+    C --> F[统一协议：差异仅来自检测范式与实现策略<br/>而非数据组织方式或脚本细节]
 ```
 
 ---
@@ -138,28 +138,28 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-    subgraph Frontend["Frontend Layer"]
+    subgraph Frontend["前端层"]
         F1[React + Vite + AntD]
-        F2[Submit / Tasks]
-        F3[Detail / Models]
-        F4[Polling / Visualization]
+        F2[提交/任务]
+        F3[详情/模型]
+        F4[轮询/可视化]
     end
 
-    subgraph Backend["Backend Layer"]
-        B1[FastAPI router<br/>/api/v1] --> B2[Task executor<br/>ThreadPoolExecutor]
-        B2 --> B3[Inference runtime<br/>unified predictor]
-        B3 --> B4[SQLAlchemy service<br/>task / result persistence]
+    subgraph Backend["后端层"]
+        B1[FastAPI路由<br/>/api/v1] --> B2[任务执行器<br/>ThreadPoolExecutor]
+        B2 --> B3[推理运行时<br/>统一预测器]
+        B3 --> B4[SQLAlchemy服务<br/>任务/结果持久化]
     end
 
-    subgraph Model["Model Layer"]
+    subgraph Model["模型层"]
         M1[DRENet]
         M2[YOLO26]
         M3[FCOS]
     end
 
-    subgraph Data["Data and Output Layer"]
-        D1[SQLite<br/>models / tasks / results]
-        D2[outputs/tasks/&lt;id&gt;<br/>raw / vis / json artifacts]
+    subgraph Data["数据与输出层"]
+        D1[SQLite<br/>模型/任务/结果]
+        D2[outputs/tasks/&lt;id&gt;<br/>原始/可视化/JSON产物]
     end
 
     Frontend --> Backend
@@ -174,25 +174,25 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    A[1. User submits images and parameters] --> B[2. FastAPI validates request and creates task row]
-    B --> C[3. TaskExecutor dispatches local inference job]
-    C --> D[4. Runtime invokes DRENet / YOLO26 / FCOS]
-    D --> E[5. Results are written to DB and output directory]
-    E --> F[6. Frontend polls task status and result endpoints]
-    F --> G[7. User reviews progress, visualizations and results]
+    A[1. 用户提交图像与参数] --> B[2. FastAPI验证请求并创建任务]
+    B --> C[3. 任务执行器派发本地推理任务]
+    C --> D[4. 运行时调用DRENet/YOLO26/FCOS]
+    D --> E[5. 结果写入数据库与输出目录]
+    E --> F[6. 前端轮询任务状态与结果接口]
+    F --> G[7. 用户查看进度、可视化与结果]
 
-    subgraph StateMachine["State machine"]
-        S1[queued -> running]
-        S2[running -> done]
-        S3[running -> failed]
+    subgraph StateMachine["状态机"]
+        S1[排队中→运行中]
+        S2[运行中→完成]
+        S3[运行中→失败]
     end
 
     C -.-> StateMachine
 
-    subgraph Artifacts["Artifacts"]
-        Art1[raw image]
-        Art2[visualized image]
-        Art3[json + result rows]
+    subgraph Artifacts["产物"]
+        Art1[原始图像]
+        Art2[可视化图像]
+        Art3[JSON与结果行]
     end
 
     E -.-> Artifacts
@@ -204,9 +204,9 @@ flowchart TB
 
 ```mermaid
 erDiagram
-    MODELS ||--o{ TASKS : "config source"
-    TASKS ||--o{ RESULTS : "1 to many"
-    TASKS ||--o{ TASK_FILES : "1 to many"
+    MODELS ||--o{ TASKS : "配置来源"
+    TASKS ||--o{ RESULTS : "一对多"
+    TASKS ||--o{ TASK_FILES : "一对多"
 
     MODELS {
         int id PK

@@ -1,6 +1,7 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  20 MAY 2026 18:01
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  20 MAY 2026 19:36
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
 **Thesis.tex
 (./Thesis.tex
@@ -2261,7 +2262,7 @@ File: img/ch5_pages.png Graphic file (type bmp)
 
 [30]
 Overfull \hbox (6.42047pt too wide) in paragraph at lines 148--149
-[]\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 针 对 次 问 题，|  后 端 新 增 进 度 查 询 接 口，|  
+[]\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 针 对 该 问 题，|  后 端 新 增 进 度 查 询 接 口，|  
 只 返 回 \TU/lmtt/m/n/12.045 status\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 、| \TU
 /lmtt/m/n/12.045 done_count \TU/AdobeSongStd-Light.otf(1)/m/n/12.045 和 \TU/lmtt
 /m/n/12.045 input_count
@@ -2324,12 +2325,12 @@ Package logreq Info: Writing requests to 'Thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 43975 strings out of 473832
- 965592 string characters out of 5719382
+ 43984 strings out of 473832
+ 966335 string characters out of 5719382
  1916716 words of memory out of 5000000
- 66203 multiletter control sequences out of 15000+600000
+ 66212 multiletter control sequences out of 15000+600000
  573074 words of font info for 155 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  129i,12n,136p,908b,5154s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Thesis.pdf (50 pages).
+Output written on Thesis.xdv (50 pages, 637140 bytes).
