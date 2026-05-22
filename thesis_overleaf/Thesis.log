@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  21 MAY 2026 17:02
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  21 MAY 2026 17:16
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -876,7 +876,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip144
 )
-Package hyperref Info: Option `colorlinks' set `false' on input line 136.
+Package hyperref Info: Option `colorlinks' set `false' on input line 137.
 
 (/opt/homebrew/Cellar/texlive/20250308_1/share/texmf-dist/tex/latex/geometry/ge
 ometry.sty
@@ -1364,7 +1364,7 @@ Package fontspec Info:
 
 
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 167.
+(Font)              scaled to size 10.0pt on input line 168.
 
 Package fontspec Info: 
 (fontspec)             Times New Roman scale = 0.9.
@@ -2084,6 +2084,9 @@ LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/b/n' will be
 \openout2 = `tex/introduction.aux'.
 
  (./tex/introduction.tex
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
+(Font)              scaled to size 8.0pt on input line 7.
+
 
 [1
 
@@ -2155,8 +2158,6 @@ File: img2_pdf/ch3_preprocess_flow.pdf Graphic file (type pdf)
 
 
 [9]
-LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 63.
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
 (Font)              scaled to size 6.0pt on input line 63.
 
@@ -2325,12 +2326,12 @@ Package logreq Info: Writing requests to 'Thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 43985 strings out of 473832
- 966848 string characters out of 5719382
+ 43986 strings out of 473832
+ 966856 string characters out of 5719382
  1916713 words of memory out of 5000000
- 66212 multiletter control sequences out of 15000+600000
+ 66213 multiletter control sequences out of 15000+600000
  573074 words of font info for 155 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  129i,12n,136p,908b,5154s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Thesis.xdv (50 pages, 637692 bytes).
+Output written on Thesis.xdv (50 pages, 638148 bytes).
