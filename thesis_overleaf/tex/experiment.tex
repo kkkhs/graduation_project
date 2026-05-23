@@ -19,7 +19,7 @@
     模型 & AP50 & AP50-95 & Precision & Recall & F1 \\
     \midrule
     DRENet & 0.7949 & 0.2919 & 0.4927 & 0.8511 & 0.6241 \\
-    FCOS & 0.7700 & 0.2850 & -- & 0.4050 & -- \\
+    FCOS & 0.7389 & 0.2880 & 0.7621 & 0.8297 & 0.7944 \\
     YOLO26 & 0.7950 & 0.3170 & 0.8430 & 0.7220 & 0.7778 \\
     \bottomrule
   \end{tabular}
@@ -32,11 +32,9 @@
   \label{fig:ch4_main_comparison_chart}
 \end{figure}
 
-表~\ref{tab:ch4_baselines} 与图~\ref{fig:ch4_main_comparison_chart} 中，YOLO26 和 DRENet 的 AP50 几乎相同，分别为 0.7950 和 0.7949，FCOS 为 0.7700。仅从 AP50 看，专项方法和成熟 one-stage 路线在该数据集上都能完成基本检出，二者差距并不体现在这一项主指标上。
+表~\ref{tab:ch4_baselines} 与图~\ref{fig:ch4_main_comparison_chart} 中，YOLO26 和 DRENet 的 AP50 几乎相同，分别为 0.7950 和 0.7949，FCOS 为 0.7389。仅从 AP50 看，专项方法和成熟 one-stage 路线在该数据集上都能完成较稳定检出，FCOS 与前两者仍有明显差距。
 
-差异主要出现在 AP50-95、Precision 和 Recall 上。YOLO26 的 AP50-95 为 0.3170，高于 DRENet 的 0.2919 和 FCOS 的 0.2850，说明在更严格的 IoU 阈值下，它的边框位置更稳。DRENet 的 Recall 为 0.8511，高于 YOLO26 的 0.7220，但 Precision 只有 0.4927，低于 YOLO26 的 0.8430。也就是说，DRENet 更愿意保留可疑目标，代价是误检更多；YOLO26 对候选框筛选更严格，输出更干净。
-
-FCOS 的 AP50 和 AP50-95 均低于前两者。在当前实验条件下，通用 anchor-free 基线没有表现出优势。不过 FCOS 仍有保留意义：它给后文讨论专项设计和 one-stage 部署路线时提供了另一条参照线。
+差异主要出现在 AP50-95、Precision 和 Recall 上。YOLO26 的 AP50-95 为 0.3170，高于 DRENet 的 0.2919 和 FCOS 的 0.2880，说明在更严格的 IoU 阈值下，它的边框位置更稳。DRENet 的 Recall 为 0.8511，高于 YOLO26 的 0.7220 和 FCOS 的 0.8297，但 Precision 只有 0.4927，低于 YOLO26 的 0.8430 和 FCOS 的 0.7621。也就是说，DRENet 更愿意保留可疑目标，代价是误检更多；YOLO26 对候选框筛选更严格，输出更干净；FCOS 的 Precision 和 Recall 折中较好，F1 为 0.7944，但整体检出能力弱于前两者。
 
 \subsection{效率与部署属性分析}
 
@@ -67,7 +65,7 @@ FCOS 的 AP50 和 AP50-95 均低于前两者。在当前实验条件下，通用
   \label{fig:ch4_efficiency_chart}
 \end{figure}
 
-把精度和效率放在一起读，DRENet 在召回和速度方面优势明显，YOLO26 在定位质量、误检控制和模型规模之间更均衡，FCOS 则提供 anchor-free 路线的对照。为综合展示三模型在精度与效率各维度上的表现，本文绘制了多维度雷达图（见图~\ref{fig:ch4_radar_chart}），其中参数效率和计算效率取逆指标（越小越优）进行归一化。
+把精度和效率放在一起读，DRENet 在召回和速度方面优势明显，YOLO26 在定位质量、误检控制和模型规模之间更均衡，FCOS 的 Precision--Recall 折中较好但整体检出能力和效率偏低。为综合展示三模型在精度与效率各维度上的表现，本文绘制了多维度雷达图（见图~\ref{fig:ch4_radar_chart}），其中参数效率和计算效率取逆指标（越小越优）进行归一化。
 
 \begin{figure}[H]
   \centering
@@ -86,7 +84,7 @@ DRENet 的问题也很直接：Precision 为 0.4927，误检压力较大。近�
 
 \subsubsection{FCOS 结果分析}
 
-FCOS 的 AP50 为 0.7700，低于 DRENet 与 YOLO26。在当前中分辨率遥感微小船舶任务中，通用 anchor-free 路线没有占到优势。不过 FCOS 的结构清晰、范式明确，保留这组结果后，专项设计和 one-stage 路线在该任务中的差异更容易讨论。
+FCOS 的 AP50 为 0.7389，低于 DRENet 与 YOLO26；但其 Precision 为 0.7621、Recall 为 0.8297、F1 为 0.7944，说明在当前评测配置下，FCOS 对正样本保留较积极，Precision 与 Recall 的折中表现优于 DRENet。不过，FCOS 的参数量（32.17M）和计算量（123.0G）均明显高于另外两个模型，推理速度也最慢（45.96 FPS），整体效率偏低。在遥感微小船舶任务中，FCOS 的检出能力不如 DRENet 和 YOLO26，但 Precision--Recall 平衡和 F1 稳定性仍有参考价值。
 
 \subsubsection{YOLO26 结果分析}
 
@@ -131,7 +129,7 @@ YOLO26 的 AP50 与 DRENet 基本持平，但 AP50-95、Precision 和 F1 更高�
   \label{fig:ch4_false_positive_cases}
 \end{figure}
 
-把这些样例和表~\ref{tab:ch4_baselines} 对照后可以发现，DRENet 与 YOLO26 的差别并不是单纯分数高低。DRENet 更偏向“先检出”，复杂背景下误检会变多；YOLO26 更偏向输出稳定和边框质量，弱目标场景下可能漏掉一部分目标。FCOS 则继续作为 anchor-free 路线的补充参照。
+把这些样例和表~\ref{tab:ch4_baselines} 对照后可以发现，三模型的差别并不是单纯分数高低。DRENet 更偏向"先检出"，复杂背景下误检会变多；YOLO26 更偏向输出稳定和边框质量，弱目标场景下可能漏掉一部分目标；FCOS 的 Precision--Recall 折中较好，但检出能力和效率均弱于前两者。
 
 \subsection{消融实验}
 
@@ -146,7 +144,7 @@ YOLO26 的 AP50 与 DRENet 基本持平，但 AP50-95、Precision 和 F1 更高�
   \small
   \caption{三模型阈值消融结果}
   \label{tab:ch4_threshold_ablation}
-  \begin{tabular}{@{}llccccp{4.2cm}@{}}
+  \begin{tabular}{@{}llcccc>{\raggedright\arraybackslash}p{4.2cm}@{}}
     \toprule
     模型 & 设置 & AP50 & Precision & Recall & F1 & 结论 \\
     \midrule
@@ -178,20 +176,23 @@ FCOS 和 YOLO26 的变化则更细。FCOS 在当前稳定权重下，阈值由 0
 
 \subsubsection{输入尺寸敏感性分析}
 
-输入尺寸敏感性分析固定置信度阈值为 0.25、IoU 阈值为 0.50，只改变推理阶段的输入尺寸。由于 FCOS 的推理接口不支持本节设置的输入尺寸调整，本节主要分析 YOLO26 的变化，结果见表~\ref{tab:ch4_size_ablation}。
+输入尺寸敏感性分析固定置信度阈值为 0.25、IoU 阈值为 0.50，只改变推理阶段的输入尺寸。DRENet 的推理流程对输入尺寸有固定约束（模型内部将输入缩放至预设分辨率后输出固定尺寸特征图，不支持自定义推理尺寸），因此本节重点比较 FCOS 与 YOLO26 在不同输入下的响应差异，结果见表~\ref{tab:ch4_size_ablation}。
 
 \begin{table}[htbp]
   \centering
   \small
-  \caption{YOLO26 输入尺寸敏感性分析结果}
+  \caption{FCOS 与 YOLO26 输入尺寸敏感性分析结果}
   \label{tab:ch4_size_ablation}
-  \begin{tabular}{lccccc}
+  \begin{tabular}{llcccc>{\raggedright\arraybackslash}p{3.8cm}}
     \toprule
-    设置 & AP50 & Precision & Recall & F1 & 结论 \\
+    模型 & 设置 & AP50 & Precision & Recall & F1 & 结论 \\
     \midrule
-    imgsz=512 & 0.6661 & 0.7527 & 0.7609 & 0.7568 & 基线稳定 \\
-    imgsz=640 & 0.6737 & 0.7543 & 0.7953 & 0.7743 & 综合表现最优 \\
-    imgsz=800 & 0.6564 & 0.6827 & 0.7989 & 0.7362 & 召回提高但误检增加 \\
+    FCOS & imgsz=512 & 0.4490 & 0.5903 & 0.6395 & 0.6139 & 输入过小时性能受限 \\
+    FCOS & imgsz=640 & 0.6452 & 0.7405 & 0.7808 & 0.7601 & 相比 512 提升明显 \\
+    FCOS & imgsz=800 & 0.7389 & 0.7621 & 0.8297 & 0.7944 & 本组综合表现最优 \\
+    YOLO26 & imgsz=512 & 0.6661 & 0.7527 & 0.7609 & 0.7568 & 基线稳定 \\
+    YOLO26 & imgsz=640 & 0.6737 & 0.7543 & 0.7953 & 0.7743 & 综合表现最优 \\
+    YOLO26 & imgsz=800 & 0.6564 & 0.6827 & 0.7989 & 0.7362 & 召回提高但误检增加 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -203,4 +204,4 @@ FCOS 和 YOLO26 的变化则更细。FCOS 在当前稳定权重下，阈值由 0
   \label{fig:ch4_size_trend}
 \end{figure}
 
-表~\ref{tab:ch4_size_ablation} 与图~\ref{fig:ch4_size_trend} 显示，YOLO26 在 640 输入下取得本组最高 AP50 和 F1，Precision 与 Recall 也保持较好平衡。当输入尺寸继续增至 800 时，Recall 略有提高，但 Precision 和 F1 明显下降，说明更大的推理输入会带来更多候选目标，同时也更容易引入误检。
+表~\ref{tab:ch4_size_ablation} 与图~\ref{fig:ch4_size_trend} 显示，FCOS 对输入尺寸更敏感，512 到 800 的 AP50、Precision、Recall 和 F1 均呈上升趋势；YOLO26 在 640 输入下取得本组最高 AP50 和 F1，Precision 与 Recall 也保持较好平衡。当输入继续增至 800 时，YOLO26 的 Recall 略升，但 Precision 和 F1 明显下降，说明更大输入会带来更多候选目标，同时也更容易引入误检。

@@ -75,7 +75,7 @@ F1 = \frac{2 \cdot \text{Precision} \cdot \text{Recall}}{\text{Precision} + \tex
 \text{IoU} = \frac{|B_{pred} \cap B_{gt}|}{|B_{pred} \cup B_{gt}|}
 \end{equation}
 
-其中，AP50 对应 IoU 阈值为 0.5 时的平均精度，本文用它观察模型是否能把微小船舶找出来；AP50-95 覆盖多个 IoU 阈值，对边框位置质量更敏感；Precision 更接近误检控制情况，Recall 更接近漏检控制情况，F1 用于观察二者折中。本文还记录 FPS、参数量和 FLOPs，用于讨论模型接入系统时的部署成本。
+其中，AP50 对应 IoU 阈值为 0.5 时的平均精度，本文用它观察模型是否能把微小船舶找出来；AP50-95 覆盖多个 IoU 阈值，对边框位置质量更敏感；Precision 更接近误检控制情况，Recall 更接近漏检控制情况，F1 用于观察二者折中。本文还记录 FPS、参数量和 FLOPs，用于讨论模型接入系统时的部署成本。相关评测口径与 IoU 阈值区间设置与 COCO 指标定义保持一致\cite{lin2014_coco}。
 
 \subsection{指标选择依据}
 
@@ -85,7 +85,7 @@ Precision、Recall 和 F1 在本文中同样重要。DRENet、FCOS 与 YOLO26 �
 
 \subsection{模型方案}
 
-为了让对比不局限在同一类检测器内部，本文选取三类模型：DRENet 对应遥感微小船舶专项方法，FCOS 对应 anchor-free 参考路线，YOLO26 对应 one-stage 路线。
+为了让对比不局限在同一类检测器内部，本文选取三类模型：DRENet 对应遥感微小船舶专项方法，FCOS 对应 anchor-free 检测路线，YOLO26 对应 one-stage 路线。
 
 \subsubsection{DRENet（专项方法）}
 
@@ -100,9 +100,9 @@ DRENet 是针对 LEVIR-Ship 场景提出的专项方法\cite{chen2022_tinyship_d
 
 图~\ref{fig:ch3_drenet_overview} 中可以看到，DRENet 在常规检测路径外加入了退化重建增强分支。该分支只参与训练，通过重建带有目标感知信息的退化图像约束骨干网络特征，使模型减少对大面积背景纹理的依赖。结合 CRMA 模块的跨阶段特征增强设计，DRENet 在本文实验中表现出比较明显的召回优先倾向。
 
-\subsubsection{FCOS（Anchor-Free 参考基线）}
+\subsubsection{FCOS（Anchor-Free 检测路线）}
 
-FCOS 用位置回归替代锚框设计，减少了 anchor 尺寸、比例和匹配策略等超参数依赖\cite{tian2019_fcos}。在本文中，它更多承担 anchor-free 参照基线的角色，用来观察不加入遥感专项结构时，通用 anchor-free 检测器在该任务上的表现。
+FCOS 用位置回归替代锚框设计，减少了 anchor 尺寸、比例和匹配策略等超参数依赖\cite{tian2019_fcos}。本文将 FCOS 作为 anchor-free 路线的代表模型，与专项方法和 one-stage 路线放在同一评测口径下比较，观察其在遥感微小船舶任务上的实际表现。
 
 \begin{figure}[htbp]
   \centering
@@ -111,7 +111,7 @@ FCOS 用位置回归替代锚框设计，减少了 anchor 尺寸、比例和匹�
   \label{fig:ch3_fcos_pipeline}
 \end{figure}
 
-FCOS 的基本流程见图~\ref{fig:ch3_fcos_pipeline}。输入图像过 Backbone 和 FPN 之后生成多尺度特征，检测头直接预测类别、边框偏移和 centerness 分数。因为没有显式 anchor 设计，FCOS 在本文中作为 anchor-free 对照比较合适。
+FCOS 的基本流程见图~\ref{fig:ch3_fcos_pipeline}。输入图像过 Backbone 和 FPN 之后生成多尺度特征，检测头直接预测类别、边框偏移和 centerness 分数。FCOS 无显式 anchor 设计，在遥感微小船舶场景中，其 Precision--Recall 折中表现值得关注。
 
 \subsubsection{YOLO26（One-Stage 代表）}
 

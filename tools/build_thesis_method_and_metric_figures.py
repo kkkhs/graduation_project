@@ -8,7 +8,7 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch
 import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTDIR = ROOT / "thesis_overleaf2" / "img"
+OUTDIR = ROOT / "thesis_overleaf" / "img"
 
 MODEL_COLORS = {
     "DRENet": "#8C8C8C",
@@ -32,7 +32,7 @@ ACCENT_FILL = "#EFEFEF"
 
 MAIN_RESULTS = {
     "DRENet": {"AP50": 0.7949, "AP50-95": 0.2919, "Precision": 0.4927, "Recall": 0.8511, "F1": 0.6241},
-    "FCOS": {"AP50": 0.7700, "AP50-95": 0.2850, "Precision": None, "Recall": 0.4050, "F1": None},
+    "FCOS": {"AP50": 0.7389, "AP50-95": 0.2880, "Precision": 0.7621, "Recall": 0.8297, "F1": 0.7944},
     "YOLO26": {"AP50": 0.7950, "AP50-95": 0.3170, "Precision": 0.8430, "Recall": 0.7220, "F1": 0.7778},
 }
 
@@ -583,20 +583,11 @@ def build_main_comparison_chart(out_path: Path) -> None:
     for idx, model in enumerate(models):
         offsets = x + (idx - 1) * width
         vals = [MAIN_RESULTS[model][m] for m in metrics]
-        draw_vals = [0 if v is None else v for v in vals]
-        bars = ax.bar(offsets, draw_vals, width=width, label=model, color=MODEL_COLORS[model], edgecolor="white", linewidth=1.0)
+        bars = ax.bar(offsets, vals, width=width, label=model, color=MODEL_COLORS[model], edgecolor="white", linewidth=1.0)
         for bar, raw in zip(bars, vals):
             cx = bar.get_x() + bar.get_width() / 2
-            if raw is None:
-                bar.set_facecolor("#E5E7EB")
-                bar.set_hatch("///")
-                bar.set_edgecolor("#9CA3AF")
-                ax.text(cx, 0.03, "N/A", ha="center", va="bottom", fontsize=9, color=MUTED, rotation=90)
-            else:
-                label = f"{raw:.3f}"
-                if model == "FCOS" and metrics[list(bars).index(bar)] == "Recall":
-                    label += "*"
-                ax.text(cx, raw + 0.018, label, ha="center", va="bottom", fontsize=8.5, color=TEXT, rotation=90)
+            label = f"{raw:.3f}"
+            ax.text(cx, raw + 0.018, label, ha="center", va="bottom", fontsize=8.5, color=TEXT, rotation=90)
 
     ax.set_ylabel("Score")
     ax.set_xticks(x)
@@ -606,7 +597,6 @@ def build_main_comparison_chart(out_path: Path) -> None:
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     ax.legend(frameon=False, ncol=3, loc="upper center", bbox_to_anchor=(0.5, 1.10))
-    ax.text(0.99, -0.14, "* FCOS recall uses AR@100 from the formal run; Precision and F1 are unavailable in the current main-table record.", transform=ax.transAxes, ha="right", va="top", fontsize=9.2, color=MUTED)
     fig.tight_layout(rect=(0, 0, 1, 0.97))
     fig.savefig(out_path, dpi=220, bbox_inches="tight")
     plt.close(fig)
@@ -848,15 +838,25 @@ def build_ch4_radar_chart(out_path: Path) -> None:
     radar_metrics = ["AP50", "AP50-95", "Precision", "Recall", "F1", "FPS", "Params eff", "FLOPs eff"]
     models = list(MAIN_RESULTS.keys())
 
+    # 归一化参数：效率指标用逆指标（越小越优），映射到 [0.1, 1.0] 避免最差模型为 0
+    max_params = max(eff["Params(M)"] for eff in EFFICIENCY_RESULTS.values())
+    min_params = min(eff["Params(M)"] for eff in EFFICIENCY_RESULTS.values())
+    max_flops = max(eff["FLOPs(G)"] for eff in EFFICIENCY_RESULTS.values())
+    min_flops = min(eff["FLOPs(G)"] for eff in EFFICIENCY_RESULTS.values())
+    max_fps = max(eff["FPS"] for eff in EFFICIENCY_RESULTS.values())
+
     radar_data = {}
     for m in models:
         main = MAIN_RESULTS[m]
         eff = EFFICIENCY_RESULTS[m]
-        precision_val = main["Precision"] if main["Precision"] is not None else 0.0
-        f1_val = main["F1"] if main["F1"] is not None else 0.0
-        fps_norm = eff["FPS"] / 121.90
-        params_eff = 1.0 - eff["Params(M)"] / 32.17
-        flops_eff = 1.0 - eff["FLOPs(G)"] / 123.0
+        precision_val = main["Precision"]
+        f1_val = main["F1"]
+        fps_norm = eff["FPS"] / max_fps
+        # 逆指标归一化到 [0.1, 1.0]：最优=1.0，最差=0.1
+        params_range = max_params - min_params if max_params != min_params else 1.0
+        flops_range = max_flops - min_flops if max_flops != min_flops else 1.0
+        params_eff = 0.1 + 0.9 * (1.0 - (eff["Params(M)"] - min_params) / params_range)
+        flops_eff = 0.1 + 0.9 * (1.0 - (eff["FLOPs(G)"] - min_flops) / flops_range)
         radar_data[m] = [
             main["AP50"], main["AP50-95"], precision_val, main["Recall"], f1_val,
             fps_norm, params_eff, flops_eff,
