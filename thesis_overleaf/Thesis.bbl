@@ -1535,6 +1535,68 @@
       \field{dateera}{ce}
       \keyw{najibi2019_autofocus}
     \endentry
+    \entry{cheng2016_rsod_survey}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=8f8c67320b6baecc329cfb36911104e1}{%
+           family={Cheng},
+           familyi={C\bibinitperiod},
+           given={Gong},
+           giveni={G\bibinitperiod}}}%
+        {{hash=19b9723645f5a1e1abb104400e9352d6}{%
+           family={Han},
+           familyi={H\bibinitperiod},
+           given={Junwei},
+           giveni={J\bibinitperiod}}}%
+      }
+      \name{namea}{2}{}{%
+        {{hash=8f8c67320b6baecc329cfb36911104e1}{%
+           family={Cheng},
+           familyi={C\bibinitperiod},
+           given={Gong},
+           giveni={G\bibinitperiod}}}%
+        {{hash=19b9723645f5a1e1abb104400e9352d6}{%
+           family={Han},
+           familyi={H\bibinitperiod},
+           given={Junwei},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \strng{namehash}{8f5a8715d977128b0d3af0af4910357a}
+      \strng{fullhash}{8f5a8715d977128b0d3af0af4910357a}
+      \strng{fullhashraw}{8f5a8715d977128b0d3af0af4910357a}
+      \strng{bibnamehash}{8f5a8715d977128b0d3af0af4910357a}
+      \strng{authorbibnamehash}{8f5a8715d977128b0d3af0af4910357a}
+      \strng{authornamehash}{8f5a8715d977128b0d3af0af4910357a}
+      \strng{authorfullhash}{8f5a8715d977128b0d3af0af4910357a}
+      \strng{authorfullhashraw}{8f5a8715d977128b0d3af0af4910357a}
+      \strng{nameabibnamehash}{8f5a8715d977128b0d3af0af4910357a}
+      \strng{nameanamehash}{8f5a8715d977128b0d3af0af4910357a}
+      \strng{nameafullhash}{8f5a8715d977128b0d3af0af4910357a}
+      \strng{nameafullhashraw}{8f5a8715d977128b0d3af0af4910357a}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ISPRS Journal of Photogrammetry and Remote Sensing}
+      \field{langid}{english}
+      \field{languageid}{english}
+      \field{lansortorder}{4}
+      \field{title}{A Survey on Object Detection in Optical Remote Sensing Images}
+      \field{usera}{J}
+      \field{userd}{english}
+      \field{userf}{english}
+      \field{volume}{117}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \field{pages}{11\bibrangedash 28}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1016/j.isprsjprs.2016.03.014
+      \endverb
+      \keyw{cheng2016_rsod_survey}
+    \endentry
     \entry{mmdet2018_openmmlab}{misc}{}{}
       \name{author}{25}{}{%
         {{hash=ee3f7d7b96add98106db907e189d6c13}{%
@@ -1878,6 +1940,367 @@
       \verb https://docs.ultralytics.com/
       \endverb
       \keyw{ultralytics2024_docs}
+    \endentry
+    \entry{lin2014_coco}{inproceedings}{}{}
+      \name{author}{8}{}{%
+        {{hash=08f925fe4692d130a1d7cb7d94483351}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Tsung-Yi},
+           giveni={T\bibinithyphendelim Y\bibinitperiod}}}%
+        {{hash=d980bc6930f008a0fb5fa667785f2309}{%
+           family={Maire},
+           familyi={M\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=044d1db5259b74e4975282f599d8e767}{%
+           family={Belongie},
+           familyi={B\bibinitperiod},
+           given={Serge},
+           giveni={S\bibinitperiod}}}%
+        {{hash=797fc3624ba315db58eef7279ace5bf3}{%
+           family={Hays},
+           familyi={H\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e52876f830a8a20786ff3e4d7dd6f083}{%
+           family={Perona},
+           familyi={P\bibinitperiod},
+           given={Pietro},
+           giveni={P\bibinitperiod}}}%
+        {{hash=aedcd3831845183e070aef16857d83ea}{%
+           family={Ramanan},
+           familyi={R\bibinitperiod},
+           given={Deva},
+           giveni={D\bibinitperiod}}}%
+        {{hash=37843fd1a96680e7945ac1a059b6e8b8}{%
+           family={Dollar},
+           familyi={D\bibinitperiod},
+           given={Piotr},
+           giveni={P\bibinitperiod}}}%
+        {{hash=0eae2d56a9cbb037c64028d6573877a7}{%
+           family={Zitnick},
+           familyi={Z\bibinitperiod},
+           given={C.\bibnamedelimi Lawrence},
+           giveni={C\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \name{namea}{8}{}{%
+        {{hash=08f925fe4692d130a1d7cb7d94483351}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Tsung-Yi},
+           giveni={T\bibinithyphendelim Y\bibinitperiod}}}%
+        {{hash=d980bc6930f008a0fb5fa667785f2309}{%
+           family={Maire},
+           familyi={M\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=044d1db5259b74e4975282f599d8e767}{%
+           family={Belongie},
+           familyi={B\bibinitperiod},
+           given={Serge},
+           giveni={S\bibinitperiod}}}%
+        {{hash=797fc3624ba315db58eef7279ace5bf3}{%
+           family={Hays},
+           familyi={H\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e52876f830a8a20786ff3e4d7dd6f083}{%
+           family={Perona},
+           familyi={P\bibinitperiod},
+           given={Pietro},
+           giveni={P\bibinitperiod}}}%
+        {{hash=aedcd3831845183e070aef16857d83ea}{%
+           family={Ramanan},
+           familyi={R\bibinitperiod},
+           given={Deva},
+           giveni={D\bibinitperiod}}}%
+        {{hash=37843fd1a96680e7945ac1a059b6e8b8}{%
+           family={Dollar},
+           familyi={D\bibinitperiod},
+           given={Piotr},
+           giveni={P\bibinitperiod}}}%
+        {{hash=0eae2d56a9cbb037c64028d6573877a7}{%
+           family={Zitnick},
+           familyi={Z\bibinitperiod},
+           given={C.\bibnamedelimi Lawrence},
+           giveni={C\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \strng{namehash}{3f23d264edb29776986e0c9e6a6459c4}
+      \strng{fullhash}{3f23d264edb29776986e0c9e6a6459c4}
+      \strng{fullhashraw}{3f23d264edb29776986e0c9e6a6459c4}
+      \strng{bibnamehash}{3f23d264edb29776986e0c9e6a6459c4}
+      \strng{authorbibnamehash}{3f23d264edb29776986e0c9e6a6459c4}
+      \strng{authornamehash}{3f23d264edb29776986e0c9e6a6459c4}
+      \strng{authorfullhash}{3f23d264edb29776986e0c9e6a6459c4}
+      \strng{authorfullhashraw}{3f23d264edb29776986e0c9e6a6459c4}
+      \strng{nameabibnamehash}{3f23d264edb29776986e0c9e6a6459c4}
+      \strng{nameanamehash}{3f23d264edb29776986e0c9e6a6459c4}
+      \strng{nameafullhash}{3f23d264edb29776986e0c9e6a6459c4}
+      \strng{nameafullhashraw}{3f23d264edb29776986e0c9e6a6459c4}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the European Conference on Computer Vision (ECCV)}
+      \field{langid}{english}
+      \field{languageid}{english}
+      \field{lansortorder}{4}
+      \field{title}{Microsoft {COCO}: Common Objects in Context}
+      \field{usera}{C}
+      \field{userd}{english}
+      \field{userf}{english}
+      \field{year}{2014}
+      \field{dateera}{ce}
+      \field{pages}{740\bibrangedash 755}
+      \range{pages}{16}
+      \keyw{lin2014_coco}
+    \endentry
+    \entry{everingham2010_voc}{inproceedings}{}{}
+      \name{author}{5}{}{%
+        {{hash=655191b4f54a942147b118da2f50aeed}{%
+           family={Everingham},
+           familyi={E\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod}}}%
+        {{hash=d3bc7b9be5061411a87f19fcdf39499c}{%
+           family={Van\bibnamedelima Gool},
+           familyi={V\bibinitperiod\bibinitdelim G\bibinitperiod},
+           given={Luc},
+           giveni={L\bibinitperiod}}}%
+        {{hash=d34fdfcbfcb5412397b946351370db22}{%
+           family={Williams},
+           familyi={W\bibinitperiod},
+           given={Christopher\bibnamedelimb K.\bibnamedelimi I.},
+           giveni={C\bibinitperiod\bibinitdelim K\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+        {{hash=19dcf449a33f27289a006b0acf819975}{%
+           family={Winn},
+           familyi={W\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=c72fc39e94030f67717052309266a44d}{%
+           family={Zisserman},
+           familyi={Z\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+      }
+      \name{namea}{5}{}{%
+        {{hash=655191b4f54a942147b118da2f50aeed}{%
+           family={Everingham},
+           familyi={E\bibinitperiod},
+           given={Mark},
+           giveni={M\bibinitperiod}}}%
+        {{hash=d3bc7b9be5061411a87f19fcdf39499c}{%
+           family={Van\bibnamedelima Gool},
+           familyi={V\bibinitperiod\bibinitdelim G\bibinitperiod},
+           given={Luc},
+           giveni={L\bibinitperiod}}}%
+        {{hash=d34fdfcbfcb5412397b946351370db22}{%
+           family={Williams},
+           familyi={W\bibinitperiod},
+           given={Christopher\bibnamedelimb K.\bibnamedelimi I.},
+           giveni={C\bibinitperiod\bibinitdelim K\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+        {{hash=19dcf449a33f27289a006b0acf819975}{%
+           family={Winn},
+           familyi={W\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=c72fc39e94030f67717052309266a44d}{%
+           family={Zisserman},
+           familyi={Z\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \strng{namehash}{f5f172ccc39720f9a6284cf8a9d3b6f3}
+      \strng{fullhash}{f5f172ccc39720f9a6284cf8a9d3b6f3}
+      \strng{fullhashraw}{f5f172ccc39720f9a6284cf8a9d3b6f3}
+      \strng{bibnamehash}{f5f172ccc39720f9a6284cf8a9d3b6f3}
+      \strng{authorbibnamehash}{f5f172ccc39720f9a6284cf8a9d3b6f3}
+      \strng{authornamehash}{f5f172ccc39720f9a6284cf8a9d3b6f3}
+      \strng{authorfullhash}{f5f172ccc39720f9a6284cf8a9d3b6f3}
+      \strng{authorfullhashraw}{f5f172ccc39720f9a6284cf8a9d3b6f3}
+      \strng{nameabibnamehash}{f5f172ccc39720f9a6284cf8a9d3b6f3}
+      \strng{nameanamehash}{f5f172ccc39720f9a6284cf8a9d3b6f3}
+      \strng{nameafullhash}{f5f172ccc39720f9a6284cf8a9d3b6f3}
+      \strng{nameafullhashraw}{f5f172ccc39720f9a6284cf8a9d3b6f3}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{International Journal of Computer Vision}
+      \field{langid}{english}
+      \field{languageid}{english}
+      \field{lansortorder}{4}
+      \field{number}{2}
+      \field{title}{The {PASCAL} Visual Object Classes ({VOC}) Challenge}
+      \field{usera}{C}
+      \field{userd}{english}
+      \field{userf}{english}
+      \field{volume}{88}
+      \field{year}{2010}
+      \field{dateera}{ce}
+      \field{pages}{303\bibrangedash 338}
+      \range{pages}{36}
+      \verb{doi}
+      \verb 10.1007/s11263-009-0275-4
+      \endverb
+      \keyw{everingham2010_voc}
+    \endentry
+    \entry{solovyev2021_wbf}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=251f2828891bd015bfcf8a200098065b}{%
+           family={Solovyev},
+           familyi={S\bibinitperiod},
+           given={Roman},
+           giveni={R\bibinitperiod}}}%
+        {{hash=2be0857ae5cdb7fee9911798d50717d3}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Weimin},
+           giveni={W\bibinitperiod}}}%
+        {{hash=7879e7d3a202dca038d228642d1f59c7}{%
+           family={Gabruseva},
+           familyi={G\bibinitperiod},
+           given={Tatiana},
+           giveni={T\bibinitperiod}}}%
+      }
+      \name{namea}{3}{}{%
+        {{hash=251f2828891bd015bfcf8a200098065b}{%
+           family={Solovyev},
+           familyi={S\bibinitperiod},
+           given={Roman},
+           giveni={R\bibinitperiod}}}%
+        {{hash=2be0857ae5cdb7fee9911798d50717d3}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Weimin},
+           giveni={W\bibinitperiod}}}%
+        {{hash=7879e7d3a202dca038d228642d1f59c7}{%
+           family={Gabruseva},
+           familyi={G\bibinitperiod},
+           given={Tatiana},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \strng{namehash}{716368ffcbf4a15fd391700bd71a3f40}
+      \strng{fullhash}{716368ffcbf4a15fd391700bd71a3f40}
+      \strng{fullhashraw}{716368ffcbf4a15fd391700bd71a3f40}
+      \strng{bibnamehash}{716368ffcbf4a15fd391700bd71a3f40}
+      \strng{authorbibnamehash}{716368ffcbf4a15fd391700bd71a3f40}
+      \strng{authornamehash}{716368ffcbf4a15fd391700bd71a3f40}
+      \strng{authorfullhash}{716368ffcbf4a15fd391700bd71a3f40}
+      \strng{authorfullhashraw}{716368ffcbf4a15fd391700bd71a3f40}
+      \strng{nameabibnamehash}{716368ffcbf4a15fd391700bd71a3f40}
+      \strng{nameanamehash}{716368ffcbf4a15fd391700bd71a3f40}
+      \strng{nameafullhash}{716368ffcbf4a15fd391700bd71a3f40}
+      \strng{nameafullhashraw}{716368ffcbf4a15fd391700bd71a3f40}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Image and Vision Computing}
+      \field{langid}{english}
+      \field{languageid}{english}
+      \field{lansortorder}{4}
+      \field{title}{Weighted Boxes Fusion: Ensembling Boxes from Different Object Detection Models}
+      \field{usera}{J}
+      \field{userd}{english}
+      \field{userf}{english}
+      \field{volume}{107}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{pages}{104117}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.imavis.2021.104117
+      \endverb
+      \keyw{solovyev2021_wbf}
+    \endentry
+    \entry{bodla2017_softnms}{inproceedings}{}{}
+      \name{author}{4}{}{%
+        {{hash=78b49707c6d91e50fc71049dc03be144}{%
+           family={Bodla},
+           familyi={B\bibinitperiod},
+           given={Navaneeth},
+           giveni={N\bibinitperiod}}}%
+        {{hash=0941470bff5d1a7c2c1598f3a26e0342}{%
+           family={Singh},
+           familyi={S\bibinitperiod},
+           given={Bharat},
+           giveni={B\bibinitperiod}}}%
+        {{hash=58e34e482e0dd6e755329ae57da3b293}{%
+           family={Chellappa},
+           familyi={C\bibinitperiod},
+           given={Rama},
+           giveni={R\bibinitperiod}}}%
+        {{hash=dcd7f4d5fae52e84cdfcfb7809b2d5a2}{%
+           family={Davis},
+           familyi={D\bibinitperiod},
+           given={Larry\bibnamedelima S.},
+           giveni={L\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \name{namea}{4}{}{%
+        {{hash=78b49707c6d91e50fc71049dc03be144}{%
+           family={Bodla},
+           familyi={B\bibinitperiod},
+           given={Navaneeth},
+           giveni={N\bibinitperiod}}}%
+        {{hash=0941470bff5d1a7c2c1598f3a26e0342}{%
+           family={Singh},
+           familyi={S\bibinitperiod},
+           given={Bharat},
+           giveni={B\bibinitperiod}}}%
+        {{hash=58e34e482e0dd6e755329ae57da3b293}{%
+           family={Chellappa},
+           familyi={C\bibinitperiod},
+           given={Rama},
+           giveni={R\bibinitperiod}}}%
+        {{hash=dcd7f4d5fae52e84cdfcfb7809b2d5a2}{%
+           family={Davis},
+           familyi={D\bibinitperiod},
+           given={Larry\bibnamedelima S.},
+           giveni={L\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \strng{namehash}{6ecc0adb2c55d3815a4962aaf1fbdc2f}
+      \strng{fullhash}{6ecc0adb2c55d3815a4962aaf1fbdc2f}
+      \strng{fullhashraw}{6ecc0adb2c55d3815a4962aaf1fbdc2f}
+      \strng{bibnamehash}{6ecc0adb2c55d3815a4962aaf1fbdc2f}
+      \strng{authorbibnamehash}{6ecc0adb2c55d3815a4962aaf1fbdc2f}
+      \strng{authornamehash}{6ecc0adb2c55d3815a4962aaf1fbdc2f}
+      \strng{authorfullhash}{6ecc0adb2c55d3815a4962aaf1fbdc2f}
+      \strng{authorfullhashraw}{6ecc0adb2c55d3815a4962aaf1fbdc2f}
+      \strng{nameabibnamehash}{6ecc0adb2c55d3815a4962aaf1fbdc2f}
+      \strng{nameanamehash}{6ecc0adb2c55d3815a4962aaf1fbdc2f}
+      \strng{nameafullhash}{6ecc0adb2c55d3815a4962aaf1fbdc2f}
+      \strng{nameafullhashraw}{6ecc0adb2c55d3815a4962aaf1fbdc2f}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the IEEE International Conference on Computer Vision (ICCV)}
+      \field{langid}{english}
+      \field{languageid}{english}
+      \field{lansortorder}{4}
+      \field{title}{Soft-{NMS} -- Improving Object Detection with One Line of Code}
+      \field{usera}{C}
+      \field{userd}{english}
+      \field{userf}{english}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \field{pages}{5561\bibrangedash 5569}
+      \range{pages}{9}
+      \keyw{bodla2017_softnms}
     \endentry
   \enddatalist
 \endrefsection

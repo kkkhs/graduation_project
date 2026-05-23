@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  22 MAY 2026 14:41
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  23 MAY 2026 12:58
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2214,6 +2214,12 @@ File: img/ch4_false_positive_cases.png Graphic file (type bmp)
 
 
 [19]
+Overfull \hbox (8.31392pt too wide) in paragraph at lines 132--133
+[]\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 把 这 些 样 例 和 表 []\TU/TimesNewRoman(0)
+/m/n/12.045 4.1[] \TU/AdobeSongStd-Light.otf(1)/m/n/12.045 对 照 后 可 以 发 现，|  三 模
+ 型 的 差 别 并 不 是 单 纯 分 数 高 低。| \TU/TimesNewRoman(0)/m/n/12.045 DRENet
+ []
+
 File: img/ch4_threshold_trend.png Graphic file (type bmp)
 <img/ch4_threshold_trend.png>
 
@@ -2262,6 +2268,8 @@ File: img/ch5_pages.png Graphic file (type bmp)
 [29]
 
 [30]
+
+[31]
 Overfull \hbox (6.42047pt too wide) in paragraph at lines 148--149
 []\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 针 对 该 问 题，|  后 端 新 增 进 度 查 询 接 口，|  
 只 返 回 \TU/lmtt/m/n/12.045 status\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 、| \TU
@@ -2269,9 +2277,7 @@ Overfull \hbox (6.42047pt too wide) in paragraph at lines 148--149
 /m/n/12.045 input_count
  []
 
-
-
-[31])
+)
 
 [32]
 
@@ -2320,18 +2326,18 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2022/08/05>
  ***********
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: E618AD5C755C8653A7C64F0F2539D53F;7702.
+(rerunfilecheck)             Checksum: D0006983C94FB8FFE522D26212BA472D;7702.
 Package logreq Info: Writing requests to 'Thesis.run.xml'.
 \openout1 = `Thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 43986 strings out of 473832
- 966856 string characters out of 5719382
- 1916713 words of memory out of 5000000
- 66213 multiletter control sequences out of 15000+600000
+ 43997 strings out of 473832
+ 967029 string characters out of 5719382
+ 1917058 words of memory out of 5000000
+ 66224 multiletter control sequences out of 15000+600000
  573074 words of font info for 155 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 129i,12n,136p,908b,5154s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 129i,12n,136p,1026b,5154s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Thesis.xdv (50 pages, 637908 bytes).
+Output written on Thesis.xdv (50 pages, 662344 bytes).

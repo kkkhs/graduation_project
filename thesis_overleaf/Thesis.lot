@@ -3,6 +3,6 @@
 \contentsline {table}{\numberline {4.1}{\ignorespaces 三模型在 LEVIR-Ship 数据集上的主对比结果}}{14}{table.caption.10}%
 \contentsline {table}{\numberline {4.2}{\ignorespaces 三模型效率与复杂度对比}}{15}{table.caption.12}%
 \contentsline {table}{\numberline {4.3}{\ignorespaces 三模型阈值消融结果}}{21}{table.caption.18}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces YOLO26 输入尺寸敏感性分析结果}}{22}{table.caption.20}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces FCOS 与 YOLO26 输入尺寸敏感性分析结果}}{22}{table.caption.20}%
 \contentsline {table}{\numberline {5.1}{\ignorespaces 系统核心接口设计}}{26}{table.caption.24}%
 \contentsline {table}{\numberline {5.2}{\ignorespaces 系统响应速度优化的关键基准结果}}{32}{table.caption.27}%

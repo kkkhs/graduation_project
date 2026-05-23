@@ -19,7 +19,7 @@
 \contentsline {subsection}{\numberline {3.6}指标选择依据}{10}{subsection.3.6}%
 \contentsline {subsection}{\numberline {3.7}模型方案}{11}{subsection.3.7}%
 \contentsline {subsubsection}{\numberline {3.7.1}DRENet（专项方法）}{11}{subsubsection.3.7.1}%
-\contentsline {subsubsection}{\numberline {3.7.2}FCOS（Anchor-Free 参考基线）}{11}{subsubsection.3.7.2}%
+\contentsline {subsubsection}{\numberline {3.7.2}FCOS（Anchor-Free 检测路线）}{11}{subsubsection.3.7.2}%
 \contentsline {subsubsection}{\numberline {3.7.3}YOLO26（One-Stage 代表）}{12}{subsubsection.3.7.3}%
 \contentsline {subsection}{\numberline {3.8}统一实验协议与实现约束}{12}{subsection.3.8}%
 \contentsline {section}{\numberline {4}实验结果与分析}{14}{section.4}%

@@ -2971,16 +2971,22 @@
     <bcf:citekey order="17" intorder="1">najibi2019_autofocus</bcf:citekey>
     <bcf:citekey order="18" intorder="1">lin2017_focalloss</bcf:citekey>
     <bcf:citekey order="19" intorder="1">wang2023_sod_review</bcf:citekey>
+    <bcf:citekey order="19" intorder="2">cheng2016_rsod_survey</bcf:citekey>
     <bcf:citekey order="20" intorder="1">zhao2024_shipsurvey</bcf:citekey>
     <bcf:citekey order="21" intorder="1">chen2022_tinyship_drenet</bcf:citekey>
     <bcf:citekey order="22" intorder="1">mmdet2018_openmmlab</bcf:citekey>
     <bcf:citekey order="23" intorder="1">ultralytics2024_docs</bcf:citekey>
-    <bcf:citekey order="24" intorder="1">chen2022_tinyship_drenet</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">lin2014_coco</bcf:citekey>
+    <bcf:citekey order="24" intorder="2">everingham2010_voc</bcf:citekey>
     <bcf:citekey order="25" intorder="1">chen2022_tinyship_drenet</bcf:citekey>
-    <bcf:citekey order="26" intorder="1">tian2019_fcos</bcf:citekey>
-    <bcf:citekey order="27" intorder="1">redmon2016_yolo</bcf:citekey>
-    <bcf:citekey order="27" intorder="2">redmon2018_yolov3</bcf:citekey>
-    <bcf:citekey order="27" intorder="3">ultralytics2024_docs</bcf:citekey>
+    <bcf:citekey order="26" intorder="1">lin2014_coco</bcf:citekey>
+    <bcf:citekey order="27" intorder="1">chen2022_tinyship_drenet</bcf:citekey>
+    <bcf:citekey order="28" intorder="1">tian2019_fcos</bcf:citekey>
+    <bcf:citekey order="29" intorder="1">redmon2016_yolo</bcf:citekey>
+    <bcf:citekey order="29" intorder="2">redmon2018_yolov3</bcf:citekey>
+    <bcf:citekey order="29" intorder="3">ultralytics2024_docs</bcf:citekey>
+    <bcf:citekey order="30" intorder="1">solovyev2021_wbf</bcf:citekey>
+    <bcf:citekey order="31" intorder="1">bodla2017_softnms</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

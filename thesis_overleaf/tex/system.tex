@@ -135,7 +135,7 @@
 
 \subsubsection{并行推理与模型预加载机制}
 
-融合模式需要对于同一张图像调用多个模型，再合并其检测结果。初始实现按顺序执行，总耗时接近各模型耗时之和。为减少这部分的等待时间，后端推理运行时加入了基于 \texttt{ThreadPoolExecutor} 的并行推理机制，并通过环境配置控制并行模型数。并行度设为 1 时仍按串行执行；而当 GPU 资源较充足时，可以选择性地提高并行度来缩短融合推理时间。
+融合模式需要对于同一张图像调用多个模型，再合并其检测结果。初始实现按顺序执行，总耗时接近各模型耗时之和。为减少这部分的等待时间，后端推理运行时加入了基于 \texttt{ThreadPoolExecutor} 的并行推理机制，并通过环境配置控制并行模型数。并行度设为 1 时仍按串行执行；而当 GPU 资源较充足时，可以选择性地提高并行度来缩短融合推理时间。融合后处理阶段采用加权框融合思路统一多模型候选框\cite{solovyev2021_wbf}，并与常见 NMS 系列方法的设计取向保持一致\cite{bodla2017_softnms}。
 
 并行并没有被设为默认开启。原因是线程争抢会使单模型耗时上升，三模型并行也可能带来显存竞争。本文因此保留默认并行度为 1，只在资源允许时手动提高并行度，让系统在不同机器上更容易稳定运行。
 
@@ -165,7 +165,7 @@
   \setlength{\tabcolsep}{4pt}
   \caption{系统响应速度优化的关键基准结果}
   \label{tab:ch5_perf}
-  \begin{tabular}{p{3.0cm}p{2.2cm}p{2.2cm}p{2.0cm}p{4.0cm}}
+  \begin{tabular}{>{\raggedright\arraybackslash}p{3.0cm}>{\centering\arraybackslash}p{2.2cm}>{\centering\arraybackslash}p{2.2cm}>{\centering\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{4.0cm}}
     \toprule
     优化项 & 优化前 & 优化后 & 提升倍数 & 说明 \\
     \midrule
