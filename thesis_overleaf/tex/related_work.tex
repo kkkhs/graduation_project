@@ -4,7 +4,7 @@
 
 通用目标检测的发展可以先从 R-CNN 系列看起。Girshick 等人的工作\cite{girshick2014_rcnn}把候选区域、特征提取和分类回归串成一条检测流程，后来 Faster R-CNN\cite{ren2015_fasterrcnn} 又把候选框生成进一步网络化，成为 two-stage 路线中很常被引用的代表。这一路线通常定位较稳，但候选区域处理会带来额外计算，推理速度不如更直接的单阶段方法。
 
-与之相比，one-stage 方法取消了显式候选区域生成过程，直接在特征图上进行密集预测。YOLO 系列\cite{redmon2016_yolo,redmon2018_yolov3}、RetinaNet\cite{lin2017_focalloss} 和 EfficientDet\cite{tan2020_efficientdet} 均属于该路线的代表工作。它们结构紧凑、推理速度快、部署方便，因此在工程场景中应用较多；但遇到复杂背景和弱目标时，误检与漏检问题仍需要单独分析。
+one-stage 方法与之相比取消了显式候选区域生成过程且直接在特征图上进行密集预测，YOLO 系列\cite{redmon2016_yolo,redmon2018_yolov3}、RetinaNet\cite{lin2017_focalloss} 和 EfficientDet\cite{tan2020_efficientdet} 都属于该路线的代表工作，它们结构紧凑、推理速度快、部署方便，因此在工程场景中应用较多；但当遇到复杂背景和弱目标时，误检与漏检问题仍需要单独分析。
 
 anchor-free 方法的出发点是减少 anchor 尺寸、比例和匹配策略带来的调参负担。FCOS\cite{tian2019_fcos} 直接在特征图位置上回归目标框，并用 centerness 抑制偏离目标中心的预测。这个设计在通用场景中较有代表性，但遥感微小船舶的目标面积太小，anchor-free 方法能否稳定优于 anchor-based 或专项方法，还需要放到同一任务口径下测试。
 
@@ -14,7 +14,7 @@ anchor-free 方法的出发点是减少 anchor 尺寸、比例和匹配策略带
 
 \subsection{小目标检测研究进展}
 
-小目标检测之所以困难，首先是因为可用像素少。目标在特征图上经过下采样后可能只剩很小响应，纹理、边缘和上下文都不稳定；同时，图像中大量背景区域会放大正负样本不平衡。围绕这些问题，相关研究常从下面几类思路展开。
+小目标检测困难的原因，首先是因为可用像素少导致目标在特征图上经过下采样后可能只剩很小响应，纹理、边缘和上下文都不稳定；同时图像中大量背景区域会放大正负样本不平衡，围绕这些问题，相关研究常从下述几类思路展开。
 
 一类做法直接改进特征表达。FPN\cite{lin2017_fpn} 将浅层细节和深层语义结合起来，后来许多小目标检测方法都沿用了这种多尺度思想。遥感场景中，SCRDet\cite{yang2019_scrdet} 等方法进一步结合注意力和旋转检测，以适应小尺度、密集分布目标。这类方法容易和现有检测器组合，但遇到极弱纹理目标时，特征仍可能被背景响应盖住。
 
@@ -40,9 +40,9 @@ anchor-free 方法的出发点是减少 anchor 尺寸、比例和匹配策略带
 
 LEVIR-Ship 数据集\cite{chen2022_tinyship_drenet} 聚焦中分辨率遥感图像中的微小船舶，为不同方法提供了同一数据基础。DRENet 也是围绕该数据集提出的专项方法，其退化重建增强机制主要服务于训练阶段，希望让网络对弱纹理船舶目标更敏感。本文选择它作为主线模型之一，正是因为它和本文场景最贴近。
 
-工程工具链的成熟也改变了这类课题的组织方式。MMDetection\cite{mmdet2018_openmmlab} 和 Ultralytics\cite{ultralytics2024_docs} 已经提供了训练、测试和部署所需的基础设施，使不同模型之间的复现和比较更可操作。相关工作也逐渐重视评测协议、复现记录和实验流程的一致性，而这种一致性通常也借助 COCO、VOC 等通用基准协议来统一理解\cite{lin2014_coco,everingham2010_voc}。
+工程工具链的成熟也改变了这类课题的组织方式，MMDetection\cite{mmdet2018_openmmlab} 和 Ultralytics\cite{ultralytics2024_docs} 提供了训练、测试和部署所需的基础设施，使得不同模型之间的复现和比较更方便，相关工作也慢慢开始重视评测协议、复现记录和实验流程的一致性，而这种一致性通常也需要借助 COCO、VOC 等通用基准协议来统一理解\cite{lin2014_coco,everingham2010_voc}。
 
-本文从通用目标检测、小目标检测和遥感船舶检测三条路线展开梳理，各路线的代表方法与本文定位之间的关系见图~\ref{fig:ch2_research_map}。
+本文从通用目标检测、小目标检测和遥感船舶检测三条路线展开，各个路线的代表方法与本文之间的关系见图~\ref{fig:ch2_research_map}。
 
 \begin{table}[htbp]
   \centering
