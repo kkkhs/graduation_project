@@ -1,0 +1,33 @@
+% 标准 E-R 图（实体-属性-关系，中文）
+\begin{tikzpicture}[
+  entity/.style={rectangle, draw=black, rounded corners=2pt, minimum width=2.6cm, minimum height=0.9cm, font=\small, fill=blue!8, align=center},
+  rel/.style={diamond, draw=black, aspect=2, minimum width=1.8cm, minimum height=0.8cm, font=\footnotesize, fill=orange!10, align=center},
+  attr/.style={ellipse, draw=black, minimum width=2.2cm, minimum height=0.7cm, font=\scriptsize, fill=gray!8, align=center},
+  link/.style={-{Stealth[length=4pt,width=2.8pt]}, thick}
+]
+\node[entity] (models) at (0,2.6) {models\\模型表};
+\node[entity] (tasks) at (4.4,2.6) {tasks\\任务表};
+\node[entity] (results) at (8.8,2.6) {results\\检测结果表};
+\node[entity] (files) at (4.4,0) {task\_files\\任务文件表};
+
+\node[rel] (r1) at (2.2,2.6) {配置/引用};
+\node[rel] (r2) at (6.6,2.6) {产生};
+\node[rel] (r3) at (4.4,1.3) {关联};
+
+\draw[link] (models) -- node[above,font=\scriptsize]{1} (r1);
+\draw[link] (r1) -- node[above,font=\scriptsize]{N} (tasks);
+\draw[link] (tasks) -- node[above,font=\scriptsize]{1} (r2);
+\draw[link] (r2) -- node[above,font=\scriptsize]{N} (results);
+\draw[link] (tasks) -- node[right,font=\scriptsize]{1} (r3);
+\draw[link] (r3) -- node[right,font=\scriptsize]{N} (files);
+
+\node[attr] (a1) at (0,4.1) {model\_name / key / enabled};
+\node[attr] (a2) at (4.4,4.1) {type / mode / status / score\_thr};
+\node[attr] (a3) at (8.8,4.1) {bbox / score / category\_id};
+\node[attr] (a4) at (4.4,-1.3) {file\_type / file\_path};
+
+\draw[link] (a1) -- (models);
+\draw[link] (a2) -- (tasks);
+\draw[link] (a3) -- (results);
+\draw[link] (a4) -- (files);
+\end{tikzpicture}

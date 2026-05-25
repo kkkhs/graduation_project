@@ -94,11 +94,30 @@ DRENet 是针对 LEVIR-Ship 数据集提出的专项方法\cite{chen2022_tinyshi
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\textwidth]{img2_pdf/ch3_drenet_overview.pdf}
-  \caption{DRENet 方法示意}
-  \label{fig:ch3_drenet_overview}
+  \caption{DRENet 检测流程示意}
+  \label{fig:ch3_drenet_flow}
 \end{figure}
 
-图~\ref{fig:ch3_drenet_overview} 中可以看到，DRENet 在常规检测路径外加入了退化重建增强分支。该分支只参与训练，通过重建带有目标感知信息的退化图像约束骨干网络特征，使模型减少对大面积背景纹理的依赖。结合 CRMA 模块的跨阶段特征增强设计，DRENet 在本文实验中表现出比较明显的召回优先倾向。
+从神经网络工作机理看，DRENet 由"检测主干路径 + 训练期增强路径"两部分构成。检测主干负责常规定位与分类；增强路径通过退化-重建任务向骨干特征注入弱纹理目标的判别信息，并在训练阶段提供附加监督。该设计的直接效果是提升模型对微小、低对比船舶目标的敏感性。
+
+DRENet 的突出创新点主要体现在以下方面：
+
+\begin{enumerate}
+
+  \item \textbf{退化重建增强机制}：训练阶段对输入图像施加模拟退化（模糊、噪声、分辨率下降等），再要求网络从退化版本中重建原始外观，该辅助分支与检测主干共享同一骨干网络，使骨干同时接受检测损失与重建损失的双重监督，从而显式强化对弱纹理目标的判别能力——即使目标在退化后几乎不可辨认，网络仍被约束去恢复其特征。
+  \item \textbf{跨阶段区域记忆增强模块（CRMA）}：该模块将浅层特征图（保留空间细节与边缘信息）与深层特征图（承载语义判别信息）进行跨阶段连接与融合，使小目标的定位信号不会在下采样过程中被完全淹没，相比仅依赖 FPN 的自顶向下路径，CRMA 提供了更直接的浅层—深层协同通道。
+  \item \textbf{双路径联合训练策略}：检测路径与重建路径在训练期并行运行，推理时只保留检测路径，不增加额外推理开销，这种"训练期增强、推理期无负担"的设计使 DRENet 在保持推理效率的同时获得了对弱纹理目标的更高敏感性。
+
+\end{enumerate}
+
+对应到实验现象，DRENet 通常 Recall 更高，但在复杂背景下误检压力也更大，因此更适合作为召回优先路线。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{img/ch3_drenet_network_from_paper.png}
+  \caption{DRENet 网络结构图（基于文献\cite{chen2022_tinyship_drenet}图示翻译整理）}
+  \label{fig:ch3_drenet_overview}
+\end{figure}
 
 \subsubsection{FCOS（Anchor-Free 检测路线）}
 
@@ -108,23 +127,61 @@ FCOS 用位置回归替代锚框设计，减少了 anchor 尺寸、比例和匹�
   \centering
   \includegraphics[width=0.95\textwidth]{img2_pdf/ch3_fcos_pipeline.pdf}
   \caption{FCOS 检测流程示意}
-  \label{fig:ch3_fcos_pipeline}
+  \label{fig:ch3_fcos_flow}
 \end{figure}
 
-FCOS 的基本流程见图~\ref{fig:ch3_fcos_pipeline}。输入图像过 Backbone 和 FPN 之后生成多尺度特征，检测头直接预测类别、边框偏移和 centerness 分数。FCOS 无显式 anchor 设计，在遥感微小船舶场景中，其 Precision--Recall 折中表现值得关注。
+FCOS 的基础机理是 anchor-free 密集回归。输入图像经 Backbone 与 FPN 生成多尺度特征后，检测头在每个位置直接预测边框偏移和类别分数，并通过 centerness 分支评估预测质量。最终由分类分数与 centerness 联合排序，再经 NMS 输出检测结果。
+
+FCOS 的核心创新点主要体现在以下方面：
+
+\begin{enumerate}
+
+  \item \textbf{逐点预测替代锚框匹配}：FCOS 在特征图每个位置直接预测该点到目标边界框四条边的距离偏移（上、下、左、右），以及类别概率，完全取消了锚框的尺度、比例和匹配阈值等超参数设计，这一改变降低了跨数据集迁移时的调参负担，也避免了锚框匹配中正负样本定义不一致的问题。
+  \item \textbf{centerness 分支抑制低质量候选}：远离目标中心的特征点往往产生定位不准确的预测框，传统 anchor-free 方法中这些低质量候选会拉低整体排序效果，FCOS 引入 centerness 分支，预测每个点距目标中心的相对距离，并将 centerness 与分类分数相乘作为最终排序依据，从而有效抑制边缘区域的低质量候选框，提升检测结果的整体排序稳定性。
+  \item \textbf{基于 FPN 层级的尺度分配策略}：FCOS 为不同 FPN 层级显式指定目标尺度范围，每个层级只负责特定大小区间的目标检测，减少了不同层级之间的预测重叠与竞争，使小目标在浅层层级获得更充分的响应空间。
+
+\end{enumerate}
+
+对本课题而言，FCOS 的优势是训练口径清晰、Precision--Recall 折中较稳，不足是对输入尺寸较敏感——当推理输入过小时，特征图分辨率不足以支撑逐点回归的精度。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.86\textwidth]{img/ch3_fcos_network_from_paper.png}
+  \caption{FCOS 网络结构图（基于文献\cite{tian2019_fcos}图示翻译整理）}
+  \label{fig:ch3_fcos_pipeline}
+\end{figure}
 
 \subsubsection{YOLO26（One-Stage 代表）}
 
 YOLO 系列以单阶段预测和推理效率见长，在工程部署中使用较多\cite{redmon2016_yolo,redmon2018_yolov3,ultralytics2024_docs}。本文选取 YOLO26 代表 one-stage 路线，关注它在检测精度、边框质量、训练链路成熟度和系统接入成本之间的表现。
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=0.95\textwidth]{img2_pdf/ch3_yolo_pipeline.pdf}
-  \caption{YOLO26 单阶段检测流程示意}
-  \label{fig:ch3_yolo_pipeline}
+  \includegraphics[width=0.82\textwidth]{img2_pdf/ch3_yolo_pipeline.pdf}
+  \caption{YOLO26 检测流程示意}
+  \label{fig:ch3_yolo_flow}
 \end{figure}
 
-如图~\ref{fig:ch3_yolo_pipeline} 所示，YOLO26 延续了典型 one-stage 结构：Backbone 提取特征，Neck 做多尺度融合，检测头一次输出候选框。相较于专项结构较多的模型，它在训练、部署和接口封装上更直接。
+YOLO26 延续 one-stage 端到端范式：Backbone 提取语义特征，Neck 执行跨尺度融合，检测头在多个尺度同时输出候选框与类别分数，单次前向即可完成检出。该结构在工程上具备较好的吞吐效率与部署友好性。
+
+YOLO 路线的突出创新点主要体现在以下方面：
+
+\begin{enumerate}
+
+  \item \textbf{多尺度检测头增强小目标可见性}：YOLO26 在三个不同尺度的特征图（P3、P4、P5）上同时设置检测头，浅层特征图分辨率较高，能够保留更多小目标的细节信息，使微小船舶在浅层层级获得更充分的候选框生成机会，相比只在单一尺度输出的检测器，多尺度检测头对小目标的覆盖更完整。
+  \item \textbf{结构轻量化与高效模块设计}：YOLO26 采用 C2f 等高效构建模块替代传统重参数卷积，在保持特征表达能力的同时控制参数量与计算量，本文实验中 YOLO26 的参数量仅为 2.5M、FLOPs 为 3.7G，远低于 FCOS 的 32.2M 与 123.0G，使它在部署场景中具备更高的吞吐效率。
+  \item \textbf{任务对齐分配与训练增强策略}：YOLO26 采用任务对齐分配（TaskAlignedAssigner）替代传统 IoU 匹配策略，将分类质量与定位质量联合评估来分配正负样本，使训练阶段的样本定义更贴合最终评测目标。同时配合 mosaic、mixup 等数据增强策略，提升模型对稀疏小目标和复杂背景的泛化能力。
+
+\end{enumerate}
+
+对本文任务而言，YOLO26 的优势是输出较干净、部署链路成熟，适合作为系统默认候选；它与 DRENet 在误检控制上也能形成互补。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\textwidth]{img/ch3_yolo_network_from_paper.png}
+  \caption{YOLO26 网络结构图}
+  \label{fig:ch3_yolo_pipeline}
+\end{figure}
 
 \subsection{统一实验协议与实现约束}
 

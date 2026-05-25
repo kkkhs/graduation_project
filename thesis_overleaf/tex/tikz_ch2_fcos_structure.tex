@@ -1,0 +1,28 @@
+% 第2章：FCOS 网络结构（研究现状示意，中文化）
+\begin{tikzpicture}[
+  box/.style={rectangle, rounded corners=2pt, draw=black, minimum width=1.9cm, minimum height=0.7cm, align=center, font=\small},
+  smallbox/.style={rectangle, rounded corners=2pt, draw=black, minimum width=1.55cm, minimum height=0.62cm, align=center, font=\footnotesize, fill=gray!8},
+  arr/.style={-{Stealth[length=5pt,width=3.4pt]}, thick}
+]
+\node[box, fill=blue!8] (in) at (0,0) {输入图像};
+\node[box, fill=green!10] (backbone) at (2.6,0) {主干网络\\ResNet};
+\node[box, fill=green!10] (fpn) at (5.2,0) {FPN 多尺度\\特征};
+\node[box, fill=orange!12] (headc) at (7.9,0.75) {分类分支};
+\node[box, fill=orange!12] (headr) at (7.9,0) {回归分支\\(l,t,r,b)};
+\node[box, fill=orange!12] (cent) at (7.9,-0.75) {Center-ness 分支};
+\node[box, fill=purple!10] (post) at (10.6,0) {分数融合 + NMS};
+\node[box, fill=blue!8] (out) at (13,0) {最终检测框};
+
+\draw[arr] (in) -- (backbone);
+\draw[arr] (backbone) -- (fpn);
+\draw[arr] (fpn) -- (headc);
+\draw[arr] (fpn) -- (headr);
+\draw[arr] (fpn) -- (cent);
+\draw[arr] (headc) -- (post);
+\draw[arr] (headr) -- (post);
+\draw[arr] (cent) -- (post);
+\draw[arr] (post) -- (out);
+
+\node[smallbox] at (5.2,-1.8) {无锚框设计，减少超参数};
+\draw[arr] (5.2,-1.45) -- (5.2,-0.45);
+\end{tikzpicture}

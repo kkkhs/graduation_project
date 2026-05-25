@@ -1,0 +1,23 @@
+% 第2章：DRENet 结构（研究现状示意，中文化）
+\begin{tikzpicture}[
+  box/.style={rectangle, rounded corners=2pt, draw=black, minimum width=1.95cm, minimum height=0.7cm, align=center, font=\small},
+  sub/.style={rectangle, rounded corners=2pt, draw=black, minimum width=1.8cm, minimum height=0.62cm, align=center, font=\footnotesize, fill=gray!8},
+  arr/.style={-{Stealth[length=5pt,width=3.4pt]}, thick},
+  darr/.style={-{Stealth[length=5pt,width=3.4pt]}, thick, dashed}
+]
+\node[box, fill=blue!8] (in) at (0,0) {输入图像};
+\node[box, fill=green!10] (feat) at (2.5,0) {主干特征提取};
+\node[box, fill=orange!12] (det) at (5.2,0) {检测分支};
+\node[box, fill=blue!8] (out) at (8,0) {检测输出};
+\draw[arr] (in)--(feat);
+\draw[arr] (feat)--(det);
+\draw[arr] (det)--(out);
+
+\node[sub] (deg) at (2.5,-1.5) {退化增强分支};
+\node[sub] (rec) at (5.2,-1.5) {重建分支};
+\draw[arr] (feat) -- (deg);
+\draw[arr] (deg) -- (rec);
+\draw[darr] (rec) -- (det);
+
+\node[font=\footnotesize] at (6.9,-1.5) {训练阶段引导};
+\end{tikzpicture}

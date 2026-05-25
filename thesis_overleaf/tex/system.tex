@@ -20,6 +20,27 @@
   \item \textbf{结果持久化}：在系统重启后，仍可保留历史任务的结果和输出文件路径，以支持任务复查。
 \end{enumerate}
 
+表~\ref{tab:ch5_requirement_response} 为各操作场景的响应定义，用于约束前后端联调时的行为一致性。
+
+\begin{table}[H]
+  \centering
+  \small
+  \caption{功能需求的操作—响应定义}
+  \label{tab:ch5_requirement_response}
+  \begin{tabular}{p{3.2cm}p{4.6cm}p{5.1cm}}
+    \toprule
+    操作场景 & 用户操作 & 期望系统响应 \\
+    \midrule
+    模型管理 & 启用/停用模型 & 页面状态即时更新，后端返回成功状态并持久化 \\
+    单图任务提交 & 上传 1 张图并提交 & 返回 task\_id，任务状态进入 queued/running，跳转详情页 \\
+    批量任务提交 & 上传多图并提交 & 返回 task\_id，列表与详情页显示总数与完成数进度 \\
+    任务执行失败 & 模型路径错误或输入异常 & 状态变为 failed，并在详情页返回可读错误信息 \\
+    结果回看 & 打开历史任务详情 & 展示任务参数、可视化图、结构化结果和统计图 \\
+    结果导出 & 点击 CSV 导出 & 生成并下载包含 bbox/score/source\_model 的结果文件 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 \subsubsection{非功能需求}
 
 非功能需求主要包括可维护性、可复现性和稳定性。环境安装、数据库初始化和项目启动方式需要可重复；算法层、服务层和展示层的边界要清楚，后续替换模型时不至于牵动整套页面；界面信息需要能够清楚呈现任务状态、模型参数和检测结果。
@@ -54,7 +75,7 @@
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.92\textwidth]{img2_pdf/ch5_er.pdf}
-  \caption{系统数据库 ER 图}
+  \caption{系统数据库 E-R 图}
   \label{fig:ch5_er}
 \end{figure}
 
@@ -106,6 +127,80 @@
   \label{fig:ch5_flow}
 \end{figure}
 
+\subsection{模块实现细节}
+
+\subsubsection{端到端数据流与职责分解}
+
+本文将一次任务的端到端链路拆分为四段：前端请求构建、后端推理编排、结果持久化和可视化回传，前端提交参数时，会统一封装模型键值、阈值、执行模式和输入文件；后端接口层负责参数校验与任务建档；调度层在后台线程中调用预测服务并聚合检测框；存储层将任务状态、检测结果和产物路径落盘，最后由结果接口把结构化结果和可视化文件返回给前端页面完成展示，该分段设计的目的是：接口层、算法层、存储层可以独立维护，后续替换模型时不必改动前端交互协议。
+
+\subsubsection{单图检测逻辑（接口层）}
+
+接口层的核心职责是“参数标准化 + 任务创建 + 异步投递”，其核心逻辑如下代码所示。
+
+\begin{verbatim}
+def submit_infer_task(request):
+    payload = normalize_request(request)
+    validate_model_and_threshold(payload)
+    task = task_repo.create(
+        mode=payload.mode,
+        model_key=payload.model_key,
+        conf=payload.conf,
+        iou=payload.iou,
+        status="queued"
+    )
+    executor.submit(run_infer_pipeline, task.id, payload)
+    return {"task_id": task.id, "status": "queued"}
+\end{verbatim}
+
+该逻辑保证了前端拿到任务编号后即可进入轮询，不需要阻塞等待推理完成，即使后续任务失败，也能通过 \texttt{task\_id} 在详情页定位错误信息，提升了系统可观测性。
+
+\subsubsection{推理调用逻辑（服务层）}
+
+服务层聚焦“统一预测入口 + 多模型策略分发”，单模型模式下直接调用指定模型适配器；融合模式下按配置选择串行或并行执行，再将结果交给融合后处理。其核心流程如下代码所示。
+
+\begin{verbatim}
+def run_infer_pipeline(task_id, payload):
+    task_repo.update_status(task_id, "running")
+    image_list = prepare_inputs(payload.files)
+    for image_path in image_list:
+        if payload.mode == "single":
+            records = predict_service.predict(
+                image_path=image_path,
+                model_name=payload.model_key,
+                conf_threshold=payload.conf,
+                iou_threshold=payload.iou
+            )
+        else:
+            records = predict_service.predict_fusion(
+                image_path,
+                payload
+            )
+        result_repo.save_records(task_id, image_path, records)
+    task_repo.update_status(task_id, "done")
+\end{verbatim}
+
+该设计将“接口协议”与“算法实现”分离：接口层不感知具体模型框架差异，服务层通过适配器完成 DRENet、FCOS、YOLO26 的统一调用，便于后续新增模型。
+
+\subsubsection{结果聚合逻辑（存储层）}
+
+存储层负责“状态写回 + 文件索引 + 结构化检测框存储”，其目标是确保任务可追溯与结果可复查，对应逻辑如下代码所示。
+
+\begin{verbatim}
+def save_records(task_id, image_path, records):
+    vis_path = render_and_save(image_path, records, task_id)
+    json_path = dump_json(records, task_id, image_path)
+    db.insert_task_file(task_id, "input", image_path)
+    db.insert_task_file(task_id, "vis", vis_path)
+    db.insert_task_file(task_id, "json", json_path)
+    for rec in records:
+        db.insert_result(
+            task_id, image_path,
+            rec["bbox"], rec["score"], rec["label"]
+        )
+\end{verbatim}
+
+通过上述写入流程，系统既能展示可视化图片，也能导出结构化表格，满足“页面复查 + 数据再分析”双重需求。
+
 \subsection{系统实现效果}
 
 经过前后端联调和真实模型接入测试，系统已经跑通任务创建、推理执行、结果保存和历史回放整体链路。当前系统可以接入 DRENet、YOLO 与 FCOS 模型权重，完成单图和批量推理；任务列表模块支持轮询刷新、进度展示和失败状态标记；任务详情页展示模型来源、检测框、平均置信度和统计图表；结构化检测结果可以导出为 CSV 表格。SQLite 数据库则保存历史任务和检测结果，保证系统重启后仍可查询。
@@ -122,6 +217,64 @@
   \caption{系统主要页面实现效果}
   \label{fig:ch5_pages}
 \end{figure}
+
+\subsection{系统输出案例集}
+
+本节选取数据集中三组不同样本的系统输出结果图，用于展示系统接入模型后在不同场景下的检测表现，三组样本分别覆盖相对清晰场景、弱纹理场景与复杂背景场景，以便观察模型在目标可见性与背景干扰变化条件下的输出差异。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{img/ch5_task_detail_case_a.png}
+  \caption{样本 A 的系统输出结果图：目标边界相对清晰场景下的检测结果示例}
+  \label{fig:ch5_task_detail_case_a}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{img/ch5_task_detail_case_b.png}
+  \caption{样本 B 的系统输出结果图：弱纹理与低对比度条件下的检测结果示例}
+  \label{fig:ch5_task_detail_case_b}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{img/ch5_task_detail_case_c.png}
+  \caption{样本 C 的系统输出结果图：复杂背景干扰条件下的检测结果示例}
+  \label{fig:ch5_task_detail_case_c}
+\end{figure}
+
+结合图~\ref{fig:ch5_task_detail_case_a} 至图~\ref{fig:ch5_task_detail_case_c} 可以观察到：当目标边界清晰时，系统输出结果较稳定；而当目标纹理弱、对比度降低时，漏检风险上升；当背景纹理复杂时，误检风险增加，该结果与第四章中的定量与定性分析结论一致，说明系统侧结果展示能够较好反映模型在不同样本条件下的行为差异。
+
+\subsection{模块测试用例设计}
+
+为验证系统在正常与极端条件下的可用性，本文的测试覆盖了接口层、任务调度层、结果展示层和持久化层，按模块设计的测试用例如表~\ref{tab:ch5_test_cases} 所示。
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{系统主要模块测试用例}
+  \label{tab:ch5_test_cases}
+  \begin{tabular}{p{2.1cm}p{2.6cm}p{3.0cm}p{5.0cm}}
+    \toprule
+    模块 & 用例类型 & 输入/场景 & 期望结果 \\
+    \midrule
+    任务提交 & 正常 & 合法图片 + 合法阈值 & 返回task\_id，状态进入queued/running \\
+    任务提交 & 极端 & 空文件、超限文件、阈值越界 & 请求被拒绝，返回明确错误信息 \\
+    任务执行 & 正常 & 单图/批量任务 & 状态按 queued->running->done 演进，结果落盘 \\
+    任务执行 & 极端 & 模型权重缺失、推理中断 & 状态进入 failed，错误信息可追溯 \\
+    结果查询 & 正常 & 已完成任务详情查询 & 返回可视化链接、结构化 bbox、统计字段 \\
+    结果查询 & 极端 & 不存在 task\_id & 返回 404 或业务错误码，不影响其他任务 \\
+    数据持久化 & 正常 & 服务重启后查询历史任务 & 历史任务记录与结果仍可访问 \\
+    数据持久化 & 极端 & 高频轮询与并发查询 & 状态字段一致，无明显数据错乱 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{测试执行结果}
+
+基于表~\ref{tab:ch5_test_cases} 的用例集合，本文完成了功能与异常场景的联调测试，总体结果表明：正常流程下任务提交、异步执行、结果回看和 CSV 导出均可稳定完成；异常流程下空输入、阈值越界、无效任务编号和模型异常均能够返回可解释错误信息，且不会影响其他任务状态。
+
+进一步地，在服务重启后的历史任务复查测试中，任务记录与结果文件索引能够正确恢复；在高频轮询与并发查询场景下，任务状态字段保持一致，未观察到明显的数据错乱，上述结果说明当前系统实现能够满足本课题对可用性、可观测性与可追溯性的基本要求。
 
 \subsection{系统响应速度优化}
 

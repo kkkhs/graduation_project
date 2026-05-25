@@ -6,6 +6,31 @@
 
 除离线训练和测试外，系统侧推理流程也完成联调，相关输出可用于第五章的任务管理与结果回看说明。
 
+本文实验的硬件、软件和关键超参数记录如表~\ref{tab:ch4_env} 所示。
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{实验环境与关键配置}
+  \label{tab:ch4_env}
+  \begin{tabular}{p{3.0cm}p{9.0cm}}
+    \toprule
+    配置项 & 设置说明 \\
+    \midrule
+    操作系统 & macOS（本地联调）+ Linux（云端训练） \\
+    主要计算设备 & 本地 CPU/MPS（推理与验证）；云端 NVIDIA RTX 3080 Ti 12GB（主训练） \\
+    后端框架 & PyTorch，MMDetection（FCOS），Ultralytics（YOLO26），DRENet 原始实现 \\
+    系统框架 & FastAPI + React + SQLite \\
+    数据集与划分 & LEVIR-Ship，固定 train/val/test 划分（2321/788/788） \\
+    输入尺寸（主口径） & DRENet：512；YOLO26：512；FCOS：800 \\
+    置信度与 IoU 阈值 & 默认 \texttt{conf=0.25}、\texttt{iou=0.50}（另做阈值消融） \\
+    主要评测指标 & AP50（主指标）、AP50-95、Precision、Recall、F1 \\
+    效率指标采集口径 & FPS 统一在单图推理场景统计；参数量与 FLOPs 按模型结构计算并统一换算单位 \\
+    结果记录与追踪 & 保留配置文件、权重路径、运行日志、结构化预测结果和可视化产物 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 \subsection{三模型主对比结果}
 
 三模型核心结果见表~\ref{tab:ch4_baselines}，对应日志和权重均已留存。
@@ -204,4 +229,4 @@ FCOS 和 YOLO26 的变化则更加细致，FCOS 在当前稳定权重下，阈�
   \label{fig:ch4_size_trend}
 \end{figure}
 
-表~\ref{tab:ch4_size_ablation} 与图~\ref{fig:ch4_size_trend} 显示，FCOS 对输入尺寸更敏感，512 到 800 的 AP50、Precision、Recall 和 F1 均呈上升趋势；YOLO26 在 640 输入下取得本组最高 AP50 和 F1，Precision 与 Recall 也保持较好平衡。当输入继续增至 800 时，YOLO26 的 Recall 略升，但 Precision 和 F1 明显下降，说明更大输入会带来更多候选目标，同时也更容易引入误检。
+上述数据显示，FCOS 对输入尺寸更敏感，512 到 800 的 AP50、Precision、Recall 和 F1 均呈上升趋势；YOLO26 在 640 输入下取得本组最高 AP50 和 F1，Precision 与 Recall 也保持较好平衡。当输入继续增至 800 时，YOLO26 的 Recall 略升，但 Precision 和 F1 明显下降，说明更大输入会带来更多候选目标，同时也更容易引入误检。

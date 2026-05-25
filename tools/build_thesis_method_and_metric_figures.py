@@ -11,16 +11,16 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTDIR = ROOT / "thesis_overleaf" / "img"
 
 MODEL_COLORS = {
-    "DRENet": "#8C8C8C",
-    "YOLO26": "#B0B0B0",
-    "FCOS": "#D0D0D0",
+    "DRENet": "#1F77B4",
+    "YOLO26": "#FF7F0E",
+    "FCOS": "#2CA02C",
 }
 METRIC_COLORS = {
-    "Precision": "#566D7E",
-    "Recall": "#6E7F63",
-    "F1": "#8A6A46",
-    "AP50": "#4F4F4F",
-    "AP50-95": "#8C8C8C",
+    "Precision": "#4E79A7",
+    "Recall": "#59A14F",
+    "F1": "#F28E2B",
+    "AP50": "#E15759",
+    "AP50-95": "#B07AA1",
 }
 BG = "#FFFFFF"
 TEXT = "#222222"

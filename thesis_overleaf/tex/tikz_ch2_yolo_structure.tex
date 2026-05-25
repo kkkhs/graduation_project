@@ -1,0 +1,24 @@
+% 第2章：YOLO 系列网络结构（研究现状示意，中文化）
+\begin{tikzpicture}[
+  box/.style={rectangle, rounded corners=2pt, draw=black, minimum width=2.0cm, minimum height=0.7cm, align=center, font=\small},
+  arr/.style={-{Stealth[length=5pt,width=3.4pt]}, thick}
+]
+\node[box, fill=blue!8] (in) at (0,0) {输入图像};
+\node[box, fill=green!10] (bb) at (2.5,0) {Backbone\\特征提取};
+\node[box, fill=green!10] (neck) at (5.2,0) {Neck\\PAN/FPN 融合};
+\node[box, fill=orange!12] (p3) at (8.2,1.0) {检测头 P3\\小目标};
+\node[box, fill=orange!12] (p4) at (8.2,0) {检测头 P4\\中目标};
+\node[box, fill=orange!12] (p5) at (8.2,-1.0) {检测头 P5\\大目标};
+\node[box, fill=purple!10] (post) at (10.9,0) {置信度筛选\\+ NMS};
+\node[box, fill=blue!8] (out) at (13.2,0) {最终检测结果};
+
+\draw[arr] (in) -- (bb);
+\draw[arr] (bb) -- (neck);
+\draw[arr] (neck) -- (p3);
+\draw[arr] (neck) -- (p4);
+\draw[arr] (neck) -- (p5);
+\draw[arr] (p3) -- (post);
+\draw[arr] (p4) -- (post);
+\draw[arr] (p5) -- (post);
+\draw[arr] (post) -- (out);
+\end{tikzpicture}

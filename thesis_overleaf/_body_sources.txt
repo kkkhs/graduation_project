@@ -1,0 +1,6 @@
+/Users/khs/codes/graduation_project/thesis_overleaf/tex/introduction.tex
+/Users/khs/codes/graduation_project/thesis_overleaf/tex/related_work.tex
+/Users/khs/codes/graduation_project/thesis_overleaf/tex/method.tex
+/Users/khs/codes/graduation_project/thesis_overleaf/tex/experiment.tex
+/Users/khs/codes/graduation_project/thesis_overleaf/tex/system.tex
+/Users/khs/codes/graduation_project/thesis_overleaf/tex/conclusion.tex
