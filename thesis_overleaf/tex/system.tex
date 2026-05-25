@@ -258,7 +258,7 @@ def save_records(task_id, image_path, records):
     \toprule
     模块 & 用例类型 & 输入/场景 & 期望结果 \\
     \midrule
-    任务提交 & 正常 & 合法图片 + 合法阈值 & 返回task\_id，状态进入queued/running \\
+    任务提交 & 正常 & 合法图片 + 合法阈值 & 返回 task\_id，任务状态进入queued/running \\
     任务提交 & 极端 & 空文件、超限文件、阈值越界 & 请求被拒绝，返回明确错误信息 \\
     任务执行 & 正常 & 单图/批量任务 & 状态按 queued->running->done 演进，结果落盘 \\
     任务执行 & 极端 & 模型权重缺失、推理中断 & 状态进入 failed，错误信息可追溯 \\
