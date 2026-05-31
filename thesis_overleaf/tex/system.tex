@@ -12,7 +12,7 @@
 
 结合课题任务，系统需要覆盖以下功能。
 
-\begin{enumerate}
+\begin{enumerate}[label=5.2.1.\arabic*., leftmargin=3.5em]
   \item \textbf{模型管理}：可读取模型配置和展示模型名称、状态和权重信息，并且支持模型启用或停用；
   \item \textbf{任务提交}：能够支持单张图像与批量图像上传，并允许用户设置模型类型和置信度阈值；
   \item \textbf{任务执行}：用异步的方式执行推理任务，用于避免前端界面阻塞，且支持任务状态查询；
@@ -51,14 +51,14 @@
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.92\textwidth]{img2_pdf/ch5_architecture.pdf}
+  \includegraphics[width=\textwidth]{img2_pdf/ch5_architecture.pdf}
   \caption{系统总体架构图}
   \label{fig:ch5_architecture}
 \end{figure}
 
 从职责划分角度看，系统可分为以下五层：
 
-\begin{enumerate}
+\begin{enumerate}[label=5.3.1.\arabic*., leftmargin=3.5em]
   \item \textbf{前端展示层}：使用 React、Vite、TypeScript 与 Ant Design 技术栈，实现任务提交页、任务列表页、任务详情页和模型管理页；
   \item \textbf{后端服务层}：使用 FastAPI 提供任务提交、任务查询、结果查询、模型查询和健康检查等接口；
   \item \textbf{任务调度层}：使用 \texttt{ThreadPoolExecutor} 实现异步任务执行，以降低界面阻塞；
@@ -74,7 +74,7 @@
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.92\textwidth]{img2_pdf/ch5_er.pdf}
+  \includegraphics[width=\textwidth]{img2_pdf/ch5_er.pdf}
   \caption{系统数据库 E-R 图}
   \label{fig:ch5_er}
 \end{figure}
@@ -122,7 +122,7 @@
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.92\textwidth]{img2_pdf/ch5_flow.pdf}
+  \includegraphics[width=\textwidth]{img2_pdf/ch5_flow.pdf}
   \caption{系统关键流程图}
   \label{fig:ch5_flow}
 \end{figure}

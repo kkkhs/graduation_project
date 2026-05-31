@@ -6,7 +6,7 @@
 
 从任务定义看，遥感图像中的船舶检测属于标准目标检测问题：输入为遥感图像（单张或批量），输出为每张图像中的船舶目标集合，输出的每个目标包含边界框坐标、置信度和类别标识，并且由于遥感图像中目标普遍偏小、背景干扰强、尺度变化明显，该任务对检测模型的要求不仅是整体精度达标，还需要在召回率与精确率之间取得合理平衡——既要尽量检出真实船舶目标，又要控制近岸纹理、云层和港区设施等背景带来的误检。
 
-近年来，目标检测技术从 two-stage 走到 one-stage、anchor-free，再到 transformer 检测器，模型在精度、速度和表达能力上持续演进\cite{ren2015_fasterrcnn,lin2017_fpn,lin2017_focalloss,tian2019_fcos,redmon2016_yolo,carion2020_detr,zhu2021_deformabledetr}。与此同时，遥感小目标检测也一直在关注尺度变化、背景干扰和样本稀疏对模型稳定性的影响\cite{wang2023_sod_review,zhao2024_shipsurvey}。不过，在中分辨率遥感图像中，微小船舶占据的像素本就有限，还容易和海浪、云层、岸线或近岸建筑纹理混在一起，通用检测器直接迁移时往往会出现漏检和误检。
+近年来，目标检测技术从 two-stage 走到 one-stage、anchor-free，再到 transformer 检测器，模型在精度、速度和表达能力上持续演进\cite{ren2015_fasterrcnn,lin2017_fpn,lin2017_focalloss,tian2019_fcos,redmon2016_yolo,carion2020_detr,zhu2021_deformabledetr}。与此同时，遥感小目标检测也一直在关注尺度变化、背景干扰和样本稀疏对模型稳定性的影响\cite{wang2023_sod_review,zhao2024_shipsurvey,du2022_small_object_review_cn,liao2023_small_target_review_cn}。围绕光学遥感目标检测与舰船检测，国内也已有较系统的综述工作对任务特点、算法脉络和应用场景进行了梳理\cite{wang2011_ship_detection_cn,xu2021_vessel_detection_cn,song2021_ship_survey_cn,liao2022_optical_rs_detection_cn,huang2023_ship_detection_survey_cn}。不过，在中分辨率遥感图像中，微小船舶占据的像素本就有限，还容易和海浪、云层、岸线或近岸建筑纹理混在一起，通用检测器直接迁移时往往会出现漏检和误检。
 
 公开数据集和开源工具链逐步完善后，问题也从“模型能否训练出来”转向“结果能否统一评测、稳定复现并进入可运行流程”。只给出单一模型指标已经不够，仍需要在同一协议下比较不同检测范式，并把算法能力接入系统。本文的工作就是在这个背景下展开的。
 
@@ -18,8 +18,7 @@
 
 本文在上述情况下将工作组织为三条并行路线，以保证实验结果、误差分析与系统展示之间的逻辑一致性，具体如下：
 
-\begin{enumerate}
-
+\begin{enumerate}[label=1.2.\arabic*., leftmargin=3em]
   \item \textbf{实验协议线}：固定数据划分、评价指标、阈值设置和结果字段，并对配置文件、权重版本和运行日志进行统一记录，用以降低实验口径差异带来的偏差，使模型结果具备可比性和可复验性。
   \item \textbf{模型比较线}：在统一协议下选取 DRENet、FCOS 和 YOLO26 三类代表模型，针对 AP50、Precision、Recall、F1 以及效率指标进行横向比较，并结合成功样例、漏检样例和误检样例分析性能差异来源。
   \item \textbf{系统落地线}：将离线推理能力接入任务管理与可视化流程，形成从任务提交、异步执行到结果回看的完整链路，以验证模型结果在系统环境中的可用性与可追溯性，并为后续应用场景提供工程化支撑。
@@ -32,7 +31,7 @@
 
 具体工作包括：
 
-\begin{enumerate}
+\begin{enumerate}[label=1.3.\arabic*., leftmargin=3em]
       \item \textbf{整理数据与评测口径}：固定数据划分、指标计算方式和结果记录字段，减少模型比较中的人为差异；
       \item \textbf{完成三类模型实验}：基于 DRENet、FCOS 与 YOLO26 的训练记录、测试和正式结果来比较不同检测路线的表现；
       \item \textbf{补充误差与消融观察}：结合阈值、输入尺寸和可视化样例来分析误检、漏检和原因；
@@ -55,7 +54,7 @@
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[width=0.92\textwidth]{img2_pdf/ch1_pipeline.pdf}
+  \includegraphics[width=\textwidth]{img2_pdf/ch1_pipeline.pdf}
   \caption{技术路线图}
   \label{fig:ch1_pipeline}
 \end{figure}
@@ -68,7 +67,7 @@
 
 全文共分为六章，各章内容安排如下。
 
-\begin{enumerate}
+\begin{enumerate}[label=1.6.\arabic*., leftmargin=3em]
   \item 第一章为绪论，介绍研究背景、问题挑战、研究目标、主要工作以及技术路线；
   \item 第二章为国内外研究现状，梳理通用目标检测、小目标检测与遥感船舶检测相关研究，并明确本文切入点；
   \item 第三章介绍数据集、评价指标与方法方案，说明统一实验协议、模型选择依据以及实现约束；

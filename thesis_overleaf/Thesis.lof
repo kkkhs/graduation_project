@@ -1,25 +1,25 @@
 \contentsline {figure}{\numberline {1.1}{\ignorespaces 技术路线图}}{3}{figure.caption.1}%
-\contentsline {figure}{\numberline {2.1}{\ignorespaces 本文相关研究方向与代表路线脉络}}{6}{figure.caption.2}%
-\contentsline {figure}{\numberline {3.1}{\ignorespaces LEVIR-Ship 数据集典型样例}}{9}{figure.caption.5}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces 数据预处理与统一格式流程图}}{10}{figure.caption.6}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces DRENet 检测流程示意}}{11}{figure.caption.7}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces DRENet 网络结构图（基于文献\blx@tocontentsinit {0}\textsuperscript {\origcite {chen2022_tinyship_drenet}}图示翻译整理）}}{12}{figure.caption.8}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces FCOS 检测流程示意}}{13}{figure.caption.9}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces FCOS 网络结构图（基于文献\blx@tocontentsinit {0}\textsuperscript {\origcite {tian2019_fcos}}图示翻译整理）}}{14}{figure.caption.10}%
-\contentsline {figure}{\numberline {3.7}{\ignorespaces YOLO26 检测流程示意}}{14}{figure.caption.11}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces YOLO26 网络结构图}}{15}{figure.caption.12}%
-\contentsline {figure}{\numberline {4.1}{\ignorespaces 三模型主对比结果的指标可视化}}{18}{figure.caption.15}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces 三模型效率与复杂度对比柱状图}}{19}{figure.caption.17}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces 三模型多维度综合雷达图}}{20}{figure.caption.18}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces 三模型成功检测样例对比}}{22}{figure.caption.19}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces 三模型漏检样例对比}}{23}{figure.caption.20}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces 三模型误检样例对比}}{24}{figure.caption.21}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces 三模型阈值消融趋势图}}{25}{figure.caption.23}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces 输入尺寸敏感性趋势图}}{26}{figure.caption.25}%
-\contentsline {figure}{\numberline {5.1}{\ignorespaces 系统总体架构图}}{29}{figure.caption.27}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces 系统数据库 E-R 图}}{30}{figure.caption.28}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces 系统关键流程图}}{32}{figure.caption.30}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces 系统主要页面实现效果}}{36}{figure.caption.31}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces 样本 A 的系统输出结果图：目标边界相对清晰场景下的检测结果示例}}{37}{figure.caption.32}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces 样本 B 的系统输出结果图：弱纹理与低对比度条件下的检测结果示例}}{37}{figure.caption.33}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces 样本 C 的系统输出结果图：复杂背景干扰条件下的检测结果示例}}{38}{figure.caption.34}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces 本文相关研究方向与代表路线脉络}}{7}{figure.caption.2}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces LEVIR-Ship 数据集典型样例}}{10}{figure.caption.5}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces 数据预处理与统一格式流程图}}{11}{figure.caption.6}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces DRENet 检测流程示意}}{12}{figure.caption.7}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces DRENet 网络结构图（基于文献\blx@tocontentsinit {0}\textsuperscript {\origcite {chen2022_tinyship_drenet}}图示翻译整理）}}{13}{figure.caption.8}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces FCOS 检测流程示意}}{14}{figure.caption.9}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces FCOS 网络结构图（基于文献\blx@tocontentsinit {0}\textsuperscript {\origcite {tian2019_fcos}}图示翻译整理）}}{15}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces YOLO26 检测流程示意}}{15}{figure.caption.11}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces YOLO26 网络结构图}}{16}{figure.caption.12}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 三模型主对比结果的指标可视化}}{19}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 三模型效率与复杂度对比柱状图}}{20}{figure.caption.17}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 三模型多维度综合雷达图}}{21}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces 三模型成功检测样例对比}}{23}{figure.caption.19}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces 三模型漏检样例对比}}{24}{figure.caption.20}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces 三模型误检样例对比}}{25}{figure.caption.21}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces 三模型阈值消融趋势图}}{26}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces 输入尺寸敏感性趋势图}}{27}{figure.caption.25}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces 系统总体架构图}}{30}{figure.caption.27}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces 系统数据库 E-R 图}}{31}{figure.caption.28}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces 系统关键流程图}}{33}{figure.caption.30}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces 系统主要页面实现效果}}{37}{figure.caption.31}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces 样本 A 的系统输出结果图：目标边界相对清晰场景下的检测结果示例}}{38}{figure.caption.32}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces 样本 B 的系统输出结果图：弱纹理与低对比度条件下的检测结果示例}}{38}{figure.caption.33}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces 样本 C 的系统输出结果图：复杂背景干扰条件下的检测结果示例}}{39}{figure.caption.34}%

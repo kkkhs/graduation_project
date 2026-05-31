@@ -52,7 +52,7 @@
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.96\textwidth]{img/ch4_main_comparison_chart.png}
+  \includegraphics[width=\textwidth]{img/ch4_main_comparison_chart.png}
   \caption{三模型主对比结果的指标可视化}
   \label{fig:ch4_main_comparison_chart}
 \end{figure}
@@ -85,7 +85,7 @@
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.92\textwidth]{img/ch4_efficiency_chart.png}
+  \includegraphics[width=\textwidth]{img/ch4_efficiency_chart.png}
   \caption{三模型效率与复杂度对比柱状图}
   \label{fig:ch4_efficiency_chart}
 \end{figure}
@@ -188,16 +188,14 @@ YOLO26 也更偏向工程侧，其训练链路比较成熟，接口封装也相�
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.98\textwidth]{img/ch4_threshold_trend.png}
+  \includegraphics[width=\textwidth]{img/ch4_threshold_trend.png}
   \caption{三模型阈值消融趋势图}
   \label{fig:ch4_threshold_trend}
 \end{figure}
 
 表~\ref{tab:ch4_threshold_ablation} 和图~\ref{fig:ch4_threshold_trend} 显示，阈值升高后，三模型的 Precision 大多上升，Recall 大多下降。这一趋势符合候选框筛选逻辑，也说明后处理阈值会明显改变遥感微小船舶检测结果。
 
-DRENet 对阈值的变化较为敏感，低阈值会进一步放大它的召回倾向，但误检也随之增加；而当阈值提高到 0.35 ，Precision 升到了 0.7778，Recall 降至 0.7355，若系统需要在检出率和误检数量之间取一个中间位置，0.25 相比 0.15 和 0.35 更适合作为默认值。
-
-FCOS 和 YOLO26 的变化则更加细致，FCOS 在当前稳定权重下，阈值由 0.25 提高到 0.35 时，F1 从 0.7944 小幅度升至 0.7986，说明这组权重下略高阈值能减少一部分冗余候选，YOLO26 在 0.25 时 AP50、Precision 和 Recall 的组合更均衡；继续升高到 0.35 后，Precision 为 0.8248，但 AP50 与 Recall 同时下降，所以综合 AP50、Precision、Recall 和 F1，0.25 更加适合作为后续实验和系统推理的默认阈值。
+DRENet 对阈值的变化较为敏感，低阈值会进一步放大它的召回倾向，但误检也随之增加；而当阈值提高到 0.35 ，Precision 升到了 0.7778，Recall 降至 0.7355，若系统需要在检出率和误检数量之间取一个中间位置，0.25 相比 0.15 和 0.35 更适合作为默认值。FCOS 和 YOLO26 的变化则更加细致，FCOS 在当前稳定权重下，阈值由 0.25 提高到 0.35 时，F1 从 0.7944 小幅度升至 0.7986，说明这组权重下略高阈值能减少一部分冗余候选，YOLO26 在 0.25 时 AP50、Precision 和 Recall 的组合更均衡；继续升高到 0.35 后，Precision 为 0.8248，但 AP50 与 Recall 同时下降，所以综合 AP50、Precision、Recall 和 F1，0.25 更加适合作为后续实验和系统推理的默认阈值。
 
 \subsubsection{输入尺寸敏感性分析}
 
@@ -224,7 +222,7 @@ FCOS 和 YOLO26 的变化则更加细致，FCOS 在当前稳定权重下，阈�
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.86\textwidth]{img/ch4_size_trend.png}
+  \includegraphics[width=\textwidth]{img/ch4_size_trend.png}
   \caption{输入尺寸敏感性趋势图}
   \label{fig:ch4_size_trend}
 \end{figure}

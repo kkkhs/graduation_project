@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  26 MAY 2026 10:35
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  31 MAY 2026 22:20
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2029,18 +2029,10 @@ Overfull \hbox (4.37639pt too wide) in paragraph at lines 9--10
 
 
 ]
-Overfull \hbox (7.11598pt too wide) in paragraph at lines 22--23
-\TU/TimesNewRoman(0)/m/n/12.045 ports single-image and batch-image submission, 
-model activation management, asynchronous
- []
-
-
 
 [2
 
-]
-
-[3])
+])
 \openout2 = `tex/pages/toc.aux'.
 
  (./tex/pages/toc.tex
@@ -2051,20 +2043,20 @@ LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/b/n' will be
 (Font)              scaled to size 12.0pt on input line 1.
 
 
-[4
+[3
 
 
 
 
 ]
 
-[5])
+[4])
 \tf@toc=\write6
 \openout6 = `Thesis.toc'.
 
 
 
-[6] (./Thesis.lof
+[5] (./Thesis.lof
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
 (Font)              scaled to size 8.0pt on input line 6.
 )
@@ -2073,7 +2065,7 @@ LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
 
 
 
-[7
+[6
 
 ] (./Thesis.lot)
 \tf@lot=\write8
@@ -2081,7 +2073,7 @@ LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
 
 
 
-[8
+[7
 
 ])
 \openout2 = `tex/introduction.aux'.
@@ -2100,7 +2092,7 @@ LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
 File: img2_pdf/ch1_pipeline.pdf Graphic file (type pdf)
 <use img2_pdf/ch1_pipeline.pdf>
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
-(Font)              scaled to size 10.5pt on input line 59.
+(Font)              scaled to size 10.5pt on input line 58.
 
 
 [3])
@@ -2120,9 +2112,11 @@ File: img2_pdf/ch2_research_map.pdf Graphic file (type pdf)
 <use img2_pdf/ch2_research_map.pdf>
 
 
-[6])
+[6]
 
-[7]
+[7])
+
+[8]
 \openout2 = `tex/method.aux'.
 
  (./tex/method.tex
@@ -2130,7 +2124,7 @@ File: img/ch3_dataset_examples.png Graphic file (type bmp)
 <img/ch3_dataset_examples.png>
 
 
-[8
+[9
 
 
 
@@ -2153,48 +2147,48 @@ language=dflt;mapping=tex-text;"
 (fontspec)             <->"[fonts/AdobeFangsongStd-Regular.otf]/OT:script=hani;
 language=dflt;embolden=4;mapping=tex-text;"
 
+
+
+[10]
 File: img2_pdf/ch3_preprocess_flow.pdf Graphic file (type pdf)
 <use img2_pdf/ch3_preprocess_flow.pdf>
-
-
-[9]
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
 (Font)              scaled to size 6.0pt on input line 63.
 
 
-[10]
+[11]
 File: img2_pdf/ch3_drenet_overview.pdf Graphic file (type pdf)
 <use img2_pdf/ch3_drenet_overview.pdf>
 
 
-[11]
+[12]
 File: img/ch3_drenet_network_from_paper.png Graphic file (type bmp)
 <img/ch3_drenet_network_from_paper.png>
-LaTeX Font Info:    Calculating math sizes for size <10.5> on input line 118.
+LaTeX Font Info:    Calculating math sizes for size <10.5> on input line 117.
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
-(Font)              scaled to size 7.34996pt on input line 118.
+(Font)              scaled to size 7.34996pt on input line 117.
 File: img2_pdf/ch3_fcos_pipeline.pdf Graphic file (type pdf)
 <use img2_pdf/ch3_fcos_pipeline.pdf>
 
 
-[12]
+[13]
 File: img/ch3_fcos_network_from_paper.png Graphic file (type bmp)
 <img/ch3_fcos_network_from_paper.png>
 
 
-[13]
+[14]
 File: img2_pdf/ch3_yolo_pipeline.pdf Graphic file (type pdf)
 <use img2_pdf/ch3_yolo_pipeline.pdf>
 
 
-[14]
+[15]
 File: img/ch3_yolo_network_from_paper.png Graphic file (type bmp)
 <img/ch3_yolo_network_from_paper.png>
 
 
-[15])
+[16])
 
-[16]
+[17]
 \openout2 = `tex/experiment.aux'.
 
  (./tex/experiment.tex
@@ -2210,38 +2204,38 @@ File: img/ch4_main_comparison_chart.png Graphic file (type bmp)
 <img/ch4_main_comparison_chart.png>
 
 
-[17
+[18
 
 
 
 
 ]
 
-[18]
+[19]
 File: img/ch4_efficiency_chart.png Graphic file (type bmp)
 <img/ch4_efficiency_chart.png>
 File: img/ch4_radar_chart.png Graphic file (type bmp)
 <img/ch4_radar_chart.png>
 
 
-[19]
-
 [20]
+
+[21]
 File: img/ch4_success_cases.png Graphic file (type bmp)
 <img/ch4_success_cases.png>
 
 
-[21]
+[22]
 File: img/ch4_miss_cases.png Graphic file (type bmp)
 <img/ch4_miss_cases.png>
 
 
-[22]
+[23]
 File: img/ch4_false_positive_cases.png Graphic file (type bmp)
 <img/ch4_false_positive_cases.png>
 
 
-[23]
+[24]
 Overfull \hbox (8.31392pt too wide) in paragraph at lines 157--158
 []\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 把 这 些 样 例 和 表 []\TU/TimesNewRoman(0)
 /m/n/12.045 4.2[] \TU/AdobeSongStd-Light.otf(1)/m/n/12.045 对 照 后 可 以 发 现，|  三 模
@@ -2252,14 +2246,14 @@ File: img/ch4_threshold_trend.png Graphic file (type bmp)
 <img/ch4_threshold_trend.png>
 
 
-[24]
-
 [25]
+
+[26]
 File: img/ch4_size_trend.png Graphic file (type bmp)
 <img/ch4_size_trend.png>
 )
 
-[26]
+[27]
 \openout2 = `tex/system.aux'.
 
  (./tex/system.tex
@@ -2276,7 +2270,7 @@ Underfull \hbox (badness 7064) in paragraph at lines 39--40
 
 
 
-[27
+[28
 
 
 
@@ -2286,42 +2280,42 @@ File: img2_pdf/ch5_architecture.pdf Graphic file (type pdf)
 <use img2_pdf/ch5_architecture.pdf>
 
 
-[28]
-
 [29]
+
+[30]
 File: img2_pdf/ch5_er.pdf Graphic file (type pdf)
 <use img2_pdf/ch5_er.pdf>
 
 
-[30]
-
 [31]
+
+[32]
 File: img2_pdf/ch5_flow.pdf Graphic file (type pdf)
 <use img2_pdf/ch5_flow.pdf>
 
 
-[32]
-
 [33]
 
 [34]
+
+[35]
 File: img/ch5_pages.png Graphic file (type bmp)
 <img/ch5_pages.png>
 
 
-[35]
+[36]
 File: img/ch5_task_detail_case_a.png Graphic file (type bmp)
 <img/ch5_task_detail_case_a.png>
 
 
-[36]
+[37]
 File: img/ch5_task_detail_case_b.png Graphic file (type bmp)
 <img/ch5_task_detail_case_b.png>
 File: img/ch5_task_detail_case_c.png Graphic file (type bmp)
 <img/ch5_task_detail_case_c.png>
 
 
-[37]
+[38]
 Underfull \hbox (badness 3701) in paragraph at lines 261--262
 []|\TU/AdobeSongStd-Light.otf(0)/m/n/10.53937 返 回 \TU/TimesNewRoman(0)/m/n/10.5
 3937 task_id\TU/AdobeSongStd-Light.otf(0)/m/n/10.53937 ，|  任 务 状 态 进 入
@@ -2335,9 +2329,9 @@ Underfull \hbox (badness 1540) in paragraph at lines 263--264
 
 
 
-[38]
-
 [39]
+
+[40]
 Overfull \hbox (6.42047pt too wide) in paragraph at lines 301--302
 []\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 针 对 该 问 题，|  后 端 新 增 进 度 查 询 接 口，|  
 只 返 回 \TU/lmtt/m/n/12.045 status\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 、| \TU
@@ -2347,34 +2341,36 @@ Overfull \hbox (6.42047pt too wide) in paragraph at lines 301--302
 
 
 
-[40])
+[41])
 
-[41]
+[42]
 \openout2 = `tex/conclusion.aux'.
 
  (./tex/conclusion.tex
 
-[42
+[43
 
 
 
 
 ])
 
-[43]
+[44]
 
-[44
+[45
 
 
 
 ]
 
-[45]
+[46]
+
+[47]
 \openout2 = `tex/acknowledge.aux'.
 
  (./tex/acknowledge.tex)
 
-[46
+[48
 
 
 ]
@@ -2400,12 +2396,12 @@ Package logreq Info: Writing requests to 'Thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 44293 strings out of 473832
- 986123 string characters out of 5719382
- 1916946 words of memory out of 5000000
- 66512 multiletter control sequences out of 15000+600000
+ 44341 strings out of 473832
+ 988825 string characters out of 5719382
+ 1924997 words of memory out of 5000000
+ 66560 multiletter control sequences out of 15000+600000
  577734 words of font info for 175 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  129i,12n,136p,1026b,5154s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Thesis.xdv (58 pages, 791160 bytes).
+Output written on Thesis.xdv (59 pages, 813532 bytes).

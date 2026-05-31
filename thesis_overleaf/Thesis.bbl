@@ -807,6 +807,502 @@
       \endverb
       \keyw{zhao2024_shipsurvey}
     \endentry
+    \entry{du2022_small_object_review_cn}{article}{}{}
+      \name{author}{7}{}{%
+        {{hash=54e6f42e0e2bc57947a75d7cf0b94c9b}{%
+           family={杜紫薇},
+           familyi={杜\bibinitperiod}}}%
+        {{hash=5631b6e798b5ad4962867d7699136bad}{%
+           family={周恒},
+           familyi={周\bibinitperiod}}}%
+        {{hash=773ff828977e42c526c9784306c92ea5}{%
+           family={李承阳},
+           familyi={李\bibinitperiod}}}%
+        {{hash=6d8da8fc266f6cbd5625c6b7ccc764aa}{%
+           family={李忠博},
+           familyi={李\bibinitperiod}}}%
+        {{hash=7661dd454149fff022c0d282853cb1af}{%
+           family={谢永强},
+           familyi={谢\bibinitperiod}}}%
+        {{hash=cb402e171e24f79e8318fb4bf542be62}{%
+           family={董昱辰},
+           familyi={董\bibinitperiod}}}%
+        {{hash=5311f62870fac810b5e3443ef6d13c15}{%
+           family={齐锦},
+           familyi={齐\bibinitperiod}}}%
+      }
+      \name{namea}{7}{}{%
+        {{hash=54e6f42e0e2bc57947a75d7cf0b94c9b}{%
+           family={杜紫薇},
+           familyi={杜\bibinitperiod}}}%
+        {{hash=5631b6e798b5ad4962867d7699136bad}{%
+           family={周恒},
+           familyi={周\bibinitperiod}}}%
+        {{hash=773ff828977e42c526c9784306c92ea5}{%
+           family={李承阳},
+           familyi={李\bibinitperiod}}}%
+        {{hash=6d8da8fc266f6cbd5625c6b7ccc764aa}{%
+           family={李忠博},
+           familyi={李\bibinitperiod}}}%
+        {{hash=7661dd454149fff022c0d282853cb1af}{%
+           family={谢永强},
+           familyi={谢\bibinitperiod}}}%
+        {{hash=cb402e171e24f79e8318fb4bf542be62}{%
+           family={董昱辰},
+           familyi={董\bibinitperiod}}}%
+        {{hash=5311f62870fac810b5e3443ef6d13c15}{%
+           family={齐锦},
+           familyi={齐\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {chinese}%
+      }
+      \strng{namehash}{ef49cf84537363df5581a7a3e88b0387}
+      \strng{fullhash}{ef49cf84537363df5581a7a3e88b0387}
+      \strng{fullhashraw}{ef49cf84537363df5581a7a3e88b0387}
+      \strng{bibnamehash}{ef49cf84537363df5581a7a3e88b0387}
+      \strng{authorbibnamehash}{ef49cf84537363df5581a7a3e88b0387}
+      \strng{authornamehash}{ef49cf84537363df5581a7a3e88b0387}
+      \strng{authorfullhash}{ef49cf84537363df5581a7a3e88b0387}
+      \strng{authorfullhashraw}{ef49cf84537363df5581a7a3e88b0387}
+      \strng{nameabibnamehash}{ef49cf84537363df5581a7a3e88b0387}
+      \strng{nameanamehash}{ef49cf84537363df5581a7a3e88b0387}
+      \strng{nameafullhash}{ef49cf84537363df5581a7a3e88b0387}
+      \strng{nameafullhashraw}{ef49cf84537363df5581a7a3e88b0387}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{计算机科学}
+      \field{langid}{english}
+      \field{languageid}{chinese}
+      \field{lansortorder}{1}
+      \field{number}{12}
+      \field{title}{面向深度卷积神经网络的小目标检测算法综述}
+      \field{usera}{J}
+      \field{userd}{chinese}
+      \field{userf}{chinese}
+      \field{volume}{49}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{pages}{205\bibrangedash 218}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.11896/jsjkx.220500260
+      \endverb
+      \keyw{du2022_small_object_review_cn}
+    \endentry
+    \entry{liao2023_small_target_review_cn}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=fec8660ff204cd87002a33c6e992298d}{%
+           family={廖龙杰},
+           familyi={廖\bibinitperiod}}}%
+        {{hash=37123d01a1c90d60bc8d9e62f0b402c9}{%
+           family={吕文涛},
+           familyi={吕\bibinitperiod}}}%
+        {{hash=25edc76cf6f975c7ef9918ff295ef093}{%
+           family={叶冬},
+           familyi={叶\bibinitperiod}}}%
+        {{hash=99b49e55cbdbc184d3defde2818bd94d}{%
+           family={郭庆},
+           familyi={郭\bibinitperiod}}}%
+        {{hash=1d3116eedf1f03ca5c2eeb6de4677f3e}{%
+           family={鲁竞},
+           familyi={鲁\bibinitperiod}}}%
+        {{hash=a6bcb7f447c0fd0c85d0b28dde493d47}{%
+           family={刘志伟},
+           familyi={刘\bibinitperiod}}}%
+      }
+      \name{namea}{6}{}{%
+        {{hash=fec8660ff204cd87002a33c6e992298d}{%
+           family={廖龙杰},
+           familyi={廖\bibinitperiod}}}%
+        {{hash=37123d01a1c90d60bc8d9e62f0b402c9}{%
+           family={吕文涛},
+           familyi={吕\bibinitperiod}}}%
+        {{hash=25edc76cf6f975c7ef9918ff295ef093}{%
+           family={叶冬},
+           familyi={叶\bibinitperiod}}}%
+        {{hash=99b49e55cbdbc184d3defde2818bd94d}{%
+           family={郭庆},
+           familyi={郭\bibinitperiod}}}%
+        {{hash=1d3116eedf1f03ca5c2eeb6de4677f3e}{%
+           family={鲁竞},
+           familyi={鲁\bibinitperiod}}}%
+        {{hash=a6bcb7f447c0fd0c85d0b28dde493d47}{%
+           family={刘志伟},
+           familyi={刘\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {chinese}%
+      }
+      \strng{namehash}{786046ed29e8a70a8c1a8c2d36326839}
+      \strng{fullhash}{786046ed29e8a70a8c1a8c2d36326839}
+      \strng{fullhashraw}{786046ed29e8a70a8c1a8c2d36326839}
+      \strng{bibnamehash}{786046ed29e8a70a8c1a8c2d36326839}
+      \strng{authorbibnamehash}{786046ed29e8a70a8c1a8c2d36326839}
+      \strng{authornamehash}{786046ed29e8a70a8c1a8c2d36326839}
+      \strng{authorfullhash}{786046ed29e8a70a8c1a8c2d36326839}
+      \strng{authorfullhashraw}{786046ed29e8a70a8c1a8c2d36326839}
+      \strng{nameabibnamehash}{786046ed29e8a70a8c1a8c2d36326839}
+      \strng{nameanamehash}{786046ed29e8a70a8c1a8c2d36326839}
+      \strng{nameafullhash}{786046ed29e8a70a8c1a8c2d36326839}
+      \strng{nameafullhashraw}{786046ed29e8a70a8c1a8c2d36326839}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{浙江理工大学学报}
+      \field{langid}{english}
+      \field{languageid}{chinese}
+      \field{lansortorder}{1}
+      \field{number}{自科三}
+      \field{title}{基于深度学习的小目标检测算法研究进展}
+      \field{usera}{J}
+      \field{userd}{chinese}
+      \field{userf}{chinese}
+      \field{volume}{49--50}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{pages}{331\bibrangedash 343}
+      \range{pages}{13}
+      \keyw{liao2023_small_target_review_cn}
+    \endentry
+    \entry{wang2011_ship_detection_cn}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=8d51abf1b05a345ff0de5fa106b430dc}{%
+           family={王彦情},
+           familyi={王\bibinitperiod}}}%
+        {{hash=c12210ef9a40f96e657943dac36cc911}{%
+           family={马雷},
+           familyi={马\bibinitperiod}}}%
+        {{hash=4413a059f330190dc8cf2d12803b6c28}{%
+           family={田原},
+           familyi={田\bibinitperiod}}}%
+      }
+      \name{namea}{3}{}{%
+        {{hash=8d51abf1b05a345ff0de5fa106b430dc}{%
+           family={王彦情},
+           familyi={王\bibinitperiod}}}%
+        {{hash=c12210ef9a40f96e657943dac36cc911}{%
+           family={马雷},
+           familyi={马\bibinitperiod}}}%
+        {{hash=4413a059f330190dc8cf2d12803b6c28}{%
+           family={田原},
+           familyi={田\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {chinese}%
+      }
+      \strng{namehash}{2325184c3eb5233a9ba1e7c96a42ae94}
+      \strng{fullhash}{2325184c3eb5233a9ba1e7c96a42ae94}
+      \strng{fullhashraw}{2325184c3eb5233a9ba1e7c96a42ae94}
+      \strng{bibnamehash}{2325184c3eb5233a9ba1e7c96a42ae94}
+      \strng{authorbibnamehash}{2325184c3eb5233a9ba1e7c96a42ae94}
+      \strng{authornamehash}{2325184c3eb5233a9ba1e7c96a42ae94}
+      \strng{authorfullhash}{2325184c3eb5233a9ba1e7c96a42ae94}
+      \strng{authorfullhashraw}{2325184c3eb5233a9ba1e7c96a42ae94}
+      \strng{nameabibnamehash}{2325184c3eb5233a9ba1e7c96a42ae94}
+      \strng{nameanamehash}{2325184c3eb5233a9ba1e7c96a42ae94}
+      \strng{nameafullhash}{2325184c3eb5233a9ba1e7c96a42ae94}
+      \strng{nameafullhashraw}{2325184c3eb5233a9ba1e7c96a42ae94}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{自动化学报}
+      \field{langid}{english}
+      \field{languageid}{chinese}
+      \field{lansortorder}{1}
+      \field{number}{9}
+      \field{title}{光学遥感图像舰船目标检测与识别综述}
+      \field{usera}{J}
+      \field{userd}{chinese}
+      \field{userf}{chinese}
+      \field{volume}{37}
+      \field{year}{2011}
+      \field{dateera}{ce}
+      \field{pages}{1029\bibrangedash 1039}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.3724/SP.J.1004.2011.01029
+      \endverb
+      \keyw{wang2011_ship_detection_cn}
+    \endentry
+    \entry{xu2021_vessel_detection_cn}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=eb1970394a431045645843996a40c6e8}{%
+           family={徐芳},
+           familyi={徐\bibinitperiod}}}%
+        {{hash=afe2a9a76c304ec5aa7325f669057f53}{%
+           family={刘晶红},
+           familyi={刘\bibinitperiod}}}%
+        {{hash=fd985b0987b51e94e777640a8381782c}{%
+           family={孙辉},
+           familyi={孙\bibinitperiod}}}%
+        {{hash=11ccee3ac8c17c7e3fbf62f129ff2757}{%
+           family={等},
+           familyi={等\bibinitperiod}}}%
+      }
+      \name{namea}{4}{}{%
+        {{hash=eb1970394a431045645843996a40c6e8}{%
+           family={徐芳},
+           familyi={徐\bibinitperiod}}}%
+        {{hash=afe2a9a76c304ec5aa7325f669057f53}{%
+           family={刘晶红},
+           familyi={刘\bibinitperiod}}}%
+        {{hash=fd985b0987b51e94e777640a8381782c}{%
+           family={孙辉},
+           familyi={孙\bibinitperiod}}}%
+        {{hash=11ccee3ac8c17c7e3fbf62f129ff2757}{%
+           family={等},
+           familyi={等\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {chinese}%
+      }
+      \strng{namehash}{1522239fae5b1e11e90e7c9434e356f7}
+      \strng{fullhash}{1522239fae5b1e11e90e7c9434e356f7}
+      \strng{fullhashraw}{1522239fae5b1e11e90e7c9434e356f7}
+      \strng{bibnamehash}{1522239fae5b1e11e90e7c9434e356f7}
+      \strng{authorbibnamehash}{1522239fae5b1e11e90e7c9434e356f7}
+      \strng{authornamehash}{1522239fae5b1e11e90e7c9434e356f7}
+      \strng{authorfullhash}{1522239fae5b1e11e90e7c9434e356f7}
+      \strng{authorfullhashraw}{1522239fae5b1e11e90e7c9434e356f7}
+      \strng{nameabibnamehash}{1522239fae5b1e11e90e7c9434e356f7}
+      \strng{nameanamehash}{1522239fae5b1e11e90e7c9434e356f7}
+      \strng{nameafullhash}{1522239fae5b1e11e90e7c9434e356f7}
+      \strng{nameafullhashraw}{1522239fae5b1e11e90e7c9434e356f7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{光学精密工程}
+      \field{langid}{english}
+      \field{languageid}{chinese}
+      \field{lansortorder}{1}
+      \field{number}{4}
+      \field{title}{光学遥感图像海面船舶目标检测技术进展}
+      \field{usera}{J}
+      \field{userd}{chinese}
+      \field{userf}{chinese}
+      \field{volume}{29}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{pages}{916\bibrangedash 931}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.37188/OPE.2020.0419
+      \endverb
+      \keyw{xu2021_vessel_detection_cn}
+    \endentry
+    \entry{song2021_ship_survey_cn}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=bcf3db85da518515eda481f6b2e38cfc}{%
+           family={宋志娜},
+           familyi={宋\bibinitperiod}}}%
+        {{hash=31e9a3d4e962c15efd472aa380a6c616}{%
+           family={眭海刚},
+           familyi={眭\bibinitperiod}}}%
+        {{hash=696dd56a10cb01e783cc010cf4f2d889}{%
+           family={李永成},
+           familyi={李\bibinitperiod}}}%
+      }
+      \name{namea}{3}{}{%
+        {{hash=bcf3db85da518515eda481f6b2e38cfc}{%
+           family={宋志娜},
+           familyi={宋\bibinitperiod}}}%
+        {{hash=31e9a3d4e962c15efd472aa380a6c616}{%
+           family={眭海刚},
+           familyi={眭\bibinitperiod}}}%
+        {{hash=696dd56a10cb01e783cc010cf4f2d889}{%
+           family={李永成},
+           familyi={李\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {chinese}%
+      }
+      \strng{namehash}{8b0f7d9a0de192536af6ec7859d862d0}
+      \strng{fullhash}{8b0f7d9a0de192536af6ec7859d862d0}
+      \strng{fullhashraw}{8b0f7d9a0de192536af6ec7859d862d0}
+      \strng{bibnamehash}{8b0f7d9a0de192536af6ec7859d862d0}
+      \strng{authorbibnamehash}{8b0f7d9a0de192536af6ec7859d862d0}
+      \strng{authornamehash}{8b0f7d9a0de192536af6ec7859d862d0}
+      \strng{authorfullhash}{8b0f7d9a0de192536af6ec7859d862d0}
+      \strng{authorfullhashraw}{8b0f7d9a0de192536af6ec7859d862d0}
+      \strng{nameabibnamehash}{8b0f7d9a0de192536af6ec7859d862d0}
+      \strng{nameanamehash}{8b0f7d9a0de192536af6ec7859d862d0}
+      \strng{nameafullhash}{8b0f7d9a0de192536af6ec7859d862d0}
+      \strng{nameafullhashraw}{8b0f7d9a0de192536af6ec7859d862d0}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{武汉大学学报(信息科学版)}
+      \field{langid}{english}
+      \field{languageid}{chinese}
+      \field{lansortorder}{1}
+      \field{number}{11}
+      \field{title}{高分辨率可见光遥感图像舰船目标检测综述}
+      \field{usera}{J}
+      \field{userd}{chinese}
+      \field{userf}{chinese}
+      \field{volume}{46}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{pages}{1703\bibrangedash 1715}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.13203/j.whugis20200481
+      \endverb
+      \keyw{song2021_ship_survey_cn}
+    \endentry
+    \entry{liao2022_optical_rs_detection_cn}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=d750e7f9eaef8769de14d9174d16510c}{%
+           family={廖育荣},
+           familyi={廖\bibinitperiod}}}%
+        {{hash=342312aaff82b2f183638437d8d88e10}{%
+           family={王海宁},
+           familyi={王\bibinitperiod}}}%
+        {{hash=3a86e20b690c42366856a4e8f31f4445}{%
+           family={林存宝},
+           familyi={林\bibinitperiod}}}%
+        {{hash=6944d9d6078e831516c34d85a309d191}{%
+           family={李阳},
+           familyi={李\bibinitperiod}}}%
+        {{hash=40930c4c26107d1d1c295030df3894e9}{%
+           family={方宇强},
+           familyi={方\bibinitperiod}}}%
+        {{hash=1fec0cc76bf2edfaa5030425461b9512}{%
+           family={倪淑燕},
+           familyi={倪\bibinitperiod}}}%
+      }
+      \name{namea}{6}{}{%
+        {{hash=d750e7f9eaef8769de14d9174d16510c}{%
+           family={廖育荣},
+           familyi={廖\bibinitperiod}}}%
+        {{hash=342312aaff82b2f183638437d8d88e10}{%
+           family={王海宁},
+           familyi={王\bibinitperiod}}}%
+        {{hash=3a86e20b690c42366856a4e8f31f4445}{%
+           family={林存宝},
+           familyi={林\bibinitperiod}}}%
+        {{hash=6944d9d6078e831516c34d85a309d191}{%
+           family={李阳},
+           familyi={李\bibinitperiod}}}%
+        {{hash=40930c4c26107d1d1c295030df3894e9}{%
+           family={方宇强},
+           familyi={方\bibinitperiod}}}%
+        {{hash=1fec0cc76bf2edfaa5030425461b9512}{%
+           family={倪淑燕},
+           familyi={倪\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {chinese}%
+      }
+      \strng{namehash}{7576e737f62a7a0252e3481686c55de7}
+      \strng{fullhash}{7576e737f62a7a0252e3481686c55de7}
+      \strng{fullhashraw}{7576e737f62a7a0252e3481686c55de7}
+      \strng{bibnamehash}{7576e737f62a7a0252e3481686c55de7}
+      \strng{authorbibnamehash}{7576e737f62a7a0252e3481686c55de7}
+      \strng{authornamehash}{7576e737f62a7a0252e3481686c55de7}
+      \strng{authorfullhash}{7576e737f62a7a0252e3481686c55de7}
+      \strng{authorfullhashraw}{7576e737f62a7a0252e3481686c55de7}
+      \strng{nameabibnamehash}{7576e737f62a7a0252e3481686c55de7}
+      \strng{nameanamehash}{7576e737f62a7a0252e3481686c55de7}
+      \strng{nameafullhash}{7576e737f62a7a0252e3481686c55de7}
+      \strng{nameafullhashraw}{7576e737f62a7a0252e3481686c55de7}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{通信学报}
+      \field{langid}{english}
+      \field{languageid}{chinese}
+      \field{lansortorder}{1}
+      \field{number}{5}
+      \field{title}{基于深度学习的光学遥感图像目标检测研究进展}
+      \field{usera}{J}
+      \field{userd}{chinese}
+      \field{userf}{chinese}
+      \field{volume}{43}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{pages}{190\bibrangedash 203}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.11959/j.issn.1000-436x.2022071
+      \endverb
+      \keyw{liao2022_optical_rs_detection_cn}
+    \endentry
+    \entry{huang2023_ship_detection_survey_cn}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=82f5eb5505ba37055c8f339c8380d39e}{%
+           family={黄泽贤},
+           familyi={黄\bibinitperiod}}}%
+        {{hash=9e4ba67bdf72c7177ee334efde9c4d6f}{%
+           family={吴凡路},
+           familyi={吴\bibinitperiod}}}%
+        {{hash=f17676b824ac5c922d1ad0f20016833f}{%
+           family={傅瑶},
+           familyi={傅\bibinitperiod}}}%
+        {{hash=11ccee3ac8c17c7e3fbf62f129ff2757}{%
+           family={等},
+           familyi={等\bibinitperiod}}}%
+      }
+      \name{namea}{4}{}{%
+        {{hash=82f5eb5505ba37055c8f339c8380d39e}{%
+           family={黄泽贤},
+           familyi={黄\bibinitperiod}}}%
+        {{hash=9e4ba67bdf72c7177ee334efde9c4d6f}{%
+           family={吴凡路},
+           familyi={吴\bibinitperiod}}}%
+        {{hash=f17676b824ac5c922d1ad0f20016833f}{%
+           family={傅瑶},
+           familyi={傅\bibinitperiod}}}%
+        {{hash=11ccee3ac8c17c7e3fbf62f129ff2757}{%
+           family={等},
+           familyi={等\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {chinese}%
+      }
+      \strng{namehash}{9af7fb5bb190f54c5334a8507293fe52}
+      \strng{fullhash}{9af7fb5bb190f54c5334a8507293fe52}
+      \strng{fullhashraw}{9af7fb5bb190f54c5334a8507293fe52}
+      \strng{bibnamehash}{9af7fb5bb190f54c5334a8507293fe52}
+      \strng{authorbibnamehash}{9af7fb5bb190f54c5334a8507293fe52}
+      \strng{authornamehash}{9af7fb5bb190f54c5334a8507293fe52}
+      \strng{authorfullhash}{9af7fb5bb190f54c5334a8507293fe52}
+      \strng{authorfullhashraw}{9af7fb5bb190f54c5334a8507293fe52}
+      \strng{nameabibnamehash}{9af7fb5bb190f54c5334a8507293fe52}
+      \strng{nameanamehash}{9af7fb5bb190f54c5334a8507293fe52}
+      \strng{nameafullhash}{9af7fb5bb190f54c5334a8507293fe52}
+      \strng{nameafullhashraw}{9af7fb5bb190f54c5334a8507293fe52}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{光学精密工程}
+      \field{langid}{english}
+      \field{languageid}{chinese}
+      \field{lansortorder}{1}
+      \field{number}{15}
+      \field{title}{基于深度学习的遥感图像舰船目标检测算法综述}
+      \field{usera}{J}
+      \field{userd}{chinese}
+      \field{userf}{chinese}
+      \field{volume}{31}
+      \field{year}{2023}
+      \field{dateera}{ce}
+      \field{pages}{2295\bibrangedash 2318}
+      \range{pages}{24}
+      \verb{doi}
+      \verb 10.37188/OPE.20233115.2295
+      \endverb
+      \keyw{huang2023_ship_detection_survey_cn}
+    \endentry
     \entry{chen2022_tinyship_drenet}{article}{}{}
       \name{author}{5}{}{%
         {{hash=2ef986e13b9dd53437a3390e408d4dc6}{%
@@ -877,8 +1373,8 @@
       \strng{nameanamehash}{d23a745eae5b7c37f491af0eda1d67ad}
       \strng{nameafullhash}{d23a745eae5b7c37f491af0eda1d67ad}
       \strng{nameafullhashraw}{d23a745eae5b7c37f491af0eda1d67ad}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{IEEE Transactions on Geoscience and Remote Sensing}
@@ -959,8 +1455,8 @@
       \strng{nameanamehash}{9147daa2f6a058d5b8880ff5cf38abd6}
       \strng{nameafullhash}{9147daa2f6a058d5b8880ff5cf38abd6}
       \strng{nameafullhashraw}{9147daa2f6a058d5b8880ff5cf38abd6}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)}
@@ -1017,8 +1513,8 @@
       \strng{nameanamehash}{e3b480c56f52be95ad68ce67e9708174}
       \strng{nameafullhash}{e3b480c56f52be95ad68ce67e9708174}
       \strng{nameafullhashraw}{e3b480c56f52be95ad68ce67e9708174}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{eprintclass}{cs.CV}
@@ -1227,6 +1723,158 @@
       \verb 2203.03605
       \endverb
       \keyw{zhang2023_dino}
+    \endentry
+    \entry{zhang2020_detection_review_cn}{article}{}{}
+      \name{author}{7}{}{%
+        {{hash=0a496156ace43ba00708182796dca779}{%
+           family={张婷婷},
+           familyi={张\bibinitperiod}}}%
+        {{hash=93610249ceee2ff383a10275f0175169}{%
+           family={章坚武},
+           familyi={章\bibinitperiod}}}%
+        {{hash=24b950d074c71df24e9684b7abe09cd9}{%
+           family={郭春生},
+           familyi={郭\bibinitperiod}}}%
+        {{hash=5a250fc3944fd50dd14d00f5aed1e28a}{%
+           family={陈华华},
+           familyi={陈\bibinitperiod}}}%
+        {{hash=04d3a72a4bd539b7af913725ad3e1c13}{%
+           family={周迪},
+           familyi={周\bibinitperiod}}}%
+        {{hash=4dc2578d8d24f135b057b8d5aa6c2afd}{%
+           family={王延松},
+           familyi={王\bibinitperiod}}}%
+        {{hash=75e06cc910bd2b70d0e68c7577e59f3a}{%
+           family={徐爱华},
+           familyi={徐\bibinitperiod}}}%
+      }
+      \name{namea}{7}{}{%
+        {{hash=0a496156ace43ba00708182796dca779}{%
+           family={张婷婷},
+           familyi={张\bibinitperiod}}}%
+        {{hash=93610249ceee2ff383a10275f0175169}{%
+           family={章坚武},
+           familyi={章\bibinitperiod}}}%
+        {{hash=24b950d074c71df24e9684b7abe09cd9}{%
+           family={郭春生},
+           familyi={郭\bibinitperiod}}}%
+        {{hash=5a250fc3944fd50dd14d00f5aed1e28a}{%
+           family={陈华华},
+           familyi={陈\bibinitperiod}}}%
+        {{hash=04d3a72a4bd539b7af913725ad3e1c13}{%
+           family={周迪},
+           familyi={周\bibinitperiod}}}%
+        {{hash=4dc2578d8d24f135b057b8d5aa6c2afd}{%
+           family={王延松},
+           familyi={王\bibinitperiod}}}%
+        {{hash=75e06cc910bd2b70d0e68c7577e59f3a}{%
+           family={徐爱华},
+           familyi={徐\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {chinese}%
+      }
+      \strng{namehash}{17da750a44b2e3328a5ca1e96525c7a8}
+      \strng{fullhash}{17da750a44b2e3328a5ca1e96525c7a8}
+      \strng{fullhashraw}{17da750a44b2e3328a5ca1e96525c7a8}
+      \strng{bibnamehash}{17da750a44b2e3328a5ca1e96525c7a8}
+      \strng{authorbibnamehash}{17da750a44b2e3328a5ca1e96525c7a8}
+      \strng{authornamehash}{17da750a44b2e3328a5ca1e96525c7a8}
+      \strng{authorfullhash}{17da750a44b2e3328a5ca1e96525c7a8}
+      \strng{authorfullhashraw}{17da750a44b2e3328a5ca1e96525c7a8}
+      \strng{nameabibnamehash}{17da750a44b2e3328a5ca1e96525c7a8}
+      \strng{nameanamehash}{17da750a44b2e3328a5ca1e96525c7a8}
+      \strng{nameafullhash}{17da750a44b2e3328a5ca1e96525c7a8}
+      \strng{nameafullhashraw}{17da750a44b2e3328a5ca1e96525c7a8}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{电信科学}
+      \field{langid}{english}
+      \field{languageid}{chinese}
+      \field{lansortorder}{1}
+      \field{number}{7}
+      \field{title}{基于深度学习的图像目标检测算法综述}
+      \field{usera}{J}
+      \field{userd}{chinese}
+      \field{userf}{chinese}
+      \field{volume}{36}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{pages}{92\bibrangedash 106}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.11959/j.issn.1000-0801.2020199
+      \endverb
+      \keyw{zhang2020_detection_review_cn}
+    \endentry
+    \entry{zhao2020_detection_survey_cn}{article}{}{}
+      \name{author}{4}{}{%
+        {{hash=8983fb3e10bd6c6817f6e7d128c67276}{%
+           family={赵永强},
+           familyi={赵\bibinitperiod}}}%
+        {{hash=383f5decae0038b167126841858d4db1}{%
+           family={饶元},
+           familyi={饶\bibinitperiod}}}%
+        {{hash=735b5e971e206b7f66333b4fd4999f16}{%
+           family={董世鹏},
+           familyi={董\bibinitperiod}}}%
+        {{hash=76855a3c38f0d9f4f8e046d9234c9f99}{%
+           family={张君毅},
+           familyi={张\bibinitperiod}}}%
+      }
+      \name{namea}{4}{}{%
+        {{hash=8983fb3e10bd6c6817f6e7d128c67276}{%
+           family={赵永强},
+           familyi={赵\bibinitperiod}}}%
+        {{hash=383f5decae0038b167126841858d4db1}{%
+           family={饶元},
+           familyi={饶\bibinitperiod}}}%
+        {{hash=735b5e971e206b7f66333b4fd4999f16}{%
+           family={董世鹏},
+           familyi={董\bibinitperiod}}}%
+        {{hash=76855a3c38f0d9f4f8e046d9234c9f99}{%
+           family={张君毅},
+           familyi={张\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {chinese}%
+      }
+      \strng{namehash}{13570c7d1f4220348f98df67cae6d953}
+      \strng{fullhash}{13570c7d1f4220348f98df67cae6d953}
+      \strng{fullhashraw}{13570c7d1f4220348f98df67cae6d953}
+      \strng{bibnamehash}{13570c7d1f4220348f98df67cae6d953}
+      \strng{authorbibnamehash}{13570c7d1f4220348f98df67cae6d953}
+      \strng{authornamehash}{13570c7d1f4220348f98df67cae6d953}
+      \strng{authorfullhash}{13570c7d1f4220348f98df67cae6d953}
+      \strng{authorfullhashraw}{13570c7d1f4220348f98df67cae6d953}
+      \strng{nameabibnamehash}{13570c7d1f4220348f98df67cae6d953}
+      \strng{nameanamehash}{13570c7d1f4220348f98df67cae6d953}
+      \strng{nameafullhash}{13570c7d1f4220348f98df67cae6d953}
+      \strng{nameafullhashraw}{13570c7d1f4220348f98df67cae6d953}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{中国图象图形学报}
+      \field{langid}{english}
+      \field{languageid}{chinese}
+      \field{lansortorder}{1}
+      \field{number}{4}
+      \field{title}{深度学习目标检测方法综述}
+      \field{usera}{J}
+      \field{userd}{chinese}
+      \field{userf}{chinese}
+      \field{volume}{25}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{pages}{629\bibrangedash 654}
+      \range{pages}{26}
+      \verb{doi}
+      \verb 10.11834/jig.190307
+      \endverb
+      \keyw{zhao2020_detection_survey_cn}
     \endentry
     \entry{yang2019_scrdet}{inproceedings}{}{}
       \name{author}{8}{}{%
@@ -1452,8 +2100,8 @@
       \strng{nameanamehash}{3560b4b07a36401f284791c1e9e800e3}
       \strng{nameafullhash}{3560b4b07a36401f284791c1e9e800e3}
       \strng{nameafullhashraw}{3560b4b07a36401f284791c1e9e800e3}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Advances in Neural Information Processing Systems}
@@ -1519,8 +2167,8 @@
       \strng{nameanamehash}{da7a2f4be40720d9c0a5f227afcaf7c4}
       \strng{nameafullhash}{da7a2f4be40720d9c0a5f227afcaf7c4}
       \strng{nameafullhashraw}{da7a2f4be40720d9c0a5f227afcaf7c4}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)}
@@ -1596,6 +2244,131 @@
       \verb 10.1016/j.isprsjprs.2016.03.014
       \endverb
       \keyw{cheng2016_rsod_survey}
+    \endentry
+    \entry{nie2021_optical_rs_detection_cn}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=52de9697bd46a0e70b23b67a31a174c0}{%
+           family={聂光涛},
+           familyi={聂\bibinitperiod}}}%
+        {{hash=917d920e7436bff3d952813ba140ec32}{%
+           family={黄华},
+           familyi={黄\bibinitperiod}}}%
+      }
+      \name{namea}{2}{}{%
+        {{hash=52de9697bd46a0e70b23b67a31a174c0}{%
+           family={聂光涛},
+           familyi={聂\bibinitperiod}}}%
+        {{hash=917d920e7436bff3d952813ba140ec32}{%
+           family={黄华},
+           familyi={黄\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {chinese}%
+      }
+      \strng{namehash}{62f210cceffcd7daa2a2bea244f90926}
+      \strng{fullhash}{62f210cceffcd7daa2a2bea244f90926}
+      \strng{fullhashraw}{62f210cceffcd7daa2a2bea244f90926}
+      \strng{bibnamehash}{62f210cceffcd7daa2a2bea244f90926}
+      \strng{authorbibnamehash}{62f210cceffcd7daa2a2bea244f90926}
+      \strng{authornamehash}{62f210cceffcd7daa2a2bea244f90926}
+      \strng{authorfullhash}{62f210cceffcd7daa2a2bea244f90926}
+      \strng{authorfullhashraw}{62f210cceffcd7daa2a2bea244f90926}
+      \strng{nameabibnamehash}{62f210cceffcd7daa2a2bea244f90926}
+      \strng{nameanamehash}{62f210cceffcd7daa2a2bea244f90926}
+      \strng{nameafullhash}{62f210cceffcd7daa2a2bea244f90926}
+      \strng{nameafullhashraw}{62f210cceffcd7daa2a2bea244f90926}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{自动化学报}
+      \field{langid}{english}
+      \field{languageid}{chinese}
+      \field{lansortorder}{1}
+      \field{number}{8}
+      \field{title}{光学遥感图像目标检测算法综述}
+      \field{usera}{J}
+      \field{userd}{chinese}
+      \field{userf}{chinese}
+      \field{volume}{47}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{pages}{1749\bibrangedash 1768}
+      \range{pages}{20}
+      \keyw{nie2021_optical_rs_detection_cn}
+    \endentry
+    \entry{li2021_ship_detection_review_cn}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=3526af3803115b6aaa9a689afa6acc9c}{%
+           family={李晨蠡},
+           familyi={李\bibinitperiod}}}%
+        {{hash=c4fa6f525af83c3ef4b3cfd5a5182be8}{%
+           family={胥辉旗},
+           familyi={胥\bibinitperiod}}}%
+        {{hash=efd65760d980a6de24f1cc312799282d}{%
+           family={钱坤},
+           familyi={钱\bibinitperiod}}}%
+        {{hash=81f23b6dbbf30f8d37300fefc945ed7f}{%
+           family={邓博元},
+           familyi={邓\bibinitperiod}}}%
+        {{hash=e6d6b9e73c0279f66f65240b147feab8}{%
+           family={冯泽钦},
+           familyi={冯\bibinitperiod}}}%
+      }
+      \name{namea}{5}{}{%
+        {{hash=3526af3803115b6aaa9a689afa6acc9c}{%
+           family={李晨蠡},
+           familyi={李\bibinitperiod}}}%
+        {{hash=c4fa6f525af83c3ef4b3cfd5a5182be8}{%
+           family={胥辉旗},
+           familyi={胥\bibinitperiod}}}%
+        {{hash=efd65760d980a6de24f1cc312799282d}{%
+           family={钱坤},
+           familyi={钱\bibinitperiod}}}%
+        {{hash=81f23b6dbbf30f8d37300fefc945ed7f}{%
+           family={邓博元},
+           familyi={邓\bibinitperiod}}}%
+        {{hash=e6d6b9e73c0279f66f65240b147feab8}{%
+           family={冯泽钦},
+           familyi={冯\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {chinese}%
+      }
+      \strng{namehash}{3cac4e7c24c17afcd8ee67d97392757f}
+      \strng{fullhash}{3cac4e7c24c17afcd8ee67d97392757f}
+      \strng{fullhashraw}{3cac4e7c24c17afcd8ee67d97392757f}
+      \strng{bibnamehash}{3cac4e7c24c17afcd8ee67d97392757f}
+      \strng{authorbibnamehash}{3cac4e7c24c17afcd8ee67d97392757f}
+      \strng{authornamehash}{3cac4e7c24c17afcd8ee67d97392757f}
+      \strng{authorfullhash}{3cac4e7c24c17afcd8ee67d97392757f}
+      \strng{authorfullhashraw}{3cac4e7c24c17afcd8ee67d97392757f}
+      \strng{nameabibnamehash}{3cac4e7c24c17afcd8ee67d97392757f}
+      \strng{nameanamehash}{3cac4e7c24c17afcd8ee67d97392757f}
+      \strng{nameafullhash}{3cac4e7c24c17afcd8ee67d97392757f}
+      \strng{nameafullhashraw}{3cac4e7c24c17afcd8ee67d97392757f}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{兵器装备工程学报}
+      \field{langid}{english}
+      \field{languageid}{chinese}
+      \field{lansortorder}{1}
+      \field{number}{12}
+      \field{title}{基于深度学习的舰船目标检测技术综述}
+      \field{usera}{J}
+      \field{userd}{chinese}
+      \field{userf}{chinese}
+      \field{volume}{42}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{pages}{57\bibrangedash 63}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.11809/bqzbgcxb2021.12.008
+      \endverb
+      \keyw{li2021_ship_detection_review_cn}
     \endentry
     \entry{mmdet2018_openmmlab}{misc}{}{}
       \name{author}{25}{}{%
@@ -1916,8 +2689,8 @@
       \strng{nameanamehash}{88f069848482a556e416f713d2819905}
       \strng{nameafullhash}{88f069848482a556e416f713d2819905}
       \strng{nameafullhashraw}{88f069848482a556e416f713d2819905}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{langid}{english}
@@ -2041,8 +2814,8 @@
       \strng{nameanamehash}{3f23d264edb29776986e0c9e6a6459c4}
       \strng{nameafullhash}{3f23d264edb29776986e0c9e6a6459c4}
       \strng{nameafullhashraw}{3f23d264edb29776986e0c9e6a6459c4}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the European Conference on Computer Vision (ECCV)}
@@ -2129,8 +2902,8 @@
       \strng{nameanamehash}{f5f172ccc39720f9a6284cf8a9d3b6f3}
       \strng{nameafullhash}{f5f172ccc39720f9a6284cf8a9d3b6f3}
       \strng{nameafullhashraw}{f5f172ccc39720f9a6284cf8a9d3b6f3}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{International Journal of Computer Vision}
@@ -2202,8 +2975,8 @@
       \strng{nameanamehash}{716368ffcbf4a15fd391700bd71a3f40}
       \strng{nameafullhash}{716368ffcbf4a15fd391700bd71a3f40}
       \strng{nameafullhashraw}{716368ffcbf4a15fd391700bd71a3f40}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{Image and Vision Computing}
@@ -2284,8 +3057,8 @@
       \strng{nameanamehash}{6ecc0adb2c55d3815a4962aaf1fbdc2f}
       \strng{nameafullhash}{6ecc0adb2c55d3815a4962aaf1fbdc2f}
       \strng{nameafullhashraw}{6ecc0adb2c55d3815a4962aaf1fbdc2f}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the IEEE International Conference on Computer Vision (ICCV)}
