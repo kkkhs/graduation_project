@@ -2993,22 +2993,20 @@
     <bcf:citekey order="27" intorder="5">li2021_ship_detection_review_cn</bcf:citekey>
     <bcf:citekey order="28" intorder="1">chen2022_tinyship_drenet</bcf:citekey>
     <bcf:citekey order="29" intorder="1">mmdet2018_openmmlab</bcf:citekey>
-    <bcf:citekey order="30" intorder="1">ultralytics2024_docs</bcf:citekey>
-    <bcf:citekey order="31" intorder="1">lin2014_coco</bcf:citekey>
-    <bcf:citekey order="31" intorder="2">everingham2010_voc</bcf:citekey>
-    <bcf:citekey order="32" intorder="1">chen2022_tinyship_drenet</bcf:citekey>
-    <bcf:citekey order="33" intorder="1">lin2014_coco</bcf:citekey>
+    <bcf:citekey order="30" intorder="1">lin2014_coco</bcf:citekey>
+    <bcf:citekey order="30" intorder="2">everingham2010_voc</bcf:citekey>
+    <bcf:citekey order="31" intorder="1">chen2022_tinyship_drenet</bcf:citekey>
+    <bcf:citekey order="32" intorder="1">lin2014_coco</bcf:citekey>
+    <bcf:citekey order="33" intorder="1">chen2022_tinyship_drenet</bcf:citekey>
     <bcf:citekey order="34" intorder="1">chen2022_tinyship_drenet</bcf:citekey>
     <bcf:citekey order="35" intorder="1">chen2022_tinyship_drenet</bcf:citekey>
-    <bcf:citekey order="36" intorder="1">chen2022_tinyship_drenet</bcf:citekey>
+    <bcf:citekey order="36" intorder="1">tian2019_fcos</bcf:citekey>
     <bcf:citekey order="37" intorder="1">tian2019_fcos</bcf:citekey>
     <bcf:citekey order="38" intorder="1">tian2019_fcos</bcf:citekey>
-    <bcf:citekey order="39" intorder="1">tian2019_fcos</bcf:citekey>
-    <bcf:citekey order="40" intorder="1">redmon2016_yolo</bcf:citekey>
-    <bcf:citekey order="40" intorder="2">redmon2018_yolov3</bcf:citekey>
-    <bcf:citekey order="40" intorder="3">ultralytics2024_docs</bcf:citekey>
-    <bcf:citekey order="41" intorder="1">solovyev2021_wbf</bcf:citekey>
-    <bcf:citekey order="42" intorder="1">bodla2017_softnms</bcf:citekey>
+    <bcf:citekey order="39" intorder="1">redmon2016_yolo</bcf:citekey>
+    <bcf:citekey order="39" intorder="2">redmon2018_yolov3</bcf:citekey>
+    <bcf:citekey order="40" intorder="1">solovyev2021_wbf</bcf:citekey>
+    <bcf:citekey order="41" intorder="1">bodla2017_softnms</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">

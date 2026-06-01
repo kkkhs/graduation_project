@@ -94,6 +94,8 @@
       \field{volume}{28}
       \field{year}{2015}
       \field{dateera}{ce}
+      \field{pages}{91\bibrangedash 99}
+      \range{pages}{9}
       \keyw{ren2015_fasterrcnn}
     \endentry
     \entry{lin2017_fpn}{inproceedings}{}{}
@@ -278,6 +280,11 @@
       \field{userf}{english}
       \field{year}{2017}
       \field{dateera}{ce}
+      \field{pages}{2999\bibrangedash 3007}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1109/ICCV.2017.324
+      \endverb
       \keyw{lin2017_focalloss}
     \endentry
     \entry{tian2019_fcos}{inproceedings}{}{}
@@ -354,6 +361,11 @@
       \field{userf}{english}
       \field{year}{2019}
       \field{dateera}{ce}
+      \field{pages}{9626\bibrangedash 9635}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1109/ICCV.2019.00972
+      \endverb
       \keyw{tian2019_fcos}
     \endentry
     \entry{redmon2016_yolo}{inproceedings}{}{}
@@ -430,9 +442,14 @@
       \field{userf}{english}
       \field{year}{2016}
       \field{dateera}{ce}
+      \field{pages}{779\bibrangedash 788}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1109/CVPR.2016.91
+      \endverb
       \keyw{redmon2016_yolo}
     \endentry
-    \entry{carion2020_detr}{misc}{}{}
+    \entry{carion2020_detr}{inproceedings}{}{}
       \name{author}{6}{}{%
         {{hash=0cb223da593b5653feac6f6eabcbe82d}{%
            family={Carion},
@@ -516,26 +533,24 @@
       \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{eprintclass}{cs.CV}
-      \field{eprinttype}{arXiv}
+      \field{booktitle}{Proceedings of the European Conference on Computer Vision (ECCV)}
       \field{langid}{english}
       \field{languageid}{english}
       \field{lansortorder}{4}
       \field{title}{End-to-End Object Detection with Transformers}
-      \field{usera}{Z}
+      \field{usera}{C}
       \field{userd}{english}
       \field{userf}{english}
       \field{year}{2020}
       \field{dateera}{ce}
+      \field{pages}{213\bibrangedash 229}
+      \range{pages}{17}
       \verb{doi}
-      \verb 10.48550/arXiv.2005.12872
-      \endverb
-      \verb{eprint}
-      \verb 2005.12872
+      \verb 10.1007/978-3-030-58452-8_13
       \endverb
       \keyw{carion2020_detr}
     \endentry
-    \entry{zhu2021_deformabledetr}{misc}{}{}
+    \entry{zhu2021_deformabledetr}{inproceedings}{}{}
       \name{author}{6}{}{%
         {{hash=19309053ea27cb5af23921c399ac27f8}{%
            family={Zhu},
@@ -619,22 +634,23 @@
       \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{eprintclass}{cs.CV}
-      \field{eprinttype}{arXiv}
+      \field{booktitle}{International Conference on Learning Representations (ICLR)}
       \field{langid}{english}
       \field{languageid}{english}
       \field{lansortorder}{4}
       \field{title}{Deformable {DETR}: Deformable Transformers for End-to-End Object Detection}
-      \field{usera}{Z}
+      \field{usera}{C}
       \field{userd}{english}
       \field{userf}{english}
       \field{year}{2021}
       \field{dateera}{ce}
-      \verb{doi}
-      \verb 10.48550/arXiv.2010.04159
+      \field{pages}{1\bibrangedash 16}
+      \range{pages}{16}
+      \verb{urlraw}
+      \verb https://openreview.net/forum?id=gZ9hCDWe6ke
       \endverb
-      \verb{eprint}
-      \verb 2010.04159
+      \verb{url}
+      \verb https://openreview.net/forum?id=gZ9hCDWe6ke
       \endverb
       \keyw{zhu2021_deformabledetr}
     \endentry
@@ -732,58 +748,95 @@
       \keyw{wang2023_sod_review}
     \endentry
     \entry{zhao2024_shipsurvey}{article}{}{}
-      \true{moreauthor}
-      \true{morelabelname}
-      \name{author}{3}{}{%
-        {{hash=eed156c687a79d721734200afc38d239}{%
+      \name{author}{7}{}{%
+        {{hash=6b015519bd2712b2c450a4143a3ba8aa}{%
            family={Zhao},
            familyi={Z\bibinitperiod},
-           given={Zhe},
-           giveni={Z\bibinitperiod}}}%
-        {{hash=00b734eb3fb588e4c6c94e4271080d0b}{%
+           given={Tianqi},
+           giveni={T\bibinitperiod}}}%
+        {{hash=e8418fc5f6389b6395b1244283de5190}{%
            family={Wang},
            familyi={W\bibinitperiod},
-           given={Meng},
-           giveni={M\bibinitperiod}}}%
-        {{hash=dacc7d75c740472b7ca1281b35a47a90}{%
+           given={Yongcheng},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=80c88b1c7cc92f9bcb33605a25e00dab}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Zheng},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=c61d988f8aae16476de3708aef8a26db}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={Yunxiao},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=215c7d91e47bc648dac2d6096241a0e5}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Chi},
+           giveni={C\bibinitperiod}}}%
+        {{hash=b0e8e4c399a2cfa6f86a3bed624f666c}{%
+           family={Feng},
+           familyi={F\bibinitperiod},
+           given={Hao},
+           giveni={H\bibinitperiod}}}%
+        {{hash=2adba577ee37585befb3281a9288bc16}{%
            family={Zhao},
            familyi={Z\bibinitperiod},
-           given={Minglei},
-           giveni={M\bibinitperiod}}}%
+           given={Zhikang},
+           giveni={Z\bibinitperiod}}}%
       }
-      \true{morenamea}
-      \name{namea}{3}{}{%
-        {{hash=eed156c687a79d721734200afc38d239}{%
+      \name{namea}{7}{}{%
+        {{hash=6b015519bd2712b2c450a4143a3ba8aa}{%
            family={Zhao},
            familyi={Z\bibinitperiod},
-           given={Zhe},
-           giveni={Z\bibinitperiod}}}%
-        {{hash=00b734eb3fb588e4c6c94e4271080d0b}{%
+           given={Tianqi},
+           giveni={T\bibinitperiod}}}%
+        {{hash=e8418fc5f6389b6395b1244283de5190}{%
            family={Wang},
            familyi={W\bibinitperiod},
-           given={Meng},
-           giveni={M\bibinitperiod}}}%
-        {{hash=dacc7d75c740472b7ca1281b35a47a90}{%
+           given={Yongcheng},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=80c88b1c7cc92f9bcb33605a25e00dab}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Zheng},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=c61d988f8aae16476de3708aef8a26db}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={Yunxiao},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=215c7d91e47bc648dac2d6096241a0e5}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Chi},
+           giveni={C\bibinitperiod}}}%
+        {{hash=b0e8e4c399a2cfa6f86a3bed624f666c}{%
+           family={Feng},
+           familyi={F\bibinitperiod},
+           given={Hao},
+           giveni={H\bibinitperiod}}}%
+        {{hash=2adba577ee37585befb3281a9288bc16}{%
            family={Zhao},
            familyi={Z\bibinitperiod},
-           given={Minglei},
-           giveni={M\bibinitperiod}}}%
+           given={Zhikang},
+           giveni={Z\bibinitperiod}}}%
       }
       \list{language}{1}{%
         {english}%
       }
-      \strng{namehash}{928b3e7f54edd02618d22a8911eff51b}
-      \strng{fullhash}{928b3e7f54edd02618d22a8911eff51b}
-      \strng{fullhashraw}{928b3e7f54edd02618d22a8911eff51b}
-      \strng{bibnamehash}{928b3e7f54edd02618d22a8911eff51b}
-      \strng{authorbibnamehash}{928b3e7f54edd02618d22a8911eff51b}
-      \strng{authornamehash}{928b3e7f54edd02618d22a8911eff51b}
-      \strng{authorfullhash}{928b3e7f54edd02618d22a8911eff51b}
-      \strng{authorfullhashraw}{928b3e7f54edd02618d22a8911eff51b}
-      \strng{nameabibnamehash}{928b3e7f54edd02618d22a8911eff51b}
-      \strng{nameanamehash}{928b3e7f54edd02618d22a8911eff51b}
-      \strng{nameafullhash}{928b3e7f54edd02618d22a8911eff51b}
-      \strng{nameafullhashraw}{928b3e7f54edd02618d22a8911eff51b}
+      \strng{namehash}{65ba62bca5c25a3a4cbaeab8e7afb9b6}
+      \strng{fullhash}{65ba62bca5c25a3a4cbaeab8e7afb9b6}
+      \strng{fullhashraw}{65ba62bca5c25a3a4cbaeab8e7afb9b6}
+      \strng{bibnamehash}{65ba62bca5c25a3a4cbaeab8e7afb9b6}
+      \strng{authorbibnamehash}{65ba62bca5c25a3a4cbaeab8e7afb9b6}
+      \strng{authornamehash}{65ba62bca5c25a3a4cbaeab8e7afb9b6}
+      \strng{authorfullhash}{65ba62bca5c25a3a4cbaeab8e7afb9b6}
+      \strng{authorfullhashraw}{65ba62bca5c25a3a4cbaeab8e7afb9b6}
+      \strng{nameabibnamehash}{65ba62bca5c25a3a4cbaeab8e7afb9b6}
+      \strng{nameanamehash}{65ba62bca5c25a3a4cbaeab8e7afb9b6}
+      \strng{nameafullhash}{65ba62bca5c25a3a4cbaeab8e7afb9b6}
+      \strng{nameafullhashraw}{65ba62bca5c25a3a4cbaeab8e7afb9b6}
       \field{sortinit}{4}
       \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
@@ -1030,7 +1083,7 @@
       \keyw{wang2011_ship_detection_cn}
     \endentry
     \entry{xu2021_vessel_detection_cn}{article}{}{}
-      \name{author}{4}{}{%
+      \name{author}{5}{}{%
         {{hash=eb1970394a431045645843996a40c6e8}{%
            family={徐芳},
            familyi={徐\bibinitperiod}}}%
@@ -1040,11 +1093,14 @@
         {{hash=fd985b0987b51e94e777640a8381782c}{%
            family={孙辉},
            familyi={孙\bibinitperiod}}}%
-        {{hash=11ccee3ac8c17c7e3fbf62f129ff2757}{%
-           family={等},
-           familyi={等\bibinitperiod}}}%
+        {{hash=6f9bca5680fea56a580e684c334c4fbc}{%
+           family={王腾龙},
+           familyi={王\bibinitperiod}}}%
+        {{hash=b4165a704c5d395f8fbacecd5c126b40}{%
+           family={王璇},
+           familyi={王\bibinitperiod}}}%
       }
-      \name{namea}{4}{}{%
+      \name{namea}{5}{}{%
         {{hash=eb1970394a431045645843996a40c6e8}{%
            family={徐芳},
            familyi={徐\bibinitperiod}}}%
@@ -1054,25 +1110,28 @@
         {{hash=fd985b0987b51e94e777640a8381782c}{%
            family={孙辉},
            familyi={孙\bibinitperiod}}}%
-        {{hash=11ccee3ac8c17c7e3fbf62f129ff2757}{%
-           family={等},
-           familyi={等\bibinitperiod}}}%
+        {{hash=6f9bca5680fea56a580e684c334c4fbc}{%
+           family={王腾龙},
+           familyi={王\bibinitperiod}}}%
+        {{hash=b4165a704c5d395f8fbacecd5c126b40}{%
+           family={王璇},
+           familyi={王\bibinitperiod}}}%
       }
       \list{language}{1}{%
         {chinese}%
       }
-      \strng{namehash}{1522239fae5b1e11e90e7c9434e356f7}
-      \strng{fullhash}{1522239fae5b1e11e90e7c9434e356f7}
-      \strng{fullhashraw}{1522239fae5b1e11e90e7c9434e356f7}
-      \strng{bibnamehash}{1522239fae5b1e11e90e7c9434e356f7}
-      \strng{authorbibnamehash}{1522239fae5b1e11e90e7c9434e356f7}
-      \strng{authornamehash}{1522239fae5b1e11e90e7c9434e356f7}
-      \strng{authorfullhash}{1522239fae5b1e11e90e7c9434e356f7}
-      \strng{authorfullhashraw}{1522239fae5b1e11e90e7c9434e356f7}
-      \strng{nameabibnamehash}{1522239fae5b1e11e90e7c9434e356f7}
-      \strng{nameanamehash}{1522239fae5b1e11e90e7c9434e356f7}
-      \strng{nameafullhash}{1522239fae5b1e11e90e7c9434e356f7}
-      \strng{nameafullhashraw}{1522239fae5b1e11e90e7c9434e356f7}
+      \strng{namehash}{f8c6136f08f56c2ebdc896aab69ef822}
+      \strng{fullhash}{f8c6136f08f56c2ebdc896aab69ef822}
+      \strng{fullhashraw}{f8c6136f08f56c2ebdc896aab69ef822}
+      \strng{bibnamehash}{f8c6136f08f56c2ebdc896aab69ef822}
+      \strng{authorbibnamehash}{f8c6136f08f56c2ebdc896aab69ef822}
+      \strng{authornamehash}{f8c6136f08f56c2ebdc896aab69ef822}
+      \strng{authorfullhash}{f8c6136f08f56c2ebdc896aab69ef822}
+      \strng{authorfullhashraw}{f8c6136f08f56c2ebdc896aab69ef822}
+      \strng{nameabibnamehash}{f8c6136f08f56c2ebdc896aab69ef822}
+      \strng{nameanamehash}{f8c6136f08f56c2ebdc896aab69ef822}
+      \strng{nameafullhash}{f8c6136f08f56c2ebdc896aab69ef822}
+      \strng{nameafullhashraw}{f8c6136f08f56c2ebdc896aab69ef822}
       \field{sortinit}{5}
       \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
@@ -1237,7 +1296,7 @@
       \keyw{liao2022_optical_rs_detection_cn}
     \endentry
     \entry{huang2023_ship_detection_survey_cn}{article}{}{}
-      \name{author}{4}{}{%
+      \name{author}{5}{}{%
         {{hash=82f5eb5505ba37055c8f339c8380d39e}{%
            family={黄泽贤},
            familyi={黄\bibinitperiod}}}%
@@ -1247,11 +1306,14 @@
         {{hash=f17676b824ac5c922d1ad0f20016833f}{%
            family={傅瑶},
            familyi={傅\bibinitperiod}}}%
-        {{hash=11ccee3ac8c17c7e3fbf62f129ff2757}{%
-           family={等},
-           familyi={等\bibinitperiod}}}%
+        {{hash=1fed6de3753b8cf668a4eb4c485a70cb}{%
+           family={张宇},
+           familyi={张\bibinitperiod}}}%
+        {{hash=d1e7f1c7e3ff565ca8a2a369223a5271}{%
+           family={蒋晓楠},
+           familyi={蒋\bibinitperiod}}}%
       }
-      \name{namea}{4}{}{%
+      \name{namea}{5}{}{%
         {{hash=82f5eb5505ba37055c8f339c8380d39e}{%
            family={黄泽贤},
            familyi={黄\bibinitperiod}}}%
@@ -1261,25 +1323,28 @@
         {{hash=f17676b824ac5c922d1ad0f20016833f}{%
            family={傅瑶},
            familyi={傅\bibinitperiod}}}%
-        {{hash=11ccee3ac8c17c7e3fbf62f129ff2757}{%
-           family={等},
-           familyi={等\bibinitperiod}}}%
+        {{hash=1fed6de3753b8cf668a4eb4c485a70cb}{%
+           family={张宇},
+           familyi={张\bibinitperiod}}}%
+        {{hash=d1e7f1c7e3ff565ca8a2a369223a5271}{%
+           family={蒋晓楠},
+           familyi={蒋\bibinitperiod}}}%
       }
       \list{language}{1}{%
         {chinese}%
       }
-      \strng{namehash}{9af7fb5bb190f54c5334a8507293fe52}
-      \strng{fullhash}{9af7fb5bb190f54c5334a8507293fe52}
-      \strng{fullhashraw}{9af7fb5bb190f54c5334a8507293fe52}
-      \strng{bibnamehash}{9af7fb5bb190f54c5334a8507293fe52}
-      \strng{authorbibnamehash}{9af7fb5bb190f54c5334a8507293fe52}
-      \strng{authornamehash}{9af7fb5bb190f54c5334a8507293fe52}
-      \strng{authorfullhash}{9af7fb5bb190f54c5334a8507293fe52}
-      \strng{authorfullhashraw}{9af7fb5bb190f54c5334a8507293fe52}
-      \strng{nameabibnamehash}{9af7fb5bb190f54c5334a8507293fe52}
-      \strng{nameanamehash}{9af7fb5bb190f54c5334a8507293fe52}
-      \strng{nameafullhash}{9af7fb5bb190f54c5334a8507293fe52}
-      \strng{nameafullhashraw}{9af7fb5bb190f54c5334a8507293fe52}
+      \strng{namehash}{fc845d319b3cc40d629f5ebd9ffbd07b}
+      \strng{fullhash}{fc845d319b3cc40d629f5ebd9ffbd07b}
+      \strng{fullhashraw}{fc845d319b3cc40d629f5ebd9ffbd07b}
+      \strng{bibnamehash}{fc845d319b3cc40d629f5ebd9ffbd07b}
+      \strng{authorbibnamehash}{fc845d319b3cc40d629f5ebd9ffbd07b}
+      \strng{authornamehash}{fc845d319b3cc40d629f5ebd9ffbd07b}
+      \strng{authorfullhash}{fc845d319b3cc40d629f5ebd9ffbd07b}
+      \strng{authorfullhashraw}{fc845d319b3cc40d629f5ebd9ffbd07b}
+      \strng{nameabibnamehash}{fc845d319b3cc40d629f5ebd9ffbd07b}
+      \strng{nameanamehash}{fc845d319b3cc40d629f5ebd9ffbd07b}
+      \strng{nameafullhash}{fc845d319b3cc40d629f5ebd9ffbd07b}
+      \strng{nameafullhashraw}{fc845d319b3cc40d629f5ebd9ffbd07b}
       \field{sortinit}{5}
       \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
       \field{labelnamesource}{author}
@@ -1473,7 +1538,7 @@
       \range{pages}{8}
       \keyw{girshick2014_rcnn}
     \endentry
-    \entry{redmon2018_yolov3}{misc}{}{}
+    \entry{redmon2018_yolov3}{article}{}{}
       \name{author}{2}{}{%
         {{hash=99bced2e56a5253f3fe98a5f04e6d9b2}{%
            family={Redmon},
@@ -1517,19 +1582,20 @@
       \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{eprintclass}{cs.CV}
-      \field{eprinttype}{arXiv}
+      \field{journaltitle}{arXiv preprint arXiv:1804.02767}
       \field{langid}{english}
       \field{languageid}{english}
       \field{lansortorder}{4}
       \field{title}{{YOLOv3}: An Incremental Improvement}
-      \field{usera}{Z}
+      \field{usera}{J}
       \field{userd}{english}
       \field{userf}{english}
       \field{year}{2018}
       \field{dateera}{ce}
-      \verb{eprint}
-      \verb 1804.02767
+      \field{pages}{1\bibrangedash 6}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.48550/arXiv.1804.02767
       \endverb
       \keyw{redmon2018_yolov3}
     \endentry
@@ -1601,7 +1667,7 @@
       \range{pages}{10}
       \keyw{tan2020_efficientdet}
     \endentry
-    \entry{zhang2023_dino}{misc}{}{}
+    \entry{zhang2023_dino}{inproceedings}{}{}
       \name{author}{8}{}{%
         {{hash=8c6d18e2d167e1a3dc88c0166bbc3471}{%
            family={Zhang},
@@ -1705,22 +1771,23 @@
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{eprintclass}{cs.CV}
-      \field{eprinttype}{arXiv}
+      \field{booktitle}{International Conference on Learning Representations (ICLR)}
       \field{langid}{english}
       \field{languageid}{english}
       \field{lansortorder}{4}
       \field{title}{{DINO}: {DETR} with Improved DeNoising Anchor Boxes for End-to-End Object Detection}
-      \field{usera}{Z}
+      \field{usera}{C}
       \field{userd}{english}
       \field{userf}{english}
       \field{year}{2023}
       \field{dateera}{ce}
-      \verb{doi}
-      \verb 10.48550/arXiv.2203.03605
+      \field{pages}{1\bibrangedash 19}
+      \range{pages}{19}
+      \verb{urlraw}
+      \verb https://openreview.net/forum?id=3mRwyG5one
       \endverb
-      \verb{eprint}
-      \verb 2203.03605
+      \verb{url}
+      \verb https://openreview.net/forum?id=3mRwyG5one
       \endverb
       \keyw{zhang2023_dino}
     \endentry
@@ -1990,6 +2057,11 @@
       \field{userf}{english}
       \field{year}{2019}
       \field{dateera}{ce}
+      \field{pages}{8231\bibrangedash 8240}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1109/ICCV.2019.00832
+      \endverb
       \keyw{yang2019_scrdet}
     \endentry
     \entry{singh2018_snip}{inproceedings}{}{}
@@ -2115,6 +2187,8 @@
       \field{volume}{31}
       \field{year}{2018}
       \field{dateera}{ce}
+      \field{pages}{9333\bibrangedash 9343}
+      \range{pages}{11}
       \keyw{singh2018_sniper}
     \endentry
     \entry{najibi2019_autofocus}{inproceedings}{}{}
@@ -2181,6 +2255,11 @@
       \field{userf}{english}
       \field{year}{2019}
       \field{dateera}{ce}
+      \field{pages}{9744\bibrangedash 9754}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1109/ICCV.2019.00984
+      \endverb
       \keyw{najibi2019_autofocus}
     \endentry
     \entry{cheng2016_rsod_survey}{article}{}{}
@@ -2295,6 +2374,9 @@
       \field{dateera}{ce}
       \field{pages}{1749\bibrangedash 1768}
       \range{pages}{20}
+      \verb{doi}
+      \verb 10.16383/j.aas.c200596
+      \endverb
       \keyw{nie2021_optical_rs_detection_cn}
     \endentry
     \entry{li2021_ship_detection_review_cn}{article}{}{}
@@ -2370,7 +2452,7 @@
       \endverb
       \keyw{li2021_ship_detection_review_cn}
     \endentry
-    \entry{mmdet2018_openmmlab}{misc}{}{}
+    \entry{mmdet2018_openmmlab}{article}{}{}
       \name{author}{25}{}{%
         {{hash=ee3f7d7b96add98106db907e189d6c13}{%
            family={Chen},
@@ -2644,75 +2726,22 @@
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{eprintclass}{cs.CV}
-      \field{eprinttype}{arXiv}
+      \field{journaltitle}{arXiv preprint arXiv:1906.07155}
       \field{langid}{english}
       \field{languageid}{english}
       \field{lansortorder}{4}
       \field{title}{{MMDetection}: Open {MMLab} Detection Toolbox and Benchmark}
-      \field{usera}{Z}
+      \field{usera}{J}
       \field{userd}{english}
       \field{userf}{english}
       \field{year}{2019}
       \field{dateera}{ce}
+      \field{pages}{1\bibrangedash 13}
+      \range{pages}{13}
       \verb{doi}
       \verb 10.48550/arXiv.1906.07155
       \endverb
-      \verb{eprint}
-      \verb 1906.07155
-      \endverb
       \keyw{mmdet2018_openmmlab}
-    \endentry
-    \entry{ultralytics2024_docs}{online}{}{}
-      \name{author}{1}{}{%
-        {{hash=88f069848482a556e416f713d2819905}{%
-           family={{Ultralytics}},
-           familyi={U\bibinitperiod}}}%
-      }
-      \name{namea}{1}{}{%
-        {{hash=88f069848482a556e416f713d2819905}{%
-           family={{Ultralytics}},
-           familyi={U\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {english}%
-      }
-      \strng{namehash}{88f069848482a556e416f713d2819905}
-      \strng{fullhash}{88f069848482a556e416f713d2819905}
-      \strng{fullhashraw}{88f069848482a556e416f713d2819905}
-      \strng{bibnamehash}{88f069848482a556e416f713d2819905}
-      \strng{authorbibnamehash}{88f069848482a556e416f713d2819905}
-      \strng{authornamehash}{88f069848482a556e416f713d2819905}
-      \strng{authorfullhash}{88f069848482a556e416f713d2819905}
-      \strng{authorfullhashraw}{88f069848482a556e416f713d2819905}
-      \strng{nameabibnamehash}{88f069848482a556e416f713d2819905}
-      \strng{nameanamehash}{88f069848482a556e416f713d2819905}
-      \strng{nameafullhash}{88f069848482a556e416f713d2819905}
-      \strng{nameafullhashraw}{88f069848482a556e416f713d2819905}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{langid}{english}
-      \field{languageid}{english}
-      \field{lansortorder}{4}
-      \field{title}{Ultralytics {YOLO} Docs}
-      \field{urlday}{15}
-      \field{urlmonth}{3}
-      \field{urlyear}{2026}
-      \field{usera}{EB}
-      \field{userd}{english}
-      \field{userf}{english}
-      \field{year}{2024}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \verb{urlraw}
-      \verb https://docs.ultralytics.com/
-      \endverb
-      \verb{url}
-      \verb https://docs.ultralytics.com/
-      \endverb
-      \keyw{ultralytics2024_docs}
     \endentry
     \entry{lin2014_coco}{inproceedings}{}{}
       \name{author}{8}{}{%
@@ -2832,7 +2861,7 @@
       \range{pages}{16}
       \keyw{lin2014_coco}
     \endentry
-    \entry{everingham2010_voc}{inproceedings}{}{}
+    \entry{everingham2010_voc}{article}{}{}
       \name{author}{5}{}{%
         {{hash=655191b4f54a942147b118da2f50aeed}{%
            family={Everingham},
@@ -2906,13 +2935,13 @@
       \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{booktitle}{International Journal of Computer Vision}
+      \field{journaltitle}{International Journal of Computer Vision}
       \field{langid}{english}
       \field{languageid}{english}
       \field{lansortorder}{4}
       \field{number}{2}
       \field{title}{The {PASCAL} Visual Object Classes ({VOC}) Challenge}
-      \field{usera}{C}
+      \field{usera}{J}
       \field{userd}{english}
       \field{userf}{english}
       \field{volume}{88}
