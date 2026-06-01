@@ -40,7 +40,7 @@ anchor-free 方法的出发点是减少 anchor 尺寸、比例和匹配策略带
 
 LEVIR-Ship 数据集\cite{chen2022_tinyship_drenet} 聚焦中分辨率遥感图像中的微小船舶，为不同方法提供了同一数据基础。DRENet 也是围绕该数据集提出的专项方法，其退化重建增强机制主要服务于训练阶段，希望让网络对弱纹理船舶目标更敏感。本文选择它作为主线模型之一，正是因为它和本文场景最贴近。
 
-工程工具链的成熟也改变了这类课题的组织方式，MMDetection\cite{mmdet2018_openmmlab} 和 Ultralytics\cite{ultralytics2024_docs} 提供了训练、测试和部署所需的基础设施，使得不同模型之间的复现和比较更方便，相关工作也慢慢开始重视评测协议、复现记录和实验流程的一致性，而这种一致性通常也需要借助 COCO、VOC 等通用基准协议来统一理解\cite{lin2014_coco,everingham2010_voc}。
+工程工具链的成熟也改变了这类课题的组织方式，MMDetection\cite{mmdet2018_openmmlab} 等开源框架提供了训练、测试和部署所需的基础设施，使得不同模型之间的复现和比较更方便，相关工作也慢慢开始重视评测协议、复现记录和实验流程的一致性，而这种一致性通常也需要借助 COCO、VOC 等通用基准协议来统一理解\cite{lin2014_coco,everingham2010_voc}。
 
 本文从通用目标检测、小目标检测和遥感船舶检测三条路线展开，各个路线的代表方法与本文之间的关系见表~\ref{tab:ch2_research_map}。
 
