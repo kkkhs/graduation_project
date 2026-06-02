@@ -211,7 +211,7 @@
 
 % 设置标题格式
 \titleformat{\section}{\centering \heiti \sanhao \bfseries}{\thesection}{0.5em}{}
-\titleformat{\subsection}{\heiti \xiaosihao}{\thesubsection}{0.4em}{}
+\titleformat{\subsection}{\heiti \xiaosihao \bfseries}{\thesubsection}{0.4em}{}
 \titleformat{\subsubsection}{\songti \xiaosihao \bfseries}{\thesubsubsection}{0.4em}{}
 \setlength\parindent{2\ccwd}
 

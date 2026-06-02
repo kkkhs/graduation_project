@@ -2,11 +2,7 @@
 
 \subsection{实验环境与设置}
 
-本章使用基于 LEVIR-Ship 数据集的实验记录，对模型 DRENet、FCOS 和 YOLO26 进行比较，数据指标保留了 AP50、AP50-95、Precision、Recall 与 F1；工程方面记录了 FPS、参数量和 FLOPs，训练配置、权重文件、运行日志和结果文档也均已保存，后续表格和图示可以追溯到对应产物。
-
-除离线训练和测试外，系统侧推理流程也完成联调，相关输出可用于第五章的任务管理与结果回看说明。
-
-本文实验的硬件、软件和关键超参数记录如表~\ref{tab:ch4_env} 所示。
+本章基于 LEVIR-Ship 数据集上的实验记录，对模型 DRENet、FCOS 和 YOLO26 进行比较。记录指标包括 AP50、AP50-95、精度、召回率与 F1 值；工程方面记录了帧率（FPS）、参数量和 FLOPs。训练配置、权重文件、运行日志和结果文档也均已保存，文中表格和图示均可追溯到对应产物。除离线训练和测试外，系统侧推理流程也完成联调，相关输出可用于第五章的任务管理与结果回看说明。本文实验的硬件、软件和关键超参数记录如表~\ref{tab:ch4_env} 所示。
 
 \begin{table}[htbp]
   \centering
@@ -23,25 +19,25 @@
     系统框架 & FastAPI + React + SQLite \\
     数据集与划分 & LEVIR-Ship，固定 train/val/test 划分（2321/788/788） \\
     输入尺寸（主口径） & DRENet：512；YOLO26：512；FCOS：800 \\
-    置信度与 IoU 阈值 & 默认 \texttt{conf=0.25}、\texttt{iou=0.50}（另做阈值消融） \\
-    主要评测指标 & AP50（主指标）、AP50-95、Precision、Recall、F1 \\
-    效率指标采集口径 & FPS 统一在单图推理场景统计；参数量与 FLOPs 按模型结构计算并统一换算单位 \\
+    置信度与交并比阈值 & 默认 \texttt{conf=0.25}、\texttt{iou=0.50}（另做阈值消融） \\
+    主要评测指标 & AP50（主指标）、AP50-95、精度、召回率、F1 值 \\
+    效率指标采集口径 & 帧率（FPS）统一在单图推理场景统计；参数量与 FLOPs 按模型结构计算并统一换算单位 \\
     结果记录与追踪 & 保留配置文件、权重路径、运行日志、结构化预测结果和可视化产物 \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\subsection{三模型主对比结果}
+\subsection{模型定量实验结果对比}
 
-三模型核心结果见表~\ref{tab:ch4_baselines}，对应日志和权重均已留存。
+本文所集成的三个目标检测模型的核心实验结果如表~\ref{tab:ch4_baselines} 和图~\ref{fig:ch4_main_comparison_chart} 所示，对应日志和权重均已留存。下表从 AP50、AP50-95、精度、召回率和 F1 五个指标展开对比，观察各模型在检出能力和输出质量上的具体差异。
 
 \begin{table}[htbp]
   \centering
-  \caption{三模型在 LEVIR-Ship 数据集上的主对比结果}
+  \caption{模型在 LEVIR-Ship 数据集上的主对比结果}
   \label{tab:ch4_baselines}
   \begin{tabular}{lccccc}
     \toprule
-    模型 & AP50 & AP50-95 & Precision & Recall & F1 \\
+    模型 & AP50 & AP50-95 & 精度 & 召回率 & F1 值 \\
     \midrule
     DRENet & 0.7949 & 0.2919 & 0.4927 & 0.8511 & 0.6241 \\
     FCOS & 0.7389 & 0.2880 & 0.7621 & 0.8297 & 0.7944 \\
@@ -53,13 +49,13 @@
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{img/ch4_main_comparison_chart.png}
-  \caption{三模型主对比结果的指标可视化}
+  \caption{模型主对比结果的指标可视化}
   \label{fig:ch4_main_comparison_chart}
 \end{figure}
 
-表~\ref{tab:ch4_baselines} 与图~\ref{fig:ch4_main_comparison_chart} 中，YOLO26 和 DRENet 的 AP50 几乎相同，分别为 0.7950 和 0.7949，而 FCOS 为 0.7389，故仅从 AP50 看，专项方法和成熟的 one-stage 路线在该数据集上都能完成较稳定检出，而 FCOS 与前两者依然有明显差距。
+表~\ref{tab:ch4_baselines} 从检出精度、定位质量和综合性能三个维度对三类模型进行了横向比较。由图~\ref{fig:ch4_main_comparison_chart} 可以直观看出，三模型在各项指标上呈现出不同的分布特征，没有单一模型在所有维度上均占优。具体而言，YOLO26 和 DRENet 的 AP50 几乎相同，分别为 0.7950 和 0.7949，而 FCOS 为 0.7389，故仅从 AP50 看，专项方法和成熟的单阶段路线在该数据集上都能完成较稳定检出，而 FCOS 与前两者依然有明显差距。
 
-差异主要出现在 AP50-95、Precision 和 Recall 上。YOLO26 的 AP50-95 为 0.3170，高于 DRENet 的 0.2919 和 FCOS 的 0.2880，说明在更严格的 IoU 阈值下，它的边框位置更稳。DRENet 的 Recall 为 0.8511，高于 YOLO26 的 0.7220 和 FCOS 的 0.8297，但 Precision 只有 0.4927，低于 YOLO26 的 0.8430 和 FCOS 的 0.7621。也就是说，DRENet 更愿意保留可疑目标，代价是误检更多；YOLO26 对候选框筛选更严格，输出更干净；FCOS 的 Precision 和 Recall 折中较好，F1 为 0.7944，但整体检出能力弱于前两者。
+差异主要出现在 AP50-95、精度和召回率上。YOLO26 的 AP50-95 为 0.3170，高于 DRENet 的 0.2919 和 FCOS 的 0.2880，说明在更严格的交并比阈值下，其边框位置更稳定。DRENet 的召回率为 0.8511，高于 YOLO26 的 0.7220 和 FCOS 的 0.8297，但精度仅为 0.4927，低于 YOLO26 的 0.8430 和 FCOS 的 0.7621。这表明 DRENet 对可疑目标的保留更充分，但同时带来了更多误检；YOLO26 对候选框筛选更严格，输出结果更为整洁；FCOS 的精度和召回率折中较好，F1 值为 0.7944，但整体检出能力弱于前两者。
 
 \subsection{效率与部署属性分析}
 
@@ -67,12 +63,12 @@
 
 \begin{table}[htbp]
   \centering
-  \caption{三模型效率与复杂度对比}
+  \caption{模型效率与复杂度对比}
   \label{tab:ch4_efficiency}
   \small
   \begin{tabular}{lccc}
     \toprule
-    模型 & FPS & Params(M) & FLOPs(G) \\
+    模型 & 帧率(FPS) & Params(M) & FLOPs(G) \\
     \midrule
     DRENet & 121.8993 & 4.7882 & 4.2057 \\
     FCOS & 45.9559 & 32.1664 & 123.0 \\
@@ -81,21 +77,21 @@
   \end{tabular}
 \end{table}
 
-对于三个模型在效率表中的趋势和精度表并不完全相同，DRENet 在实验记录中 FPS 最高，说明其推理速度最快，YOLO26 的参数量为 2.5042M、FLOPs 为 3.6939G，模型的规模最小，而 FCOS 的参数量和计算量较高，故整体效率低于前两者，三模型效率与复杂度对比的可视化见图~\ref{fig:ch4_efficiency_chart}。
+各模型在效率维度上的排序与精度维度并不完全一致。DRENet 在实验记录中的帧率最高，说明其推理速度最快；YOLO26 的参数量为 2.5042M、FLOPs 为 3.6939G，模型规模最小；FCOS 的参数量和计算量均较高，因此整体效率低于前两者。模型效率与复杂度对比的可视化结果如图~\ref{fig:ch4_efficiency_chart}所示。
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{img/ch4_efficiency_chart.png}
-  \caption{三模型效率与复杂度对比柱状图}
+  \caption{模型效率与复杂度对比柱状图}
   \label{fig:ch4_efficiency_chart}
 \end{figure}
 
-把精度和效率放在一起读，DRENet 在召回和速度方面优势明显，YOLO26 在定位质量、误检控制和模型规模之间更均衡，FCOS 的 Precision--Recall 折中较好但整体检出能力和效率偏低。为综合展示三模型在精度与效率各维度上的表现，本文绘制了多维度雷达图（见图~\ref{fig:ch4_radar_chart}），其中参数效率和计算效率取逆指标（越小越优）进行归一化。
+从精度与效率两个维度综合分析，DRENet 在召回率与推理速度上具有明显优势，YOLO26 在定位质量、误检控制与模型规模之间更为均衡，FCOS 的精度--召回率折中较好，但整体检出能力与效率偏弱。为进一步展示三模型在精度与效率各维度上的相对表现，本文绘制了多维度雷达图，如图~\ref{fig:ch4_radar_chart}所示，其中参数效率和计算效率取逆指标（越小越优）进行归一化。
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.65\textwidth]{img/ch4_radar_chart.png}
-  \caption{三模型多维度综合雷达图}
+  \caption{模型多维度综合雷达图}
   \label{fig:ch4_radar_chart}
 \end{figure}
 
@@ -103,19 +99,15 @@
 
 \subsubsection{DRENet 结果分析}
 
-DRENet 模型在上述结果中的特点是 Recall 高，其 Recall 为 0.8511，高于 YOLO26 模型，说明该模型对于复杂背景和弱纹理目标更倾向于保留候选框，所以如果任务目标是先尽可能发现可疑船舶再由后续流程复核，这种结果取向更有实际价值。
-
-而 DRENet 的问题为，Precision 较低，数值为 0.4927，误检的可能性较大，对于近岸区域、港区设施和背景边缘纹理都可能被它保留下来，所以 DRENet 更适合作为召回优先的模型候选方案。
+DRENet 在上述结果中的突出特点是召回率较高，其召回率为 0.8511，高于 YOLO26。这表明该模型在复杂背景和弱纹理目标场景下更倾向于保留候选框。若任务目标是优先发现可疑船舶并交由人工复核，则该路线具有更高的实际价值。其不足在于精度较低，仅为 0.4927，误检风险相对较高，近岸区域、港区设施和背景边缘纹理均可能被保留下来。因此，DRENet 更适合作为召回优先的模型候选方案。
 
 \subsubsection{FCOS 结果分析}
 
-FCOS 模型的 AP50 结果为 0.7389，数值低于 DRENet 与 YOLO26；但它的 Precision 为 0.7621、Recall 为 0.8297、F1 为 0.7944，表明了在当前评测配置下，FCOS 能更好的保留正样本，其 Precision 与 Recall 的折中表现优于 DRENet，但是 FCOS 的参数量（32.17M）和计算量（123.0G）均明显高于另外两个模型，同时他的推理速度也最慢（45.96 FPS），所以整体推理效率偏低，在遥感微小船舶任务中，FCOS 的检出能力比不上 DRENet 和 YOLO26，但是它的 Precision--Recall 平衡和 F1 稳定性仍对本文具有一定的参考价值。
+FCOS 的 AP50 为 0.7389，低于 DRENet 与 YOLO26；但其精度为 0.7621、召回率为 0.8297、F1 值为 0.7944，表明在当前评测配置下，FCOS 的精度与召回率折中表现优于 DRENet。不过，FCOS 的参数量（32.17M）和计算量（123.0G）均明显高于另外两个模型，且推理速度最慢（45.96 FPS），因此整体推理效率偏低。在遥感微小船舶任务中，FCOS 的检出能力弱于 DRENet 和 YOLO26，但其精度--召回率平衡和 F1 稳定性仍具有一定参考价值。
 
 \subsubsection{YOLO26 结果分析}
 
-YOLO26 的 AP50 与 DRENet 几乎相同，但它的 AP50-95、Precision 和 F1 更高，其中 Precision 达到 0.8430，说明在当前阈值设置下，它能够一定程度上避免检出复杂背景中的伪目标。
-
-YOLO26 也更偏向工程侧，其训练链路比较成熟，接口封装也相对直接，因此在系统接入时的适配成本较低，它也可以与 DRENet 在误检控制上形成互补。
+YOLO26 的 AP50 与 DRENet 几乎相同，但它的 AP50-95、精度和 F1 值更高，其中精度达到 0.8430，说明在当前阈值设置下，它能够一定程度上避免检出复杂背景中的伪目标。YOLO26 也更符合工程部署需求，其训练链路较为成熟，接口封装相对直接，因此在系统接入时的适配成本较低；同时，它也可以与 DRENet 在误检控制方面形成互补。
 
 \subsection{定性样例与误差分析}
 
@@ -127,8 +119,8 @@ YOLO26 也更偏向工程侧，其训练链路比较成熟，接口封装也相�
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.95\textwidth]{img/ch4_success_cases.png}
-  \caption{三模型成功检测样例对比}
+  \includegraphics[width=0.85\textwidth]{img/ch4_success_cases.png}
+  \caption{模型成功检测样例对比}
   \label{fig:ch4_success_cases}
 \end{figure}
 
@@ -139,39 +131,41 @@ YOLO26 也更偏向工程侧，其训练链路比较成熟，接口封装也相�
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.95\textwidth]{img/ch4_miss_cases.png}
-  \caption{三模型漏检样例对比}
+  \caption{模型漏检样例对比}
   \label{fig:ch4_miss_cases}
 \end{figure}
 
+上述漏检现象主要影响召回率指标，反映模型对弱纹理、小尺度目标的敏感程度。然而，仅从漏检角度不足以完整解释各模型在精度上的显著差异。与漏检导致的召回损失不同，误检行为直接反映模型对背景干扰的抑制能力：当模型将海浪波纹、云层边缘或港区设施纹理误判为船舶目标时，会产生大量虚假候选框，从而直接降低 Precision。因此，为更全面地理解 DRENet、YOLO26 与 FCOS 在表~\ref{tab:ch4_baselines} 中 Precision 数值的显著差异，有必要进一步分析三类模型的误检样例及其分布规律。
+
 \subsubsection{误检样例}
 
-误检样例则更能解释 Precision 结果的差异，DRENet 更加容易把复杂背景纹理保留下来，而 YOLO26 偶尔会在边缘背景区域产生额外检测结果；同时 FCOS 也存在误检，但数量和位置与前两者不同，如图~\ref{fig:ch4_false_positive_cases} 所示，三者误检分布位置并不一致。
+误检样例则更能解释精度结果的差异，DRENet 更加容易把复杂背景纹理保留下来，而 YOLO26 偶尔会在边缘背景区域产生额外检测结果；同时 FCOS 也存在误检，但数量和位置与前两者不同，如图~\ref{fig:ch4_false_positive_cases} 所示，三者误检分布位置并不一致。
 
-\begin{figure}[H]
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\textwidth]{img/ch4_false_positive_cases.png}
-  \caption{三模型误检样例对比}
+  \caption{模型误检样例对比}
   \label{fig:ch4_false_positive_cases}
 \end{figure}
 
-把这些样例和表~\ref{tab:ch4_baselines} 对照后可以发现，三模型的差别并不是单纯分数高低。DRENet 更偏向"先检出"，复杂背景下误检会变多；YOLO26 更偏向输出稳定和边框质量，弱目标场景下可能漏掉一部分目标；FCOS 的 Precision--Recall 折中较好，但检出能力和效率均弱于前两者。
+结合这些样例与表~\ref{tab:ch4_baselines} 可知，模型之间的差异并不只体现在分数高低上。DRENet 更偏向优先检出目标，在复杂背景下误检会增多；YOLO26 更强调输出稳定性和边框质量，在弱目标场景下可能遗漏部分目标；FCOS 的精度--召回率折中较好，但检出能力和效率均弱于前两者。
 
 \subsection{消融实验}
 
-实验部分，为了说明主表中 Precision 与 Recall 的差异，主要是补充置信度阈值和输入尺寸两组消融，前者是为了观察候选框筛选变化后各模型的响应，后者观察推理输入尺寸变化对检测结果的影响。
+为进一步解释主表中精度与召回率的差异，本文补充了置信度阈值和输入尺寸两组消融实验。前者用于观察候选框筛选变化后各模型的响应，后者用于分析推理输入尺寸变化对检测结果的影响。选择这两个维度是因为置信度阈值是系统部署中最常调节的后处理参数，而输入尺寸则直接影响推理速度与显存占用，二者均关乎模型从实验环境向实际系统迁移时的性能取舍。消融实验保持其他条件不变，仅改变目标变量，以排除干扰因素。
 
 \subsubsection{阈值消融分析}
 
-阈值消融固定 IoU 阈值为 0.50，置信度阈值取 0.15、0.25 和 0.35。本文主要观察阈值升高后 Precision、Recall 和 F1 的变化情况。三模型结果见表~\ref{tab:ch4_threshold_ablation}。
+阈值消融固定交并比阈值为 0.50，置信度阈值取 0.15、0.25 和 0.35。本文主要观察阈值升高后精度、召回率和 F1 值的变化情况。模型结果如表~\ref{tab:ch4_threshold_ablation}所示。
 
 \begin{table}[htbp]
   \centering
   \small
-  \caption{三模型阈值消融结果}
+  \caption{模型阈值消融结果}
   \label{tab:ch4_threshold_ablation}
   \begin{tabular}{@{}llcccc>{\raggedright\arraybackslash}p{4.2cm}@{}}
     \toprule
-    模型 & 设置 & AP50 & Precision & Recall & F1 & 结论 \\
+    模型 & 设置 & AP50 & 精度 & 召回率 & F1 值 & 结论 \\
     \midrule
     DRENet & conf=0.15 & 0.6616 & 0.6441 & 0.7935 & 0.7110 & 低阈值召回更高，但误检增加 \\
     DRENet & conf=0.25 & 0.6616 & 0.7331 & 0.7663 & 0.7493 & 默认值更均衡 \\
@@ -189,17 +183,17 @@ YOLO26 也更偏向工程侧，其训练链路比较成熟，接口封装也相�
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{img/ch4_threshold_trend.png}
-  \caption{三模型阈值消融趋势图}
+  \caption{模型阈值消融趋势图}
   \label{fig:ch4_threshold_trend}
 \end{figure}
 
-表~\ref{tab:ch4_threshold_ablation} 和图~\ref{fig:ch4_threshold_trend} 显示，阈值升高后，三模型的 Precision 大多上升，Recall 大多下降。这一趋势符合候选框筛选逻辑，也说明后处理阈值会明显改变遥感微小船舶检测结果。
+表~\ref{tab:ch4_threshold_ablation} 和图~\ref{fig:ch4_threshold_trend} 显示，阈值升高后，模型的精度大多上升，召回率大多下降。这一趋势符合候选框筛选逻辑，也说明后处理阈值会明显改变遥感微小船舶检测结果。
 
-DRENet 对阈值的变化较为敏感，低阈值会进一步放大它的召回倾向，但误检也随之增加；而当阈值提高到 0.35 ，Precision 升到了 0.7778，Recall 降至 0.7355，若系统需要在检出率和误检数量之间取一个中间位置，0.25 相比 0.15 和 0.35 更适合作为默认值。FCOS 和 YOLO26 的变化则更加细致，FCOS 在当前稳定权重下，阈值由 0.25 提高到 0.35 时，F1 从 0.7944 小幅度升至 0.7986，说明这组权重下略高阈值能减少一部分冗余候选，YOLO26 在 0.25 时 AP50、Precision 和 Recall 的组合更均衡；继续升高到 0.35 后，Precision 为 0.8248，但 AP50 与 Recall 同时下降，所以综合 AP50、Precision、Recall 和 F1，0.25 更加适合作为后续实验和系统推理的默认阈值。
+DRENet 对阈值变化较为敏感。低阈值会进一步放大其召回倾向，但误检也随之增加；当阈值提高到 0.35 时，精度升至 0.7778，召回率降至 0.7355。若系统需要在检出率与误检数量之间取得折中，则 0.25 相比 0.15 和 0.35 更适合作为默认值。FCOS 和 YOLO26 的变化相对平缓：FCOS 在当前稳定权重下，阈值由 0.25 提高到 0.35 时，F1 值从 0.7944 小幅升至 0.7986，说明略高阈值可以减少部分冗余候选；YOLO26 在 0.25 时 AP50、精度和召回率的组合更均衡，继续升高到 0.35 后，精度虽提升至 0.8248，但 AP50 与召回率同时下降。因此，综合 AP50、精度、召回率和 F1 值，0.25 更适合作为实验与系统推理的默认阈值。
 
 \subsubsection{输入尺寸敏感性分析}
 
-输入尺寸敏感性分析固定置信度阈值为 0.25、IoU 阈值为 0.50，只改变推理阶段的输入尺寸。DRENet 的推理流程对输入尺寸有固定约束（模型内部将输入缩放至预设分辨率后输出固定尺寸特征图，不支持自定义推理尺寸），因此本节重点比较 FCOS 与 YOLO26 在不同输入下的响应差异，结果见表~\ref{tab:ch4_size_ablation}。
+输入尺寸敏感性分析固定置信度阈值为 0.25、交并比阈值为 0.50，只改变推理阶段的输入尺寸。DRENet 的推理流程对输入尺寸有固定约束（模型内部将输入缩放至预设分辨率后输出固定尺寸特征图，不支持自定义推理尺寸），因此本节重点比较 FCOS 与 YOLO26 在不同输入下的响应差异，结果如表~\ref{tab:ch4_size_ablation}所示。
 
 \begin{table}[htbp]
   \centering
@@ -208,7 +202,7 @@ DRENet 对阈值的变化较为敏感，低阈值会进一步放大它的召回�
   \label{tab:ch4_size_ablation}
   \begin{tabular}{llcccc>{\raggedright\arraybackslash}p{3.8cm}}
     \toprule
-    模型 & 设置 & AP50 & Precision & Recall & F1 & 结论 \\
+    模型 & 设置 & AP50 & 精度 & 召回率 & F1 值 & 结论 \\
     \midrule
     FCOS & imgsz=512 & 0.4490 & 0.5903 & 0.6395 & 0.6139 & 输入过小时性能受限 \\
     FCOS & imgsz=640 & 0.6452 & 0.7405 & 0.7808 & 0.7601 & 相比 512 提升明显 \\
@@ -227,4 +221,8 @@ DRENet 对阈值的变化较为敏感，低阈值会进一步放大它的召回�
   \label{fig:ch4_size_trend}
 \end{figure}
 
-上述数据显示，FCOS 对输入尺寸更敏感，512 到 800 的 AP50、Precision、Recall 和 F1 均呈上升趋势；YOLO26 在 640 输入下取得本组最高 AP50 和 F1，Precision 与 Recall 也保持较好平衡。当输入继续增至 800 时，YOLO26 的 Recall 略升，但 Precision 和 F1 明显下降，说明更大输入会带来更多候选目标，同时也更容易引入误检。
+图~\ref{fig:ch4_size_trend} 展示了 FCOS 与 YOLO26 在不同输入尺寸下的指标变化趋势。由图和表~\ref{tab:ch4_size_ablation} 可知，FCOS 对输入尺寸更敏感，512 到 800 的 AP50、精度、召回率和 F1 值均呈上升趋势；YOLO26 在 640 输入下取得本组最高 AP50 和 F1 值，精度与召回率也保持较好平衡。当输入继续增至 800 时，YOLO26 的召回率略升，但精度和 F1 值明显下降，说明更大输入会带来更多候选目标，同时也更容易引入误检。
+
+\subsection{本章总结}
+
+本章在统一实验协议下，对 DRENet、FCOS 和 YOLO26 三种模型进行了系统比较，并从定量指标、定性样例和消融实验三个层面展开分析。主对比结果表明，DRENet 与 YOLO26 在 AP50 上接近，但前者更偏召回优先，后者在精度与定位质量方面更为均衡；FCOS 的精度与召回率折中较好，但整体检出能力和效率相对偏弱。误差样例分析以及阈值、输入尺寸消融实验进一步说明，不同模型在误检控制、漏检风险和参数敏感性方面存在明显差异。这些结果为模型选择与系统部署取舍提供了依据，也为第五章的系统实现和结果展示提供了实验支撑。
