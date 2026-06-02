@@ -1,6 +1,6 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  1 JUN 2026 12:34
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  2 JUN 2026 16:05
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
 **Thesis.tex
@@ -2032,7 +2032,9 @@ Overfull \hbox (4.37639pt too wide) in paragraph at lines 9--10
 
 [2
 
-])
+]
+
+[3])
 \openout2 = `tex/pages/toc.aux'.
 
  (./tex/pages/toc.tex
@@ -2043,20 +2045,20 @@ LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/b/n' will be
 (Font)              scaled to size 12.0pt on input line 1.
 
 
-[3
+[4
 
 
 
 
 ]
 
-[4])
+[5])
 \tf@toc=\write6
 \openout6 = `Thesis.toc'.
 
 
 
-[5] (./Thesis.lof
+[6] (./Thesis.lof
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
 (Font)              scaled to size 8.0pt on input line 6.
 )
@@ -2065,7 +2067,7 @@ LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
 
 
 
-[6
+[7
 
 ] (./Thesis.lot)
 \tf@lot=\write8
@@ -2073,7 +2075,7 @@ LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
 
 
 
-[7
+[8
 
 ])
 \openout2 = `tex/introduction.aux'.
@@ -2167,16 +2169,16 @@ File: img/ch3_drenet_network_from_paper.png Graphic file (type bmp)
 LaTeX Font Info:    Calculating math sizes for size <10.5> on input line 117.
 LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
 (Font)              scaled to size 7.34996pt on input line 117.
+
+
+[13]
 File: img2_pdf/ch3_fcos_pipeline.pdf Graphic file (type pdf)
 <use img2_pdf/ch3_fcos_pipeline.pdf>
 
 
-[13]
+[14]
 File: img/ch3_fcos_network_from_paper.png Graphic file (type bmp)
 <img/ch3_fcos_network_from_paper.png>
-
-
-[14]
 File: img2_pdf/ch3_yolo_pipeline.pdf Graphic file (type pdf)
 <use img2_pdf/ch3_yolo_pipeline.pdf>
 
@@ -2192,14 +2194,6 @@ File: img/ch3_yolo_network_from_paper.png Graphic file (type bmp)
 \openout2 = `tex/experiment.aux'.
 
  (./tex/experiment.tex
-Overfull \hbox (3.05414pt too wide) in paragraph at lines 5--6
-[]\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 本 章 使 用 基 于 \TU/TimesNewRoman(0)/m/n
-/12.045 LEVIR-Ship \TU/AdobeSongStd-Light.otf(1)/m/n/12.045 数 据 集 的 实 验 记 录，|  
-对 模 型 \TU/TimesNewRoman(0)/m/n/12.045 DRENet\TU/AdobeSongStd-Light.otf(1)/m/n/1
-2.045 、| \TU/TimesNewRoman(0)/m/n/12.045 FCOS \TU/AdobeSongStd-Light.otf(1)/m/n
-/12.045 和 \TU/TimesNewRoman(0)/m/n/12.045 YOLO26
- []
-
 File: img/ch4_main_comparison_chart.png Graphic file (type bmp)
 <img/ch4_main_comparison_chart.png>
 
@@ -2228,30 +2222,23 @@ File: img/ch4_success_cases.png Graphic file (type bmp)
 [22]
 File: img/ch4_miss_cases.png Graphic file (type bmp)
 <img/ch4_miss_cases.png>
-
-
-[23]
 File: img/ch4_false_positive_cases.png Graphic file (type bmp)
 <img/ch4_false_positive_cases.png>
 
 
-[24]
-Overfull \hbox (8.31392pt too wide) in paragraph at lines 157--158
-[]\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 把 这 些 样 例 和 表 []\TU/TimesNewRoman(0)
-/m/n/12.045 4.2[] \TU/AdobeSongStd-Light.otf(1)/m/n/12.045 对 照 后 可 以 发 现，|  三 模
- 型 的 差 别 并 不 是 单 纯 分 数 高 低。| \TU/TimesNewRoman(0)/m/n/12.045 DRENet
- []
-
+[23]
 File: img/ch4_threshold_trend.png Graphic file (type bmp)
 <img/ch4_threshold_trend.png>
 
 
-[25]
+[24]
 
-[26]
+[25]
 File: img/ch4_size_trend.png Graphic file (type bmp)
 <img/ch4_size_trend.png>
 )
+
+[26]
 
 [27]
 \openout2 = `tex/system.aux'.
@@ -2316,13 +2303,13 @@ File: img/ch5_task_detail_case_c.png Graphic file (type bmp)
 
 
 [38]
-Underfull \hbox (badness 3701) in paragraph at lines 261--262
+Underfull \hbox (badness 3701) in paragraph at lines 259--260
 []|\TU/AdobeSongStd-Light.otf(0)/m/n/10.53937 返 回 \TU/TimesNewRoman(0)/m/n/10.5
 3937 task_id\TU/AdobeSongStd-Light.otf(0)/m/n/10.53937 ，|  任 务 状 态 进 入
  []
 
 
-Underfull \hbox (badness 1540) in paragraph at lines 263--264
+Underfull \hbox (badness 1540) in paragraph at lines 261--262
 []|\TU/AdobeSongStd-Light.otf(0)/m/n/10.53937 状 态 按 \TU/TimesNewRoman(0)/m/n/10
 .53937 queued->running->done
  []
@@ -2332,7 +2319,7 @@ Underfull \hbox (badness 1540) in paragraph at lines 263--264
 [39]
 
 [40]
-Overfull \hbox (6.42047pt too wide) in paragraph at lines 301--302
+Overfull \hbox (6.42047pt too wide) in paragraph at lines 299--300
 []\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 针 对 该 问 题，|  后 端 新 增 进 度 查 询 接 口，|  
 只 返 回 \TU/lmtt/m/n/12.045 status\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 、| \TU
 /lmtt/m/n/12.045 done_count \TU/AdobeSongStd-Light.otf(1)/m/n/12.045 和 \TU/lmtt
@@ -2341,36 +2328,44 @@ Overfull \hbox (6.42047pt too wide) in paragraph at lines 301--302
 
 
 
-[41])
+[41]
+Overfull \hbox (19.44914pt too wide) in paragraph at lines 303--304
+[]\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 可 视 化 渲 染 阶 段 原 本 会 多 次 打 开 同 一 张 图。
+|  为 此，|  本 文 扩 展 了 \TU/lmtt/m/n/12.045 render_detections()
+ []
 
-[42]
+
+
+[42])
+
+[43]
 \openout2 = `tex/conclusion.aux'.
 
  (./tex/conclusion.tex
 
-[43
+[44
 
 
 
 
 ])
 
-[44]
+[45]
 
-[45
+[46
 
 
 
 ]
 
-[46]
-
 [47]
+
+[48]
 \openout2 = `tex/acknowledge.aux'.
 
  (./tex/acknowledge.tex)
 
-[48
+[49
 
 
 ]
@@ -2390,18 +2385,18 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2022/08/05>
  ***********
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 52958985567C6F1AE3F569D8730866EE;8798.
+(rerunfilecheck)             Checksum: 3579D3AB948D9BA3ABAFA6D8A9B45B5E;9243.
 Package logreq Info: Writing requests to 'Thesis.run.xml'.
 \openout1 = `Thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 44333 strings out of 473832
- 988575 string characters out of 5719382
- 1922920 words of memory out of 5000000
- 66552 multiletter control sequences out of 15000+600000
+ 44291 strings out of 473832
+ 985188 string characters out of 5719382
+ 1922915 words of memory out of 5000000
+ 66510 multiletter control sequences out of 15000+600000
  577734 words of font info for 175 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 129i,12n,136p,1026b,5061s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 129i,12n,136p,1267b,5061s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Thesis.xdv (59 pages, 815892 bytes).
+Output written on Thesis.xdv (61 pages, 869284 bytes).

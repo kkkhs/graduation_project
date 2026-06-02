@@ -5,26 +5,29 @@
 \contentsline {subsection}{\numberline {1.4}本文主要工作与贡献}{3}{subsection.1.4}%
 \contentsline {subsection}{\numberline {1.5}技术路线与研究方法}{3}{subsection.1.5}%
 \contentsline {subsection}{\numberline {1.6}论文结构安排}{4}{subsection.1.6}%
+\contentsline {subsection}{\numberline {1.7}本章总结}{4}{subsection.1.7}%
 \contentsline {section}{\numberline {2}国内外研究现状}{5}{section.2}%
 \contentsline {subsection}{\numberline {2.1}通用目标检测方法演进}{5}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}小目标检测研究进展}{5}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}遥感船舶检测研究现状}{6}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}现有工作的不足与本文切入点}{7}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}本章总结}{8}{subsection.2.5}%
 \contentsline {section}{\numberline {3}数据集、评价指标与方法方案}{9}{section.3}%
 \contentsline {subsection}{\numberline {3.1}实验基础}{9}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}数据集介绍}{9}{subsection.3.2}%
 \contentsline {subsection}{\numberline {3.3}数据集样例与任务特征}{9}{subsection.3.3}%
 \contentsline {subsection}{\numberline {3.4}数据预处理与统一格式}{10}{subsection.3.4}%
 \contentsline {subsection}{\numberline {3.5}评价指标}{11}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}指标选择依据}{11}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.6}指标选择依据}{12}{subsection.3.6}%
 \contentsline {subsection}{\numberline {3.7}模型方案}{12}{subsection.3.7}%
-\contentsline {subsubsection}{\numberline {3.7.1}DRENet（专项方法）}{12}{subsubsection.3.7.1}%
-\contentsline {subsubsection}{\numberline {3.7.2}FCOS（Anchor-Free 检测路线）}{13}{subsubsection.3.7.2}%
-\contentsline {subsubsection}{\numberline {3.7.3}YOLO26（One-Stage 代表）}{15}{subsubsection.3.7.3}%
+\contentsline {subsubsection}{\numberline {3.7.1}遥感微小船舶检测专用方法：DRENet}{12}{subsubsection.3.7.1}%
+\contentsline {subsubsection}{\numberline {3.7.2}无锚框代表性目标检测方法：FCOS}{14}{subsubsection.3.7.2}%
+\contentsline {subsubsection}{\numberline {3.7.3}单阶段代表性目标检测方法：YOLO26}{15}{subsubsection.3.7.3}%
 \contentsline {subsection}{\numberline {3.8}统一实验协议与实现约束}{16}{subsection.3.8}%
+\contentsline {subsection}{\numberline {3.9}本章总结}{17}{subsection.3.9}%
 \contentsline {section}{\numberline {4}实验结果与分析}{18}{section.4}%
 \contentsline {subsection}{\numberline {4.1}实验环境与设置}{18}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}三模型主对比结果}{18}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.2}模型定量实验结果对比}{18}{subsection.4.2}%
 \contentsline {subsection}{\numberline {4.3}效率与部署属性分析}{20}{subsection.4.3}%
 \contentsline {subsection}{\numberline {4.4}模型逐项分析}{21}{subsection.4.4}%
 \contentsline {subsubsection}{\numberline {4.4.1}DRENet 结果分析}{21}{subsubsection.4.4.1}%
@@ -33,10 +36,11 @@
 \contentsline {subsection}{\numberline {4.5}定性样例与误差分析}{22}{subsection.4.5}%
 \contentsline {subsubsection}{\numberline {4.5.1}成功检测样例}{22}{subsubsection.4.5.1}%
 \contentsline {subsubsection}{\numberline {4.5.2}漏检样例}{23}{subsubsection.4.5.2}%
-\contentsline {subsubsection}{\numberline {4.5.3}误检样例}{24}{subsubsection.4.5.3}%
-\contentsline {subsection}{\numberline {4.6}消融实验}{25}{subsection.4.6}%
-\contentsline {subsubsection}{\numberline {4.6.1}阈值消融分析}{25}{subsubsection.4.6.1}%
-\contentsline {subsubsection}{\numberline {4.6.2}输入尺寸敏感性分析}{27}{subsubsection.4.6.2}%
+\contentsline {subsubsection}{\numberline {4.5.3}误检样例}{23}{subsubsection.4.5.3}%
+\contentsline {subsection}{\numberline {4.6}消融实验}{24}{subsection.4.6}%
+\contentsline {subsubsection}{\numberline {4.6.1}阈值消融分析}{24}{subsubsection.4.6.1}%
+\contentsline {subsubsection}{\numberline {4.6.2}输入尺寸敏感性分析}{26}{subsubsection.4.6.2}%
+\contentsline {subsection}{\numberline {4.7}本章总结}{27}{subsection.4.7}%
 \contentsline {section}{\numberline {5}系统需求分析、设计与实现}{28}{section.5}%
 \contentsline {subsection}{\numberline {5.1}系统建设目标}{28}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}系统需求分析}{28}{subsection.5.2}%
@@ -64,10 +68,10 @@
 \contentsline {subsubsection}{\numberline {5.11.3}进度端点与前端轮询重构}{41}{subsubsection.5.11.3}%
 \contentsline {subsubsection}{\numberline {5.11.4}渲染、存储与结果访问优化}{42}{subsubsection.5.11.4}%
 \contentsline {subsubsection}{\numberline {5.11.5}优化效果分析}{42}{subsubsection.5.11.5}%
-\contentsline {section}{\numberline {6}总结与展望}{43}{section.6}%
-\contentsline {subsection}{\numberline {6.1}工作总结}{43}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}不足分析}{43}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}未来展望}{44}{subsection.6.3}%
-\contentsline {subsection}{\numberline {6.4}全文结论}{44}{subsection.6.4}%
-\contentsline {section}{参考文献}{45}{subsection.6.4}%
-\contentsline {section}{致谢}{48}{section*.37}%
+\contentsline {subsection}{\numberline {5.12}本章总结}{43}{subsection.5.12}%
+\contentsline {section}{\numberline {6}总结与展望}{44}{section.6}%
+\contentsline {subsection}{\numberline {6.1}工作总结}{44}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}不足分析}{44}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}未来展望}{45}{subsection.6.3}%
+\contentsline {section}{参考文献}{46}{subsection.6.3}%
+\contentsline {section}{致谢}{49}{section*.37}%

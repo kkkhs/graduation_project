@@ -1,11 +1,11 @@
 \contentsline {table}{\numberline {2.1}{\ignorespaces 本文相关研究方向与代表路线}}{7}{table.caption.3}%
 \contentsline {table}{\numberline {3.1}{\ignorespaces LEVIR-Ship 数据集划分}}{9}{table.caption.4}%
 \contentsline {table}{\numberline {4.1}{\ignorespaces 实验环境与关键配置}}{18}{table.caption.13}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces 三模型在 LEVIR-Ship 数据集上的主对比结果}}{19}{table.caption.14}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces 三模型效率与复杂度对比}}{20}{table.caption.16}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces 三模型阈值消融结果}}{26}{table.caption.22}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces FCOS 与 YOLO26 输入尺寸敏感性分析结果}}{27}{table.caption.24}%
-\contentsline {table}{\numberline {5.1}{\ignorespaces 功能需求的操作—响应定义}}{29}{table.caption.26}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces 模型在 LEVIR-Ship 数据集上的主对比结果}}{19}{table.caption.14}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces 模型效率与复杂度对比}}{20}{table.caption.16}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces 模型阈值消融结果}}{25}{table.caption.22}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces FCOS 与 YOLO26 输入尺寸敏感性分析结果}}{26}{table.caption.24}%
+\contentsline {table}{\numberline {5.1}{\ignorespaces 功能需求的操作与响应定义}}{29}{table.caption.26}%
 \contentsline {table}{\numberline {5.2}{\ignorespaces 系统核心接口设计}}{32}{table.caption.29}%
 \contentsline {table}{\numberline {5.3}{\ignorespaces 系统主要模块测试用例}}{40}{table.caption.35}%
 \contentsline {table}{\numberline {5.4}{\ignorespaces 系统响应速度优化的关键基准结果}}{42}{table.caption.36}%
