@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  2 JUN 2026 16:05
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025/Homebrew) (preloaded format=xelatex 2025.3.15)  3 JUN 2026 13:44
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2329,12 +2329,6 @@ Overfull \hbox (6.42047pt too wide) in paragraph at lines 299--300
 
 
 [41]
-Overfull \hbox (19.44914pt too wide) in paragraph at lines 303--304
-[]\TU/AdobeSongStd-Light.otf(1)/m/n/12.045 可 视 化 渲 染 阶 段 原 本 会 多 次 打 开 同 一 张 图。
-|  为 此，|  本 文 扩 展 了 \TU/lmtt/m/n/12.045 render_detections()
- []
-
-
 
 [42])
 
@@ -2393,10 +2387,10 @@ Package logreq Info: Writing requests to 'Thesis.run.xml'.
 Here is how much of TeX's memory you used:
  44291 strings out of 473832
  985188 string characters out of 5719382
- 1922915 words of memory out of 5000000
+ 1921915 words of memory out of 5000000
  66510 multiletter control sequences out of 15000+600000
  577734 words of font info for 175 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 129i,12n,136p,1267b,5061s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 129i,12n,136p,1348b,5061s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Thesis.xdv (61 pages, 869284 bytes).
+Output written on Thesis.xdv (61 pages, 871256 bytes).
