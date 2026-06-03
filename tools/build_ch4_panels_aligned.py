@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path('/Users/khs/codes/graduation_project')
 IMG_DIR = ROOT / 'experiment_assets/datasets/LEVIR-Ship/test/images'
 LBL_DIR = ROOT / 'experiment_assets/datasets/LEVIR-Ship/test/labels'
-GEN = ROOT / 'thesis_overleaf/figures/generated'
+GEN = ROOT / 'thesis_overleaf/img'
 
 PRED_PATHS = {
     'DRENet': ROOT / 'experiment_assets/ablation/threshold/drenet/conf025/predictions.json',
@@ -32,29 +32,31 @@ COLORS = {
     'FCOS': (255, 200, 70),
 }
 
-FONT_PATH = Path('/System/Library/Fonts/Supplemental/Times New Roman.ttf')
+FONT_PATH_ROW = ROOT / 'thesis_overleaf/fonts/AdobeSongStd-Light.otf'
+FONT_PATH_COL = Path('/System/Library/Fonts/Supplemental/Times New Roman.ttf')
 # Keep figure text smaller and visually consistent with thesis figure style.
 FONT_SIZE_ROW = 48
 FONT_SIZE_COL = 44
+ROW_TEXT_SPACING = 10
 
 
-def load_font(size):
+def load_font(font_path, size):
     try:
-        return ImageFont.truetype(str(FONT_PATH), size=size)
+        return ImageFont.truetype(str(font_path), size=size)
     except OSError:
         return ImageFont.load_default()
 
 
-def text_size(text, font):
+def text_size(text, font, spacing=4):
     draw = ImageDraw.Draw(Image.new('RGB', (1, 1), (0, 0, 0)))
-    x0, y0, x1, y1 = draw.textbbox((0, 0), text, font=font)
+    x0, y0, x1, y1 = draw.textbbox((0, 0), text, font=font, spacing=spacing)
     return x1 - x0, y1 - y0
 
 
-def draw_text_on_rgb(rgb, pos, text, font, fill):
+def draw_text_on_rgb(rgb, pos, text, font, fill, spacing=4):
     pil = Image.fromarray(rgb)
     draw = ImageDraw.Draw(pil)
-    draw.text(pos, text, font=font, fill=fill)
+    draw.text(pos, text, font=font, fill=fill, spacing=spacing)
     return np.array(pil)
 
 
@@ -250,11 +252,11 @@ def build_samples(preds):
 def render_case_figure(cat, selected_info, preds):
     # 3x2 grid:
     #   columns = model names
-    #   rows    = Label / Prediction
-    row_font = load_font(FONT_SIZE_ROW)
-    col_font = load_font(FONT_SIZE_COL)
-    row_names = ['Label', 'Prediction']
-    row_widths = [text_size(n, row_font)[0] for n in row_names]
+    #   rows    = 真实标签 / 预测结果
+    row_font = load_font(FONT_PATH_ROW, FONT_SIZE_ROW)
+    col_font = load_font(FONT_PATH_COL, FONT_SIZE_COL)
+    row_names = ['真实\n标签', '预测\n结果']
+    row_widths = [text_size(n, row_font, spacing=ROW_TEXT_SPACING)[0] for n in row_names]
     left_w = max(LEFT_W, max(row_widths) + 24)
 
     total_w = left_w + TILE_W * 3 + GAP_X * 2
@@ -262,11 +264,13 @@ def render_case_figure(cat, selected_info, preds):
     canvas = np.full((total_h, total_w, 3), 255, dtype=np.uint8)
 
     # row titles on the left
-    for row_name, row_y in [('Label', TOP_H + TILE_H // 2), ('Prediction', TOP_H + TILE_H + GAP_Y + TILE_H // 2)]:
-        tw, th = text_size(row_name, row_font)
+    for row_name, row_y in [('真实\n标签', TOP_H + TILE_H // 2), ('预测\n结果', TOP_H + TILE_H + GAP_Y + TILE_H // 2)]:
+        tw, th = text_size(row_name, row_font, spacing=ROW_TEXT_SPACING)
         tx = (left_w - tw) // 2
         ty = row_y - th // 2 - 1
-        canvas = draw_text_on_rgb(canvas, (tx, ty), row_name, row_font, fill=(25, 25, 25))
+        canvas = draw_text_on_rgb(
+            canvas, (tx, ty), row_name, row_font, fill=(25, 25, 25), spacing=ROW_TEXT_SPACING
+        )
 
     for i, m in enumerate(MODEL_ORDER):
         info = selected_info[m]
